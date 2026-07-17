@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liên hệ Gas Việt để được hỗ trợ và tư vấn nhanh chóng về gas và thiết bị bếp. Phản hồi trong 5 phút.">
+    <title>Kết Nối Với Chúng Tôi | Gas Việt</title>
+    <!-- FontAwesome cho Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- CSS Hệ thống -->
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* Đổi màu phần tư vấn thành dark-green và bỏ padding thừa */
+        .site-footer .footer-consultation {
+            background-color: var(--color-primary-dark) !important;
+            padding: 50px 0 0 0 !important;
+        }
+
+        /* Ẩn nội dung tư vấn nhưng giữ lại đường cong wave top ở footer */
+        .site-footer .consultation-container,
+        .site-footer .custom-shape-divider-bottom {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR (Từ trang chủ) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-inner">
+                <div class="top-bar-left">
+                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
+                </div>
+                <div class="top-bar-right">
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
+                        Hồ Chí Minh</a>
+                    <span class="top-bar-divider"></span>
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
+                        1900.123.123</a>
+                    <span class="top-bar-divider"></span>
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER (Từ trang chủ) -->
+    <header class="header">
+        <div class="container header-inner">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
+            </a>
+
+            <!-- Main Links -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="ve-chung-toi.html">Về Chúng Tôi</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                    <li><a href="#">Tin Tức</a></li>
+                    <li><a href="lien-he.html" class="active">Liên Hệ</a></li>
+                </ul>
+            </nav>
+
+            <!-- Actions -->
+            <div class="header-actions">
+                <button class="cart-btn-primary">
+                    <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
+                    <span class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="contact-page-wrapper">
+        <!-- CONTACT MAIN SECTION -->
+        <section class="contact-main">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Left Form Area -->
+                    <div class="contact-form-area">
+                        <div class="contact-title" style="margin-bottom: 40px;">
+                            <div class="badge-top" style="margin-bottom: 15px;"> — HỖ TRỢ ĐỒI GAS & THIẾT BỊ</div>
+                            <h1
+                                style="font-size: 42px; font-weight: 800; color: var(--color-primary-dark); line-height: 1.3; margin-bottom: 15px;">
+                                Kết Nối Với<span class="highlight"> Chúng Tôi</span></h1>
+                            <p style="font-size: 18px; color: var(--color-gray-600); line-height: 1.6;">
+                                Chia sẻ nhu cầu của bạn, Gas Việt sẽ phản hồi trong 5 phút.
+                            </p>
+                        </div>
+                        <form id="contactForm" class="custom-contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactName">Họ Tên *</label>
+                                    <input type="text" id="contactName" name="name" placeholder="VD: Nguyễn Văn A"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPhone">Số điện thoại *</label>
+                                    <input type="tel" id="contactPhone" name="phone" placeholder="VD: 0901234567"
+                                        required>
+                                    <span class="error-msg" id="phoneError"
+                                        style="color: red; font-size: 12px; display: none;">Số điện thoại phải bắt đầu
+                                        bằng 0 và có 9-10 chữ số.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Nội dung *</label>
+                                <textarea id="contactMessage" name="message" rows="5"
+                                    placeholder="Nhập nội dung chi tiết..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit-contact">
+                                <span class="icon-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                                <span class="text">Gửi thông tin</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right Info Area -->
+                    <div class="contact-info-area">
+                        <div class="info-blocks-col">
+                            <div class="info-block">
+                                <h3>Địa chỉ</h3>
+                                <p>475A Điện Biên Phủ, Phường 25,<br>Quận Bình Thạnh, TP.HCM</p>
+                            </div>
+                            <div class="info-block">
+                                <h3>Liên hệ</h3>
+                                <p>Phone : 090 123 4567</p>
+                                <p>Email : hotro@giaogas.vn</p>
+                            </div>
+                            <div class="info-block">
+                                <h3>Giờ làm việc</h3>
+                                <p>Thứ 2 - Thứ 6 : 08:00 - 20:00</p>
+                                <p>Thứ 7 - CN : 08:00 - 18:00</p>
+                            </div>
+                            <div class="info-block social-block" style="margin-bottom: 0;">
+                                <h3>Kết nối với chúng tôi</h3>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="qr-col">
+                            <div class="qr-scan-box">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=LienHeGiaoGas" alt="Scan to Contact" class="qr-image">
+                                <div class="scan-line"></div>
+                            </div>
+                            <p class="qr-text">Quét mã để gọi ngay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="contact-features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="f-icon"><i class="fa-solid fa-box-open"></i></div>
+                        <div class="f-text">
+                            <h3>Chất lượng đảm bảo</h3>
+                            <p>Sản phẩm chính hãng an toàn.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="f-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <div class="f-text">
+                            <h3>Giao hàng siêu tốc</h3>
+                            <p>Nhận hàng chỉ trong 30 phút.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="f-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <div class="f-text">
+                            <h3>Đội ngũ chuyên nghiệp</h3>
+                            <p>Hỗ trợ kỹ thuật tận tâm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    
+    <footer class="site-footer">
+        <!-- Consultation Section with Wave -->
+        <div class="footer-consultation">
+            <!-- SVG Wave shape Top -->
+            <div class="custom-shape-divider-top">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M0,120 C400,0 800,120 1200,40 V120 H0 Z" class="shape-fill"></path>
+                </svg>
+            </div>
+
+            <div class="container consultation-container">
+                <div class="consultation-content">
+                    <div class="consultation-title">Tư vấn khách hàng</div>
+                    <p>Để lại số điện thoại, chuyên viên của chúng tôi sẽ liên hệ với bạn trong vòng 5 phút!</p>
+                </div>
+
+                <div class="consultation-form-wrap">
+                    <form class="consultation-form">
+                        <input type="tel" placeholder="Nhập số điện thoại của bạn..." required>
+                        <button type="submit" class="consult-submit-btn">Gửi thông tin</button>
+                    </form>
+                </div>
+
+                <div class="footer-contact-actions">
+                    <a href="tel:0901234567" class="footer-hotline">
+                        <div class="icon-ring">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="hotline-text">
+                            <span>Hỗ trợ tận tâm</span>
+                            <strong>090 123 4567</strong>
+                        </div>
+                    </a>
+
+                    <a href="https://zalo.me/0901234567" target="_blank" class="footer-zalo">
+                        <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo Chat"
+                            onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
+                        <span>Chat Zalo</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SVG Wave shape -->
+            <div class="custom-shape-divider-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M0,120 C300,0 900,120 1200,30 V120 H0 Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Main Footer -->
+        <div class="footer-main">
+            <div class="container">
+                <h2 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Tư vấn khách hàng</h2>                   <div class="footer-grid">
+                    <!-- Column 1: About -->
+                    <div class="footer-col footer-col-about">
+                        <div class="footer-logo">
+                            <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo">
+                        </div>
+                        <p class="footer-desc">
+                            Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
+                            nhà với đội ngũ chuyên nghiệp.
+                        </p>
+                        <div class="footer-socials">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Nav Links -->
+                    <div class="footer-col">
+                        <div class="footer-col-title">Công Ty</div>
+                        <ul>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Sản phẩm</a></li>
+                            <li><a href="#">Tin tức & Blog</a></li>
+                            <li><a href="#">Tuyển dụng</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Contact Info -->
+                    <div class="footer-col">
+                        <div class="footer-col-title">Liên Hệ</div>                        
+                        <ul class="contact-info-list">
+                            <li><i class="fa-solid fa-location-dot"></i> 475A Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP.HCM</li>
+                            <li><i class="fa-solid fa-phone"></i> 090 123 4567</li>
+                            <li><i class="fa-solid fa-envelope"></i> hotro@giaogas.vn</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Map & Certification -->
+                    <div class="footer-col">
+                        <img src="/assets/logo/bocongthuong_logo.png" alt="Bộ Công Thương" style="max-width: 180px; margin-bottom: 15px; display: block;">
+                        <div class="footer-map" style="border-radius: 8px; overflow: hidden; height: 200px; width: 100%;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1256743939634!2d106.7118949!3d10.8016869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Gas Việt. Hân hạnh phục vụ quý khách.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+        
+        
+
+
+    <!-- JS -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

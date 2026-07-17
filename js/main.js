@@ -225,6 +225,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
+       5. RELATED PRODUCTS SLIDER
+       ========================================================================== */
+    const relatedSlider = document.getElementById('relatedSlider');
+    const prevRelatedBtn = document.getElementById('prevRelatedBtn');
+    const nextRelatedBtn = document.getElementById('nextRelatedBtn');
+
+    if (relatedSlider && prevRelatedBtn && nextRelatedBtn) {
+        let currentRelatedIndex = 0;
+
+        const updateRelatedPosition = () => {
+            const card = relatedSlider.querySelector('.product-card');
+            if (!card) return;
+            const cardWidth = card.offsetWidth + 20; // card width + gap
+            relatedSlider.style.transform = `translateX(-${currentRelatedIndex * cardWidth}px)`;
+        };
+
+        nextRelatedBtn.addEventListener('click', () => {
+            const cards = relatedSlider.querySelectorAll('.product-card');
+            if (cards.length === 0) return;
+            const visibleCards = Math.floor(relatedSlider.parentElement.clientWidth / (cards[0].offsetWidth + 10)) || 1;
+            const maxIndex = cards.length - visibleCards;
+
+            if (currentRelatedIndex < maxIndex) {
+                currentRelatedIndex++;
+            } else {
+                currentRelatedIndex = 0; // loop back
+            }
+            updateRelatedPosition();
+        });
+
+        prevRelatedBtn.addEventListener('click', () => {
+            if (currentRelatedIndex > 0) {
+                currentRelatedIndex--;
+            } else {
+                const cards = relatedSlider.querySelectorAll('.product-card');
+                if (cards.length === 0) return;
+                const visibleCards = Math.floor(relatedSlider.parentElement.clientWidth / (cards[0].offsetWidth + 10)) || 1;
+                currentRelatedIndex = Math.max(0, cards.length - visibleCards);
+            }
+            updateRelatedPosition();
+        });
+
+        window.addEventListener('resize', () => {
+            currentRelatedIndex = 0;
+            updateRelatedPosition();
+        });
+    }
+
+    /* ==========================================================================
        2. CUSTOM DROPDOWN
        ========================================================================== */
     const sortDropdown = document.getElementById('sortDropdown');
@@ -239,17 +288,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         options.forEach(option => {
-            option.addEventListener('click', function(e) {
+            option.addEventListener('click', function (e) {
                 e.stopPropagation();
                 // Remove active class from all
                 options.forEach(opt => opt.classList.remove('active'));
-                
+
                 // Add active to clicked
                 this.classList.add('active');
-                
+
                 // Update selected text
                 selectedText.textContent = this.textContent;
-                
+
                 // Close dropdown
                 sortDropdown.classList.remove('open');
             });
@@ -355,6 +404,167 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => {
             currentFlashDealIndex = 0;
             updateFlashDealPosition();
+        });
+    }
+
+    /* ==========================================================================
+       CONTACT FORM VALIDATION
+       ========================================================================== */
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        const nameInput = document.getElementById('contactName');
+        const phoneInput = document.getElementById('contactPhone');
+        const phoneError = document.getElementById('phoneError');
+
+        // Auto capitalize first letter of each word
+        nameInput.addEventListener('input', function (e) {
+            let val = e.target.value;
+            // Split by space, capitalize first letter, join back
+            val = val.split(' ').map(word => {
+                if (word.length > 0) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }
+                return word;
+            }).join(' ');
+            e.target.value = val;
+        });
+
+        // Phone number input restriction (only numbers)
+        phoneInput.addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form submit validation
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const phoneVal = phoneInput.value;
+            const phoneRegex = /^0[0-9]{8,9}$/;
+
+            if (!phoneRegex.test(phoneVal)) {
+                phoneError.style.display = 'block';
+                phoneInput.style.borderColor = 'red';
+                return;
+            }
+
+            phoneError.style.display = 'none';
+            phoneInput.style.borderColor = '#ddd';
+
+            const btn = contactForm.querySelector('.btn-submit-contact');
+            const btnText = btn.querySelector('.text');
+            const btnIcon = btn.querySelector('.icon-arrow i');
+            const originalText = btnText.textContent;
+            
+            // Start success animation
+            btn.classList.add('success');
+            
+            // Instantly change text and icon while they slide to their new positions
+            btnIcon.className = 'fa-solid fa-check';
+            btnText.textContent = 'Thành công!';
+            
+            // Reset form and button after 3.5 seconds
+            setTimeout(() => {
+                contactForm.reset();
+                btn.classList.remove('success');
+                btnIcon.className = 'fa-solid fa-arrow-right';
+                btnText.textContent = originalText;
+            }, 3500);
+        });
+    }
+
+    // --- GLOBAL SCROLL ANIMATION ---
+    // --- GLOBAL SCROLL ANIMATION ---
+    const elementsToAnimate = document.querySelectorAll(`
+        .section-header, 
+        .section-title,
+        .feature-item, 
+        .value-card,
+        .info-block,
+        .contact-title > *,
+        .custom-contact-form .form-group,
+        .custom-contact-form .btn-submit-contact,
+        .qr-col > *,
+        .badge-item,
+        .image-grid-creative img,
+        .mission-list-item,
+        .about-story-img,
+        .about-story-content > *,
+        .hero-content > *,
+        .truck-anim,
+        .category-card,
+        .products-flex,
+        .products-grid,
+        .step-card,
+        .testimonial-card,
+        .brand-logo
+    `);
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('scrolled-in');
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+
+    elementsToAnimate.forEach((el, index) => {
+        el.classList.add('scroll-hidden');
+        
+        // Add stagger effect based on DOM order for groups of items
+        if (el.classList.contains('feature-item') || 
+            el.classList.contains('info-block') || 
+            el.classList.contains('value-card') || 
+            el.classList.contains('badge-item') ||
+            el.classList.contains('form-group') ||
+            el.classList.contains('mission-list-item') ||
+            el.classList.contains('category-card') ||
+            el.classList.contains('step-card') ||
+            el.classList.contains('testimonial-card') ||
+            el.classList.contains('brand-logo') ||
+            (el.tagName === 'IMG' && el.parentElement && el.parentElement.classList.contains('image-grid-creative'))) {
+            const staggerDelay = (index % 6) + 1; 
+            el.classList.add(`stagger-${staggerDelay}`);
+        }
+        
+        // Stagger children of specific parents
+        if (el.parentElement) {
+            if (el.parentElement.classList.contains('hero-content') || 
+                el.parentElement.classList.contains('about-story-content') ||
+                el.parentElement.classList.contains('contact-title') ||
+                el.parentElement.classList.contains('qr-col')) {
+                const siblings = Array.from(el.parentElement.children);
+                const childIndex = siblings.indexOf(el);
+                el.classList.add(`stagger-${Math.min(childIndex + 1, 6)}`);
+            }
+        }
+        
+        scrollObserver.observe(el);
+    });
+
+    /* ==========================================================================
+       9. HEADER SCROLL LOGIC
+       ========================================================================== */
+    const header = document.querySelector('.header');
+    if (header) {
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 150) {
+                if (currentScrollY > lastScrollY) {
+                    // Kéo xuống -> ẩn header
+                    header.classList.add('header-hidden');
+                } else {
+                    // Kéo lên -> hiện header
+                    header.classList.remove('header-hidden');
+                }
+            } else {
+                // Ở trên cùng -> luôn hiện
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
         });
     }
 
