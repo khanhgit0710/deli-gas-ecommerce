@@ -1,0 +1,1055 @@
+/* ==========================================================================
+   Responsive Styles
+   Nguyên tắc: Các breakpoint được tách biệt hoàn toàn (không trùng lặp).
+   Màn hình PC (trên 1024px) sẽ không bị ảnh hưởng và giữ nguyên thiết kế gốc.
+   ========================================================================== */
+
+/* General Mobile Btn Default Hidden (for PC) */
+.header-mobile-btn {
+    display: none;
+}
+
+/* Tablet ngang & Laptop nhỏ (821px - 1024px) */
+@media screen and (min-width: 821px) and (max-width: 1024px) {
+    .nav-links {
+        gap: 40px;
+    }
+
+    .nav-links li a {
+        font-size: 18px;
+    }
+
+    .top-bar-left,
+    .top-bar-right {
+        gap: 10px;
+    }
+
+
+
+
+
+    .header-mobile-btn {
+        display: none;
+    }
+
+    .cart-btn-primary {
+        padding: 8px 20px;
+    }
+
+    /* Thu nhỏ hero-images ở 1024px */
+    .about-page-wrapper .about-hero {
+        padding: 120px 0 180px !important;
+        /* Giảm height của hero */
+    }
+
+    .about-page-wrapper .hero-images {
+        margin-top: -250px !important;
+        /* Đẩy xe cao lên xíu */
+        margin-left: -260px !important;
+        /* Đẩy xe qua trái */
+        justify-content: flex-start !important;
+    }
+
+    .about-page-wrapper .hero-images img {
+        width: 65% !important;
+        /* Làm ảnh nhỏ lại */
+        margin: 0 auto;
+    }
+
+    /* Ngăn overflow-x do ảnh mission lố ra ngoài */
+    .about-page-wrapper .img-sub-mission {
+        right: 0 !important;
+    }
+
+    .about-page-wrapper .grid-overlay {
+        left: 0 !important;
+    }
+
+    /* Thu hẹp about-menu hơn nữa */
+    .about-page-wrapper .about-menu {
+        padding: 15px 0 !important;
+    }
+
+    .about-page-wrapper .menu-grid {
+        gap: 10px !important;
+    }
+
+    .about-page-wrapper .menu-categories-col {
+        display: grid !important;
+        grid-template-columns: repeat(2, max-content) !important;
+        justify-content: flex-end !important;
+        gap: 20px !important;
+        /* Tăng khoảng cách cho bớt chật */
+    }
+
+    .about-page-wrapper .category-square {
+        width: 180px !important;
+        /* Rộng ra xíu nữa */
+        padding: 10px !important;
+        /* Giảm padding trên dưới để hẹp chiều cao */
+        gap: 5px !important;
+        /* Giảm khoảng cách giữa icon và chữ để lùn lại */
+    }
+
+    /* Đảm bảo cột ảnh bên phải cao bằng cột nội dung bên trái */
+    .about-page-wrapper .image-grid-creative {
+        height: 100% !important;
+    }
+
+    .about-page-wrapper .values-grid {
+        gap: 15px;
+    }
+
+    .product-area {
+        gap: 10px;
+    }
+
+    .new-blog-container {
+        padding-bottom: 0px;
+    }
+
+    .page-content {
+        margin-bottom: 30px;
+    }
+
+    .contact-features {
+        padding: 30px 0;
+    }
+
+    .contact-info-area {
+        padding: 30px 20px;
+    }
+
+    .nb-archive-grid {
+        gap: 10px;
+    }
+
+    .nb-archive-container {
+        margin-bottom: 30px;
+    }
+
+    .nb-archive-card-body {
+        padding: 15px;
+    }
+}
+
+/* Các thay đổi chung cho Mobile (<= 1024px) */
+@media screen and (max-width: 1024px) {
+
+    /* Products-flex hiệu ứng lướt ngang */
+    .products-flex,
+    .featured-slider-container .products-flex {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px !important;
+        padding-bottom: 15px;
+        /* khoảng trống cho thanh scroll */
+    }
+
+    .products-flex::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .products-flex::-webkit-scrollbar-thumb {
+        background-color: var(--color-gray-300);
+        border-radius: 4px;
+    }
+
+    .products-flex .product-card,
+    .featured-slider-container .products-flex .product-card {
+        flex: 0 0 250px !important;
+        width: 250px !important;
+        max-width: 85vw !important;
+        scroll-snap-align: start;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+
+    /* Ẩn title tất cả sản phẩm */
+    .section-header-full h2 {
+        display: none !important;
+    }
+
+    /* Chỉnh sửa lại layout của section-header-full khi ẩn title */
+    .section-header-full {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 15px !important;
+        padding: 15px !important;
+    }
+
+    /* Đưa sort-by về trong luồng để không bị đè lên ô search */
+    .section-header-full .sort-by {
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* section-search chia sẻ không gian với sort-by */
+    .section-search,
+    .search-flex {
+        width: auto !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+        margin: 0 !important;
+        padding: 5px 5px 5px 15px !important;
+    }
+
+    .section-search .btn-search {
+        padding: 8px 15px !important;
+    }
+
+    /* dropdown-selected ngắn lại xíu */
+    .custom-dropdown,
+    .sort-by .custom-dropdown {
+        width: 180px !important;
+        position: relative !important;
+    }
+
+    .dropdown-selected {
+        padding: 8px 12px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .dropdown-selected span {
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    .container {
+        padding: 0 8px !important;
+    }
+
+    .custom-dropdown .dropdown-options {
+        width: 180px !important;
+        min-width: 0 !important;
+        left: auto !important;
+        right: 0 !important;
+    }
+
+    .custom-dropdown .dropdown-options li {
+        padding: 8px 16px !important;
+    }
+
+    .nb-detail-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    /* Kéo ảnh tràn lề màn hình */
+    .nb-detail-featured-img img,
+    .nb-detail-content img {
+        margin-left: -8px !important;
+        margin-right: -8px !important;
+        width: calc(100% + 16px) !important;
+        max-width: none !important;
+        border-radius: 0 !important;
+    }
+
+    /* Thu nhỏ padding của contact-info-area và dàn hàng ngang */
+    .contact-info-area {
+        padding: 30px 20px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    /* Thu hẹp khoảng cách các thành phần trong card tin tức (gần xíu nữa) */
+    .nb-archive-card-body h3 {
+        margin: 2px 0 !important;
+    }
+
+    .nb-archive-card-body p {
+        margin-bottom: 4px !important;
+    }
+    
+    .nb-archive-card-body .nb-cat {
+        margin-bottom: 6px !important;
+        display: inline-block !important;
+    }
+
+    .info-blocks-col {
+        display: block !important;
+        flex: 1;
+    }
+
+    .qr-col {
+        width: auto !important;
+        margin-top: 0 !important;
+    }
+
+    /* Đổi chữ "Gửi thông tin" thành "Gửi" cho nút consult-submit-btn */
+    .consult-submit-btn {
+        font-size: 0 !important;
+    }
+
+    .consult-submit-btn::after {
+        content: "Gửi";
+        font-size: 0.95rem;
+        /* Giữ nguyên kích thước chữ gốc */
+    }
+
+    .nb-archive-card-body p {
+        line-height: 1.4;
+        margin-top: 2px;
+    }
+
+    .nb-archive-container {
+        gap: 20px;
+    }
+}
+
+/* Tablet dọc (769px - 820px) */
+@media screen and (max-width: 820px) {
+    .btn-sidebar-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-primary-dark);
+        color: white;
+        border: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    /* Menu Grid 2 hàng và Center */
+    .about-page-wrapper .menu-grid {
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center;
+    }
+
+    .about-page-wrapper .menu-title-col {
+        min-width: 0 !important;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-page-wrapper .menu-badge {
+        justify-content: center;
+    }
+
+    .about-page-wrapper .menu-categories-col {
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .about-page-wrapper .social-follow {
+        display: none !important;
+    }
+
+    .about-page-wrapper .promise-grid {
+        max-height: none;
+    }
+
+    .about-page-wrapper .promise-col-left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .about-page-wrapper .promise-col-left > div {
+        flex: 1;
+        margin-bottom: 0 !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Values Grid lướt ngang */
+    .about-page-wrapper .values-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px !important;
+        padding-bottom: 15px;
+    }
+
+    .about-page-wrapper .values-grid::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .about-page-wrapper .values-grid::-webkit-scrollbar-thumb {
+        background-color: var(--color-gray-300);
+        border-radius: 4px;
+    }
+
+    .about-page-wrapper .value-card {
+        flex: 0 0 340px !important;
+        width: 340px !important;
+        max-width: 90vw !important;
+        scroll-snap-align: start;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .about-page-wrapper .image-grid-creative {
+        height: 100% !important;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 820px) {
+    .top-bar {
+        display: none !important;
+    }
+
+    /* Header Hàng Ngang: Hamburger - Logo - Giỏ Hàng */
+    .header {
+        padding: 10px 0 !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .header-mobile-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--color-primary-dark);
+        cursor: pointer;
+        order: 1;
+        /* Ôm trái */
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        order: 2;
+        /* Giữa */
+    }
+
+    .header-actions {
+        order: 3;
+        /* Ôm phải */
+    }
+
+    /* Đổi Giỏ hàng thành Icon tròn & Ngay Giữa */
+    .cart-btn-primary {
+        font-size: 0 !important;
+        /* Ẩn chữ */
+        padding: 0 !important;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .cart-btn-primary i {
+        font-size: 20px;
+        /* Hiện lại Icon */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .cart-badge {
+        top: -2px;
+        right: -2px;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .main-nav.mobile-active {
+        display: block;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .features-badge-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px;
+    }
+
+    .featured-slider-container .products-flex .product-card {
+        flex: 0 0 calc(33.333% - 14px);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px;
+    }
+
+    .qr-scan-box {
+        width: 250px !important;
+        height: 250px !important;
+    }
+
+    .about-page-wrapper .about-hero {
+        padding: 160px 0 150px;
+    }
+
+    .about-page-wrapper .hero-images img {
+        width: 80%;
+        max-width: 1100px;
+    }
+
+    .about-page-wrapper .hero-images {
+        margin-top: -250px !important;
+        margin-left: -110px !important;
+        justify-content: flex-start !important;
+    }
+
+    .about-page-wrapper .mission-grid {
+        gap: 10px;
+    }
+
+    .about-page-wrapper .flash-deal-content {
+        margin-bottom: 0;
+    }
+
+    .about-page-wrapper .promise-grid {
+        gap: 20px;
+    }
+
+    .nb-detail-header {
+        margin-top: 40px;
+    }
+
+    .nb-archive-grid {
+        gap: 10px;
+    }
+
+    .nb-archive-container {
+        gap: 15px;
+        display: grid;
+        grid-template-columns: 0.5fr 4fr;
+
+    }
+
+    .nb-archive-card-body {
+        padding: 10px;
+    }
+
+    .contact-main {
+        padding-bottom: 60px;
+    }
+
+    .contact-features {
+        padding-bottom: 40px;
+    }
+}
+
+/* Tablet nhỏ & Mobile ngang (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .top-bar {
+        display: none !important;
+    }
+
+    /* Header Hàng Ngang: Hamburger - Logo - Giỏ Hàng */
+    .header {
+        padding: 10px 0 !important;
+        /* Làm header to ra xíu */
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .header-mobile-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--color-primary-dark);
+        cursor: pointer;
+        order: 1;
+        /* Ôm trái */
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        order: 2;
+        /* Giữa */
+    }
+
+    .header-actions {
+        order: 3;
+        /* Ôm phải */
+    }
+
+    /* Đổi Giỏ hàng thành Icon tròn & Ngay Giữa */
+    .cart-btn-primary {
+        font-size: 0 !important;
+        /* Ẩn chữ */
+        padding: 0 !important;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .cart-btn-primary i {
+        font-size: 20px;
+        /* Hiện lại Icon */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .cart-badge {
+        top: -2px;
+        right: -2px;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .main-nav.mobile-active {
+        display: block;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .features-badge-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px;
+    }
+
+    .featured-slider-container .products-flex .product-card {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    .features-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px !important;
+        padding-bottom: 15px;
+    }
+    
+    .features-grid::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .features-grid::-webkit-scrollbar-thumb {
+        background-color: var(--color-gray-300);
+        border-radius: 4px;
+    }
+
+    .features-grid .feature-item {
+        flex: 0 0 280px !important;
+        width: 280px !important;
+        max-width: 85vw !important;
+        scroll-snap-align: start;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .contact-main {
+        padding-bottom: 60px;
+    }
+
+    /* Đưa Flash Deal Sidebar & Slider lên cùng 1 hàng ở Tablet */
+    .flash-deal-container {
+        flex-direction: row !important;
+        align-items: stretch !important; /* hoặc flex-start tuỳ gốc */
+    }
+
+    .flash-deal-sidebar {
+        width: 250px !important;
+        padding: 20px 15px !important; /* Gọn lại cho vừa */
+        flex-shrink: 0 !important;
+    }
+
+    .flash-deal-slider-wrapper {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0 !important; /* Quan trọng để slider không làm vỡ layout flex */
+        overflow: hidden !important;
+    }
+}
+
+/* Mobile lớn (361px - 480px) */
+@media screen and (min-width: 361px) and (max-width: 480px) {
+    .top-bar {
+        display: none !important;
+    }
+
+    /* Header Hàng Ngang: Hamburger - Logo - Giỏ Hàng */
+    .header {
+        padding: 10px 0 !important;
+        /* Làm header to ra xíu */
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .header-mobile-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--color-primary-dark);
+        cursor: pointer;
+        order: 1;
+        /* Ôm trái */
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        order: 2;
+        /* Giữa */
+    }
+
+    .logo-img {
+        max-height: 50px;
+    }
+
+    .header-actions {
+        order: 3;
+        /* Ôm phải */
+    }
+
+    /* Đổi Giỏ hàng thành Icon tròn & Ngay Giữa */
+    .cart-btn-primary {
+        font-size: 0 !important;
+        /* Ẩn chữ */
+        padding: 0 !important;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .cart-btn-primary i {
+        font-size: 18px;
+        /* Hiện lại Icon */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .cart-badge {
+        top: -2px;
+        right: -2px;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        z-index: 1000;
+    }
+
+    .main-nav.mobile-active {
+        display: block;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .features-badge-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+
+    .news-card {
+        flex: 0 0 calc(100% + 30px) !important;
+        width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .products-flex .product-info,
+    .news-card-body {
+        padding: 10px 8px !important;
+    }
+
+    .pd-main-image {
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile nhỏ (tối đa 360px) */
+@media screen and (max-width: 360px) {
+    .top-bar {
+        display: none !important;
+    }
+
+    /* Header Hàng Ngang: Hamburger - Logo - Giỏ Hàng */
+    .header {
+        padding: 10px 0 !important;
+        /* Làm header to ra xíu */
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .header-mobile-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: var(--color-primary-dark);
+        cursor: pointer;
+        order: 1;
+        /* Ôm trái */
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        order: 2;
+        /* Giữa */
+    }
+
+    .logo-img {
+        max-height: 40px;
+    }
+
+    .header-actions {
+        order: 3;
+        /* Ôm phải */
+    }
+
+    /* Đổi Giỏ hàng thành Icon tròn & Ngay Giữa */
+    .cart-btn-primary {
+        font-size: 0 !important;
+        /* Ẩn chữ */
+        padding: 0 !important;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .cart-btn-primary i {
+        font-size: 16px;
+        /* Hiện lại Icon */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .cart-badge {
+        top: -2px;
+        right: -2px;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        z-index: 1000;
+    }
+
+    .main-nav.mobile-active {
+        display: block;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .features-badge-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+    }
+
+    .news-card {
+        flex: 0 0 calc(100% + 30px) !important;
+        width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .products-flex .product-info,
+    .news-card-body {
+        padding: 10px 8px !important;
+    }
+
+    .pd-main-image {
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    .section-header h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Fix bài viết liên quan ở 820px không cách lề trái phải 8px */
+@media screen and (max-width: 820px) and (min-width: 820px) {
+    .nb-related .nb-archive-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* Tùy chỉnh Footer cho màn hình <= 820px */
+@media screen and (max-width: 820px) {
+    .footer-grid {
+        display: grid !important;
+        grid-template-columns: 1.8fr 1fr 1fr !important;
+        gap: 0px 15px!important;
+        margin-bottom: 15px !important; /* override 40px in main.css */
+    }
+
+    /* Đưa 3 cột About, Dịch Vụ, Liên Hệ lên cùng 1 hàng */
+    .footer-grid > .footer-col:nth-child(1) { order: 1 !important; } /* About */
+    .footer-grid > .footer-col:nth-child(2) { order: 2 !important; } /* Dịch vụ */
+    .footer-grid > .footer-col:nth-child(3) { order: 3 !important; } /* Liên hệ */
+    
+    /* Cột 4 (Bo Cong Thuong) nằm dưới cùng, chiếm trọn chiều ngang để đẩy sang phải dễ dàng */
+    .footer-grid > .footer-col:nth-child(4) { 
+        order: 4 !important; 
+        grid-column: 1 / -1 !important; 
+    }
+
+    /* Ẩn Map */
+    .footer-map {
+        display: none !important;
+    }
+
+    /* Ẩn các nút gọi điện và Zalo trong footer */
+    .footer-contact-actions {
+        display: none !important;
+    }
+
+    /* Logo Bộ Công Thương ôm lề phải dưới */
+    .footer-grid > .footer-col:nth-child(4) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+    
+    .footer-grid > .footer-col:nth-child(4) img {
+        margin-bottom: 0 !important;
+        margin-left: auto !important;
+        max-width: 130px !important; /* Nhỏ hơn nữa */
+    }
+
+    /* Tối ưu tối đa chiều cao: giảm margin, padding, chữ */
+    .footer-logo img { max-width: 240px !important; margin-bottom: 10px !important; }
+    .footer-col .footer-col-title { margin-bottom: 10px !important; font-size: 15px !important; padding-bottom: 5px !important; }
+    .footer-col ul li { margin-bottom: 5px !important; font-size: 16px !important; }
+    .footer-desc { font-size: 16px !important; line-height: 1.3 !important; }
+}

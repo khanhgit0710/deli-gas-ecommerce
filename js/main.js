@@ -67,14 +67,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
         if (window.innerWidth <= 992) {
-            const isClickInsideSidebar = categorySidebar.contains(e.target);
-            const isClickOnBtn = mobileMenuBtn.contains(e.target);
+            const isClickInsideSidebar = categorySidebar && categorySidebar.contains(e.target);
+            const isClickOnBtn = mobileMenuBtn && mobileMenuBtn.contains(e.target);
 
-            if (!isClickInsideSidebar && !isClickOnBtn && categorySidebar.classList.contains('mobile-active')) {
+            if (!isClickInsideSidebar && !isClickOnBtn && categorySidebar && categorySidebar.classList.contains('mobile-active')) {
                 categorySidebar.classList.remove('mobile-active');
             }
         }
     });
+
+    /* ==========================================================================
+       2.5 DYNAMIC HEADER HAMBURGER MENU
+       ========================================================================== */
+    const headerInner = document.querySelector('.header-inner');
+    const mainNav = document.querySelector('.main-nav');
+    
+    if (headerInner && mainNav && !document.getElementById('headerMobileBtn')) {
+        const btn = document.createElement('button');
+        btn.id = 'headerMobileBtn';
+        btn.className = 'header-mobile-btn';
+        btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        
+        // Insert before main-nav or actions
+        const actions = document.querySelector('.header-actions');
+        if (actions) {
+            headerInner.insertBefore(btn, actions);
+        } else {
+            headerInner.appendChild(btn);
+        }
+        
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mainNav.classList.toggle('mobile-active');
+        });
+
+        // Close nav when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && !btn.contains(e.target) && mainNav.classList.contains('mobile-active')) {
+                mainNav.classList.remove('mobile-active');
+            }
+        });
+    }
 
     /* ==========================================================================
        3. CUSTOM SEARCH CATEGORY DROPDOWN LOGIC
@@ -453,14 +486,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const btnText = btn.querySelector('.text');
             const btnIcon = btn.querySelector('.icon-arrow i');
             const originalText = btnText.textContent;
-            
+
             // Start success animation
             btn.classList.add('success');
-            
+
             // Instantly change text and icon while they slide to their new positions
             btnIcon.className = 'fa-solid fa-check';
             btnText.textContent = 'Thành công!';
-            
+
             // Reset form and button after 3.5 seconds
             setTimeout(() => {
                 contactForm.reset();
@@ -497,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .testimonial-card,
         .brand-logo
     `);
-    
+
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -509,11 +542,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elementsToAnimate.forEach((el, index) => {
         el.classList.add('scroll-hidden');
-        
+
         // Add stagger effect based on DOM order for groups of items
-        if (el.classList.contains('feature-item') || 
-            el.classList.contains('info-block') || 
-            el.classList.contains('value-card') || 
+        if (el.classList.contains('feature-item') ||
+            el.classList.contains('info-block') ||
+            el.classList.contains('value-card') ||
             el.classList.contains('badge-item') ||
             el.classList.contains('form-group') ||
             el.classList.contains('mission-list-item') ||
@@ -522,13 +555,13 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.contains('testimonial-card') ||
             el.classList.contains('brand-logo') ||
             (el.tagName === 'IMG' && el.parentElement && el.parentElement.classList.contains('image-grid-creative'))) {
-            const staggerDelay = (index % 6) + 1; 
+            const staggerDelay = (index % 6) + 1;
             el.classList.add(`stagger-${staggerDelay}`);
         }
-        
+
         // Stagger children of specific parents
         if (el.parentElement) {
-            if (el.parentElement.classList.contains('hero-content') || 
+            if (el.parentElement.classList.contains('hero-content') ||
                 el.parentElement.classList.contains('about-story-content') ||
                 el.parentElement.classList.contains('contact-title') ||
                 el.parentElement.classList.contains('qr-col')) {
@@ -537,7 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.classList.add(`stagger-${Math.min(childIndex + 1, 6)}`);
             }
         }
-        
+
         scrollObserver.observe(el);
     });
 
@@ -547,10 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     if (header) {
         let lastScrollY = window.scrollY;
-        
+
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-            
+
             if (currentScrollY > 150) {
                 if (currentScrollY > lastScrollY) {
                     // Kéo xuống -> ẩn header
@@ -563,9 +596,312 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ở trên cùng -> luôn hiện
                 header.classList.remove('header-hidden');
             }
-            
+
             lastScrollY = currentScrollY;
         });
     }
 
+    /* ==========================================================================
+       CART LOGIC
+       ========================================================================== */
+    if (!localStorage.getItem('gas_cart_seeded')) {
+        const initialCart = [
+            { name: 'Bình Gas Saigon Petro 12kg', price: 360000, image: 'https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg', quantity: 4 },
+            { name: 'Van điều áp Namilux', price: 120000, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s', quantity: 2 },
+            { name: 'Dây Dẫn Gas Thái Lan', price: 80000, image: 'https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png', quantity: 1 }
+        ];
+        localStorage.setItem('gas_cart', JSON.stringify(initialCart));
+        localStorage.setItem('gas_cart_seeded', 'true');
+    }
+
+    // Update product counts dynamically based on actual DOM elements
+    const sectionsWithCount = document.querySelectorAll('.section-header');
+    sectionsWithCount.forEach(header => {
+        const countSpan = header.querySelector('.product-count');
+        if (countSpan) {
+            const section = header.closest('section') || header.closest('.main-content-section');
+            if (section) {
+                const productCards = section.querySelectorAll('.product-card');
+                if (productCards.length > 0) {
+                    countSpan.textContent = `(${productCards.length} sản phẩm)`;
+                }
+            }
+        }
+    });
+
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+
+    function showToast(message, type = 'success') {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.style.cssText = 'position:fixed; top:100px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px; pointer-events:none;';
+            document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        const bgColor = type === 'error' ? '#e74c3c' : 'var(--color-accent)';
+        const textColor = type === 'error' ? 'white' : 'red';
+        toast.style.cssText = `background-color:${bgColor}; color:${textColor}; padding:12px 20px; border-radius:4px; box-shadow:0 2px 10px rgba(0,0,0,0.2); font-weight:700; font-family:inherit; font-size: 0.95rem; opacity:0; transform:translateX(20px); transition:all 0.3s ease;`;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(0)';
+        });
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(20px)';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    const cartBtns = document.querySelectorAll('.cart-btn-primary');
+    cartBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            window.location.href = 'gio-hang.html';
+        });
+    });
+
+    function getCart() {
+        return JSON.parse(localStorage.getItem('gas_cart')) || [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('gas_cart', JSON.stringify(cart));
+        updateCartBadge();
+    }
+
+    function updateCartBadge() {
+        const cart = getCart();
+        let totalItems = 0;
+        cart.forEach(item => { totalItems += item.quantity });
+        const badges = document.querySelectorAll('.cart-badge');
+        badges.forEach(b => b.textContent = totalItems);
+    }
+
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const productCard = this.closest('.product-card');
+            if (!productCard) return;
+
+            const name = productCard.querySelector('h3').innerText.trim();
+            const priceText = productCard.querySelector('.price-current').innerText;
+            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+            const imgSrc = productCard.querySelector('img').src;
+
+            const cart = getCart();
+            const existingItem = cart.find(i => i.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: imgSrc,
+                    quantity: 1
+                });
+            }
+            saveCart(cart);
+
+            // Show toast popup
+            showToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
+        });
+    });
+
+    // Add to cart on Product Detail page
+    const pdAddToCartBtn = document.querySelector('.pd-info .pd-btn-outline');
+    if (pdAddToCartBtn) {
+        pdAddToCartBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const name = document.querySelector('.pd-title').innerText.trim();
+            const priceText = document.querySelector('.pd-price').innerText;
+            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+            const imgSrc = document.querySelector('#pdMainImage').src;
+            const qtyInput = document.getElementById('qtyInput');
+            const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+
+            const cart = getCart();
+            const existingItem = cart.find(i => i.name === name);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: imgSrc,
+                    quantity: quantity
+                });
+            }
+            saveCart(cart);
+
+            showToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
+        });
+    }
+
+    const cartTableBody = document.querySelector('.cart-table tbody');
+    if (cartTableBody) {
+        function renderCart() {
+            const cart = getCart();
+            cartTableBody.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="index.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
+                updateCartTotals(0, 0);
+
+                const cartActions = document.querySelector('.cart-actions');
+                if (cartActions) cartActions.style.display = 'none';
+                return;
+            }
+
+            const cartActions = document.querySelector('.cart-actions');
+            if (cartActions) cartActions.style.display = 'flex';
+
+            let totalAmount = 0;
+            let totalItems = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+                totalItems += item.quantity;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="product-col">
+                            <button class="remove-btn" data-index="${index}"><i class="fa-solid fa-xmark"></i></button>
+                            <img src="${item.image}" alt="${item.name}" class="cart-product-img">
+                            <div class="cart-product-info">
+                                <h4>${item.name}</h4>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight: 500;">${item.price.toLocaleString('vi-VN')}đ</td>
+                    <td>
+                        <div class="qty-controls">
+                            <button class="qty-btn qty-minus" data-index="${index}"><i class="fa-solid fa-minus"></i></button>
+                            <input type="number" class="qty-input" value="${item.quantity}" min="1" readonly>
+                            <button class="qty-btn qty-plus" data-index="${index}"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </td>
+                    <td style="font-weight: 600; color: #333;">${itemTotal.toLocaleString('vi-VN')}đ</td>
+                `;
+                cartTableBody.appendChild(tr);
+            });
+
+            updateCartTotals(totalItems, totalAmount);
+            attachCartEvents();
+        }
+
+        function updateCartTotals(items, amount) {
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const itemsCountEl = document.querySelector('.summary-row:first-child span:last-child');
+            const bannerQtyEl = document.querySelector('.cart-banner-content h2 strong');
+
+            const formattedAmount = amount.toLocaleString('vi-VN') + 'đ';
+            if (subtotalEl) subtotalEl.textContent = formattedAmount;
+            if (totalEl) totalEl.textContent = formattedAmount;
+            if (itemsCountEl) itemsCountEl.textContent = items;
+            if (bannerQtyEl) bannerQtyEl.textContent = items;
+        }
+
+        function attachCartEvents() {
+            const minuses = document.querySelectorAll('.qty-minus');
+            const pluses = document.querySelectorAll('.qty-plus');
+            const removes = document.querySelectorAll('.remove-btn');
+            const clearBtn = document.querySelector('.btn-clear');
+
+            minuses.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const idx = this.getAttribute('data-index');
+                    const cart = getCart();
+                    if (cart[idx].quantity > 1) {
+                        cart[idx].quantity -= 1;
+                        saveCart(cart);
+                        renderCart();
+                    }
+                });
+            });
+
+            pluses.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const idx = this.getAttribute('data-index');
+                    const cart = getCart();
+                    cart[idx].quantity += 1;
+                    saveCart(cart);
+                    renderCart();
+                });
+            });
+
+            removes.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const idx = this.getAttribute('data-index');
+                    const cart = getCart();
+                    cart.splice(idx, 1);
+                    saveCart(cart);
+                    renderCart();
+                    showToast('Đã xóa sản phẩm khỏi giỏ hàng', 'error');
+                });
+            });
+
+            if (clearBtn) {
+                const newClearBtn = clearBtn.cloneNode(true);
+                clearBtn.parentNode.replaceChild(newClearBtn, clearBtn);
+                newClearBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const modalOverlay = document.createElement('div');
+                    modalOverlay.className = 'custom-confirm-overlay';
+                    modalOverlay.innerHTML = `
+                        <div class="custom-confirm-modal">
+                            <div class="confirm-content">
+                                <p>Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?</p>
+                            </div>
+                            <div class="confirm-actions">
+                                <button class="btn-confirm-cancel">Huỷ</button>
+                                <button class="btn-confirm-agree">Đồng ý</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modalOverlay);
+
+                    setTimeout(() => {
+                        modalOverlay.classList.add('show');
+                        modalOverlay.querySelector('.custom-confirm-modal').classList.add('show');
+                    }, 10);
+
+                    const cancelBtn = modalOverlay.querySelector('.btn-confirm-cancel');
+                    const agreeBtn = modalOverlay.querySelector('.btn-confirm-agree');
+
+                    function closeModal() {
+                        modalOverlay.classList.remove('show');
+                        modalOverlay.querySelector('.custom-confirm-modal').classList.remove('show');
+                        setTimeout(() => {
+                            if (document.body.contains(modalOverlay)) {
+                                document.body.removeChild(modalOverlay);
+                            }
+                        }, 300);
+                    }
+
+                    cancelBtn.addEventListener('click', closeModal);
+
+                    agreeBtn.addEventListener('click', () => {
+                        saveCart([]);
+                        renderCart();
+                        showToast('Đã xóa toàn bộ giỏ hàng', 'error');
+                        closeModal();
+                    });
+                });
+            }
+        }
+
+        renderCart();
+    }
+
+    updateCartBadge();
 });

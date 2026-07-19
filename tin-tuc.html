@@ -4,216 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tin tức và Blog của Gas Việt - Khám phá các bài viết mới nhất và kiến thức ngành gas.">
-    <title>Tin Tức & Blog | Gas Việt</title>
+    <title>Tin tức & kiến thức ngành gas | Gas Việt</title>
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css?v=3">
-    <style>
-        /* Specific styles for blog page based on the demo */
-        body {
-            background-color: #f4f8fb; /* Light blueish background */
-        }
-
-        .blog-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop') no-repeat center center;
-            background-size: cover;
-            border-radius: 20px;
-            padding: 80px 20px;
-            text-align: center;
-            color: white;
-            margin-top: 20px;
-            margin-bottom: 50px;
-        }
-        
-        .blog-hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .blog-hero p {
-            font-size: 1.2rem;
-            color: #f1f1f1;
-        }
-        
-        .featured-post {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-        
-        .featured-post-img img {
-            width: 100%;
-            border-radius: 20px;
-            object-fit: cover;
-            height: 400px;
-        }
-        
-        .post-meta {
-            font-size: 0.9rem;
-            color: var(--color-gray-500);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .post-tag {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        
-        .featured-post-content h3 {
-            font-size: 2.5rem;
-            color: var(--color-primary-dark);
-            margin-bottom: 20px;
-            line-height: 1.2;
-            font-weight: 700;
-        }
-        
-        .featured-post-content p {
-            color: var(--color-gray-600);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        
-        .author-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .author-details h4 {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--color-gray-900);
-            font-weight: 600;
-        }
-        
-        .author-details span {
-            font-size: 0.85rem;
-            color: var(--color-gray-500);
-        }
-        
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .post-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-        
-        .post-card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .post-card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .post-card-content h4 {
-            font-size: 1.25rem;
-            color: var(--color-gray-900);
-            margin-bottom: 15px;
-            line-height: 1.4;
-            font-weight: 700;
-        }
-        
-        .post-card-content p {
-            color: var(--color-gray-600);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            flex-grow: 1;
-            line-height: 1.5;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 60px;
-        }
-        
-        .page-link {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: white;
-            color: var(--color-gray-700);
-            text-decoration: none;
-            border: 1px solid var(--color-gray-200);
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .page-link:hover, .page-link.active {
-            background-color: var(--color-accent); /* orange tone */
-            color: white;
-            border-color: var(--color-accent);
-        }
-        
-        @media (max-width: 992px) {
-            .featured-post {
-                grid-template-columns: 1fr;
-            }
-            .featured-post-img img {
-                height: 300px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .blog-hero h2 {
-                font-size: 2.5rem;
-            }
-            .featured-post-content h3 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/news-blog.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 </head>
 <body>
-
     <!-- SEO Headings (Hidden) -->
-    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Tin Tức & Kiến Thức Ngành Gas</h1>
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Tin tức & kiến thức ngành gas</h1>
 
     <!-- TOP BAR -->
     <div class="top-bar">
@@ -225,7 +27,7 @@
                 <div class="top-bar-right">
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức, Hồ Chí Minh</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link" style="color: var(--color-accent);"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
                     <span class="top-bar-divider"></span>
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
                 </div>
@@ -247,7 +49,7 @@
                     <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="ve-chung-toi.html">Về Chúng Tôi</a></li>
                     <li><a href="san-pham.html">Sản Phẩm</a></li>
-                    <li><a href="tintuc.html" class="active">Tin Tức</a></li>
+                    <li><a href="tin-tuc.html" class="active">Tin Tức</a></li>
                     <li><a href="lien-he.html">Liên Hệ</a></li>
                 </ul>
             </nav>
@@ -262,169 +64,135 @@
         </div>
     </header>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="blog-hero">
-            <h2>Blog Insights</h2>
-            <p>Explore Our Latest Articles and Industry Insights</p>
-        </div>
-
-        <!-- Featured Post -->
-        <div class="featured-post">
-            <div class="featured-post-img">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" alt="Elevate Your SEO Game Today">
+    <div class="container new-blog-container">
+        <!-- Section 1: Tin Nổi Bật -->
+        <section class="nb-hero">
+            <div class="nb-hero-text">
+                <h2>Khám Phá Thế Giới Gas & Bếp Gas An Toàn</h2>
+                <p>Tìm hiểu những mẹo hay, kiến thức bổ ích và các hướng dẫn an toàn giúp bạn sử dụng gas hiệu quả, tiết kiệm trong gia đình.</p>
+                <a href="chi-tiet-tin-tuc.html" class="nb-btn-dark">Đọc bài nổi bật</a>
             </div>
-            <div class="featured-post-content">
-                <div class="post-meta">
-                    <span>Jan 22, 2025</span>
-                    <span class="post-tag">SEO</span>
+            <div class="nb-hero-images">
+                <div class="nb-img-large">
+                    <img src="https://i.pinimg.com/control1/1200x/36/db/be/36dbbe7534d0fb076fa0e8e9f425340b.jpg" alt="Bếp gas hiện đại">
                 </div>
-                <h3><a href="#" style="color: inherit; text-decoration: none;">Elevate Your SEO Game Today</a></h3>
-                <p>Discover effective SEO strategies that will boost your website's visibility and drive organic traffic. Learn tips and tricks from our experts.</p>
-                <div class="author-info">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar">
-                    <div class="author-details">
-                        <h4>James Anderson</h4>
-                        <span>SEO Specialist</span>
-                    </div>
+                <div class="nb-img-small-stack">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcCEN_u0qNOSj1q24gJ3k76Afm3QJfGNW78nzrKPNPA&s=10" alt="Nấu ăn với bếp gas">
+                    <img src="https://kenh14cdn.com/zoom/700_438/203336854389633024/2024/8/20/anh-cat-dan-nghe-thuat-lich-ghi-nho-hinh-nen-may-tinh-22543283-1724149878897-17241498802971855222386-0-46-405-694-crop-1724149982222287470039.png" alt="Bình gas an toàn">
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Post Grid -->
-        <div class="posts-grid">
-            <!-- Post 1 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Creating Engaging Social Media Content" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>Feb 22, 2025</span>
-                        <span class="post-tag">Social</span>
+        <!-- Section 2: Chuyên Mục / Tin Chuyên Đề -->
+        <section class="nb-destinations">
+            <div class="nb-dest-header">
+                <h2>Chuyên Mục Yêu Thích</h2>
+                <div class="nb-dest-filters">
+                    <a href="danh-sach-tin-tuc.html" class="active">Tất cả</a>
+                    <a href="chuyen-muc-an-toan-gas.html">An toàn Gas</a>
+                    <a href="danh-sach-tin-tuc.html">Mẹo vặt nhà bếp</a>
+                    <a href="danh-sach-tin-tuc.html">Khuyến mãi</a>
+                    <a href="danh-sach-tin-tuc.html">Sản phẩm mới</a>
+                </div>
+            </div>
+            <div class="nb-dest-grid">
+                <!-- Card 1 -->
+                <div class="nb-dest-card">
+                    <img src="https://vangas.com.vn/assets/binh-gas-composite-chong-chay-no-2-Sao.jpg" alt="Bình Gas Composite">
+                    <div class="nb-dest-card-info">
+                        <h3><a href="chi-tiet-tin-tuc.html">Bình Gas Composite chống cháy nổ</a></h3>
+                        <span><a href="chuyen-muc-an-toan-gas.html" style="color:white; text-decoration:none;">An toàn Gas</a></span>
                     </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">Creating Engaging Social Media Content</a></h4>
-                    <p>Learn how to craft compelling social media content that captures attention and drives engagement. Our guide covers best practices and creative ideas.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">Emily Johnson</h4>
-                            <span style="font-size: 0.75rem;">Social Media Manager</span>
+                </div>
+                <!-- Card 2 -->
+                <div class="nb-dest-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREDfbpJN9BQsZcMUaDaz3hl4DxMfYHjrLkFJ10o4ugcCRPcoF6BtM-ZDA&s=10" alt="Vệ sinh bếp gas">
+                    <div class="nb-dest-card-info">
+                        <h3><a href="chi-tiet-tin-tuc.html">Mẹo vệ sinh bếp gas sạch bong</a></h3>
+                        <span><a href="chuyen-muc-an-toan-gas.html" style="color:white; text-decoration:none;">Mẹo vặt nhà bếp</a></span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="nb-dest-card">
+                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" alt="Bữa ăn ngon">
+                    <div class="nb-dest-card-info">
+                        <h3><a href="chi-tiet-tin-tuc.html">Nấu ăn ngon với lửa xanh</a></h3>
+                        <span><a href="chuyen-muc-an-toan-gas.html" style="color:white; text-decoration:none;">Ẩm thực</a></span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="nb-dest-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdCLr1Drw3Zmm8R1xEIAdpHoAQb7b_9AZ0kbFWNdKrrg&s=10" alt="Nhà bếp đẹp">
+                    <div class="nb-dest-card-info">
+                        <h3><a href="chi-tiet-tin-tuc.html">Lắp đặt gas an toàn tại nhà</a></h3>
+                        <span><a href="chuyen-muc-an-toan-gas.html" style="color:white; text-decoration:none;">Kỹ thuật</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Tin Cập Nhật -->
+        <section class="nb-latest">
+            <div class="nb-latest-header">
+                <h2>Tin Tức Cập Nhật</h2>
+                <a href="danh-sach-tin-tuc.html" class="nb-btn-outline">Xem tất cả bài viết</a>
+            </div>
+            <div class="nb-latest-content">
+                <div class="nb-latest-main">
+                    <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2026/7/16/1736102/Cover-Gia-Gas-2.jpg" alt="Công nghệ chiết nạp gas">
+                    <div class="nb-latest-main-info">
+                        <span class="nb-cat">Thị trường</span>
+                        <h3><a href="chi-tiet-tin-tuc.html">Giá gas tháng 8 dự kiến giảm nhẹ, người tiêu dùng hưởng lợi</a></h3>
+                        <div class="nb-meta">Ngày 14 Tháng 7, 2026</div>
+                        <p>Theo dự báo từ các chuyên gia, giá gas thế giới đang có dấu hiệu hạ nhiệt, kéo theo giá gas trong nước có thể giảm vào kỳ điều chỉnh đầu tháng tới, giúp các bà nội trợ bớt gánh nặng chi tiêu...</p>
+                    </div>
+                </div>
+                <div class="nb-latest-list">
+                    <!-- Item 1 -->
+                    <div class="nb-list-item">
+                        <img src="https://motthegioi.vn/wp-content/uploads/2026/04/bep-gas-chay-bang-nuoc.jpg.webp" alt="Cảnh báo lừa đảo">
+                        <div class="nb-list-item-info">
+                            <span class="nb-cat">Cảnh báo</span>
+                            <h3><a href="chi-tiet-tin-tuc.html">Cảnh giác với các chiêu trò lừa đảo đổi gas giả mạo</a></h3>
+                            <div class="nb-meta">Ngày 12 Tháng 7, 2026</div>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="nb-list-item">
+                        <img src="https://kingshop.vn/data/images/Van-gas-cao-ap-tu-ngat-an-toan-Namilux-NA-538SH-1.jpg" alt="Van gas">
+                        <div class="nb-list-item-info">
+                            <span class="nb-cat">Hướng dẫn</span>
+                            <h3><a href="chi-tiet-tin-tuc.html">Cách nhận biết van gas tự ngắt chính hãng và hàng nhái</a></h3>
+                            <div class="nb-meta">Ngày 10 Tháng 7, 2026</div>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="nb-list-item">
+                        <img src="https://cdn.tgdd.vn//News/542986//nhan-biet-may-dieu-hoa-thieu-gas-het-gas-2-730x487.jpg" alt="Bảo dưỡng bếp">
+                        <div class="nb-list-item-info">
+                            <span class="nb-cat">Kỹ thuật</span>
+                            <h3><a href="chi-tiet-tin-tuc.html">Khi nào cần thay dây dẫn gas? Dấu hiệu cần biết ngay</a></h3>
+                            <div class="nb-meta">Ngày 08 Tháng 7, 2026</div>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="nb-list-item">
+                        <img src="https://gassaigonvina.com/upload/product/7-8062.png" alt="Bình gas mới">
+                        <div class="nb-list-item-info">
+                            <span class="nb-cat">Thị trường</span>
+                            <h3><a href="chi-tiet-tin-tuc.html">Tìm hiểu về bình gas Composite chống cháy nổ thế hệ mới</a></h3>
+                            <div class="nb-meta">Ngày 05 Tháng 7, 2026</div>
                         </div>
                     </div>
                 </div>
-            </article>
-
-            <!-- Post 2 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="The Power of Content Marketing" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>Mar 22, 2025</span>
-                        <span class="post-tag">Content</span>
-                    </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">The Power of Content Marketing</a></h4>
-                    <p>Unleash the potential of content marketing to connect with your audience. Discover how quality content can drive traffic and boost conversions.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">Michael Brown</h4>
-                            <span style="font-size: 0.75rem;">Content Director</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Post 3 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" alt="Digital Strategy for Small Businesses" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>Apr 22, 2025</span>
-                        <span class="post-tag">Strategy</span>
-                    </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">Digital Strategy for Small Businesses</a></h4>
-                    <p>Explore tailored digital strategies designed to help small businesses succeed online. Learn how to reach your target audience effectively.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">Sarah Williams</h4>
-                            <span style="font-size: 0.75rem;">Digital Strategist</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            
-            <!-- Post 4 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Measuring Success with Analytics" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>May 22, 2025</span>
-                        <span class="post-tag">Analytics</span>
-                    </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">Measuring Success with Analytics</a></h4>
-                    <p>Understand the importance of analytics in digital marketing. Learn how to track, measure, and optimize your campaigns for better results.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">David Anderson</h4>
-                            <span style="font-size: 0.75rem;">Analytics Expert</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Post 5 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2076&auto=format&fit=crop" alt="Maximizing ROI in Digital Campaigns" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>Jun 22, 2025</span>
-                        <span class="post-tag">ROI</span>
-                    </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">Maximizing ROI in Digital Campaigns</a></h4>
-                    <p>Discover techniques to maximize your return on investment in digital marketing campaigns. Our experts share insights on budget allocation.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">Laura Davis</h4>
-                            <span style="font-size: 0.75rem;">Marketing Analyst</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Post 6 -->
-            <article class="post-card">
-                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop" alt="Trends in Digital Marketing 2025" class="post-card-img">
-                <div class="post-card-content">
-                    <div class="post-meta">
-                        <span>Jul 22, 2025</span>
-                        <span class="post-tag">Trends</span>
-                    </div>
-                    <h4><a href="#" style="color: inherit; text-decoration: none;">Trends in Digital Marketing 2025</a></h4>
-                    <p>Stay ahead of the curve with the latest trends in digital marketing. Learn what's shaping the industry and how to adapt your strategies.</p>
-                    <div class="author-info" style="margin-top: 15px;">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="Author" class="author-avatar" style="width: 35px; height: 35px;">
-                        <div class="author-details">
-                            <h4 style="font-size: 0.9rem;">Richard Wilson</h4>
-                            <span style="font-size: 0.75rem;">Industry Analyst</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <a href="#" class="page-link"><i class="fa-solid fa-chevron-left"></i></a>
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link"><i class="fa-solid fa-chevron-right"></i></a>
-        </div>
+            </div>
+        </section>
     </div>
+    <site-footer></site-footer>
     
     <!-- Scripts -->
+    <script src="components/footer.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
+

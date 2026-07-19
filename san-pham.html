@@ -18,9 +18,11 @@
         
         html { scroll-behavior: smooth; }
     </style>
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 </head>
 <body>
-    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Sản phẩm Gas Việt</h1>
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Tất cả sản phẩm</h1>
 
     <!-- TOP BAR -->
     <div class="top-bar">
@@ -32,7 +34,7 @@
                 <div class="top-bar-right">
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức, Hồ Chí Minh</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link" style="color: var(--color-accent);"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
                     <span class="top-bar-divider"></span>
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
                 </div>
@@ -54,7 +56,7 @@
                     <li><a href="index.html" >Trang Chủ</a></li>
                     <li><a href="ve-chung-toi.html">Về Chúng Tôi</a></li>
                     <li><a href="san-pham.html" class="active">Sản Phẩm</a></li>
-                    <li><a href="tintuc.html">Tin Tức</a></li>
+                    <li><a href="/tin-tuc.html">Tin Tức</a></li>
                     <li><a href="lien-he.html">Liên Hệ</a></li>
                 </ul>
             </nav>
@@ -76,7 +78,8 @@
             <!-- Sidebar -->
             <div class="category-sidebar">
                 <div class="sidebar-title">
-                    <i class="fa-solid fa-list-ul"></i> Danh mục sản phẩm
+                    <i class="fa-solid fa-list-ul"></i>
+                    <strong>Danh mục sản phẩm</strong>
                 </div>
                 <ul class="category-list">
                     <li><a href="#cat-saigon-petro">Gas Saigon Petro <span class="sidebar-count">124</span><i class="fa-solid fa-chevron-right"></i></a></li>
@@ -92,7 +95,11 @@
 
             <!-- Product Area -->
             <div class="product-area">
-                <div class="section-header-full header-search-only">
+                <div class="section-header-full header-search-only" style="position: relative;">
+                    <!-- Nút toggle sidebar trên mobile -->
+                    <button id="sidebarToggleBtn" class="btn-sidebar-toggle" aria-label="Toggle Sidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                     <div class="section-search search-flex">
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
                         <input type="text" placeholder="Tìm kiếm sản phẩm...">
@@ -114,7 +121,7 @@
                 </div>
 
                 
-                <div class="category-section" id="cat-saigon-petro" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-saigon-petro" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Gas Saigon Petro</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(124 sản phẩm)</span>
@@ -327,10 +334,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Gas Saigon Petro</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-petrolimex" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-petrolimex" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Gas Petrolimex</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(85 sản phẩm)</span>
@@ -543,10 +550,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Gas Petrolimex</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-gia-dinh" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-gia-dinh" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Gas Gia Đình</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(96 sản phẩm)</span>
@@ -759,10 +766,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Gas Gia Đình</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-thu-duc" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-thu-duc" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Gas Thủ Đức</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(42 sản phẩm)</span>
@@ -975,10 +982,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Gas Thủ Đức</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-elf" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-elf" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Gas Elf</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(35 sản phẩm)</span>
@@ -1191,10 +1198,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Gas Elf</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-bep-hong-ngoai" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-bep-hong-ngoai" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Bếp Gas Hồng Ngoại</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(156 sản phẩm)</span>
@@ -1407,10 +1414,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Bếp Gas Hồng Ngoại</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-bep-am" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-bep-am" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Bếp Gas Âm</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(210 sản phẩm)</span>
@@ -1623,10 +1630,10 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Bếp Gas Âm</button>
+                        <button class="btn-search btn-search-more">Xem thêm sản phẩm</button>
                     </div>
                 </div>
-                <div class="category-section" id="cat-phu-kien" style="margin-bottom: 50px;">
+                <div class="category-section" id="cat-phu-kien" style="margin-bottom: 30px;">
                     <div class="category-section-title-wrapper" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--color-gray-200);">
                         <h3 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">Phụ kiện (Van, Dây)</h3>
                         <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(340 sản phẩm)</span>
@@ -1839,7 +1846,7 @@
                         </div>
                     </div>
                     <div class="text-center" style="margin-top: 30px;">
-                        <button class="btn-search" style="padding: 10px 30px; border-radius: 30px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm Phụ kiện (Van, Dây)</button>
+                        <button class="btn-search" style="padding: 10px 30px; border-radius: 12px; font-size: 1rem; border: none; background-color: var(--color-primary); color: white; cursor: pointer;">Xem thêm phụ kiện</button>
                     </div>
                 </div>
             </div>
@@ -1921,12 +1928,12 @@
 
                     <!-- Column 2: Nav Links -->
                     <div class="footer-col">
-                        <div class="footer-col-title">Công Ty</div>
+                        <div class="footer-col-title">Dịch vụ</div>
                         <ul>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">Sản phẩm</a></li>
-                            <li><a href="#">Tin tức & Blog</a></li>
-                            <li><a href="#">Tuyển dụng</a></li>
+                            <li><a href="/ve-chung-toi.html">Về chúng tôi</a></li>
+                            <li><a href="/san-pham.html">Sản phẩm</a></li>
+                            <li><a href="/tin-tuc.html">Tin tức & Blog</a></li>
+                            <li><a href="/lien-he.html">Liên hệ</a></li>
                         </ul>
                     </div>
 
@@ -1982,6 +1989,23 @@
                     }
                 });
             });
+
+            // Toggle sidebar for mobile
+            const sidebarBtn = document.getElementById('sidebarToggleBtn');
+            const sidebar = document.querySelector('.category-sidebar');
+            if(sidebarBtn && sidebar) {
+                sidebarBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    sidebar.classList.toggle('mobile-active');
+                });
+
+                // Đóng sidebar khi click ngoài
+                document.addEventListener('click', (e) => {
+                    if (!sidebar.contains(e.target) && !sidebarBtn.contains(e.target)) {
+                        sidebar.classList.remove('mobile-active');
+                    }
+                });
+            }
         });
     </script>
 </body>
