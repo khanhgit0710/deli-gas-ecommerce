@@ -116,6 +116,31 @@
         padding: 30px 0;
     }
 
+    .contact-features .f-text h3,
+    .features-section .feature-text h4 {
+        font-size: 16px !important;
+        margin-bottom: 5px;
+    }
+
+    .contact-features .feature-item,
+    .features-section .feature-item {
+        gap: 10px;
+        padding: 15px;
+        /* Cho features-section */
+    }
+
+    .contact-features .f-icon,
+    .features-section .feature-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    /* Đảm bảo tên sản phẩm không bị to ở 1024px */
+    .cart-product-info h4 {
+        font-size: 18px !important;
+    }
+
     .contact-info-area {
         padding: 30px 20px;
     }
@@ -135,6 +160,11 @@
 
 /* Các thay đổi chung cho Mobile (<= 1024px) */
 @media screen and (max-width: 1024px) {
+
+    /* Ẩn các nút slider trên mobile vì đã có vuốt ngang tự nhiên */
+    .slider-btn {
+        display: none !important;
+    }
 
     /* Products-flex hiệu ứng lướt ngang */
     .products-flex,
@@ -275,7 +305,7 @@
     .nb-archive-card-body p {
         margin-bottom: 4px !important;
     }
-    
+
     .nb-archive-card-body .nb-cat {
         margin-bottom: 6px !important;
         display: inline-block !important;
@@ -300,6 +330,24 @@
         content: "Gửi";
         font-size: 0.95rem;
         /* Giữ nguyên kích thước chữ gốc */
+    }
+
+    /* CART TABLE MOBILE FIX */
+    .cart-table th:first-child,
+    .cart-table td:first-child {
+        width: 65% !important;
+        min-width: 240px !important;
+    }
+    .cart-product-info {
+        text-align: left !important;
+        flex: 1;
+    }
+    .cart-product-info h4 {
+        text-align: left !important;
+        line-height: 1.3 !important;
+    }
+    .cart-table {
+        min-width: 550px !important;
     }
 
     .nb-archive-card-body p {
@@ -366,8 +414,8 @@
         flex-direction: column;
         gap: 20px;
     }
-    
-    .about-page-wrapper .promise-col-left > div {
+
+    .about-page-wrapper .promise-col-left>div {
         flex: 1;
         margin-bottom: 0 !important;
         display: flex;
@@ -383,7 +431,8 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         gap: 15px !important;
-        padding-bottom: 15px;
+        padding: 15px;
+        background-color: #f8f9fb;
     }
 
     .about-page-wrapper .values-grid::-webkit-scrollbar {
@@ -574,6 +623,10 @@
     .contact-features {
         padding-bottom: 40px;
     }
+
+    .nb-tags a {
+        font-size: 18px;
+    }
 }
 
 /* Tablet nhỏ & Mobile ngang (481px - 768px) */
@@ -686,7 +739,7 @@
         gap: 15px !important;
         padding-bottom: 15px;
     }
-    
+
     .features-grid::-webkit-scrollbar {
         height: 6px;
     }
@@ -712,20 +765,27 @@
     /* Đưa Flash Deal Sidebar & Slider lên cùng 1 hàng ở Tablet */
     .flash-deal-container {
         flex-direction: row !important;
-        align-items: stretch !important; /* hoặc flex-start tuỳ gốc */
+        align-items: stretch !important;
+        /* hoặc flex-start tuỳ gốc */
     }
 
     .flash-deal-sidebar {
         width: 250px !important;
-        padding: 20px 15px !important; /* Gọn lại cho vừa */
+        padding: 20px 15px !important;
+        /* Gọn lại cho vừa */
         flex-shrink: 0 !important;
     }
 
     .flash-deal-slider-wrapper {
         flex: 1 !important;
         width: auto !important;
-        min-width: 0 !important; /* Quan trọng để slider không làm vỡ layout flex */
+        min-width: 0 !important;
+        /* Quan trọng để slider không làm vỡ layout flex */
         overflow: hidden !important;
+    }
+
+    .nb-tags a {
+        font-size: 18px;
     }
 }
 
@@ -825,9 +885,28 @@
         align-items: flex-start;
     }
 
-    .features-badge-wrapper {
-        grid-template-columns: 1fr !important;
-        gap: 15px;
+
+
+    .flash-deal-slider-container {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 5px;
+    }
+
+    .flash-deal-slider-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .flash-deal-slider-container .deal-horizontal-slider {
+        width: max-content;
+    }
+
+    .deal-horizontal-card {
+        flex: 0 0 85vw !important;
+        max-width: 85vw !important;
+        width: 85vw !important;
     }
 
     .news-card {
@@ -958,9 +1037,28 @@
         align-items: flex-start;
     }
 
-    .features-badge-wrapper {
-        grid-template-columns: 1fr !important;
-        gap: 10px;
+
+
+    .flash-deal-slider-container {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 5px;
+    }
+
+    .flash-deal-slider-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .flash-deal-slider-container .deal-horizontal-slider {
+        width: max-content;
+    }
+
+    .deal-horizontal-card {
+        flex: 0 0 85vw !important;
+        max-width: 85vw !important;
+        width: 85vw !important;
     }
 
     .news-card {
@@ -1008,19 +1106,32 @@
     .footer-grid {
         display: grid !important;
         grid-template-columns: 1.8fr 1fr 1fr !important;
-        gap: 0px 15px!important;
-        margin-bottom: 15px !important; /* override 40px in main.css */
+        gap: 0px 15px !important;
+        margin-bottom: 15px !important;
+        /* override 40px in main.css */
     }
 
     /* Đưa 3 cột About, Dịch Vụ, Liên Hệ lên cùng 1 hàng */
-    .footer-grid > .footer-col:nth-child(1) { order: 1 !important; } /* About */
-    .footer-grid > .footer-col:nth-child(2) { order: 2 !important; } /* Dịch vụ */
-    .footer-grid > .footer-col:nth-child(3) { order: 3 !important; } /* Liên hệ */
-    
+    .footer-grid>.footer-col:nth-child(1) {
+        order: 1 !important;
+    }
+
+    /* About */
+    .footer-grid>.footer-col:nth-child(2) {
+        order: 2 !important;
+    }
+
+    /* Dịch vụ */
+    .footer-grid>.footer-col:nth-child(3) {
+        order: 3 !important;
+    }
+
+    /* Liên hệ */
+
     /* Cột 4 (Bo Cong Thuong) nằm dưới cùng, chiếm trọn chiều ngang để đẩy sang phải dễ dàng */
-    .footer-grid > .footer-col:nth-child(4) { 
-        order: 4 !important; 
-        grid-column: 1 / -1 !important; 
+    .footer-grid>.footer-col:nth-child(4) {
+        order: 4 !important;
+        grid-column: 1 / -1 !important;
     }
 
     /* Ẩn Map */
@@ -1034,22 +1145,482 @@
     }
 
     /* Logo Bộ Công Thương ôm lề phải dưới */
-    .footer-grid > .footer-col:nth-child(4) {
+    .footer-grid>.footer-col:nth-child(4) {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-end;
     }
-    
-    .footer-grid > .footer-col:nth-child(4) img {
+
+    .footer-grid>.footer-col:nth-child(4) img {
         margin-bottom: 0 !important;
         margin-left: auto !important;
-        max-width: 130px !important; /* Nhỏ hơn nữa */
+        max-width: 130px !important;
+        /* Nhỏ hơn nữa */
     }
 
     /* Tối ưu tối đa chiều cao: giảm margin, padding, chữ */
-    .footer-logo img { max-width: 240px !important; margin-bottom: 10px !important; }
-    .footer-col .footer-col-title { margin-bottom: 10px !important; font-size: 15px !important; padding-bottom: 5px !important; }
-    .footer-col ul li { margin-bottom: 5px !important; font-size: 16px !important; }
-    .footer-desc { font-size: 16px !important; line-height: 1.3 !important; }
+    .footer-logo img {
+        max-width: 240px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .footer-col .footer-col-title {
+        margin-bottom: 10px !important;
+        font-size: 18px !important;
+        padding-bottom: 5px !important;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 5px !important;
+        font-size: 16px !important;
+    }
+
+    .footer-desc {
+        font-size: 16px !important;
+        line-height: 1.3 !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 15px !important;
+    }
+
+    /* About (cột 1) chiếm 2 cột */
+    .footer-grid>.footer-col:nth-child(1) {
+        grid-column: 1 / -1 !important;
+    }
+
+    /* Bộ Công Thương (cột 4) chiếm 2 cột */
+    .footer-grid>.footer-col:nth-child(4) {
+        grid-column: 1 / -1 !important;
+        align-items: flex-end !important;
+        justify-content: flex-end !important;
+    }
+
+    .footer-grid>.footer-col:nth-child(4) img {
+        margin-left: 0 !important;
+    }
+
+    /* Đưa form tư vấn về 1 hàng ngang */
+    .consultation-form {
+        flex-direction: row !important;
+        border-radius: 50px !important;
+        padding: 4px !important;
+    }
+
+    .consultation-form input {
+        border-radius: 50px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .consult-submit-btn {
+        border-radius: 50px !important;
+        white-space: nowrap;
+    }
+
+    .section-header-full {
+        padding-right: 75px !important;
+        position: relative !important;
+    }
+
+    .section-header-full .sort-by {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin-left: 0 !important;
+    }
+
+    .section-search .btn-search {
+        width: 36px !important;
+        height: 36px !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .sort-by .dropdown-selected {
+        width: 44px !important;
+        height: 44px !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .custom-dropdown,
+    .sort-by .custom-dropdown {
+        width: 44px !important;
+        position: relative !important;
+    }
+
+    .section-search,
+    .search-flex {
+        width: auto !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+        margin: 0 !important;
+        padding: 5px 5px 5px 15px !important;
+    }
+
+    .page-content {
+        margin-bottom: 10px;
+    }
+
+    .pd-main,
+    .pd-tabs-container,
+    .pd-reviews-section {
+        padding: 15px !important;
+    }
+
+    .nb-hero-text h2 {
+        margin-top: 30px;
+    }
+
+    .nb-hero {
+        margin-bottom: 60px;
+    }
+
+    .flash-deal-slider-wrapper {
+        padding: 15px 15px 65px;
+    }
+
+    .cart-container {
+        margin-bottom: 0px;
+    }
+
+    .cart-banner-content p {
+        font-size: 18px;
+    }
+
+    .pd-load-more-reviews {
+        margin-top: 0px !important;
+        margin-bottom: 20px;
+    }
+
+    .pd-reviews-section {
+        margin-bottom: 40px !important;
+    }
+
+    .pd-lightbox-counter {
+        right: 6px;
+    }
+
+    .about-page-wrapper .about-hero {
+        padding: 60px 0 60px !important;
+    }
+
+    .about-page-wrapper .menu-grid {
+        gap: 20px !important;
+    }
+
+    .about-page-wrapper .menu-categories-col {
+        gap: 0px !important;
+    }
+
+    .about-page-wrapper .category-square {
+        width: calc(50% - 5px) !important;
+        padding: 15px 5px !important;
+        gap: 10px !important;
+    }
+
+    .about-page-wrapper .square-icon-wrap {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .about-page-wrapper .square-icon-wrap i {
+        font-size: 45px !important;
+    }
+
+    .about-page-wrapper .category-square h3 {
+        font-size: 18px !important;
+    }
+
+    .about-page-wrapper .hero-tl-circle {
+        top: -60px;
+        left: -60px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-page-wrapper .hero-images {
+        margin: -100px auto 0;
+        margin-left: -65px !important;
+    }
+
+    .about-page-wrapper .about-hero p {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .about-page-wrapper .hero-badge {
+        font-size: 14px;
+    }
+
+    .about-clients {
+        padding-top: 40px !important;
+    }
+
+    .about-page-wrapper .clients-title {
+        margin-bottom: 30px;
+    }
+
+    .about-page-wrapper .about-mission {
+        padding-top: 50px;
+    }
+
+    .about-page-wrapper .mission-grid {
+        gap: 0px;
+    }
+
+    .about-page-wrapper .img-sub-mission {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    .flash-deal-content {
+        margin-bottom: 0 !important;
+    }
+
+    .about-page-wrapper .about-features-badge, .about-flash-deal {
+        padding: 15px !important;
+    }
+}
+
+/* ==========================================================================
+   FEATURES BADGE MARQUEE FOR MOBILE (<= 480px)
+   ========================================================================== */
+@media screen and (max-width: 480px) {
+    .features-badge-marquee {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+    }
+
+    .features-badge-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: max-content !important;
+        padding-bottom: 0 !important;
+        padding-right: 15px !important;
+        /* Perfect seamless loop balance */
+        overflow: visible !important;
+        gap: 15px !important;
+        animation: marqueeMobile 8s linear infinite;
+        /* Faster speed */
+    }
+
+    .features-badge-wrapper:hover {
+        animation-play-state: paused;
+    }
+
+    .features-badge-wrapper .feature-item {
+        display: flex !important;
+        flex: 0 0 auto !important;
+        width: max-content !important;
+        /* Natural width */
+        min-width: 0 !important;
+        /* Override 200px from main.css */
+        max-width: none !important;
+        opacity: 1 !important;
+        /* Disable scroll-hidden effect */
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .featured-products-section {
+        padding: 60px 0 40px 0 !important;
+    }
+
+    .product-info h3,
+    .products-flex .product-info h3 {
+        font-size: 16px !important;
+    }
+
+    /* Cart Features Marquee */
+    .features-section-marquee {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+    }
+    .features-section {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: max-content !important;
+        padding: 0 !important;
+        margin: 40px 0 !important;
+        padding-right: 25px !important; /* matches gap for seamless loop */
+        overflow: visible !important;
+        gap: 25px !important;
+        animation: marqueeMobile 8s linear infinite; 
+    }
+    .features-section:hover {
+        animation-play-state: paused;
+    }
+    .features-section .feature-item {
+        display: flex !important;
+        flex: 0 0 auto !important;
+        width: max-content !important; 
+        min-width: 0 !important; 
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    /* Adjust promise-grid for mobile */
+    .about-page-wrapper .promise-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    /* Promise col left hugs left/right margins */
+    .about-page-wrapper .promise-col-left {
+        width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+    }
+
+    .about-page-wrapper .about-features-badge, 
+    .about-page-wrapper .about-flash-deal {
+        border-radius: 0 !important;
+    }
+
+    /* Promise col right for the image slider */
+    .about-page-wrapper .promise-col-right {
+        width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+    }
+
+    /* Image grid creative becomes a horizontal slider */
+    .about-page-wrapper .image-grid-creative {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 15px !important;
+        padding: 0 15px 15px 15px !important;
+        height: auto !important;
+        scrollbar-width: none !important; /* Firefox */
+        overflow-y: hidden !important;
+    }
+    
+    .about-page-wrapper .image-grid-creative::-webkit-scrollbar {
+        display: none !important; /* Chrome/Safari */
+    }
+
+    .about-page-wrapper .image-grid-creative img {
+        flex: 0 0 85% !important;
+        scroll-snap-align: center !important;
+        height: 250px !important;
+        width: auto !important; /* Let width follow flex-basis */
+        border-radius: 15px !important;
+        object-fit: cover !important;
+        position: static !important;
+    }
+
+    .about-page-wrapper .hero-images img {
+        width: 80%;
+    }
+
+    /* Giảm size card ở mobile (480px) để tránh scroll dọc */
+    .products-flex .product-card,
+    .featured-slider-container .products-flex .product-card,
+    .about-page-featured .products-flex .product-card {
+        flex: 0 0 220px !important;
+        width: 220px !important;
+        min-width: 220px !important;
+        max-width: 220px !important;
+    }
+
+    .about-page-wrapper .value-card {
+        flex: 0 0 280px !important;
+        width: 280px !important;
+    }
+
+    /* Ẩn thanh cuộn ngang (scroll X) và khóa cuộn dọc cho các slider ở mobile */
+    .products-flex,
+    .about-page-wrapper .values-grid,
+    .features-grid {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        overflow-y: hidden !important;
+        background-color: transparent !important;
+    }
+    .products-flex::-webkit-scrollbar,
+    .about-page-wrapper .values-grid::-webkit-scrollbar,
+    .features-grid::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .dropdown-options li {
+        font-size: 16px;
+    }
+
+    .nb-hero {
+        gap: 30px;
+    }
+}
+
+@keyframes marqueeMobile {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive cho news-blog category widget <= 480px */
+@media screen and (max-width: 480px) {
+    .nb-archive-sidebar {
+        position: sticky;
+        top: 60px; /* Adjusted to fit the header height without gap */
+        z-index: 99;
+        background-color: #f0f4f3;
+        padding-top: 10px;
+        margin-top: -10px;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .is-header-hidden .nb-archive-sidebar {
+        top: 0;
+    }
+    .nb-widget-search {
+        margin-bottom: 20px;
+    }
+    .nb-category-hamburger {
+        display: block !important;
+    }
+    .nb-widget-category {
+        display: none;
+        margin-top: 15px;
+    }
+    .nb-widget-category.active {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    .nb-archive-container {
+        gap: 0;
+        margin-bottom: 30px;
+    }
+
+    .nb-page-header {
+        margin-bottom: 20px;
+    }
 }

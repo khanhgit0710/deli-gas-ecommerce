@@ -507,9 +507,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL SCROLL ANIMATION ---
     // --- GLOBAL SCROLL ANIMATION ---
     const elementsToAnimate = document.querySelectorAll(`
-        .section-header, 
+        .section-header > *, 
         .section-title,
-        .feature-item, 
+        .features-badge-section .features-badge-wrapper > *,
+        .features-badge-section .feature-item,
+        .full-banner-section .slide,
+        .about-page-wrapper section .container > *,
+        .about-page-wrapper .mission-content > *,
+        .about-page-wrapper .mission-images > *,
+        .about-page-wrapper .menu-title-col > *,
+        .about-page-wrapper .category-square,
+        .about-page-wrapper .about-features-badge > *,
+        .about-page-wrapper .featured-header-new > *,
         .value-card,
         .info-block,
         .contact-title > *,
@@ -524,8 +533,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .hero-content > *,
         .truck-anim,
         .category-card,
-        .products-flex,
-        .products-grid,
+        .products-flex > *,
+        .products-grid > *,
         .step-card,
         .testimonial-card,
         .brand-logo
@@ -551,9 +560,11 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.contains('form-group') ||
             el.classList.contains('mission-list-item') ||
             el.classList.contains('category-card') ||
+            el.classList.contains('category-square') ||
             el.classList.contains('step-card') ||
             el.classList.contains('testimonial-card') ||
             el.classList.contains('brand-logo') ||
+            el.classList.contains('product-card') ||
             (el.tagName === 'IMG' && el.parentElement && el.parentElement.classList.contains('image-grid-creative'))) {
             const staggerDelay = (index % 6) + 1;
             el.classList.add(`stagger-${staggerDelay}`);
@@ -564,6 +575,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (el.parentElement.classList.contains('hero-content') ||
                 el.parentElement.classList.contains('about-story-content') ||
                 el.parentElement.classList.contains('contact-title') ||
+                el.parentElement.classList.contains('section-header') ||
+                el.parentElement.classList.contains('features-badge-wrapper') ||
+                el.parentElement.classList.contains('mission-content') ||
+                el.parentElement.classList.contains('mission-images') ||
+                el.parentElement.classList.contains('menu-title-col') ||
+                el.parentElement.classList.contains('featured-header-new') ||
+                el.parentElement.classList.contains('about-features-badge') ||
                 el.parentElement.classList.contains('qr-col')) {
                 const siblings = Array.from(el.parentElement.children);
                 const childIndex = siblings.indexOf(el);
@@ -588,13 +606,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (currentScrollY > lastScrollY) {
                     // Kéo xuống -> ẩn header
                     header.classList.add('header-hidden');
+                    document.body.classList.add('is-header-hidden');
                 } else {
                     // Kéo lên -> hiện header
                     header.classList.remove('header-hidden');
+                    document.body.classList.remove('is-header-hidden');
                 }
             } else {
                 // Ở trên cùng -> luôn hiện
                 header.classList.remove('header-hidden');
+                document.body.classList.remove('is-header-hidden');
             }
 
             lastScrollY = currentScrollY;
@@ -750,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cartTableBody.innerHTML = '';
 
             if (cart.length === 0) {
-                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="index.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
+                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="trang-chu.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
                 updateCartTotals(0, 0);
 
                 const cartActions = document.querySelector('.cart-actions');

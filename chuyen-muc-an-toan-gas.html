@@ -39,15 +39,15 @@
     <header class="header">
         <div class="container header-inner">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="trang-chu.html" class="logo">
                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
             </a>
 
             <!-- Main Links -->
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="index.html">Trang Chủ</a></li>
-                    <li><a href="ve-chung-toi.html">Về Chúng Tôi</a></li>
+                    <li><a href="trang-chu.html">Trang Chủ</a></li>
+                    <li><a href="index.html">Về Chúng Tôi</a></li>
                     <li><a href="san-pham.html">Sản Phẩm</a></li>
                     <li><a href="tin-tuc.html" class="active">Tin Tức</a></li>
                     <li><a href="lien-he.html">Liên Hệ</a></li>
@@ -75,15 +75,18 @@
     <div class="container nb-archive-container">
         <!-- Sidebar / Filter -->
         <div class="nb-archive-sidebar">
-            <div class="nb-widget">
-                <p>Tìm kiếm</p>
+            <div class="nb-widget nb-widget-search">
+                <div class="nb-widget-search-header">
+                    <p>Tìm kiếm</p>
+                    <button class="nb-category-hamburger" onclick="document.querySelector('.nb-widget-category').classList.toggle('active')"><i class="fa-solid fa-bars"></i></button>
+                </div>
                 <div class="nb-search-box">
                     <input type="text" placeholder="Nhập từ khóa...">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-            <div class="nb-widget">
-                <h2>Chuyên Mục</h2>
+            <div class="nb-widget nb-widget-category">
+                <div class="nb-widget-title">Chuyên Mục</div>
                 <ul class="nb-category-list">
                     <li><a href="danh-sach-tin-tuc.html">Tất cả <span>(24)</span></a></li>
                     <li><a href="#" class="active">An toàn Gas <span>(8)</span></a></li>

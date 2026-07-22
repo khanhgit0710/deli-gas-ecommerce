@@ -513,9 +513,53 @@
         gap: 20px;
     }
     .pd-review-summary {
-        flex-direction: column;
+        flex-direction: flex;
         align-items: flex-start;
         gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pd-buttons {
+        flex-direction: row !important;
+        gap: 10px;
+    }
+    .pd-buttons .pd-btn-primary {
+        flex: 1;
+    }
+    .pd-buttons .pd-btn-outline {
+        flex: 0 0 52px;
+        width: 52px;
+        padding: 0;
+        justify-content: center;
+    }
+    .pd-buttons .pd-btn-outline .btn-text {
+        display: none;
+    }
+    .pd-buttons .pd-btn-outline i {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .pd-tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        justify-content: flex-start !important;
+        padding-bottom: 2px;
+        gap: 15px !important;
+    }
+    
+    .pd-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .pd-tabs .pd-tab {
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-size: 18px;
     }
 }
 

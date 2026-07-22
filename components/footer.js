@@ -75,7 +75,7 @@ class SiteFooter extends HTMLElement {
 
                     <!-- Column 2: Nav Links -->
                     <div class="footer-col">
-                        <h3 class="footer-col-title">Dịch vụ</h3>
+                        <div class="footer-col-title">Dịch vụ</div>
                         <ul>
                             <li><a href="#">Về chúng tôi</a></li>
                             <li><a href="#">Sản phẩm</a></li>
@@ -86,7 +86,7 @@ class SiteFooter extends HTMLElement {
 
                     <!-- Column 3: Contact Info -->
                     <div class="footer-col">
-                        <h3 class="footer-col-title">Liên Hệ</h3>
+                        <div class="footer-col-title">Liên Hệ</div>
                         <ul class="contact-info-list">
                             <li><i class="fa-solid fa-location-dot"></i> 475A Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP.HCM</li>
                             <li><i class="fa-solid fa-phone"></i> 090 123 4567</li>
