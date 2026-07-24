@@ -11,7 +11,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/product-detail.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css?v=1784899535880">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 </head>
 
@@ -101,6 +101,22 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Thumb 6">
                         </div>
                     </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="pd-trust-badges">
+                        <div class="trust-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Bảo hiểm cháy nổ</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            <span>Kiểm tra rò rỉ miễn phí</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fa-solid fa-tags"></i>
+                            <span>Tem chống giả chính hãng</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Right: Product Info -->
@@ -125,13 +141,64 @@
                         </div>
                     </div>
 
+                    <!-- New Flash Deal Section -->
+                    <div class="pd-flash-deal">
+                        <div class="flash-deal-header">
+                            <i class="fa-solid fa-bolt"></i> FLASH DEAL
+                        </div>
+                        <div class="flash-deal-progress-wrap">
+                            <div class="progress-bar"><div class="progress-fill" style="width: 93%;"></div></div>
+                            <span class="progress-text">🔥 Đã bán 28/30 bình</span>
+                        </div>
+                        <div class="flash-deal-timer">
+                            KẾT THÚC TRONG 
+                            <span class="time-box">00</span> : <span class="time-box">25</span> : <span class="time-box">26</span>
+                        </div>
+                    </div>
+
                     <div class="pd-price-wrap">
                         <div class="pd-price">420.000đ</div>
                         <div class="pd-price-old">460.000đ</div>
+                        <div class="pd-save-badge">(Tiết kiệm 40.000đ)</div>
                     </div>
 
                     <div class="pd-desc-short">
                         Bình gas Petrolimex 12kg van ngang chính hãng. Đảm bảo an toàn tuyệt đối với van ngắt tự động, bình gas được kiểm định chất lượng định kỳ. Có tem chống hàng giả và bảo hiểm trách nhiệm.
+                    </div>
+
+                    <!-- New Shipping Badges -->
+                    <div class="pd-shipping-badges">
+                        <div class="badge-item nowfree">
+                            <span class="nowfree-icon"><i>⚡</i> NowFree</span>
+                            <span>Giao Nhanh Miễn Phí 15 phút</span>
+                        </div>
+                        <div class="badge-item freeship">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>Freeship bán kính < 3km</span>
+                        </div>
+                    </div>
+
+                    <!-- New Variations Section -->
+                    <div class="pd-variations">
+                        <label class="pd-label">Tùy chọn Trọng lượng:</label>
+                        <div class="variation-options">
+                            <button type="button" class="var-btn active">12kg</button>
+                            <button type="button" class="var-btn">45kg</button>
+                        </div>
+                    </div>
+
+                    <!-- New Gift/Combo Section -->
+                    <div class="pd-gift-box">
+                        <div class="gift-header">
+                            <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
+                        </div>
+                        <div class="gift-item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây van">
+                            <div class="gift-info">
+                                <p>Giảm 50% Bộ Van Dây Ngắt Tự Động Namilux khi mua kèm</p>
+                            </div>
+                            <input type="checkbox" checked>
+                        </div>
                     </div>
 
                     <form>
@@ -147,62 +214,155 @@
                             </div>
                         </div>
 
-                        <div class="pd-buttons">
+                        <div class="pd-buttons-wrapper">
+                            <div class="pd-buttons-row1">
+                                <a href="tel:1900123123" class="pd-btn pd-btn-contact"><i class="fa-solid fa-phone-volume icon-shake"></i> Liên hệ tư vấn</a>
+                                <button type="button" class="pd-btn pd-btn-outline">
+                                    <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
+                                    <span class="btn-text" style="font-size: 0.95rem;">Thêm vào giỏ</span>
+                                </button>
+                            </div>
                             <button type="button" class="pd-btn pd-btn-primary"> Mua ngay</button>
-                            <button type="button" class="pd-btn pd-btn-outline"><i class="fa-solid fa-cart-plus"></i><span class="btn-text">Thêm vào giỏ hàng</span></button>
                         </div>
                     </form>
                 </div>
             </div>
 
             <!-- Tabs Section -->
-            <div class="pd-tabs-container">
-                <div class="pd-tabs">
-                    <div class="pd-tab active" onclick="switchTab(this, 'description')">Mô tả sản phẩm</div>
-                    <div class="pd-tab" onclick="switchTab(this, 'specs')">Thông số kỹ thuật</div>
-                    <div class="pd-tab" onclick="switchTab(this, 'policy')">Chính sách giao hàng</div>
+            <div class="pd-tabs-wrapper">
+                <div class="pd-tabs-container sticky-tabs" id="stickyTabs">
+                    <div class="pd-tabs">
+                        <div class="pd-tab active" onclick="scrollToSection('description')" data-target="description">Mô tả sản phẩm</div>
+                        <div class="pd-tab" onclick="scrollToSection('specs')" data-target="specs">Thông số kỹ thuật</div>
+                        <div class="pd-tab" onclick="scrollToSection('policy')" data-target="policy">Chính sách giao hàng</div>
+                    </div>
                 </div>
 
-                <div class="pd-tab-content">
-                    <div id="description" class="pd-tab-pane active">
-                        <p><strong>Bình gas Petrolimex 12kg</strong> là sản phẩm được người tiêu dùng tin tưởng lựa chọn nhiều nhất nhờ độ an toàn cao và thương hiệu uy tín lâu năm trên thị trường.</p>
-                        <p>Đặc điểm nổi bật:</p>
-                        <ul>
-                            <li>Bình gas được sản xuất trên dây chuyền hiện đại, vỏ bình làm bằng thép đặc chủng có khả năng chịu áp lực cao.</li>
-                            <li>Khí gas tinh khiết, khi cháy cho ngọn lửa xanh, không sinh ra muội than làm đen đáy nồi, tiết kiệm chi phí nhiên liệu.</li>
-                            <li>Được niêm phong bằng màng co chống hàng giả, tem chống giả công nghệ cao của Bộ Công An.</li>
-                            <li>Bảo hiểm trách nhiệm cho mỗi bình gas lên đến hàng tỷ đồng.</li>
-                        </ul>
+                <div class="pd-tab-content-scrollable">
+                    <div id="description" class="pd-tab-section">
+                        <h2 class="section-title">Mô tả sản phẩm</h2>
+                        <div class="pd-tab-pane">
+                            <p><strong>Bình gas Petrolimex 12kg</strong> là sản phẩm được người tiêu dùng tin tưởng lựa chọn nhiều nhất nhờ độ an toàn cao và thương hiệu uy tín lâu năm trên thị trường.</p>
+                            <p>Đặc điểm nổi bật:</p>
+                            <ul>
+                                <li>Bình gas được sản xuất trên dây chuyền hiện đại, vỏ bình làm bằng thép đặc chủng có khả năng chịu áp lực cao.</li>
+                                <li>Khí gas tinh khiết, khi cháy cho ngọn lửa xanh, không sinh ra muội than làm đen đáy nồi, tiết kiệm chi phí nhiên liệu.</li>
+                                <li>Được niêm phong bằng màng co chống hàng giả, tem chống giả công nghệ cao của Bộ Công An.</li>
+                                <li>Bảo hiểm trách nhiệm cho mỗi bình gas lên đến hàng tỷ đồng.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div id="specs" class="pd-tab-pane">
-                        <ul>
-                            <li><strong>Thương hiệu:</strong> Petrolimex</li>
-                            <li><strong>Trọng lượng ruột (khí gas):</strong> 12kg ± 100g</li>
-                            <li><strong>Trọng lượng vỏ bình:</strong> Được in nổi trên thân bình (khoảng 13-14kg)</li>
-                            <li><strong>Loại van:</strong> Van ngang (van POL) hoặc van đứng (van chụp)</li>
-                            <li><strong>Thành phần:</strong> Khí Butan và Propane (LPG)</li>
-                            <li><strong>Áp suất thử:</strong> 34kg/cm2</li>
-                        </ul>
+                    
+                    <div id="specs" class="pd-tab-section">
+                        <h2 class="section-title">Thông số kỹ thuật</h2>
+                        <div class="pd-tab-pane">
+                            <ul>
+                                <li><strong>Thương hiệu:</strong> Petrolimex</li>
+                                <li><strong>Trọng lượng ruột (khí gas):</strong> 12kg ± 100g</li>
+                                <li><strong>Trọng lượng vỏ bình:</strong> Được in nổi trên thân bình (khoảng 13-14kg)</li>
+                                <li><strong>Loại van:</strong> Van ngang (van POL) hoặc van đứng (van chụp)</li>
+                                <li><strong>Thành phần:</strong> Khí Butan và Propane (LPG)</li>
+                                <li><strong>Áp suất thử:</strong> 34kg/cm2</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div id="policy" class="pd-tab-pane">
-                        <p>Tại Gas Việt, chúng tôi cam kết mang đến dịch vụ tốt nhất cho khách hàng:</p>
-                        <ul>
-                            <li><strong>Giao hàng hỏa tốc:</strong> Giao gas tận nhà chỉ trong vòng 15-30 phút kể từ khi nhận đơn đặt hàng.</li>
-                            <li><strong>Miễn phí vận chuyển:</strong> Áp dụng cho các khu vực nội thành.</li>
-                            <li><strong>Lắp đặt & kiểm tra:</strong> Nhân viên kỹ thuật sẽ lắp đặt, thay ron an toàn mới, kiểm tra rò rỉ bằng bọt xà phòng trước khi bàn giao.</li>
-                            <li><strong>Bảo trì định kỳ:</strong> Hỗ trợ kiểm tra bếp gas, dây dẫn và van miễn phí mỗi khi giao gas.</li>
-                        </ul>
+                    
+                    <div id="policy" class="pd-tab-section">
+                        <h2 class="section-title">Chính sách giao hàng</h2>
+                        <div class="pd-tab-pane">
+                            <p>Tại Gas Việt, chúng tôi cam kết mang đến dịch vụ tốt nhất cho khách hàng:</p>
+                            <ul>
+                                <li><strong>Giao hàng hỏa tốc:</strong> Giao gas tận nhà chỉ trong vòng 15-30 phút kể từ khi nhận đơn đặt hàng.</li>
+                                <li><strong>Miễn phí vận chuyển:</strong> Áp dụng cho các khu vực nội thành.</li>
+                                <li><strong>Lắp đặt & kiểm tra:</strong> Nhân viên kỹ thuật sẽ lắp đặt, thay ron an toàn mới, kiểm tra rò rỉ bằng bọt xà phòng trước khi bàn giao.</li>
+                                <li><strong>Bảo trì định kỳ:</strong> Hỗ trợ kiểm tra bếp gas, dây dẫn và van miễn phí mỗi khi giao gas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Khối Gợi Ý Mua Combo -->
+            <div class="pd-combo-section">
+                <h2 class="section-title">Sản Phẩm Mua Kèm Khuyên Dùng</h2>
+                <div class="combo-box">
+                    <div class="combo-items">
+                        <div class="combo-item">
+                            <input type="checkbox" checked class="combo-check" id="combo-1">
+                            <label for="combo-1">
+                                <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas 12kg">
+                                <span>Bình Gas 12kg</span>
+                                <div class="combo-item-price">420.000đ</div>
+                            </label>
+                        </div>
+                        <div class="combo-plus"><i class="fa-solid fa-plus"></i></div>
+                        <div class="combo-item">
+                            <input type="checkbox" checked class="combo-check" id="combo-2">
+                            <label for="combo-2">
+                                <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Van ngắt tự động">
+                                <span>Van Ngắt Katsura</span>
+                                <div class="combo-item-price">120.000đ</div>
+                            </label>
+                        </div>
+                        <div class="combo-plus"><i class="fa-solid fa-plus"></i></div>
+                        <div class="combo-item">
+                            <input type="checkbox" checked class="combo-check" id="combo-3">
+                            <label for="combo-3">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây gas lõi thép">
+                                <span>Dây Gas Lõi Thép</span>
+                                <div class="combo-item-price">80.000đ</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="combo-action">
+                        <div class="combo-badge">🔥 HOT COMBO - TIẾT KIỆM NHẤT</div>
+                        <div class="combo-price-wrap">
+                            <div class="combo-total">620.000đ</div>
+                            <div class="combo-save">(Tiết kiệm 80.000đ)</div>
+                        </div>
+                        <button class="pd-btn pd-btn-primary combo-btn">Mua Cả Bộ Combo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cam Kết Quy Trình Giao Gas & Lắp Đặt An Toàn -->
+            <div class="pd-process-section">
+                <h2 class="section-title center-title" style="margin-bottom: 30px; font-weight: 700;">Quy Trình Giao & Lắp Đặt An Toàn 100%</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="process-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h3>Giao siêu tốc 15 phút</h3>
+                        <p>Đội ngũ túc trực theo từng quận/huyện.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="process-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3>Cân gas công khai</h3>
+                        <p>Kiểm tra trọng lượng bình trước mặt khách.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="process-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h3>Kiểm tra rò rỉ</h3>
+                        <p>Đo xà phòng/máy dò khí van, dây.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="process-icon"><i class="fa-solid fa-file-shield"></i></div>
+                        <h3>Dán tem bảo hành</h3>
+                        <p>Tem chống giả & sổ bảo trì định kỳ.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Reviews Section -->
-            <div class="pd-reviews-section" style="background: var(--color-white); padding: 40px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: 60px;">
+            <div class="pd-reviews-section" style="background: var(--color-white); padding: 40px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: 0px;">
                 <h2 style="font-size: var(--fz-h2); font-weight: 700; color: var(--color-primary-dark); margin-bottom: 30px; border-bottom: 2px solid var(--color-primary); padding-bottom: 10px; display: inline-block;">Đánh giá từ khách hàng</h2>
                 <div class="pd-reviews">
-                    <div class="pd-review-summary" style="align-items: flex-end; justify-content: space-between; width: 100%;">
-                        <div class="pd-review-average" style="text-align: left;">
-                            <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">4.8</a></h3>
+                    <div class="pd-review-summary" style="align-items: center; justify-content: flex-start; width: 100%; gap: 40px; margin-bottom: 30px; display: flex; flex-wrap: wrap;">
+                        <div class="pd-review-average" style="text-align: left; width: 180px;">
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;"><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">4.8</a></div>
                             <div class="stars">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
@@ -212,13 +372,52 @@
                             </div>
                             <p>Dựa trên 120 đánh giá</p>
                         </div>
-                        <div>
+                        
+                        <div class="pd-review-breakdown" style="flex: 1; min-width: 250px; max-width: 400px; border-left: 1px solid var(--color-gray-200); padding-left: 40px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <span style="font-weight: 500; width: 45px; font-size: 16px;">5 sao</span>
+                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div style="width: 85%; height: 100%; background: var(--color-accent);"></div>
+                                </div>
+                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">85%</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <span style="font-weight: 500; width: 45px; font-size: 16px;">4 sao</span>
+                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div style="width: 10%; height: 100%; background: var(--color-accent);"></div>
+                                </div>
+                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">10%</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <span style="font-weight: 500; width: 45px; font-size: 16px;">3 sao</span>
+                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div style="width: 5%; height: 100%; background: var(--color-accent);"></div>
+                                </div>
+                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">5%</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <span style="font-weight: 500; width: 45px; font-size: 16px;">2 sao</span>
+                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div style="width: 0%; height: 100%; background: var(--color-accent);"></div>
+                                </div>
+                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span style="font-weight: 500; width: 45px; font-size: 16px;">1 sao</span>
+                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div style="width: 0%; height: 100%; background: var(--color-accent);"></div>
+                                </div>
+                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-left: auto;">
                             <button id="writeReviewBtn" class="pd-btn pd-btn-outline" style="padding: 10px 20px; transition: opacity 0.3s ease;" onclick="document.getElementById('reviewFormContainer').classList.remove('review-form-hidden'); document.getElementById('reviewFormContainer').classList.add('review-form-visible'); this.style.opacity = '0'; setTimeout(() => this.style.display = 'none', 300);">Viết đánh giá</button>
                         </div>
                     </div>
                     
                     <div id="reviewFormContainer" class="review-form-hidden" style="background: var(--color-gray-50); border-radius: var(--border-radius-md); border: 1px solid var(--color-gray-200);">
-                        <h4 style="margin-bottom: 15px; font-size: 18px; font-weight: 600;">Viết đánh giá của bạn</h4>
+                        <div style="margin-bottom: 15px; font-size: 18px; font-weight: 600;">Viết đánh giá của bạn</div>
                         <form>
                             <div style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
                                 <i class="fa-solid fa-star"></i>
@@ -238,6 +437,16 @@
                     </div>
                     </div>
                     
+                    <div class="pd-ugc-section" style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200);">
+                        <div style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);"><i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh & Video thực tế từ người mua (12)</div>
+                        <div class="ugc-gallery">
+                            <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Khách hàng 1" onclick="openLightboxForUGC(this.src)">
+                            <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Khách hàng 2" onclick="openLightboxForUGC(this.src)">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Khách hàng 3" onclick="openLightboxForUGC(this.src)">
+                            <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Khách hàng 4" onclick="openLightboxForUGC(this.src)">
+                        </div>
+                    </div>
+
                     <div class="pd-review-list">
                         <!-- Review 1 -->
                         <div class="pd-review-item">
@@ -369,6 +578,31 @@
             </div>
         </div>
     </div>
+
+    <!-- FAQ Section -->
+    <section class="pd-faq-section" style="padding: 60px 0; background: var(--color-gray-50);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: left; margin-bottom: 40px; font-weight: 700;">Câu Hỏi Thường Gặp</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <div class="faq-question">Làm sao để biết bình gas Petrolimex 12kg là thật hay giả? <i class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Bình thật có logo chữ P dập nổi trên vỏ bình. Màng co niêm phong nguyên vẹn và tem chống giả công nghệ nước của Bộ Công An. Khi bôi nước lên tem, chữ "Petrolimex" sẽ hiện ra.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Gas Việt có hỗ trợ thu đổi vỏ bình của hãng khác không? <i class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Có. Chúng tôi hỗ trợ thu đổi vỏ bình gas của hầu hết các thương hiệu uy tín trên thị trường với mức phí bù chênh lệch (nếu có) cực kỳ hợp lý.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Phí giao hàng và lắp đặt tại nhà tính như thế nào? <i class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Hoàn toàn MIỄN PHÍ. Nhân viên sẽ giao gas tận bếp, lắp đặt, thay ron an toàn mới và kiểm tra rò rỉ bọt xà phòng miễn phí 100% cho mọi khách hàng.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Khi phát hiện mùi gas lạ trong bếp thì xử lý ra sao? <i class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Tuyệt đối không bật quạt, công tắc điện hay đánh lửa. Mở ngay các cửa sổ để thông thoáng, khóa van bình gas lại và gọi ngay Hotline để kỹ thuật viên đến xử lý.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Products Section -->
     <section class="related-products-section" style="padding-top: 0;">
@@ -718,20 +952,73 @@
             element.classList.add('active');
         }
 
-        // Tabs Handler
-        function switchTab(element, tabId) {
-            // Update tab buttons
-            document.querySelectorAll('.pd-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            element.classList.add('active');
+        // Flash Deal Countdown Timer
+        function startFlashDealTimer() {
+            let h = 0;
+            let m = 25;
+            let s = 26;
+            
+            const timeBoxes = document.querySelectorAll('.flash-deal-timer .time-box');
+            if(timeBoxes.length < 3) return;
 
-            // Update tab content
-            document.querySelectorAll('.pd-tab-pane').forEach(pane => {
-                pane.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
+            setInterval(() => {
+                if (s > 0) {
+                    s--;
+                } else {
+                    if (m > 0) {
+                        m--;
+                        s = 59;
+                    } else {
+                        if (h > 0) {
+                            h--;
+                            m = 59;
+                            s = 59;
+                        } else {
+                            h = 0; m = 25; s = 26; // Loop for demo
+                        }
+                    }
+                }
+                
+                timeBoxes[0].textContent = h.toString().padStart(2, '0');
+                timeBoxes[1].textContent = m.toString().padStart(2, '0');
+                timeBoxes[2].textContent = s.toString().padStart(2, '0');
+            }, 1000);
         }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            startFlashDealTimer();
+        });
+
+        // Scrollspy Tabs Handler
+        function scrollToSection(sectionId) {
+            const yOffset = -20; // Minimal offset since there's no sticky header
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+
+        // Setup scrollspy
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.pd-tab-section');
+            const navLinks = document.querySelectorAll('.pd-tab');
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
         // Lightbox Handler
         let currentLightboxIndex = 0;
@@ -802,6 +1089,27 @@
                 });
             }
         }
+
+        // FAQ Accordion Handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        });
+
+        // UGC Lightbox Helper
+        function openLightboxForUGC(src) {
+            const lightbox = document.getElementById('productLightbox');
+            document.getElementById('lightboxMainImage').src = src;
+            document.getElementById('lightboxThumbnails').innerHTML = '';
+            document.getElementById('lightboxCounter').innerText = 'Khách Hàng Thực Tế';
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
     </script>
 
     <!-- Lightbox -->
@@ -817,6 +1125,15 @@
             <div class="pd-lightbox-thumbnails" id="lightboxThumbnails"></div>
             <div class="pd-lightbox-counter" id="lightboxCounter">1 / 6</div>
         </div>
+    </div>
+    <!-- Floating Contact Widgets -->
+    <div class="floating-contact-wrapper">
+        <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://zalo.me/0901234567" target="_blank" class="float-btn float-zalo" title="Chat Zalo">
+            <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo" onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
+        </a>
     </div>
 </body>
 </html>

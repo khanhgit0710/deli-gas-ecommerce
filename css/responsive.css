@@ -1624,3 +1624,46 @@
         margin-bottom: 20px;
     }
 }
+
+/* Bento Box Responsive */
+@media (max-width: 991px) {
+    .bento-showcase-container {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .spotlight-img-wrap {
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .bento-grid-right {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* Fixed Products Grid Responsiveness */
+@media (max-width: 1199px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+@media (max-width: 991px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

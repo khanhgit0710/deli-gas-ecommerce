@@ -9,8 +9,8 @@
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css?v=3">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/main.css?v=1784899759735">
+    <link rel="stylesheet" href="css/responsive.css?v=1784899759735">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 </head>
 
@@ -160,213 +160,96 @@
                 <span class="product-count">(5 sản phẩm)</span>
             </div>
 
-            <div class="featured-slider-wrapper">
-                <button class="slider-btn slider-nav-left" id="prevFeaturedBtn"><i
-                        class="fa-solid fa-chevron-left"></i></button>
-                <div class="featured-slider-container">
-                    <div class="products-flex" id="featuredSlider">
-                        <!-- Product Card 1 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
+            
+                <div class="bento-showcase-container">
+                    <!-- Spotlight Product -->
+                    <div class="bento-spotlight">
+                        <div class="spotlight-badge"><i class="fa-solid fa-fire"></i> SẢN PHẨM BÁN CHẠY</div>
+                        <div class="spotlight-content">
+                            <h3 class="spotlight-title">Bếp gas âm Rinnai RVB-2GI(B)</h3>
+                            <p class="spotlight-desc">Bếp đôi, trang bị đầu đốt bằng đồng thau dày dặn, chịu nhiệt tốt, ngọn lửa xanh mạnh mẽ giúp nấu ăn nhanh và tiết kiệm gas hiệu quả.</p>
+                            <div class="spotlight-price">2.850.000đ</div>
+                            <div class="spotlight-actions">
+                                <button class="btn-spotlight-buy">Mua ngay <i class="fa-solid fa-arrow-right"></i></button>
                             </div>
                         </div>
-
-                        <!-- Product Card 2 -->
-                        <div class="product-card">
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg"
-                                    alt="Gas Công Nghiệp 45kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Công Nghiệp 45kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">1.550.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
+                        <div class="spotlight-img-wrap">
+                            <img src="https://cdn.tgdd.vn/Products/Images/2386/74889/bep-gas-am-rinnai-rvb-2bgf-n-1-org.jpg" alt="Bếp gas âm Rinnai" style="mix-blend-mode: multiply; border-radius: 10px;">
                         </div>
+                    </div>
 
-                        <!-- Product Card 3 -->
-                        <div class="product-card">
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bếp Gas Rinnai"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp Gas Đôi Rinnai RV-365</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">850.000đ</span>
+                    <!-- Right Grid Carousel -->
+                    <div class="bento-right-wrapper" style="position: relative; width: 100%;">
+                        <button class="bento-nav-btn bento-nav-left" id="bentoPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="bento-nav-btn bento-nav-right" id="bentoNext"><i class="fa-solid fa-chevron-right"></i></button>
+                        
+                        <div class="bento-carousel-wrapper">
+                            <div class="bento-carousel-track" id="bentoTrack">
+                                <!-- Page 1 -->
+                                <div class="bento-carousel-page">
+                                    <div class="bento-grid-right">
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Bình Gas Saigon Petro Xám 12kg"></div>
+                                            <h4 class="bento-item-title">Gas Saigon Petro Xám 12kg</h4>
+                                            <div class="bento-item-price">510.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/384/846/products/bep-hong-ngoai-junger-mt-21-2.jpg" alt="Bếp hồng ngoại Junger"></div>
+                                            <h4 class="bento-item-title">Bếp hồng ngoại Junger MT-21</h4>
+                                            <div class="bento-item-price">1.850.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Bình Petrolimex 45kg"></div>
+                                            <h4 class="bento-item-title">Bình Petrolimex 45kg (Công nghiệp)</h4>
+                                            <div class="bento-item-price">1.750.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Van ngắt gas tự động"></div>
+                                            <h4 class="bento-item-title">Van gas tự động Namilux NA-337S</h4>
+                                            <div class="bento-item-price">220.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product Card 4 -->
-                        <div class="product-card">
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s"
-                                    alt="Dây van ngắt tự động"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bộ Van Dây Ngắt Tự Động Namilux</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">250.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product Card 5 -->
-                        <div class="product-card">
-                            <div class="product-badge">Mới</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png"
-                                    alt="Gas Thủ Đức"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Thủ Đức 45kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">1.600.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                                                <!-- Product Card 6 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                                                <!-- Product Card 7 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                                                <!-- Product Card 8 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                                                <!-- Product Card 9 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product Card 10 -->
-                        <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
-                            <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Bình Gas 12kg"></a>
-                            </div>
-                            <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Petrolimex 12kg</a></h3>
-                                <div class="product-price">
-                                    <span class="price-current">420.000đ</span>
-                                    <span class="price-old">460.000đ</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
-                                        hàng</button>
+                                <!-- Page 2 -->
+                                <div class="bento-carousel-page">
+                                    <div class="bento-grid-right">
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Petrolimex 12kg"></div>
+                                            <h4 class="bento-item-title">Petrolimex 12kg (Van ngang)</h4>
+                                            <div class="bento-item-price">480.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Gas Thủ Đức"></div>
+                                            <h4 class="bento-item-title">Gas Thủ Đức 12kg</h4>
+                                            <div class="bento-item-price">450.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/384/846/products/bep-hong-ngoai-junger-mt-21-2.jpg" alt="Bếp Sunhouse"></div>
+                                            <h4 class="bento-item-title">Bếp hồng ngoại Sunhouse</h4>
+                                            <div class="bento-item-price">650.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                        <a href="chi-tiet-san-pham.html" class="bento-item">
+                                            <div class="bento-item-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây van Kogas"></div>
+                                            <h4 class="bento-item-title">Dây dẫn gas Kogas</h4>
+                                            <div class="bento-item-price">180.000đ</div>
+                                            <div class="bento-item-buy-btn">Mua ngay</div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="slider-btn slider-nav-right" id="nextFeaturedBtn"><i
-                        class="fa-solid fa-chevron-right"></i></button>
+
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- MAIN CONTENT (SIDEBAR & PRODUCT LIST) -->
     <section class="main-content-section">
@@ -418,7 +301,7 @@
                         <!-- Duplicating products to have 20 total items -->
                         <!-- Row 1 -->
                         <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
+                            <div class="product-badge badge-discount">Giảm 10%</div>
                             <div class="product-img"><a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
                                     alt="Gas 12kg"></a></div>
                             <div class="product-info">
@@ -474,7 +357,7 @@
 
                         <!-- Row 2 -->
                         <div class="product-card">
-                            <div class="product-badge">Mới</div>
+                            <div class="product-badge badge-new">Mới</div>
                             <div class="product-img"><a href="chi-tiet-san-pham.html"><img
                                     src="https://placehold.co/300x300/f8f9fa/f44531?text=Gas+Gia+Dinh" alt="Gas"></a></div>
                             <div class="product-info">
@@ -501,7 +384,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <div class="product-badge">Mới</div>
+                            <div class="product-badge badge-new">Mới</div>
                             <div class="product-img"><a href="chi-tiet-san-pham.html"><img
                                     src="https://placehold.co/300x300/f8f9fa/f44531?text=Bep+Gas+Am" alt="Bếp"></a></div>
                             <div class="product-info">
@@ -585,7 +468,7 @@
 
                         <!-- Row 4 -->
                         <div class="product-card">
-                            <div class="product-badge">Giảm 5%</div>
+                            <div class="product-badge badge-discount">Giảm 5%</div>
                             <div class="product-img"><a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s"
                                     alt="Gas"></a></div>
                             <div class="product-info">
@@ -868,7 +751,7 @@
 
                         <!-- Combo Card 2 -->
                         <div class="product-card">
-                            <div class="product-badge" style="background-color: var(--color-accent); color: var(--color-gray-900);">Giảm 15%</div>
+                            <div class="product-badge badge-discount" style="background-color: var(--color-accent); color: var(--color-gray-900);">Giảm 15%</div>
                             <div class="product-img">
                                 <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Combo Bếp 2"></a>
                             </div>
@@ -908,7 +791,7 @@
 
                         <!-- Combo Card 4 -->
                         <div class="product-card">
-                            <div class="product-badge" style="background-color: var(--color-accent); color: var(--color-gray-900);">Giảm 20%</div>
+                            <div class="product-badge badge-discount" style="background-color: var(--color-accent); color: var(--color-gray-900);">Giảm 20%</div>
                             <div class="product-img">
                                 <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Combo Bếp 4"></a>
                             </div>
@@ -988,7 +871,7 @@
 
                         <!-- Combo Card 8 -->
                         <div class="product-card">
-                            <div class="product-badge" style="background-color: var(--color-accent); color: var(--color-gray-900);">Hot Deal</div>
+                            <div class="product-badge badge-hot">Hot Deal</div>
                             <div class="product-img">
                                 <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Combo Bếp 8"></a>
                             </div>
@@ -1148,6 +1031,34 @@
 
     <!-- JS -->
     <script src="js/main.js?v=3"></script>
+
+    <!-- Bento Carousel Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('bentoTrack');
+            const prevBtn = document.getElementById('bentoPrev');
+            const nextBtn = document.getElementById('bentoNext');
+            
+            if(track && prevBtn && nextBtn) {
+                let currentSlide = 0;
+                const totalSlides = 2;
+                
+                function updateSlide() {
+                    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                }
+                
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateSlide();
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateSlide();
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

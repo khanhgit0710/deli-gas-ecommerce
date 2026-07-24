@@ -564,7 +564,6 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.contains('step-card') ||
             el.classList.contains('testimonial-card') ||
             el.classList.contains('brand-logo') ||
-            el.classList.contains('product-card') ||
             (el.tagName === 'IMG' && el.parentElement && el.parentElement.classList.contains('image-grid-creative'))) {
             const staggerDelay = (index % 6) + 1;
             el.classList.add(`stagger-${staggerDelay}`);
@@ -925,4 +924,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCartBadge();
+    /* ==========================================================================
+       COMBO PRICE CALCULATION
+       ========================================================================== */
+    const comboChecks = document.querySelectorAll('.combo-check');
+    const comboTotalEl = document.querySelector('.combo-total');
+    
+    if (comboChecks.length > 0 && comboTotalEl) {
+        function updateComboPrice() {
+            let total = 0;
+            let checkedCount = 0;
+            comboChecks.forEach(check => {
+                if (check.checked) {
+                    const priceText = check.closest('.combo-item').querySelector('.combo-item-price').textContent;
+                    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                    total += price;
+                    checkedCount++;
+                }
+            });
+            
+            const saveEl = document.querySelector('.combo-save');
+            if (checkedCount === comboChecks.length) {
+                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
+                if(saveEl) saveEl.style.display = 'block';
+            } else {
+                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
+                if(saveEl) saveEl.style.display = 'none';
+            }
+        }
+        
+        comboChecks.forEach(check => {
+            check.addEventListener('change', updateComboPrice);
+        });
+        
+        // Initialize
+        updateComboPrice();
+    }
 });
