@@ -61,6 +61,8 @@ html {
 body {
   font-family: var(--font-main);
   overflow-x: clip;
+  width: 100%;
+  position: relative;
   font-size: var(--fz-body);
   color: var(--color-gray-800);
   background-color: var(--color-gray-50);

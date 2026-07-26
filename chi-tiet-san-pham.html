@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -132,12 +132,14 @@
                         <span>Trọng lượng: 12kg</span>
                         <span class="pd-meta-divider">|</span>
                         <div class="pd-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star-half-stroke"></i>
-                            <span>4.8 (120 đánh giá)</span>
+                            <span id="headerRatingStarsHtml">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </span>
+                            <span><span id="headerRatingText">4.8</span> (<span id="headerReviewCount">5</span> đánh giá)</span>
                         </div>
                     </div>
 
@@ -151,7 +153,7 @@
                             <span class="progress-text">🔥 Đã bán 28/30 bình</span>
                         </div>
                         <div class="flash-deal-timer">
-                            KẾT THÚC TRONG 
+                            <span class="timer-label">KẾT THÚC TRONG</span> 
                             <span class="time-box">00</span> : <span class="time-box">25</span> : <span class="time-box">26</span>
                         </div>
                     </div>
@@ -362,52 +364,52 @@
                 <div class="pd-reviews">
                     <div class="pd-review-summary" style="align-items: center; justify-content: flex-start; width: 100%; gap: 40px; margin-bottom: 30px; display: flex; flex-wrap: wrap;">
                         <div class="pd-review-average" style="text-align: left; width: 180px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;"><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">4.8</a></div>
-                            <div class="stars">
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;"><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;" id="averageRatingText">4.8</a></div>
+                            <div class="stars" id="averageRatingStars">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            <p>Dựa trên 120 đánh giá</p>
+                            <p>Dựa trên (<span id="totalReviewCount">5</span>) đánh giá</p>
                         </div>
                         
                         <div class="pd-review-breakdown" style="flex: 1; min-width: 250px; max-width: 400px; border-left: 1px solid var(--color-gray-200); padding-left: 40px;">
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">5 sao</span>
                                 <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div style="width: 85%; height: 100%; background: var(--color-accent);"></div>
+                                    <div id="bar-5" style="width: 85%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
                                 </div>
-                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">85%</span>
+                                <span id="percent-5" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">85%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">4 sao</span>
                                 <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div style="width: 10%; height: 100%; background: var(--color-accent);"></div>
+                                    <div id="bar-4" style="width: 10%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
                                 </div>
-                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">10%</span>
+                                <span id="percent-4" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">10%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">3 sao</span>
                                 <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div style="width: 5%; height: 100%; background: var(--color-accent);"></div>
+                                    <div id="bar-3" style="width: 5%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
                                 </div>
-                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">5%</span>
+                                <span id="percent-3" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">5%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">2 sao</span>
                                 <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div style="width: 0%; height: 100%; background: var(--color-accent);"></div>
+                                    <div id="bar-2" style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
                                 </div>
-                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                                <span id="percent-2" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
                             </div>
                             <div style="display: flex; align-items: center;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">1 sao</span>
                                 <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div style="width: 0%; height: 100%; background: var(--color-accent);"></div>
+                                    <div id="bar-1" style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
                                 </div>
-                                <span style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                                <span id="percent-1" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
                             </div>
                         </div>
 
@@ -438,12 +440,14 @@
                     </div>
                     
                     <div class="pd-ugc-section" style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200);">
-                        <div style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);"><i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh & Video thực tế từ người mua (12)</div>
+                        <div style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);"><i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh & Video thực tế từ người mua (6)</div>
                         <div class="ugc-gallery">
                             <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Khách hàng 1" onclick="openLightboxForUGC(this.src)">
                             <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Khách hàng 2" onclick="openLightboxForUGC(this.src)">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Khách hàng 3" onclick="openLightboxForUGC(this.src)">
                             <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Khách hàng 4" onclick="openLightboxForUGC(this.src)">
+                            <img src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png" alt="Khách hàng 5" onclick="openLightboxForUGC(this.src)">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10" alt="Khách hàng 6" onclick="openLightboxForUGC(this.src)">
                         </div>
                     </div>
 
@@ -468,10 +472,11 @@
                             </div>
                             <div class="pd-review-content">
                                 <p>Gas chất lượng tốt, lửa xanh đều. Nhân viên giao hàng rất nhanh và nhiệt tình, thay van và kiểm tra cẩn thận trước khi về. Sẽ tiếp tục ủng hộ Gas Việt.</p>
-                                <!-- <div class="pd-review-images">
+                                <div class="pd-review-images">
                                     <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Review Image">
                                     <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Review Image">
-                                </div> -->
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Review Image">
+                                </div>
                             </div>
                         </div>
 
@@ -495,6 +500,9 @@
                             </div>
                             <div class="pd-review-content">
                                 <p>Bình gas chính hãng, có dán tem mác đầy đủ nên rất yên tâm. Giá cả hợp lý so với mặt bằng chung.</p>
+                                <div class="pd-review-images">
+                                    <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Review Image">
+                                </div>
                             </div>
                         </div>
 
@@ -518,6 +526,56 @@
                             </div>
                             <div class="pd-review-content">
                                 <p>Dịch vụ tuyệt vời. Gọi cái là 15 phút sau có mặt ngay, đúng lúc đang nấu dở bữa cơm. Cảm ơn các bạn nhé!</p>
+                                <div class="pd-review-images">
+                                    <img src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png" alt="Review Image">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10" alt="Review Image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 4 -->
+                        <div class="pd-review-item">
+                            <div class="pd-review-header">
+                                <div class="pd-reviewer-info">
+                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-accent); color: white;">N</div>
+                                    <div>
+                                        <div class="pd-reviewer-name">Nguyễn Văn Nam</div>
+                                        <div class="pd-reviewer-stars">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pd-review-date">01/07/2026</div>
+                            </div>
+                            <div class="pd-review-content">
+                                <p>Sản phẩm ổn, giao hàng hơi chậm một chút nhưng vẫn chấp nhận được.</p>
+                            </div>
+                        </div>
+
+                        <!-- Review 5 -->
+                        <div class="pd-review-item">
+                            <div class="pd-review-header">
+                                <div class="pd-reviewer-info">
+                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-gray-500); color: white;">P</div>
+                                    <div>
+                                        <div class="pd-reviewer-name">Phạm Thanh</div>
+                                        <div class="pd-reviewer-stars">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pd-review-date">28/06/2026</div>
+                            </div>
+                            <div class="pd-review-content">
+                                <p>Gas xài bình thường, nhưng nhân viên chưa nhiệt tình lắm khi lắp đặt.</p>
                             </div>
                         </div>
                         <!-- Extra Reviews (Hidden initially) -->
@@ -586,19 +644,19 @@
             <div class="faq-accordion">
                 <div class="faq-item">
                     <div class="faq-question">Làm sao để biết bình gas Petrolimex 12kg là thật hay giả? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Bình thật có logo chữ P dập nổi trên vỏ bình. Màng co niêm phong nguyên vẹn và tem chống giả công nghệ nước của Bộ Công An. Khi bôi nước lên tem, chữ "Petrolimex" sẽ hiện ra.</div>
+                    <div class="faq-answer">Bình gas Petrolimex chính hãng luôn có logo chữ "P" dập nổi rõ nét trên quai xách hoặc vai bình. Màng co niêm phong tại van phải còn nguyên vẹn, không có dấu hiệu bị rách hay chắp vá. Đặc biệt, bình gas thật được dán tem chống hàng giả tích hợp công nghệ nước của Bộ Công An. Khi bạn thoa một chút nước lên bề mặt tem, dòng chữ "Petrolimex" ẩn sẽ lập tức hiện ra rõ ràng. Ngoài ra, trọng lượng vỏ bình và ruột gas (12kg) luôn được cân đo chính xác, bạn có thể yêu cầu nhân viên cân lại ngay tại nhà để kiểm chứng.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Gas Việt có hỗ trợ thu đổi vỏ bình của hãng khác không? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Có. Chúng tôi hỗ trợ thu đổi vỏ bình gas của hầu hết các thương hiệu uy tín trên thị trường với mức phí bù chênh lệch (nếu có) cực kỳ hợp lý.</div>
+                    <div class="faq-answer">Có, Gas Việt hoàn toàn hỗ trợ khách hàng thu đổi vỏ bình gas từ các thương hiệu khác sang bình gas Petrolimex chính hãng. Chúng tôi chấp nhận vỏ bình của hầu hết các thương hiệu uy tín trên thị trường miễn là vỏ bình còn nguyên vẹn, không bị biến dạng nghiêm trọng hay rỉ sét quá mức. Mức phí bù chênh lệch (nếu có) sẽ được tính toán cực kỳ hợp lý và minh bạch, tùy thuộc vào tình trạng và thương hiệu vỏ bình cũ của bạn. Nhân viên của chúng tôi sẽ báo giá chi tiết và tư vấn tận tình trước khi tiến hành đổi bình.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Phí giao hàng và lắp đặt tại nhà tính như thế nào? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Hoàn toàn MIỄN PHÍ. Nhân viên sẽ giao gas tận bếp, lắp đặt, thay ron an toàn mới và kiểm tra rò rỉ bọt xà phòng miễn phí 100% cho mọi khách hàng.</div>
+                    <div class="faq-answer">Dịch vụ giao hàng và lắp đặt tại Gas Việt là hoàn toàn MIỄN PHÍ đối với khu vực nội thành. Khi bạn đặt hàng, đội ngũ nhân viên kỹ thuật giàu kinh nghiệm của chúng tôi sẽ giao gas đến tận bếp nhà bạn trong thời gian nhanh nhất (thường chỉ từ 15-30 phút). Không chỉ giao hàng, nhân viên sẽ tiến hành tháo lắp đúng kỹ thuật, thay mới ron an toàn (miễn phí) và sử dụng thiết bị dò khí hoặc bọt xà phòng để kiểm tra rò rỉ kỹ lưỡng. Chúng tôi cam kết đảm bảo an toàn tuyệt đối 100% trước khi bàn giao và thanh toán.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Khi phát hiện mùi gas lạ trong bếp thì xử lý ra sao? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Tuyệt đối không bật quạt, công tắc điện hay đánh lửa. Mở ngay các cửa sổ để thông thoáng, khóa van bình gas lại và gọi ngay Hotline để kỹ thuật viên đến xử lý.</div>
+                    <div class="faq-answer">Khi bạn ngửi thấy mùi gas lạ (mùi trứng thối đặc trưng), điều đầu tiên là phải giữ bình tĩnh và TUYỆT ĐỐI KHÔNG bật/tắt quạt, công tắc điện, không dùng điện thoại hay tạo ra bất kỳ tia lửa nào (kể cả bật lửa hay diêm). Ngay lập tức, hãy khóa chặt van bình gas lại. Sau đó, mở toang tất cả các cửa chính và cửa sổ để khí gas thoát ra ngoài, làm thông thoáng khu vực bếp. Cuối cùng, hãy di chuyển ra khu vực an toàn và gọi ngay cho Hotline hỗ trợ khẩn cấp của Gas Việt. Kỹ thuật viên của chúng tôi sẽ nhanh chóng có mặt để kiểm tra và xử lý triệt để sự cố, đảm bảo an toàn cho gia đình bạn.</div>
                 </div>
             </div>
         </div>
@@ -617,9 +675,9 @@
                     <div class="products-flex" id="relatedSlider">
                         <!-- Product 1 -->
                         <div class="product-card">
-                            <div class="product-badge">Giảm 10%</div>
+                            <div class="product-badge badge-discount">Giảm 10%</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Gas Công Nghiệp"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRltHKJkCxUPSl4ZRSrIGHf8zQXtVVNzojk9iQ-U-ud5w&s=10" alt="Gas Công Nghiệp"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Công Nghiệp 45kg</a></h3>
@@ -636,7 +694,7 @@
                         <!-- Product 2 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây van"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtkHqzY2phhXgoT6-g2tLLRHmZZPVj7Iov1l_BW_DqyA&s=10" alt="Dây van"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bộ Van Dây Ngắt Tự Động Namilux</a></h3>
@@ -652,9 +710,9 @@
 
                         <!-- Product 3 -->
                         <div class="product-card">
-                            <div class="product-badge">Mới</div>
+                            <div class="product-badge badge-new">Mới</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Bếp Gas"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUggeQl1dq4UxPiaxmXhyPAV7GE8KrI9NLI4e2VEUBlQ&s=10" alt="Bếp Gas"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp Gas Đôi Rinnai RV-365</a></h3>
@@ -671,7 +729,7 @@
                         <!-- Product 4 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Cân"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm44A98Y86OR6GU-VpbyV0f3oQD2QUhdxIAftDe6fkkA&s=10" alt="Cân"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Cân Đồng Hồ Báo Gas</a></h3>
@@ -687,7 +745,7 @@
                         
                         <!-- Product 5 -->
                         <div class="product-card">
-                            <div class="product-badge">Giảm 5%</div>
+                            <div class="product-badge badge-discount">Giảm 5%</div>
                             <div class="product-img">
                                 <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Gas Gia Đình"></a>
                             </div>
@@ -706,7 +764,7 @@
                         <!-- Product 6 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây dẫn Gas"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNk7x0uKT-_hX5gSFkzMZIqs3Ajt243opvGYf67MKlnQ&s=10" alt="Dây dẫn Gas"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Dây Dẫn Gas Lõi Thép</a></h3>
@@ -723,7 +781,7 @@
                         <!-- Product 7 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Bếp Gas Âm"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTWzsxIoIpr_j0bT2px0sd46weqdnuUzjFgnxX2P6sZw&s=10" alt="Bếp Gas Âm"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp Gas Âm Sunhouse</a></h3>
@@ -740,7 +798,7 @@
                         <!-- Product 8 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Gas Elf"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpLcfGmx_MR64O7EwtTraZHBNfTKvj_oAdVABgn8OdUA&s=10" alt="Gas Elf"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Elf Đỏ 12.5kg</a></h3>
@@ -756,9 +814,9 @@
 
                         <!-- Product 9 -->
                         <div class="product-card">
-                            <div class="product-badge">HOT</div>
+                            <div class="product-badge badge-hot">HOT</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Van Katsura"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQicOktFxYffoyky2C5Zirj67Ssp05MP1YuRcUTe8z_wA&s=10" alt="Van Katsura"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Van Ngắt Tự Động Katsura Nhật Bản</a></h3>
@@ -775,7 +833,7 @@
                         <!-- Product 10 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Bảo hiểm"></a>
+                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0HYG3k1qkYUWfw1JK5gQsK2ImKz10KKkYvBrzDkGupQ&s=10" alt="Bảo hiểm"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Thiết Bị Cảnh Báo Rò Rỉ Gas</a></h3>
@@ -1024,6 +1082,7 @@
         let currentLightboxIndex = 0;
         let lightboxImages = [];
         let lightboxThumbs = [];
+        let isUGCMode = false;
 
         function initLightbox() {
             const thumbElements = document.querySelectorAll('.pd-thumb');
@@ -1045,7 +1104,8 @@
         }
 
         function openLightbox() {
-            if (lightboxImages.length === 0) initLightbox();
+            isUGCMode = false;
+            initLightbox();
             const currentSrc = document.getElementById('pdMainImage').src;
             currentLightboxIndex = lightboxImages.indexOf(currentSrc);
             if (currentLightboxIndex === -1) currentLightboxIndex = 0;
@@ -1074,7 +1134,12 @@
 
         function updateLightboxView() {
             document.getElementById('lightboxMainImage').src = lightboxImages[currentLightboxIndex];
-            document.getElementById('lightboxCounter').innerText = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length;
+            
+            if (isUGCMode) {
+                document.getElementById('lightboxCounter').innerText = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length + ' (Ảnh thực tế)';
+            } else {
+                document.getElementById('lightboxCounter').innerText = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length;
+            }
             
             // Update active thumbnail
             const thumbContainer = document.getElementById('lightboxThumbnails');
@@ -1090,8 +1155,79 @@
             }
         }
 
-        // FAQ Accordion Handler
+        // Review Rating Calculator
+        function calculateReviewRatings() {
+            const reviews = document.querySelectorAll('.pd-review-item');
+            const totalReviews = reviews.length;
+            
+            if (totalReviews === 0) return;
+
+            let totalStars = 0;
+            const starCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+
+            reviews.forEach(review => {
+                // Count solid stars to get rating
+                const stars = review.querySelectorAll('.pd-reviewer-stars .fa-solid.fa-star').length;
+                if (stars >= 1 && stars <= 5) {
+                    starCounts[stars]++;
+                    totalStars += stars;
+                }
+            });
+
+            // Update Total Count
+            const countEl = document.getElementById('totalReviewCount');
+            if (countEl) countEl.innerText = totalReviews;
+
+            // Update Average Rating
+            const avgRating = (totalStars / totalReviews).toFixed(1);
+            const avgTextEl = document.getElementById('averageRatingText');
+            if (avgTextEl) avgTextEl.innerText = avgRating;
+
+            // Update Average Stars HTML
+            const avgStarsContainer = document.getElementById('averageRatingStars');
+            if (avgStarsContainer) {
+                let starsHtml = '';
+                const fullStars = Math.floor(avgRating);
+                const halfStar = (avgRating - fullStars) >= 0.5;
+                for (let i = 0; i < 5; i++) {
+                    if (i < fullStars) {
+                        starsHtml += '<i class="fa-solid fa-star"></i>';
+                    } else if (i === fullStars && halfStar) {
+                        starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+                    } else {
+                        starsHtml += '<i class="fa-regular fa-star"></i>';
+                    }
+                }
+                avgStarsContainer.innerHTML = starsHtml;
+            }
+
+            // Update Header Rating
+            const headerCount = document.getElementById('headerReviewCount');
+            if (headerCount) headerCount.innerText = totalReviews;
+            const headerText = document.getElementById('headerRatingText');
+            if (headerText) headerText.innerText = avgRating;
+            const headerStars = document.getElementById('headerRatingStarsHtml');
+            if (headerStars && avgStarsContainer) {
+                headerStars.innerHTML = avgStarsContainer.innerHTML;
+            }
+
+            // Update Progress Bars and Percentages
+            for (let i = 1; i <= 5; i++) {
+                const percentage = Math.round((starCounts[i] / totalReviews) * 100);
+                const barEl = document.getElementById(`bar-${i}`);
+                const percentTextEl = document.getElementById(`percent-${i}`);
+                
+                if (barEl) {
+                    setTimeout(() => {
+                        barEl.style.width = `${percentage}%`;
+                    }, 100); // small delay for animation
+                }
+                if (percentTextEl) percentTextEl.innerText = `${percentage}%`;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // FAQ Accordion Handler
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
@@ -1099,14 +1235,24 @@
                     item.classList.toggle('active');
                 });
             });
+
+            // Calculate Ratings
+            calculateReviewRatings();
         });
 
         // UGC Lightbox Helper
         function openLightboxForUGC(src) {
+            isUGCMode = true;
+            const ugcImages = document.querySelectorAll('.ugc-gallery img');
+            lightboxImages = Array.from(ugcImages).map(img => img.src);
+            currentLightboxIndex = lightboxImages.indexOf(src);
+            if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+            
+            document.getElementById('lightboxThumbnails').innerHTML = ''; // Hide thumbs for UGC
+            
+            updateLightboxView();
+            
             const lightbox = document.getElementById('productLightbox');
-            document.getElementById('lightboxMainImage').src = src;
-            document.getElementById('lightboxThumbnails').innerHTML = '';
-            document.getElementById('lightboxCounter').innerText = 'Khách Hàng Thực Tế';
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }

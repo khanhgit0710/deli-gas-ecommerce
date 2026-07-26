@@ -960,4 +960,40 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize
         updateComboPrice();
     }
+
+    /* ==========================================================================
+       COUNT-UP ANIMATION FOR STATS
+       ========================================================================== */
+    const countUpElements = document.querySelectorAll('.count-up');
+    
+    if (countUpElements.length > 0) {
+        const animateCountUp = (el) => {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            let current = 0;
+            const increment = target / (duration / 16); // 60fps
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.innerText = target;
+                    clearInterval(timer);
+                } else {
+                    el.innerText = Math.floor(current);
+                }
+            }, 16);
+        };
+
+        // Use Intersection Observer to trigger when visible
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCountUp(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        countUpElements.forEach(el => observer.observe(el));
+    }
 });
