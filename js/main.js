@@ -81,13 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const headerInner = document.querySelector('.header-inner');
     const mainNav = document.querySelector('.main-nav');
-    
+
     if (headerInner && mainNav && !document.getElementById('headerMobileBtn')) {
         const btn = document.createElement('button');
         btn.id = 'headerMobileBtn';
         btn.className = 'header-mobile-btn';
         btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        
+
         // Insert before main-nav or actions
         const actions = document.querySelector('.header-actions');
         if (actions) {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             headerInner.appendChild(btn);
         }
-        
+
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             mainNav.classList.toggle('mobile-active');
@@ -530,14 +530,49 @@ document.addEventListener('DOMContentLoaded', () => {
         .mission-list-item,
         .about-story-img,
         .about-story-content > *,
-        .hero-content > *,
+        
         .truck-anim,
         .category-card,
-        .products-flex > *,
+        .category-section-title-wrapper > *,
+        .flash-deal-section > *,
         .products-grid > *,
+        .products-flex > *,
         .step-card,
         .testimonial-card,
-        .brand-logo
+        .brand-logo,
+        .bento-showcase-container,
+        .bento-spotlight,
+        .bento-item,
+        .featured-slider-wrapper,
+        .pd-gallery-col,
+        .pd-info > *,
+        .pd-tabs-wrapper,
+        .pd-tab-pane > *,
+        .pd-review-item,
+        .combo-box,
+        .faq-item,
+        .cart-table tbody tr,
+        .order-summary > *,
+        .features-section .feature-item,
+        .order-summary > *,
+        .features-section .feature-item,
+        .newsletter-section > *,
+        .nb-page-header > *,
+        .nb-archive-sidebar > *,
+        .nb-archive-card,
+        .nb-detail-header > *,
+        .nb-toc,
+        .nb-detail-featured-img,
+        .nb-detail-content > *,
+        .nb-detail-content > *,
+        .nb-tags,
+        .nb-author-box,
+        .nb-hero > *,
+        .nb-dest-header > *,
+        .nb-dest-card,
+        .nb-latest-header > *,
+        .nb-latest-main,
+        .nb-latest-item
     `);
 
     const scrollObserver = new IntersectionObserver((entries) => {
@@ -550,7 +585,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
     elementsToAnimate.forEach((el, index) => {
+        // Exclude featured products elements explicitly just in case
+        if (el.closest('.featured-slider-container') || (el.closest('.featured-products-section') && !el.closest('.bento-showcase-container'))) {
+            // Keep featured header but ignore products
+            if (!el.parentElement.classList.contains('featured-header-new')) {
+                return;
+            }
+        }
+
+        let animClass = 'scroll-fade-up'; // Default
+
+        const tagName = el.tagName.toLowerCase();
+        if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3' || tagName === 'h4') {
+            animClass = 'scroll-fade-right';
+        } else if (tagName === 'p' || tagName === 'span' || tagName === 'a' || tagName === 'button') {
+            animClass = 'scroll-fade-up';
+        } else if (tagName === 'img') {
+            animClass = 'scroll-zoom-in';
+        }
+
+        if (el.classList.contains('truck-anim')) {
+            animClass = '';
+        }
+
         el.classList.add('scroll-hidden');
+        if (animClass) {
+            el.classList.add(animClass);
+        }
 
         // Add stagger effect based on DOM order for groups of items
         if (el.classList.contains('feature-item') ||
@@ -564,6 +625,15 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.contains('step-card') ||
             el.classList.contains('testimonial-card') ||
             el.classList.contains('brand-logo') ||
+            el.classList.contains('bento-spotlight') ||
+            el.classList.contains('bento-item') ||
+            el.classList.contains('pd-review-item') ||
+            el.classList.contains('pd-thumb') ||
+            el.classList.contains('combo-box') ||
+            el.classList.contains('faq-item') ||
+            el.classList.contains('nb-archive-card') ||
+            el.classList.contains('nb-dest-card') ||
+            el.classList.contains('nb-latest-item') ||
             (el.tagName === 'IMG' && el.parentElement && el.parentElement.classList.contains('image-grid-creative'))) {
             const staggerDelay = (index % 6) + 1;
             el.classList.add(`stagger-${staggerDelay}`);
@@ -581,7 +651,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.parentElement.classList.contains('menu-title-col') ||
                 el.parentElement.classList.contains('featured-header-new') ||
                 el.parentElement.classList.contains('about-features-badge') ||
-                el.parentElement.classList.contains('qr-col')) {
+                el.parentElement.classList.contains('pd-info') ||
+                el.parentElement.classList.contains('pd-tab-pane') ||
+                el.parentElement.classList.contains('pd-trust-badges') ||
+                el.parentElement.classList.contains('qr-col') ||
+                el.parentElement.classList.contains('order-summary') ||
+                el.parentElement.classList.contains('newsletter-section') ||
+                el.parentElement.classList.contains('nb-page-header') ||
+                el.parentElement.classList.contains('nb-archive-sidebar') ||
+                el.parentElement.classList.contains('nb-detail-header') ||
+                el.parentElement.classList.contains('nb-detail-content') ||
+                el.parentElement.classList.contains('nb-hero') ||
+                el.parentElement.classList.contains('nb-dest-header') ||
+                el.parentElement.classList.contains('nb-latest-header') ||
+                el.parentElement.tagName === 'TBODY') {
                 const siblings = Array.from(el.parentElement.children);
                 const childIndex = siblings.indexOf(el);
                 el.classList.add(`stagger-${Math.min(childIndex + 1, 6)}`);
@@ -874,7 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearBtn.parentNode.replaceChild(newClearBtn, clearBtn);
                 newClearBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     const modalOverlay = document.createElement('div');
                     modalOverlay.className = 'custom-confirm-overlay';
                     modalOverlay.innerHTML = `
@@ -929,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const comboChecks = document.querySelectorAll('.combo-check');
     const comboTotalEl = document.querySelector('.combo-total');
-    
+
     if (comboChecks.length > 0 && comboTotalEl) {
         function updateComboPrice() {
             let total = 0;
@@ -942,21 +1025,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     checkedCount++;
                 }
             });
-            
+
             const saveEl = document.querySelector('.combo-save');
             if (checkedCount === comboChecks.length) {
                 comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
-                if(saveEl) saveEl.style.display = 'block';
+                if (saveEl) saveEl.style.display = 'block';
             } else {
                 comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
-                if(saveEl) saveEl.style.display = 'none';
+                if (saveEl) saveEl.style.display = 'none';
             }
         }
-        
+
         comboChecks.forEach(check => {
             check.addEventListener('change', updateComboPrice);
         });
-        
+
         // Initialize
         updateComboPrice();
     }
@@ -965,14 +1048,14 @@ document.addEventListener('DOMContentLoaded', () => {
        COUNT-UP ANIMATION FOR STATS
        ========================================================================== */
     const countUpElements = document.querySelectorAll('.count-up');
-    
+
     if (countUpElements.length > 0) {
         const animateCountUp = (el) => {
             const target = parseInt(el.getAttribute('data-target'));
             const duration = 2000; // 2 seconds
             let current = 0;
             const increment = target / (duration / 16); // 60fps
-            
+
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {

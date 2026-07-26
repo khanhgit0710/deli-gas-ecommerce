@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -434,7 +434,7 @@
                                 <input type="tel" placeholder="Số điện thoại" style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
                             </div>
                             <textarea placeholder="Đánh giá của bạn về sản phẩm..." rows="4" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
-                            <button type="button" class="pd-btn pd-btn-primary" style="padding: 12px 25px; border-radius: 12px; font-size: 16px;">Gửi đánh giá</button>
+                            <button type="button" class="pd-btn pd-btn-primary" style="padding: 12px 25px; border-radius: 12px; font-size: 16px;" onclick="submitReview()">Gửi đánh giá</button>
                         </form>
                     </div>
                     </div>
@@ -1272,6 +1272,58 @@
             <div class="pd-lightbox-counter" id="lightboxCounter">1 / 6</div>
         </div>
     </div>
+    <script>
+        function submitReview() {
+            // Hide the form
+            const formContainer = document.getElementById('reviewFormContainer');
+            if (formContainer) {
+                formContainer.classList.remove('review-form-visible');
+                formContainer.classList.add('review-form-hidden');
+            }
+            
+            // Show the write button again
+            const writeBtn = document.getElementById('writeReviewBtn');
+            if (writeBtn) {
+                writeBtn.style.display = 'inline-block';
+                setTimeout(() => writeBtn.style.opacity = '1', 50);
+            }
+
+            // Create and show success popup
+            const popup = document.createElement('div');
+            popup.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;" id="successOverlay">
+                    <div style="background: white; padding: 30px 20px; border-radius: 16px; text-align: center; max-width: 400px; width: 90%; transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 15px 30px rgba(0,0,0,0.1);" id="successModal">
+                        <div style="width: 70px; height: 70px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 style="margin-bottom: 12px; font-size: 24px; color: var(--color-primary-dark); font-weight: 700;">Gửi thành công!</h3>
+                        <p style="color: var(--color-gray-600); margin-bottom: 25px; line-height: 1.5; font-size: 15px;">Cảm ơn bạn đã đánh giá sản phẩm. Đánh giá của bạn sẽ được hiển thị sau khi kiểm duyệt.</p>
+                        <button class="pd-btn pd-btn-primary" style="padding: 12px 30px; border-radius: 10px; font-weight: 600; width: 100%;" onclick="closeSuccessPopup()">Hoàn tất</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Animate in
+            setTimeout(() => {
+                document.getElementById('successOverlay').style.opacity = '1';
+                const modal = document.getElementById('successModal');
+                if (modal) modal.style.transform = 'translateY(0) scale(1)';
+            }, 50);
+        }
+
+        window.closeSuccessPopup = function() {
+            const overlay = document.getElementById('successOverlay');
+            const modal = document.getElementById('successModal');
+            if (overlay && modal) {
+                overlay.style.opacity = '0';
+                modal.style.transform = 'translateY(20px) scale(0.95)';
+                setTimeout(() => {
+                    overlay.parentElement.remove();
+                }, 300);
+            }
+        }
+    </script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
