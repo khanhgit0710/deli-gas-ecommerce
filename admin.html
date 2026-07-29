@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel | Gas Việt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
+</head>
+<body>
+    <!-- LOGIN FORM -->
+    <div class="admin-login-overlay" id="adminLoginOverlay">
+        <div class="admin-login-box">
+            <div class="login-logo">
+                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo">
+            </div>
+            <h2>Đăng Nhập Quản Trị</h2>
+            <p>Vui lòng đăng nhập để truy cập Admin GasViet</p>
+            <form id="adminLoginForm">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Tài khoản</label>
+                    <input type="text" id="loginUsername" class="admin-input" required placeholder="Tài khoản (demo: admin)">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Mật khẩu</label>
+                    <input type="password" id="loginPassword" class="admin-input" required placeholder="Mật khẩu (demo: admin)">
+                </div>
+                <div id="loginError" style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">Sai tài khoản hoặc mật khẩu!</div>
+                <button type="submit" class="admin-btn admin-btn-primary" style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">Đăng Nhập</button>
+            </form>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="trang-chu.html" style="color: var(--admin-text-muted); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: var(--admin-transition);">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-layout" id="adminLayout" style="display: none;">
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo" style="width: 100%; height: 50px; object-fit: center;">
+                <!-- <div class="sidebar-brand">
+                    <span class="sidebar-brand-name">Gas Việt</span>
+                    <span class="sidebar-brand-sub">Admin Panel</span>
+                </div> -->
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-title">Tổng quan</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> Bảng điều khiển</a></li>
+                </ul>
+
+                <div class="sidebar-section-title">Quản lý</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Sản phẩm</a></li>
+                    <li class="has-submenu">
+                        <a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mục</a>
+                        <ul class="sidebar-submenu" id="sidebarCategoryTree">
+                            <!-- JS will inject categories here -->
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="trang-chu.html"><i class="fa-solid fa-arrow-left"></i> Xem website</a>
+                <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> Tải lại dữ liệu</a>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="admin-main">
+            <!-- TOPBAR -->
+            <div class="admin-topbar">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+                    <h2 id="pageTitle">Bảng điều khiển</h2>
+                </div>
+                <div class="topbar-right">
+                    <span style="font-size:16px;color:var(--admin-text-muted)">Xin chào, <strong style="color:var(--admin-text)">Admin</strong></span>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <!-- ===== DASHBOARD SECTION ===== -->
+                <section class="admin-section active" id="section-dashboard">
+                    <div class="stats-grid" id="statsGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3><i class="fa-solid fa-fire" style="color:var(--admin-accent)"></i> Sản phẩm nổi bật</h3>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th class="hide-mobile">Giảm giá</th>
+                                    <th class="hide-mobile">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="featuredTableBody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ===== PRODUCTS SECTION ===== -->
+                <section class="admin-section" id="section-products">
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Danh sách sản phẩm</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm..." id="productSearch">
+                                </div>
+                                <select class="filter-select" id="categoryFilter">
+                                    <option value="">Tất cả danh mục</option>
+                                </select>
+                                <button class="btn btn-primary" id="btnAddProduct">
+                                    <i class="fa-solid fa-plus"></i> Thêm mới
+                                </button>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px">ID</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th class="hide-mobile">Giảm giá</th>
+                                    <th class="hide-mobile">Nổi bật</th>
+                                    <th class="hide-mobile">Ưu đãi</th>
+                                    <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="table-footer">
+                            <span id="productCountText">0 sản phẩm</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== CATEGORIES SECTION ===== -->
+                <section class="admin-section" id="section-categories">
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Danh sách danh mục</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <button class="btn btn-primary" id="btnAddCategory">
+                                    <i class="fa-solid fa-plus"></i> Thêm danh mục
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px">ID</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Slug</th>
+                                    <th>Số sản phẩm</th>
+                                    <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriesTableBody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== PRODUCT MODAL ===== -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Thêm sản phẩm</h3>
+                <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+                    <div class="form-grid">
+                        <div class="form-group full">
+                            <label class="form-label">Tên sản phẩm <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="productName" required placeholder="Nhập tên sản phẩm...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Danh mục <span class="required">*</span></label>
+                            <select class="form-select" id="productCategory" required>
+                                <option value="">Chọn danh mục</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Giá (VNĐ) <span class="required">*</span></label>
+                            <input type="number" class="form-input" id="productPrice" required placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Giảm giá (%)</label>
+                            <input type="number" class="form-input" id="productDiscount" placeholder="0" min="0" max="100" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Hình ảnh</label>
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                <input type="text" class="form-input" id="productImage" placeholder="Nhập URL hoặc tải ảnh lên...">
+                                <input type="file" id="productImageUpload" accept="image/*" style="display: none;">
+                                <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" onclick="document.getElementById('productImageUpload').click()" title="Tải ảnh từ máy tính">
+                                    <i class="fa-solid fa-upload"></i>
+                                </button>
+                            </div>
+                            <div class="image-preview-box" id="imagePreview">
+                                <div class="placeholder">
+                                    <i class="fa-solid fa-image"></i>
+                                    Xem trước hình ảnh
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tùy chọn</label>
+                            <div class="toggle-group">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="productFeatured">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label">Sản phẩm nổi bật</span>
+                            </div>
+                            <div class="toggle-group" style="margin-top:10px">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="productOnSale">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label">Đang ưu đãi</span>
+                            </div>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-textarea" id="productDescription" rows="3" placeholder="Nhập mô tả sản phẩm..."></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Thông số kỹ thuật</label>
+                            <textarea class="form-textarea" id="productSpecs" rows="4" placeholder="Mỗi thông số trên 1 dòng..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeProductModal()">Hủy</button>
+                <button class="btn btn-primary" id="btnSaveProduct"><i class="fa-solid fa-check"></i> Lưu sản phẩm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CATEGORY MODAL ===== -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal" style="max-width:480px">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">Thêm danh mục</h3>
+                <button class="modal-close" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId">
+                    <div class="form-group" style="margin-bottom:16px">
+                        <label class="form-label">Tên danh mục <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="categoryName" required placeholder="Nhập tên danh mục...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Slug (tự tạo)</label>
+                        <input type="text" class="form-input" id="categorySlug" placeholder="Tự động tạo từ tên...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeCategoryModal()">Hủy</button>
+                <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> Lưu danh mục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONFIRM DIALOG ===== -->
+    <div class="confirm-overlay" id="confirmDialog">
+        <div class="confirm-dialog">
+            <div class="confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3 id="confirmTitle">Xác nhận xóa</h3>
+            <p id="confirmMessage">Bạn có chắc chắn muốn xóa mục này?</p>
+            <div class="confirm-actions">
+                <button class="btn btn-outline" onclick="closeConfirm()">Hủy</button>
+                <button class="btn btn-danger" id="btnConfirmAction"><i class="fa-solid fa-trash"></i> Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/product-db.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

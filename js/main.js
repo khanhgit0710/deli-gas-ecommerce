@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    if (typeof ProductDB !== 'undefined') await ProductDB.initAsync();
     /* ==========================================================================
        1. SLIDER LOGIC
        ========================================================================== */

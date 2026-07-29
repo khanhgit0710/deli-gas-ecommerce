@@ -81,26 +81,6 @@
                     <div class="pd-main-image">
                         <img id="pdMainImage" src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas Petrolimex 12kg" onclick="openLightbox()" style="cursor: pointer;">
                     </div>
-                    <div class="pd-thumbnails">
-                        <div class="pd-thumb active" onclick="changeImage(this)">
-                            <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Thumb 1">
-                        </div>
-                        <div class="pd-thumb" onclick="changeImage(this)">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Thumb 2">
-                        </div>
-                        <div class="pd-thumb" onclick="changeImage(this)">
-                            <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Thumb 3">
-                        </div>
-                        <div class="pd-thumb" onclick="changeImage(this)">
-                            <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Thumb 4">
-                        </div>
-                        <div class="pd-thumb" onclick="changeImage(this)">
-                            <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Thumb 5">
-                        </div>
-                        <div class="pd-thumb" onclick="changeImage(this)">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Thumb 6">
-                        </div>
-                    </div>
                     
                     <!-- Trust Badges -->
                     <div class="pd-trust-badges">
@@ -114,7 +94,7 @@
                         </div>
                         <div class="trust-item">
                             <i class="fa-solid fa-tags"></i>
-                            <span>Tem chống giả chính hãng</span>
+                            <span>Tem chống hàng giả</span>
                         </div>
                     </div>
                 </div>
@@ -127,9 +107,9 @@
                     </div>
                     
                     <div class="pd-meta">
-                        <span>Thương hiệu: Petrolimex</span>
-                        <span class="pd-meta-divider">|</span>
-                        <span>Trọng lượng: 12kg</span>
+                        <span id="pdBrand">Thương hiệu: Petrolimex</span>
+                        <span class="pd-meta-divider" id="pdWeightDivider">|</span>
+                        <span id="pdWeight">Trọng lượng: 12kg</span>
                         <span class="pd-meta-divider">|</span>
                         <div class="pd-rating">
                             <span id="headerRatingStarsHtml">
@@ -168,6 +148,10 @@
                         Bình gas Petrolimex 12kg van ngang chính hãng. Đảm bảo an toàn tuyệt đối với van ngắt tự động, bình gas được kiểm định chất lượng định kỳ. Có tem chống hàng giả và bảo hiểm trách nhiệm.
                     </div>
 
+                    <div class="pd-specs-summary" id="pdSpecsSummary">
+                        <!-- Dynamic specs -->
+                    </div>
+
                     <!-- New Shipping Badges -->
                     <div class="pd-shipping-badges">
                         <div class="badge-item nowfree">
@@ -181,7 +165,7 @@
                     </div>
 
                     <!-- New Variations Section -->
-                    <div class="pd-variations">
+                    <div class="pd-variations" id="pdVariations">
                         <label class="pd-label">Tùy chọn Trọng lượng:</label>
                         <div class="variation-options">
                             <button type="button" class="var-btn active">12kg</button>
@@ -195,7 +179,7 @@
                             <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
                         </div>
                         <div class="gift-item">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây van">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7lqaZWCIqY8oaVA1iIXwUWt1-bUJNbd2kCmcXYE9OQ&s" alt="Dây van">
                             <div class="gift-info">
                                 <p>Giảm 50% Bộ Van Dây Ngắt Tự Động Namilux khi mua kèm</p>
                             </div>
@@ -218,7 +202,7 @@
 
                         <div class="pd-buttons-wrapper">
                             <div class="pd-buttons-row1">
-                                <a href="tel:1900123123" class="pd-btn pd-btn-contact"><i class="fa-solid fa-phone-volume icon-shake"></i> Liên hệ tư vấn</a>
+                                <a href="tel:1900123123" class="pd-btn pd-btn-contact"><i class="fa-solid fa-phone-volume icon-shake"></i> Gọi ngay chúng tôi</a>
                                 <button type="button" class="pd-btn pd-btn-outline">
                                     <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
                                     <span class="btn-text" style="font-size: 0.95rem;">Thêm vào giỏ</span>
@@ -235,7 +219,6 @@
                 <div class="pd-tabs-container sticky-tabs" id="stickyTabs">
                     <div class="pd-tabs">
                         <div class="pd-tab active" onclick="scrollToSection('description')" data-target="description">Mô tả sản phẩm</div>
-                        <div class="pd-tab" onclick="scrollToSection('specs')" data-target="specs">Thông số kỹ thuật</div>
                         <div class="pd-tab" onclick="scrollToSection('policy')" data-target="policy">Chính sách giao hàng</div>
                     </div>
                 </div>
@@ -251,20 +234,6 @@
                                 <li>Khí gas tinh khiết, khi cháy cho ngọn lửa xanh, không sinh ra muội than làm đen đáy nồi, tiết kiệm chi phí nhiên liệu.</li>
                                 <li>Được niêm phong bằng màng co chống hàng giả, tem chống giả công nghệ cao của Bộ Công An.</li>
                                 <li>Bảo hiểm trách nhiệm cho mỗi bình gas lên đến hàng tỷ đồng.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div id="specs" class="pd-tab-section">
-                        <h2 class="section-title">Thông số kỹ thuật</h2>
-                        <div class="pd-tab-pane">
-                            <ul>
-                                <li><strong>Thương hiệu:</strong> Petrolimex</li>
-                                <li><strong>Trọng lượng ruột (khí gas):</strong> 12kg ± 100g</li>
-                                <li><strong>Trọng lượng vỏ bình:</strong> Được in nổi trên thân bình (khoảng 13-14kg)</li>
-                                <li><strong>Loại van:</strong> Van ngang (van POL) hoặc van đứng (van chụp)</li>
-                                <li><strong>Thành phần:</strong> Khí Butan và Propane (LPG)</li>
-                                <li><strong>Áp suất thử:</strong> 34kg/cm2</li>
                             </ul>
                         </div>
                     </div>
@@ -301,7 +270,7 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-2">
                             <label for="combo-2">
-                                <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Van ngắt tự động">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHV6courXMlCB2CI2dnsIBG34gJABKXMlxmqO5_tzz1A&s=10" alt="Van ngắt tự động">
                                 <span>Van Ngắt Katsura</span>
                                 <div class="combo-item-price">120.000đ</div>
                             </label>
@@ -310,7 +279,7 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-3">
                             <label for="combo-3">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Dây gas lõi thép">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsAKe3cq_AaxqR5w_U2T5pUK6-h4v5RoQ5XVfbVJFzdg&s=10" alt="Dây gas lõi thép">
                                 <span>Dây Gas Lõi Thép</span>
                                 <div class="combo-item-price">80.000đ</div>
                             </label>
@@ -1272,7 +1241,228 @@
             <div class="pd-lightbox-counter" id="lightboxCounter">1 / 6</div>
         </div>
     </div>
+    <!-- JS -->
+    <script src="js/product-db.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get product ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            let currentProduct = null;
+            
+            // If no ID or invalid, redirect to san-pham.html
+            if (!productId) {
+                // For development demo, fallback to ID 1 if none provided
+                // window.location.href = 'san-pham.html';
+                loadProductDetails(1);
+            } else {
+                loadProductDetails(parseInt(productId));
+            }
+            
+            function loadProductDetails(id) {
+                const product = ProductDB.getById(id);
+                if (!product) {
+                    document.querySelector('.container').innerHTML = `
+                        <div style="text-align:center; padding: 100px 20px;">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 64px; color: var(--color-danger); margin-bottom: 20px;"></i>
+                            <h2 style="font-size: 24px; color: var(--color-primary-dark); margin-bottom: 10px;">Sản phẩm không tồn tại</h2>
+                            <p style="color: var(--color-gray-600); margin-bottom: 30px;">Xin lỗi, sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
+                            <a href="san-pham.html" class="pd-btn pd-btn-primary" style="text-decoration: none; display: inline-block;">Quay lại cửa hàng</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                currentProduct = product;
+                
+                // Set Breadcrumb
+                const breadcrumbCurrent = document.querySelector('.breadcrumb-current');
+                if (breadcrumbCurrent) breadcrumbCurrent.textContent = product.name;
+                
+                // Set Title & Badge
+                const title = document.querySelector('.pd-title');
+                if (title) title.textContent = product.name;
+                
+                const badge = document.querySelector('.pd-badge');
+                if (badge) {
+                    if (product.discount > 0) {
+                        badge.textContent = `Giảm ${product.discount}%`;
+                        badge.style.display = 'inline-block';
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                }
+                
+                // Set Images
+                const mainImg = document.getElementById('pdMainImage');
+                if (mainImg) mainImg.src = product.image;
+                
+                const lightboxMain = document.getElementById('lightboxMainImage');
+                if (lightboxMain) lightboxMain.src = product.image;
+                
+                // In a real app we'd have multiple images, here we'll just set all thumbs to the same image for demo
+                document.querySelectorAll('.pd-thumb img').forEach(img => {
+                    img.src = product.image;
+                });
+                
+                // Set Prices
+                const discountedPrice = ProductDB.getDiscountedPrice(product);
+                const priceCurrent = document.querySelector('.pd-price');
+                const priceOld = document.querySelector('.pd-price-old');
+                const saveBadge = document.querySelector('.pd-save-badge');
+                
+                if (priceCurrent) priceCurrent.textContent = ProductDB.formatPrice(discountedPrice);
+                
+                if (product.discount > 0) {
+                    if (priceOld) {
+                        priceOld.textContent = ProductDB.formatPrice(product.price);
+                        priceOld.style.display = 'inline-block';
+                    }
+                    if (saveBadge) {
+                        saveBadge.textContent = `(Tiết kiệm ${ProductDB.formatPrice(product.price - discountedPrice)})`;
+                        saveBadge.style.display = 'inline-block';
+                    }
+                } else {
+                    if (priceOld) priceOld.style.display = 'none';
+                    if (saveBadge) saveBadge.style.display = 'none';
+                }
+                
+                // Set Description
+                const desc = document.querySelector('.pd-desc-short');
+                if (desc) desc.textContent = product.description || 'Sản phẩm chính hãng chất lượng cao.';
+                
+                // Set Meta Data
+                const pdBrand = document.getElementById('pdBrand');
+                if (pdBrand) {
+                    let brandName = 'Gas Việt'; // default
+                    
+                    if (product.categoryId <= 5) {
+                        // For gas cylinders, brand is usually the category name
+                        brandName = ProductDB.getCategoryName(product.categoryId);
+                        if (brandName.toLowerCase().startsWith('gas ')) {
+                            brandName = brandName.substring(4);
+                        }
+                    } else {
+                        // For stoves and accessories, try to match known brands in the name
+                        const knownBrands = ['Namilux', 'Bosch', 'Rinnai', 'Sunhouse', 'Kogas', 'Bluestar', 'Junger', 'Katsura', 'Paloma', 'Sakura', 'Teka', 'Electrolux', 'Malloca'];
+                        
+                        const lowerName = product.name.toLowerCase();
+                        for (let b of knownBrands) {
+                            if (lowerName.includes(b.toLowerCase())) {
+                                brandName = b;
+                                break;
+                            }
+                        }
+                        
+                        // If no known brand found, fallback to something generic or keep default
+                        if (brandName === 'Gas Việt') {
+                            brandName = 'Chính hãng';
+                        }
+                    }
+                    
+                    pdBrand.textContent = `Thương hiệu: ${brandName}`;
+                }
+
+                const pdWeight = document.getElementById('pdWeight');
+                const pdWeightDivider = document.getElementById('pdWeightDivider');
+                const pdVariations = document.getElementById('pdVariations');
+
+                // Check if the product is a Gas cylinder (Categories 1-5 usually represent Gas Cylinders)
+                if (product.categoryId <= 5) {
+                    // It's a gas cylinder, show weight and variations
+                    // Extract weight from product name if possible, else default 12kg
+                    const weightMatch = product.name.match(/\b(12|12\.5|45)kg\b/i);
+                    const weightText = weightMatch ? weightMatch[0] : '12kg';
+                    
+                    if (pdWeight) {
+                        pdWeight.style.display = 'inline-block';
+                        pdWeight.textContent = `Trọng lượng: ${weightText}`;
+                    }
+                    if (pdWeightDivider) pdWeightDivider.style.display = 'inline-block';
+                    if (pdVariations) {
+                        pdVariations.style.display = 'block';
+                        const varOptions = pdVariations.querySelector('.variation-options');
+                        if (varOptions) {
+                            varOptions.innerHTML = `<button type="button" class="var-btn active">${weightText}</button>`;
+                        }
+                    }
+                } else {
+                    // Not a gas cylinder, hide weight and variations
+                    if (pdWeight) pdWeight.style.display = 'none';
+                    if (pdWeightDivider) pdWeightDivider.style.display = 'none';
+                    if (pdVariations) pdVariations.style.display = 'none';
+                }
+                
+                // Set Specs Tab
+                const specsTab = document.querySelector('#specs .pd-tab-pane');
+                if (specsTab && product.specs) {
+                    const specLines = product.specs.split('\n').filter(line => line.trim() !== '');
+                    if (specLines.length > 0) {
+                        specsTab.innerHTML = '<ul>' + specLines.map(line => `<li>${line}</li>`).join('') + '</ul>';
+                    }
+                }
+
+                // Document Title
+                document.title = `${product.name} | Gas Việt`;
+                
+                renderRelatedProducts(product.categoryId, product.id);
+            }
+            
+            function renderRelatedProducts(categoryId, currentId) {
+                const slider = document.getElementById('relatedSlider');
+                if (!slider) return;
+                
+                // Fetch products in same category or random
+                let related = ProductDB.getByCategory(categoryId).filter(p => p.id !== currentId);
+                
+                // If not enough related, add random
+                if (related.length < 8) {
+                    let others = ProductDB.getAll().filter(p => p.id !== currentId && p.categoryId !== categoryId);
+                    others = others.sort(() => 0.5 - Math.random());
+                    related = related.concat(others.slice(0, 8 - related.length));
+                }
+                
+                related = related.slice(0, 8); // Take top 8
+                
+                let html = related.map(p => {
+                    const discountedPrice = ProductDB.getDiscountedPrice(p);
+                    const hasDiscount = p.discount > 0;
+                    return `
+                        <div class="product-card">
+                            ${hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : ''))}
+                            <div class="product-img">
+                                <a href="chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                            </div>
+                            <div class="product-info">
+                                <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                <div class="product-price">
+                                    <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
+                                    ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
+                                </div>
+                                <div class="product-actions">
+                                    <button class="buy-now-btn" onclick="window.location.href='chi-tiet-san-pham.html?id=${p.id}'">Mua ngay</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Add "View All" card
+                html += `
+                    <div class="product-card view-all-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center; background-color: var(--color-gray-50); border: 2px dashed var(--color-gray-300);" onclick="window.location.href='san-pham.html'">
+                        <div class="view-all-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: 15px; transition: transform 0.3s ease;">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; color: var(--color-gray-900); font-weight: 600; margin-bottom: 10px;">Xem tất cả</h3>
+                        <p style="color: var(--color-gray-600); font-size: 0.9rem; padding: 0 15px;">Khám phá thêm hàng trăm sản phẩm khác</p>
+                    </div>
+                `;
+                
+                slider.innerHTML = html;
+            }
+        });
+
         function submitReview() {
             // Hide the form
             const formContainer = document.getElementById('reviewFormContainer');
@@ -1323,7 +1513,166 @@
                 }, 300);
             }
         }
+        // === DYNAMIC PRODUCT LOADING ===
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof ProductDB === 'undefined') return;
+            ProductDB.init();
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            if (!productId) return;
+            
+            const product = ProductDB.getById(productId);
+            if (!product) return;
+            
+            // Update Page Title and Breadcrumb
+            document.title = product.name + ' | Gas Việt';
+            const breadcrumbs = document.querySelectorAll('.pd-breadcrumbs a');
+            const breadcrumbCurrent = document.querySelector('.pd-breadcrumbs .current');
+            if (breadcrumbCurrent) breadcrumbCurrent.textContent = product.name;
+            if (breadcrumbs.length > 2) {
+                if (product.categoryId === 9) {
+                    breadcrumbs[2].textContent = 'Combo Khuyến Mãi';
+                    breadcrumbs[2].href = 'san-pham.html';
+                }
+            }
+            
+            // Update Title
+            const titleEl = document.querySelector('.pd-title');
+            if (titleEl) titleEl.textContent = product.name;
+            
+            // Update Brand/Weight if combo
+            if (product.categoryId === 9) {
+                const brandEl = document.getElementById('pdBrand');
+                if (brandEl) brandEl.textContent = 'Thương hiệu: Gas Việt';
+                const weightEl = document.getElementById('pdWeight');
+                if (weightEl) weightEl.style.display = 'none';
+                const weightDivider = document.getElementById('pdWeightDivider');
+                if (weightDivider) weightDivider.style.display = 'none';
+                const variations = document.getElementById('pdVariations');
+                if (variations) variations.style.display = 'none';
+            }
+            
+            // Update Image
+            if (product.image) {
+                const mainImg = document.getElementById('pdMainImage');
+                if (mainImg) mainImg.src = product.image;
+                const thumbs = document.querySelectorAll('.pd-thumb img');
+                thumbs.forEach(thumb => thumb.src = product.image);
+            }
+            
+            // Update Price
+            const priceEl = document.querySelector('.pd-price');
+            const oldPriceEl = document.querySelector('.pd-price-old');
+            const saveBadge = document.querySelector('.pd-save-badge');
+            
+            if (priceEl) priceEl.textContent = product.price.toLocaleString('vi-VN') + 'đ';
+            if (product.oldPrice || product.discount) {
+                const oldPrice = product.oldPrice || Math.round(product.price / (1 - product.discount / 100));
+                if (oldPriceEl) {
+                    oldPriceEl.textContent = oldPrice.toLocaleString('vi-VN') + 'đ';
+                    oldPriceEl.style.display = 'inline-block';
+                }
+                if (saveBadge) {
+                    saveBadge.textContent = '(Tiết kiệm ' + (oldPrice - product.price).toLocaleString('vi-VN') + 'đ)';
+                    saveBadge.style.display = 'inline-block';
+                }
+            } else {
+                if (oldPriceEl) oldPriceEl.style.display = 'none';
+                if (saveBadge) saveBadge.style.display = 'none';
+            }
+            
+            // Update Description
+            const shortDesc = document.querySelector('.pd-desc-short');
+            if (shortDesc) shortDesc.textContent = product.description;
+            
+            const fullDesc = document.querySelector('#description .pd-tab-pane');
+            if (fullDesc) fullDesc.innerHTML = '<p>' + product.description + '</p>';
+            
+            // Update Specs
+            const specsSummary = document.getElementById('pdSpecsSummary');
+            if (specsSummary && product.specs) {
+                const specLines = product.specs.split('\n');
+                let html = `
+                    <div class="specs-accordion-header" onclick="toggleSpecs()">
+                        <h3 class="specs-heading">Thông tin chi tiết</h3>
+                        <i class="fa-solid fa-angles-right specs-toggle-icon"></i>
+                    </div>
+                    <div class="specs-accordion-content" id="specsContent" style="display: none;">
+                `;
+                specLines.forEach(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        html += `<div class="spec-row"><div class="spec-title">${parts[0].trim()}</div><div class="spec-desc">${parts.slice(1).join(':').trim()}</div></div>`;
+                    } else {
+                        html += `<div class="spec-row"><div class="spec-desc" style="width: 100%">${line}</div></div>`;
+                    }
+                });
+                html += `</div>`;
+                specsSummary.innerHTML = html;
+            }
+        });
+
+        function toggleSpecs() {
+            const content = document.getElementById('specsContent');
+            const icon = document.querySelector('.specs-toggle-icon');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.style.transform = 'rotate(90deg)';
+            } else {
+                content.style.display = 'none';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Lightbox Functions
+        function openLightbox() {
+            const modal = document.getElementById("imageLightbox");
+            const img = document.getElementById("pdMainImage");
+            const lightboxImg = document.getElementById("lightboxImg");
+            
+            modal.style.display = "flex";
+            lightboxImg.src = img.src;
+            
+            // Prevent scrolling
+            document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'imageLightbox' || e.target.className === 'lightbox-close') {
+                const modal = document.getElementById("imageLightbox");
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+                document.documentElement.style.overflow = "auto";
+            }
+        }
+
+        // Tabs functionality
+        function scrollToSection(targetId) {
+            // Update active tab
+            document.querySelectorAll('.pd-tab').forEach(tab => {
+                if (tab.getAttribute('data-target') === targetId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Scroll to the section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const offset = 80;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
     </script>
+    <script src="js/product-db.js"></script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
@@ -1332,6 +1681,12 @@
         <a href="https://zalo.me/0901234567" target="_blank" class="float-btn float-zalo" title="Chat Zalo">
             <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo" onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
         </a>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="imageLightbox" class="lightbox-modal" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
     </div>
 </body>
 </html>
