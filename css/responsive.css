@@ -1478,11 +1478,11 @@
     }
 
     .featured-products-section {
-        padding: 40px 8px 0px 8px !important;
+        padding: 0px 8px 0px 8px !important;
     }
 
     .trang-chu-featured {
-        width: calc(100% - 16px) !important;
+        width: calc(100% - 0px) !important;
     }
 
     .product-info h3,
@@ -2026,3 +2026,6 @@
         font-size: 18px !important;
     }
 }
+@media (max-width: 480px) { .featured-products-section .container { padding-top: 30px !important; } }
+
+@media (max-width: 480px) { .promo-combo-section .container, .related-products-section .container { padding-top: 20px !important; padding-bottom: 20px !important; border-radius: 0 !important; } }
