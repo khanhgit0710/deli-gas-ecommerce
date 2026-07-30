@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sectionTitles = {
         dashboard: 'Bảng điều khiển',
         products: 'Quản lý sản phẩm',
-        categories: 'Quản lý danh mục'
+        categories: 'Quản lý danh mục',
+        settings: 'Cấu hình chung'
     };
 
     function switchSection(sectionId) {
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (sectionId === 'dashboard') renderDashboard();
         if (sectionId === 'products') renderProducts();
         if (sectionId === 'categories') renderCategories();
+        if (sectionId === 'settings') renderSettings();
     }
 
     sidebarLinks.forEach(link => {
@@ -228,9 +230,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                     </td>
-                    <td><span class="price-text">${ProductDB.formatPrice(discountedPrice)}</span></td>
-                    <td class="hide-mobile">${p.discount > 0 ? `<span class="price-discount">-${p.discount}%</span>` : '—'}</td>
-                    <td class="hide-mobile">
+                    <td style="text-align: left;"><span class="price-text">${ProductDB.formatPrice(discountedPrice)}</span></td>
+                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="price-discount">-${p.discount}%</span>` : '—'}</td>
+                    <td class="hide-mobile" style="text-align: left;">
                         ${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i> Nổi bật</span>' : ''}
                         ${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i> Ưu đãi</span>' : ''}
                     </td>
@@ -265,11 +267,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         let products;
         if (searchVal) {
-            products = ProductDB.search(searchVal);
+            products = ProductDB.search(searchVal, true);
         } else if (catFilter) {
-            products = ProductDB.getByCategory(catFilter);
+            products = ProductDB.getByCategory(catFilter, true);
         } else {
-            products = ProductDB.getAll();
+            products = ProductDB.getAll(true);
         }
 
         const tbody = document.getElementById('productsTableBody');
@@ -287,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const discountedPrice = ProductDB.getDiscountedPrice(p);
             return `
                 <tr>
-                    <td style="color:var(--admin-text-dim);font-weight:600">#${p.id}</td>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">#${p.id}</td>
                     <td>
                         <div class="product-cell">
                             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=No+Img'">
@@ -297,15 +299,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                     </td>
-                    <td>
+                    <td style="text-align: left;">
                         <span class="price-text">${ProductDB.formatPrice(discountedPrice)}</span>
-                        ${p.discount > 0 ? `<br><s style="font-size:11px;color:var(--admin-text-dim)">${ProductDB.formatPrice(p.price)}</s>` : ''}
+                        ${p.discount > 0 ? `<br><s style="font-size:14px;color:var(--admin-text-dim)">${ProductDB.formatPrice(p.price)}</s>` : ''}
                     </td>
-                    <td class="hide-mobile">${p.discount > 0 ? `<span class="badge badge-sale">-${p.discount}%</span>` : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td class="hide-mobile">${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td class="hide-mobile">${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td>
-                        <div class="actions-cell">
+                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="badge badge-sale">-${p.discount}%</span>` : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.active !== false ? '<span class="badge badge-success" style="background:#d4edda;color:#155724;padding:4px 8px;border-radius:4px;font-size:14px">Đang hiện</span>' : '<span class="badge badge-danger" style="background:#f8d7da;color:#721c24;padding:4px 8px;border-radius:4px;font-size:14px">Đang ẩn</span>'}</td>
+                    <td style="text-align: left;">
+                        <div class="actions-cell" style="justify-content: flex-start;">
                             <button class="btn-icon success" title="Sửa" onclick="editProduct(${p.id})"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn-icon danger" title="Xóa" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
@@ -329,6 +332,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         form.reset();
         document.getElementById('productId').value = '';
         document.getElementById('productDiscount').value = '0';
+        
+        // Populate combo select and recommended products
+        const comboSelect = document.getElementById('comboProductId');
+        const rec1 = document.getElementById('recProduct1');
+        const rec2 = document.getElementById('recProduct2');
+        const rec3 = document.getElementById('recProduct3');
+        
+        let comboHTML = '<option value="">Không có ưu đãi</option>';
+        let recHTML = '<option value="">-- Chọn sản phẩm --</option>';
+        
+        ProductDB.getAll().forEach(p => {
+            if (!product || p.id !== product.id) {
+                const opt = `<option value="${p.id}">${p.name}</option>`;
+                comboHTML += opt;
+                recHTML += opt;
+            }
+        });
+        
+        if (comboSelect) comboSelect.innerHTML = comboHTML;
+        if (rec1) rec1.innerHTML = recHTML;
+        if (rec2) rec2.innerHTML = recHTML;
+        if (rec3) rec3.innerHTML = recHTML;
+
         updateImagePreview();
 
         if (product) {
@@ -343,11 +369,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('productSpecs').value = product.specs || '';
             document.getElementById('productFeatured').checked = product.featured;
             document.getElementById('productOnSale').checked = product.onSale;
+            if (document.getElementById('productActive')) document.getElementById('productActive').checked = product.active !== false;
+            if (document.getElementById('productSlug')) document.getElementById('productSlug').value = product.slug || '';
+            if (document.getElementById('productSeoTitle')) document.getElementById('productSeoTitle').value = product.seoTitle || '';
+            if (document.getElementById('productSeoDesc')) document.getElementById('productSeoDesc').value = product.seoDesc || '';
+            if (document.getElementById('comboProductId')) document.getElementById('comboProductId').value = product.comboProductId || '';
+            if (document.getElementById('comboDiscountText')) document.getElementById('comboDiscountText').value = product.comboDiscountText || '';
+            
+            const recs = product.recommendedProducts || [];
+            if (document.getElementById('recProduct1')) document.getElementById('recProduct1').value = recs[0] || '';
+            if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = recs[1] || '';
+            if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = recs[2] || '';
+            
+            if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = product.comboTotalPrice || '';
+            
             updateImagePreview();
         } else {
             title.textContent = 'Thêm sản phẩm mới';
             document.getElementById('productFeatured').checked = true; // Auto "Mới" tag
             document.getElementById('productOnSale').checked = false;
+            if (document.getElementById('productActive')) document.getElementById('productActive').checked = true;
+            if (document.getElementById('productSlug')) document.getElementById('productSlug').value = '';
+            if (document.getElementById('productSeoTitle')) document.getElementById('productSeoTitle').value = '';
+            if (document.getElementById('productSeoDesc')) document.getElementById('productSeoDesc').value = '';
+            if (document.getElementById('comboProductId')) document.getElementById('comboProductId').value = '';
+            if (document.getElementById('comboDiscountText')) document.getElementById('comboDiscountText').value = '';
+            if (document.getElementById('recProduct1')) document.getElementById('recProduct1').value = '';
+            if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = '';
+            if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = '';
+            if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = '';
         }
 
         modal.classList.add('active');
@@ -424,8 +474,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             description: document.getElementById('productDescription').value.trim(),
             specs: document.getElementById('productSpecs').value.trim(),
             featured: document.getElementById('productFeatured').checked,
-            onSale: document.getElementById('productOnSale').checked
+            onSale: document.getElementById('productOnSale').checked,
+            active: document.getElementById('productActive') ? document.getElementById('productActive').checked : true,
+            slug: document.getElementById('productSlug') ? document.getElementById('productSlug').value.trim() : '',
+            seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
+            seoDesc: document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : '',
+            comboProductId: document.getElementById('comboProductId') ? (parseInt(document.getElementById('comboProductId').value) || null) : null,
+            comboDiscountText: document.getElementById('comboDiscountText') ? document.getElementById('comboDiscountText').value.trim() : ''
         };
+
+        const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;
+        const rec2Val = document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) : null;
+        const rec3Val = document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) : null;
+        data.recommendedProducts = [rec1Val, rec2Val, rec3Val].filter(v => v);
+        
+        if (document.getElementById('comboTotalPriceInput') && document.getElementById('comboTotalPriceInput').value) {
+            data.comboTotalPrice = parseInt(document.getElementById('comboTotalPriceInput').value);
+        } else {
+            data.comboTotalPrice = null;
+        }
 
         const editId = document.getElementById('productId').value;
 
@@ -546,6 +613,45 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         window.location.reload();
     });
+
+    // ========== SETTINGS ==========
+    function renderSettings() {
+        const settings = ProductDB.getSettings();
+        document.getElementById('settingHotline').value = settings.hotline || '';
+        document.getElementById('settingZalo').value = settings.zalo || '';
+        document.getElementById('settingAddress').value = settings.address || '';
+        document.getElementById('settingLogo').value = settings.logo || '';
+        updateSettingLogoPreview();
+    }
+
+    function updateSettingLogoPreview() {
+        const url = document.getElementById('settingLogo').value;
+        const box = document.getElementById('settingLogoPreview');
+        if (url) {
+            box.innerHTML = `<img src="${url}" alt="Logo Preview" style="max-height: 100%; object-fit: contain;" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'>Logo không hợp lệ</div>'">`;
+        } else {
+            box.innerHTML = '<div class="placeholder">Xem trước Logo</div>';
+        }
+    }
+
+    const settingLogoInput = document.getElementById('settingLogo');
+    if (settingLogoInput) {
+        settingLogoInput.addEventListener('input', updateSettingLogoPreview);
+    }
+
+    const btnSaveSettings = document.getElementById('btnSaveSettings');
+    if (btnSaveSettings) {
+        btnSaveSettings.addEventListener('click', () => {
+            const newSettings = {
+                hotline: document.getElementById('settingHotline').value.trim(),
+                zalo: document.getElementById('settingZalo').value.trim(),
+                address: document.getElementById('settingAddress').value.trim(),
+                logo: document.getElementById('settingLogo').value.trim()
+            };
+            ProductDB.updateSettings(newSettings);
+            showToast('Lưu cấu hình thành công!', 'success');
+        });
+    }
 
     // ========== CLOSE MODALS ON OVERLAY CLICK ==========
     document.querySelectorAll('.modal-overlay').forEach(overlay => {

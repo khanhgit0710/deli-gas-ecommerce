@@ -1,0 +1,474 @@
+﻿diff --git a/admin.html b/admin.html
+index 2fdbc79..d28e663 100644
+--- a/admin.html
++++ b/admin.html
+@@ -1,10 +1,10 @@
+-<!DOCTYPE html>
++∩╗┐<!DOCTYPE html>
+ <html lang="vi">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="robots" content="noindex, nofollow">
+-    <title>Admin Panel | Gas Viß╗çt</title>
++    <title>Admin Panel | Gas Vi├í┬╗ΓÇít</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="css/admin.css">
+     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
+@@ -16,23 +16,23 @@
+             <div class="login-logo">
+                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo">
+             </div>
+-            <h2>─É─âng Nhß║¡p Quß║ún Trß╗ï</h2>
+-            <p>Vui l├▓ng ─æ─âng nhß║¡p ─æß╗â truy cß║¡p Admin GasViet</p>
++            <h2>├ä┬É├ä╞Æng Nh├í┬║┬¡p Qu├í┬║┬ún Tr├í┬╗ΓÇ╣</h2>
++            <p>Vui l├â┬▓ng ├äΓÇÿ├ä╞Æng nh├í┬║┬¡p ├äΓÇÿ├í┬╗╞Æ truy c├í┬║┬¡p Admin GasViet</p>
+             <form id="adminLoginForm">
+                 <div class="form-group" style="margin-bottom: 15px;">
+-                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">T├ái khoß║ún</label>
+-                    <input type="text" id="loginUsername" class="admin-input" required placeholder="T├ái khoß║ún (demo: admin)">
++                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">T├â┬ái kho├í┬║┬ún</label>
++                    <input type="text" id="loginUsername" class="admin-input" required placeholder="T├â┬ái kho├í┬║┬ún (demo: admin)">
+                 </div>
+                 <div class="form-group" style="margin-bottom: 15px;">
+-                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Mß║¡t khß║⌐u</label>
+-                    <input type="password" id="loginPassword" class="admin-input" required placeholder="Mß║¡t khß║⌐u (demo: admin)">
++                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">M├í┬║┬¡t kh├í┬║┬⌐u</label>
++                    <input type="password" id="loginPassword" class="admin-input" required placeholder="M├í┬║┬¡t kh├í┬║┬⌐u (demo: admin)">
+                 </div>
+-                <div id="loginError" style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">Sai t├ái khoß║ún hoß║╖c mß║¡t khß║⌐u!</div>
+-                <button type="submit" class="admin-btn admin-btn-primary" style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">─É─âng Nhß║¡p</button>
++                <div id="loginError" style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">Sai t├â┬ái kho├í┬║┬ún ho├í┬║┬╖c m├í┬║┬¡t kh├í┬║┬⌐u!</div>
++                <button type="submit" class="admin-btn admin-btn-primary" style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">├ä┬É├ä╞Æng Nh├í┬║┬¡p</button>
+             </form>
+             <div style="text-align: center; margin-top: 20px;">
+                 <a href="trang-chu.html" style="color: var(--admin-text-muted); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: var(--admin-transition);">
+-                    <i class="fa-solid fa-arrow-left"></i> Quay lß║íi website
++                    <i class="fa-solid fa-arrow-left"></i> Quay l├í┬║┬íi website
+                 </a>
+             </div>
+         </div>
+@@ -44,32 +44,32 @@
+             <div class="sidebar-header">
+                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo" style="width: 100%; height: 50px; object-fit: center;">
+                 <!-- <div class="sidebar-brand">
+-                    <span class="sidebar-brand-name">Gas Viß╗çt</span>
++                    <span class="sidebar-brand-name">Gas Vi├í┬╗ΓÇít</span>
+                     <span class="sidebar-brand-sub">Admin Panel</span>
+                 </div> -->
+             </div>
+ 
+             <nav class="sidebar-nav">
+-                <div class="sidebar-section-title">Tß╗òng quan</div>
++                <div class="sidebar-section-title">T├í┬╗ΓÇóng quan</div>
+                 <ul class="sidebar-menu">
+-                    <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> Bß║úng ─æiß╗üu khiß╗ân</a></li>
++                    <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> B├í┬║┬úng ├äΓÇÿi├í┬╗┬üu khi├í┬╗╞Æn</a></li>
+                 </ul>
+ 
+-                <div class="sidebar-section-title">Quß║ún l├╜</div>
++                <div class="sidebar-section-title">Qu├í┬║┬ún l├â┬╜</div>
+                 <ul class="sidebar-menu">
+-                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Sß║ún phß║⌐m</a></li>
++                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> S├í┬║┬ún ph├í┬║┬⌐m</a></li>
+                     <li class="has-submenu">
+-                        <a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mß╗Ñc</a>
++                        <a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh m├í┬╗┬Ñc</a>
+                         <ul class="sidebar-submenu" id="sidebarCategoryTree">
+                             <!-- JS will inject categories here -->
+                         </ul>
+                     </li>
++                    <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> C├í┬║┬Ñu h├â┬¼nh chung</a></li>
+                 </ul>
+-            </nav>
+ 
+             <div class="sidebar-footer">
+                 <a href="trang-chu.html"><i class="fa-solid fa-arrow-left"></i> Xem website</a>
+-                <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> Tß║úi lß║íi dß╗» liß╗çu</a>
++                <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> T├í┬║┬úi l├í┬║┬íi d├í┬╗┬» li├í┬╗ΓÇíu</a>
+             </div>
+         </aside>
+ 
+@@ -79,10 +79,10 @@
+             <div class="admin-topbar">
+                 <div class="topbar-left">
+                     <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+-                    <h2 id="pageTitle">Bß║úng ─æiß╗üu khiß╗ân</h2>
++                    <h2 id="pageTitle">B├í┬║┬úng ├äΓÇÿi├í┬╗┬üu khi├í┬╗╞Æn</h2>
+                 </div>
+                 <div class="topbar-right">
+-                    <span style="font-size:16px;color:var(--admin-text-muted)">Xin ch├áo, <strong style="color:var(--admin-text)">Admin</strong></span>
++                    <span style="font-size:16px;color:var(--color-accent)">Xin ch├â┬áo, <strong style="color:var(--color-accent)">Admin</strong></span>
+                 </div>
+             </div>
+ 
+@@ -95,16 +95,16 @@
+                     <div class="table-wrapper">
+                         <div class="table-header">
+                             <div class="table-header-left">
+-                                <h3><i class="fa-solid fa-fire" style="color:var(--admin-accent)"></i> Sß║ún phß║⌐m nß╗òi bß║¡t</h3>
++                                <h3><i class="fa-solid fa-fire" style="color:var(--admin-accent)"></i> S├í┬║┬ún ph├í┬║┬⌐m n├í┬╗ΓÇói b├í┬║┬¡t</h3>
+                             </div>
+                         </div>
+                         <table class="data-table">
+                             <thead>
+                                 <tr>
+-                                    <th>Sß║ún phß║⌐m</th>
+-                                    <th>Gi├í</th>
+-                                    <th class="hide-mobile">Giß║úm gi├í</th>
+-                                    <th class="hide-mobile">Trß║íng th├íi</th>
++                                    <th style="text-align: left;">S├í┬║┬ún ph├í┬║┬⌐m</th>
++                                    <th style="text-align: left;">Gi├â┬í</th>
++                                    <th class="hide-mobile" style="text-align: left;">Gi├í┬║┬úm gi├â┬í</th>
++                                    <th class="hide-mobile" style="text-align: left;">Tr├í┬║┬íng th├â┬íi</th>
+                                 </tr>
+                             </thead>
+                             <tbody id="featuredTableBody">
+@@ -119,18 +119,18 @@
+                     <div class="table-wrapper">
+                         <div class="table-header">
+                             <div class="table-header-left">
+-                                <h3>Danh s├ích sß║ún phß║⌐m</h3>
++                                <h3>Danh s├â┬ích s├í┬║┬ún ph├í┬║┬⌐m</h3>
+                             </div>
+                             <div class="table-header-right">
+                                 <div class="search-box">
+                                     <i class="fa-solid fa-magnifying-glass"></i>
+-                                    <input type="text" placeholder="T├¼m kiß║┐m sß║ún phß║⌐m..." id="productSearch">
++                                    <input type="text" placeholder="T├â┬¼m ki├í┬║┬┐m s├í┬║┬ún ph├í┬║┬⌐m..." id="productSearch">
+                                 </div>
+                                 <select class="filter-select" id="categoryFilter">
+-                                    <option value="">Tß║Ñt cß║ú danh mß╗Ñc</option>
++                                    <option value="">T├í┬║┬Ñt c├í┬║┬ú danh m├í┬╗┬Ñc</option>
+                                 </select>
+                                 <button class="btn btn-primary" id="btnAddProduct">
+-                                    <i class="fa-solid fa-plus"></i> Th├¬m mß╗¢i
++                                    <i class="fa-solid fa-plus"></i> Th├â┬¬m m├í┬╗ΓÇ║i
+                                 </button>
+                             </div>
+                         </div>
+@@ -138,13 +138,14 @@
+                         <table class="data-table">
+                             <thead>
+                                 <tr>
+-                                    <th style="width:40px">ID</th>
+-                                    <th>Sß║ún phß║⌐m</th>
+-                                    <th>Gi├í</th>
+-                                    <th class="hide-mobile">Giß║úm gi├í</th>
+-                                    <th class="hide-mobile">Nß╗òi bß║¡t</th>
+-                                    <th class="hide-mobile">╞»u ─æ├úi</th>
+-                                    <th style="width:120px; white-space: nowrap;">Thao t├íc</th>
++                                    <th style="width:40px; text-align: left;">ID</th>
++                                    <th style="text-align: left;">S├í┬║┬ún ph├í┬║┬⌐m</th>
++                                    <th style="text-align: left;">Gi├â┬í</th>
++                                    <th class="hide-mobile" style="text-align: left;">Gi├í┬║┬úm gi├â┬í</th>
++                                    <th class="hide-mobile" style="text-align: left;">N├í┬╗ΓÇói b├í┬║┬¡t</th>
++                                    <th class="hide-mobile" style="text-align: left;">├å┬»u ├äΓÇÿ├â┬úi</th>
++                                    <th class="hide-mobile" style="text-align: left;">Tr├í┬║┬íng th├â┬íi</th>
++                                    <th style="width:120px; white-space: nowrap; text-align: left;">Thao t├â┬íc</th>
+                                 </tr>
+                             </thead>
+                             <tbody id="productsTableBody">
+@@ -153,7 +154,7 @@
+                         </table>
+                         </div>
+                         <div class="table-footer">
+-                            <span id="productCountText">0 sß║ún phß║⌐m</span>
++                            <span id="productCountText">0 s├í┬║┬ún ph├í┬║┬⌐m</span>
+                         </div>
+                     </div>
+                 </section>
+@@ -163,11 +164,11 @@
+                     <div class="table-wrapper">
+                         <div class="table-header">
+                             <div class="table-header-left">
+-                                <h3>Danh s├ích danh mß╗Ñc</h3>
++                                <h3>Danh s├â┬ích danh m├í┬╗┬Ñc</h3>
+                             </div>
+                             <div class="table-header-right">
+                                 <button class="btn btn-primary" id="btnAddCategory">
+-                                    <i class="fa-solid fa-plus"></i> Th├¬m danh mß╗Ñc
++                                    <i class="fa-solid fa-plus"></i> Th├â┬¬m danh m├í┬╗┬Ñc
+                                 </button>
+                             </div>
+                         </div>
+@@ -175,10 +176,10 @@
+                             <thead>
+                                 <tr>
+                                     <th style="width:40px">ID</th>
+-                                    <th>T├¬n danh mß╗Ñc</th>
++                                    <th>T├â┬¬n danh m├í┬╗┬Ñc</th>
+                                     <th>Slug</th>
+-                                    <th>Sß╗æ sß║ún phß║⌐m</th>
+-                                    <th style="width:120px; white-space: nowrap;">Thao t├íc</th>
++                                    <th>S├í┬╗ΓÇÿ s├í┬║┬ún ph├í┬║┬⌐m</th>
++                                    <th style="width:120px; white-space: nowrap;">Thao t├â┬íc</th>
+                                 </tr>
+                             </thead>
+                             <tbody id="categoriesTableBody">
+@@ -187,15 +188,52 @@
+                         </table>
+                     </div>
+                 </section>
++
++                <!-- ===== SETTINGS SECTION ===== -->
++                <section class="admin-section" id="section-settings">
++                    <div class="table-wrapper" style="max-width: 800px;">
++                        <div class="table-header">
++                            <div class="table-header-left">
++                                <h3>C├í┬║┬Ñu h├â┬¼nh chung</h3>
++                            </div>
++                        </div>
++                        <div style="padding: 20px;">
++                            <form id="settingsForm">
++                                <div class="form-group" style="margin-bottom: 15px;">
++                                    <label class="form-label">Hotline</label>
++                                    <input type="text" class="form-input" id="settingHotline" placeholder="Nh├í┬║┬¡p s├í┬╗ΓÇÿ ├äΓÇÿi├í┬╗ΓÇín tho├í┬║┬íi hotline">
++                                </div>
++                                <div class="form-group" style="margin-bottom: 15px;">
++                                    <label class="form-label">Zalo</label>
++                                    <input type="text" class="form-input" id="settingZalo" placeholder="Nh├í┬║┬¡p s├í┬╗ΓÇÿ ├äΓÇÿi├í┬╗ΓÇín tho├í┬║┬íi Zalo">
++                                </div>
++                                <div class="form-group" style="margin-bottom: 15px;">
++                                    <label class="form-label">├ä┬É├í┬╗ΓÇ╣a ch├í┬╗ΓÇ░</label>
++                                    <input type="text" class="form-input" id="settingAddress" placeholder="Nh├í┬║┬¡p ├äΓÇÿ├í┬╗ΓÇ╣a ch├í┬╗ΓÇ░ c├í┬╗┬¡a h├â┬áng">
++                                </div>
++                                <div class="form-group" style="margin-bottom: 20px;">
++                                    <label class="form-label">Logo URL</label>
++                                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
++                                        <input type="text" class="form-input" id="settingLogo" placeholder="Nh├í┬║┬¡p URL logo">
++                                    </div>
++                                    <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;">
++                                        <div class="placeholder">Xem tr├å┬░├í┬╗ΓÇ║c Logo</div>
++                                    </div>
++                                </div>
++                                <button type="button" class="btn btn-primary" id="btnSaveSettings"><i class="fa-solid fa-save"></i> L├å┬░u c├í┬║┬Ñu h├â┬¼nh</button>
++                            </form>
++                        </div>
++                    </div>
++                </section>
+             </div>
+         </main>
+     </div>
+ 
+     <!-- ===== PRODUCT MODAL ===== -->
+     <div class="modal-overlay" id="productModal">
+-        <div class="modal">
++        <div class="modal" style="max-width: 800px; width: 90%;">
+             <div class="modal-header">
+-                <h3 id="productModalTitle">Th├¬m sß║ún phß║⌐m</h3>
++                <h3 id="productModalTitle">Th├â┬¬m s├í┬║┬ún ph├í┬║┬⌐m</h3>
+                 <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+             </div>
+             <div class="modal-body">
+@@ -203,70 +241,142 @@
+                     <input type="hidden" id="productId">
+                     <div class="form-grid">
+                         <div class="form-group full">
+-                            <label class="form-label">T├¬n sß║ún phß║⌐m <span class="required">*</span></label>
+-                            <input type="text" class="form-input" id="productName" required placeholder="Nhß║¡p t├¬n sß║ún phß║⌐m...">
++                            <label class="form-label">T├â┬¬n s├í┬║┬ún ph├í┬║┬⌐m <span class="required">*</span></label>
++                            <input type="text" class="form-input" id="productName" required placeholder="Nh├í┬║┬¡p t├â┬¬n s├í┬║┬ún ph├í┬║┬⌐m...">
+                         </div>
+                         <div class="form-group">
+-                            <label class="form-label">Danh mß╗Ñc <span class="required">*</span></label>
++                            <label class="form-label">Danh m├í┬╗┬Ñc <span class="required">*</span></label>
+                             <select class="form-select" id="productCategory" required>
+-                                <option value="">Chß╗ìn danh mß╗Ñc</option>
++                                <option value="">Ch├í┬╗┬ìn danh m├í┬╗┬Ñc</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+-                            <label class="form-label">Gi├í (VN─É) <span class="required">*</span></label>
++                            <label class="form-label">Gi├â┬í (VN├ä┬É) <span class="required">*</span></label>
+                             <input type="number" class="form-input" id="productPrice" required placeholder="0" min="0">
+                         </div>
+                         <div class="form-group">
+-                            <label class="form-label">Giß║úm gi├í (%)</label>
++                            <label class="form-label">Gi├í┬║┬úm gi├â┬í (%)</label>
+                             <input type="number" class="form-input" id="productDiscount" placeholder="0" min="0" max="100" value="0">
+                         </div>
+                         <div class="form-group">
+-                            <label class="form-label">H├¼nh ß║únh</label>
++                            <label class="form-label">H├â┬¼nh ├í┬║┬únh</label>
+                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+-                                <input type="text" class="form-input" id="productImage" placeholder="Nhß║¡p URL hoß║╖c tß║úi ß║únh l├¬n...">
++                                <input type="text" class="form-input" id="productImage" placeholder="Nh├í┬║┬¡p URL ho├í┬║┬╖c t├í┬║┬úi ├í┬║┬únh l├â┬¬n...">
+                                 <input type="file" id="productImageUpload" accept="image/*" style="display: none;">
+-                                <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" onclick="document.getElementById('productImageUpload').click()" title="Tß║úi ß║únh tß╗½ m├íy t├¡nh">
++                                <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" onclick="document.getElementById('productImageUpload').click()" title="T├í┬║┬úi ├í┬║┬únh t├í┬╗┬½ m├â┬íy t├â┬¡nh">
+                                     <i class="fa-solid fa-upload"></i>
+                                 </button>
+                             </div>
+                             <div class="image-preview-box" id="imagePreview">
+                                 <div class="placeholder">
+                                     <i class="fa-solid fa-image"></i>
+-                                    Xem tr╞░ß╗¢c h├¼nh ß║únh
++                                    Xem tr├å┬░├í┬╗ΓÇ║c h├â┬¼nh ├í┬║┬únh
+                                 </div>
+                             </div>
+                         </div>
++
+                         <div class="form-group">
+-                            <label class="form-label">T├╣y chß╗ìn</label>
++                            <label class="form-label">T├â┬╣y ch├í┬╗┬ìn</label>
+                             <div class="toggle-group">
+                                 <label class="toggle-switch">
+                                     <input type="checkbox" id="productFeatured">
+                                     <span class="toggle-slider"></span>
+                                 </label>
+-                                <span class="toggle-label">Sß║ún phß║⌐m nß╗òi bß║¡t</span>
++                                <span class="toggle-label">S├í┬║┬ún ph├í┬║┬⌐m n├í┬╗ΓÇói b├í┬║┬¡t</span>
+                             </div>
+                             <div class="toggle-group" style="margin-top:10px">
+                                 <label class="toggle-switch">
+                                     <input type="checkbox" id="productOnSale">
+                                     <span class="toggle-slider"></span>
+                                 </label>
+-                                <span class="toggle-label">─Éang ╞░u ─æ├úi</span>
++                                <span class="toggle-label">├ä┬Éang ├å┬░u ├äΓÇÿ├â┬úi</span>
++                            </div>
++                            <div class="toggle-group" style="margin-top:10px">
++                                <label class="toggle-switch">
++                                    <input type="checkbox" id="productActive" checked>
++                                    <span class="toggle-slider"></span>
++                                </label>
++                                <span class="toggle-label">├ä┬Éang ho├í┬║┬ít ├äΓÇÿ├í┬╗Γäóng</span>
+                             </div>
+                         </div>
++                        
++                        <div class="form-group full" style="border-top: 1px solid var(--admin-border); padding-top: 15px; margin-top: 10px;">
++                            <label class="form-label" style="color: var(--color-primary); font-weight: bold;"><i class="fa-solid fa-gift"></i> ├å┬»u ├äΓÇÿ├â┬úi mua k├â┬¿m</label>
++                            
++                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-top: 10px;">
++                                <div class="form-group">
++                                    <label class="form-label">S├í┬║┬ún ph├í┬║┬⌐m ├å┬░u ├äΓÇÿ├â┬úi</label>
++                                    <select class="form-select" id="comboProductId">
++                                        <option value="">Kh├â┬┤ng c├â┬│ ├å┬░u ├äΓÇÿ├â┬úi</option>
++                                    </select>
++                                </div>
++                                <div class="form-group">
++                                    <label class="form-label">N├í┬╗Γäói dung khuy├í┬║┬┐n m├â┬úi</label>
++                                    <input type="text" class="form-input" id="comboDiscountText" placeholder="VD: Gi├í┬║┬úm 50% khi mua k├â┬¿m...">
++                                </div>
++                            </div>
++                        </div>
++
++                        <div class="form-group full" style="border-top: 1px solid var(--admin-border); padding-top: 15px; margin-top: 10px;">
++                            <label class="form-label" style="color: var(--color-primary); font-weight: bold;"><i class="fa-solid fa-link"></i> S├í┬║┬ún ph├í┬║┬⌐m mua k├â┬¿m khuy├â┬¬n d├â┬╣ng (Combo)</label>
++                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 10px;">
++                                <div class="form-group">
++                                    <label class="form-label">Khuy├â┬¬n d├â┬╣ng 1</label>
++                                    <select class="form-select rec-product-select" id="recProduct1">
++                                        <option value="">-- Ch├í┬╗┬ìn s├í┬║┬ún ph├í┬║┬⌐m --</option>
++                                    </select>
++                                </div>
++                                <div class="form-group">
++                                    <label class="form-label">Khuy├â┬¬n d├â┬╣ng 2</label>
++                                    <select class="form-select rec-product-select" id="recProduct2">
++                                        <option value="">-- Ch├í┬╗┬ìn s├í┬║┬ún ph├í┬║┬⌐m --</option>
++                                    </select>
++                                </div>
++                                <div class="form-group">
++                                    <label class="form-label">Khuy├â┬¬n d├â┬╣ng 3</label>
++                                    <select class="form-select rec-product-select" id="recProduct3">
++                                        <option value="">-- Ch├í┬╗┬ìn s├í┬║┬ún ph├í┬║┬⌐m --</option>
++                                    </select>
++                                </div>
++                            </div>
++                            <div class="form-group" style="margin-top: 15px; max-width: 33%;">
++                                <label class="form-label">Gi├â┬í tr├í┬╗┬ìn b├í┬╗Γäó Combo (T├â┬╣y ch├í┬╗┬ìn)</label>
++                                <input type="number" class="form-input" id="comboTotalPriceInput" placeholder="V├â┬¡ d├í┬╗┬Ñ: 620000" min="0">
++                                <small style="color: var(--admin-text-dim); display: block; margin-top: 5px;">N├í┬║┬┐u b├í┬╗┬Å tr├í┬╗ΓÇÿng, h├í┬╗ΓÇí th├í┬╗ΓÇÿng s├í┬║┬╜ t├í┬╗┬▒ t├â┬¡nh t├í┬╗ΓÇóng gi├â┬í v├â┬á gi├í┬║┬úm 10%.</small>
++                            </div>
++                        </div>
++
++                        <div class="form-group full">
++                            <label class="form-label">M├â┬┤ t├í┬║┬ú</label>
++                            <textarea class="form-textarea" id="productDescription" rows="3" placeholder="Nh├í┬║┬¡p m├â┬┤ t├í┬║┬ú s├í┬║┬ún ph├í┬║┬⌐m..."></textarea>
++                        </div>
++                        <div class="form-group full">
++                            <label class="form-label">Th├â┬┤ng s├í┬╗ΓÇÿ k├í┬╗┬╣ thu├í┬║┬¡t</label>
++                            <textarea class="form-textarea" id="productSpecs" rows="4" placeholder="M├í┬╗ΓÇöi th├â┬┤ng s├í┬╗ΓÇÿ tr├â┬¬n 1 d├â┬▓ng..."></textarea>
++                        </div>
++                        
++                        <!-- C├í┬║┬Ñu h├â┬¼nh SEO -->
++                        <div class="form-group full" style="border-top: 1px solid var(--admin-border); padding-top: 15px; margin-top: 10px;">
++                            <h4 style="margin-bottom: 15px; color: var(--admin-text);">C├í┬║┬Ñu h├â┬¼nh SEO</h4>
++                        </div>
++                        <div class="form-group full">
++                            <label class="form-label">├ä┬É├å┬░├í┬╗┬¥ng d├í┬║┬½n (Slug)</label>
++                            <input type="text" class="form-input" id="productSlug" placeholder="V├â┬¡ d├í┬╗┬Ñ: bep-gas-am-rinnai-rvb-220g">
++                        </div>
+                         <div class="form-group full">
+-                            <label class="form-label">M├┤ tß║ú</label>
+-                            <textarea class="form-textarea" id="productDescription" rows="3" placeholder="Nhß║¡p m├┤ tß║ú sß║ún phß║⌐m..."></textarea>
++                            <label class="form-label">Ti├â┬¬u ├äΓÇÿ├í┬╗┬ü SEO</label>
++                            <input type="text" class="form-input" id="productSeoTitle" placeholder="Ti├â┬¬u ├äΓÇÿ├í┬╗┬ü hi├í┬╗╞Æn th├í┬╗ΓÇ╣ tr├â┬¬n Google...">
+                         </div>
+                         <div class="form-group full">
+-                            <label class="form-label">Th├┤ng sß╗æ kß╗╣ thuß║¡t</label>
+-                            <textarea class="form-textarea" id="productSpecs" rows="4" placeholder="Mß╗ùi th├┤ng sß╗æ tr├¬n 1 d├▓ng..."></textarea>
++                            <label class="form-label">M├â┬┤ t├í┬║┬ú SEO</label>
++                            <textarea class="form-textarea" id="productSeoDesc" rows="2" placeholder="M├â┬┤ t├í┬║┬ú ng├í┬║┬»n g├í┬╗┬ìn thu h├â┬║t click tr├â┬¬n Google..."></textarea>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+             <div class="modal-footer">
+-                <button class="btn btn-outline" onclick="closeProductModal()">Hß╗ºy</button>
+-                <button class="btn btn-primary" id="btnSaveProduct"><i class="fa-solid fa-check"></i> L╞░u sß║ún phß║⌐m</button>
++                <button class="btn btn-outline" onclick="closeProductModal()">H├í┬╗┬ºy</button>
++                <button class="btn btn-primary" id="btnSaveProduct"><i class="fa-solid fa-check"></i> L├å┬░u s├í┬║┬ún ph├í┬║┬⌐m</button>
+             </div>
+         </div>
+     </div>
+@@ -275,25 +385,25 @@
+     <div class="modal-overlay" id="categoryModal">
+         <div class="modal" style="max-width:480px">
+             <div class="modal-header">
+-                <h3 id="categoryModalTitle">Th├¬m danh mß╗Ñc</h3>
++                <h3 id="categoryModalTitle">Th├â┬¬m danh m├í┬╗┬Ñc</h3>
+                 <button class="modal-close" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+             </div>
+             <div class="modal-body">
+                 <form id="categoryForm">
+                     <input type="hidden" id="categoryId">
+                     <div class="form-group" style="margin-bottom:16px">
+-                        <label class="form-label">T├¬n danh mß╗Ñc <span class="required">*</span></label>
+-                        <input type="text" class="form-input" id="categoryName" required placeholder="Nhß║¡p t├¬n danh mß╗Ñc...">
++                        <label class="form-label">T├â┬¬n danh m├í┬╗┬Ñc <span class="required">*</span></label>
++                        <input type="text" class="form-input" id="categoryName" required placeholder="Nh├í┬║┬¡p t├â┬¬n danh m├í┬╗┬Ñc...">
+                     </div>
+                     <div class="form-group">
+-                        <label class="form-label">Slug (tß╗▒ tß║ío)</label>
+-                        <input type="text" class="form-input" id="categorySlug" placeholder="Tß╗▒ ─æß╗Öng tß║ío tß╗½ t├¬n...">
++                        <label class="form-label">Slug (t├í┬╗┬▒ t├í┬║┬ío)</label>
++                        <input type="text" class="form-input" id="categorySlug" placeholder="T├í┬╗┬▒ ├äΓÇÿ├í┬╗Γäóng t├í┬║┬ío t├í┬╗┬½ t├â┬¬n...">
+                     </div>
+                 </form>
+             </div>
+             <div class="modal-footer">
+-                <button class="btn btn-outline" onclick="closeCategoryModal()">Hß╗ºy</button>
+-                <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> L╞░u danh mß╗Ñc</button>
++                <button class="btn btn-outline" onclick="closeCategoryModal()">H├í┬╗┬ºy</button>
++                <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> L├å┬░u danh m├í┬╗┬Ñc</button>
+             </div>
+         </div>
+     </div>
+@@ -302,11 +412,11 @@
+     <div class="confirm-overlay" id="confirmDialog">
+         <div class="confirm-dialog">
+             <div class="confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+-            <h3 id="confirmTitle">X├íc nhß║¡n x├│a</h3>
+-            <p id="confirmMessage">Bß║ín c├│ chß║»c chß║»n muß╗æn x├│a mß╗Ñc n├áy?</p>
++            <h3 id="confirmTitle">X├â┬íc nh├í┬║┬¡n x├â┬│a</h3>
++            <p id="confirmMessage">B├í┬║┬ín c├â┬│ ch├í┬║┬»c ch├í┬║┬»n mu├í┬╗ΓÇÿn x├â┬│a m├í┬╗┬Ñc n├â┬áy?</p>
+             <div class="confirm-actions">
+-                <button class="btn btn-outline" onclick="closeConfirm()">Hß╗ºy</button>
+-                <button class="btn btn-danger" id="btnConfirmAction"><i class="fa-solid fa-trash"></i> X├│a</button>
++                <button class="btn btn-outline" onclick="closeConfirm()">H├í┬╗┬ºy</button>
++                <button class="btn btn-danger" id="btnConfirmAction"><i class="fa-solid fa-trash"></i> X├â┬│a</button>
+             </div>
+         </div>
+     </div>

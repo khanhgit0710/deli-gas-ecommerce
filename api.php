@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // If file doesn't exist yet, return empty standard structure
         echo json_encode([
             'products' => [],
-            'categories' => []
+            'categories' => [],
+            'settings' => []
         ]);
     }
     exit();

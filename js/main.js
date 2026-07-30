@@ -1,5 +1,95 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    if (typeof ProductDB !== 'undefined') await ProductDB.initAsync();
+    if (typeof ProductDB !== 'undefined') {
+        await ProductDB.initAsync();
+        applyGlobalSettings();
+    }
+    
+    function applyGlobalSettings() {
+        if (typeof ProductDB === 'undefined' || !ProductDB.getSettings) return;
+        const settings = ProductDB.getSettings();
+        if (!settings) return;
+
+        // Apply Logo
+        if (settings.logo) {
+            document.querySelectorAll('.logo-img').forEach(img => {
+                img.src = settings.logo;
+            });
+            document.querySelectorAll('.footer-logo').forEach(img => {
+                if(img.tagName === 'IMG') img.src = settings.logo;
+            });
+        }
+
+        // Apply Hotline
+        if (settings.hotline) {
+            const hotlineClean = settings.hotline.replace(/\D/g, '');
+            document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+                a.href = `tel:${hotlineClean}`;
+                
+                // Don't append text to floating buttons which are designed to be icon-only
+                // Also exclude pd-btn-contact which has custom text "Gọi ngay chúng tôi"
+                if (a.classList.contains('float-btn') || a.classList.contains('pd-btn-contact')) return;
+
+                const strong = a.querySelector('strong');
+                if (strong) {
+                    strong.textContent = settings.hotline;
+                    return;
+                }
+
+                const span = a.querySelector('span');
+                if (span) span.textContent = settings.hotline;
+                else {
+                    const i = a.querySelector('i');
+                    if (i) {
+                        a.innerHTML = '';
+                        a.appendChild(i);
+                        a.append(' ' + settings.hotline);
+                    } else {
+                        a.textContent = settings.hotline;
+                    }
+                }
+            });
+            const dynHotline = document.getElementById('dynamicHotline');
+            if (dynHotline) {
+                dynHotline.href = `tel:${hotlineClean}`;
+                const span = dynHotline.querySelector('span');
+                if(span) span.textContent = settings.hotline;
+            }
+        }
+
+        // Apply Zalo
+        if (settings.zalo) {
+            const zaloClean = settings.zalo.replace(/\D/g, '');
+            document.querySelectorAll('.footer-zalo, .float-zalo, a[href^="https://zalo.me/"]').forEach(a => {
+                a.href = `https://zalo.me/${zaloClean}`;
+            });
+        }
+
+        // Apply Address
+        if (settings.address) {
+            const dynAddress = document.getElementById('dynamicAddress');
+            if (dynAddress) {
+                const span = dynAddress.querySelector('span');
+                if (span) span.textContent = settings.address;
+            }
+            document.querySelectorAll('.top-bar-link').forEach(a => {
+                if (a.querySelector('.fa-location-dot')) {
+                    const span = a.querySelector('span');
+                    if (span) span.textContent = settings.address;
+                    else {
+                        const i = a.querySelector('i');
+                        if (i) {
+                            a.innerHTML = '';
+                            a.appendChild(i);
+                            a.append(' ' + settings.address);
+                        } else {
+                            a.textContent = settings.address;
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     /* ==========================================================================
        1. SLIDER LOGIC
        ========================================================================== */
@@ -109,6 +199,65 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    // DYNAMIC RENDER FEATURED PRODUCTS
+    const fSlider = document.getElementById('featuredSlider');
+    if (fSlider && typeof ProductDB !== 'undefined') {
+        const allProds = ProductDB.getAll();
+        let featuredProds = allProds.filter(p => p.featured).slice(0, 10);
+        if (featuredProds.length < 10) {
+            const others = allProds.filter(p => !p.featured).slice(0, 10 - featuredProds.length);
+            featuredProds.push(...others);
+        }
+        
+        let html = featuredProds.map(p => {
+            const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price) + 'đ';
+            let badgeHtml = '';
+            if (p.onSale && p.discount > 0) {
+                badgeHtml = `<div class="product-badge badge-discount" style="background-color: #e11d48;">-${p.discount}%</div>`;
+            } else if (p.featured) {
+                badgeHtml = `<div class="product-badge" style="background-color: #f59e0b;">BÁN CHẠY</div>`;
+            }
+            
+            let priceHtml = `<span class="price-current">${formatPrice(p.price - (p.price * p.discount / 100))}</span>`;
+            if (p.discount > 0) {
+                priceHtml += `\n<span class="price-old">${formatPrice(p.price)}</span>`;
+            }
+            
+            return `
+            <div class="product-card featured-large-card">
+                ${badgeHtml}
+                <div class="product-img">
+                    <a href="chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                </div>
+                <div class="product-info">
+                    <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                    <p class="product-desc">${p.description || ''}</p>
+                    <div class="product-price">
+                        ${priceHtml}
+                    </div>
+                    <div class="product-actions">
+                        <button class="buy-now-btn">Mua ngay</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
+        
+        // Add "View All" card
+        html += `
+        <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href='san-pham.html'">
+            <div style="text-align: center; color: var(--color-accent); padding: 40px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right"></i></div>
+                <h3 style="font-size: 1.2rem; margin: 0;">Xem tất cả sản phẩm</h3>
+            </div>
+        </div>
+        `;
+        
+        fSlider.innerHTML = html;
+    }
+
 
     /* ==========================================================================
        3. CUSTOM SEARCH CATEGORY DROPDOWN LOGIC

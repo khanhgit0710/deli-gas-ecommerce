@@ -1478,7 +1478,11 @@
     }
 
     .featured-products-section {
-        padding: 40px 0 0px 0 !important;
+        padding: 40px 8px 0px 8px !important;
+    }
+
+    .trang-chu-featured {
+        width: calc(100% - 16px) !important;
     }
 
     .product-info h3,
@@ -1489,6 +1493,82 @@
 
     .product-price {
         margin-bottom: 5px !important;
+    }
+
+    .btn-view-all-featured {
+        font-size: 0 !important;
+    }
+    .btn-view-all-featured::before {
+        content: "Xem tất cả";
+        font-size: 14px;
+    }
+    .btn-view-all-featured i {
+        font-size: 14px;
+    }
+
+    /* Tối ưu lại bottom banner (cụm icon và nút khuyến mãi) trên mobile */
+    .featured-bottom-banner {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+        margin-top: 15px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px;
+        margin-bottom: 10px !important;
+
+    }
+
+    .trang-chu-featured .featured-slider-wrapper {
+        padding: 0;
+    }
+
+    .trust-icons-left {
+        gap: 12px 15px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        margin-top: 10px;
+    }
+
+    .trust-item {
+        font-size: 14px !important;
+        gap: 8px !important;
+    }
+
+    .trust-item span {
+        font-size: 0 !important;
+    }
+    .trust-item:nth-child(1) span::after {
+        content: "Bảo hành";
+        font-size: 14px;
+    }
+    .trust-item:nth-child(2) span::after {
+        content: "Giao hàng";
+        font-size: 14px;
+    }
+    .trust-item:nth-child(3) span::after {
+        content: "Hỗ trợ";
+        font-size: 14px;
+    }
+
+    .trust-item i {
+        font-size: 20px !important;
+        width: 24px !important; /* Đảm bảo icon thẳng hàng */
+        text-align: center;
+    }
+
+    .sale-link-right {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .sale-link-right a {
+        font-size: 14px !important;
+        justify-content: center !important;
+        padding: 0 20px !important;
+        width: auto !important;
+        height: 42px !important;
     }
 
     /* Cart Features Marquee */
@@ -1705,8 +1785,12 @@
     }
 
     .bento-nav-btn {
-        display: none !important;
+        display: flex !important;
+        width: 32px;
+        height: 32px;
     }
+    .bento-nav-left { left: 5px !important; }
+    .bento-nav-right { right: 5px !important; }
 
     .bento-spotlight {
         min-width: 0;
@@ -1737,6 +1821,7 @@
         display: flex !important;
         flex-wrap: nowrap;
         overflow-x: auto;
+        overflow-y: hidden !important;
         gap: 15px;
         padding-bottom: 10px;
         scrollbar-width: none;

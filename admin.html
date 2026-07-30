@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -58,12 +58,13 @@
                 <div class="sidebar-section-title">Quản lý</div>
                 <ul class="sidebar-menu">
                     <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Sản phẩm</a></li>
-                    <li class="has-submenu">
+                    <li>
                         <a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mục</a>
                         <ul class="sidebar-submenu" id="sidebarCategoryTree">
                             <!-- JS will inject categories here -->
                         </ul>
                     </li>
+                    <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cấu hình chung</a></li>
                 </ul>
             </nav>
 
@@ -144,6 +145,7 @@
                                     <th class="hide-mobile">Giảm giá</th>
                                     <th class="hide-mobile">Nổi bật</th>
                                     <th class="hide-mobile">Ưu đãi</th>
+                                    <th class="hide-mobile">Trạng thái</th>
                                     <th style="width:120px; white-space: nowrap;">Thao tác</th>
                                 </tr>
                             </thead>
@@ -187,13 +189,50 @@
                         </table>
                     </div>
                 </section>
+
+                <!-- ===== SETTINGS SECTION ===== -->
+                <section class="admin-section" id="section-settings">
+                    <div class="table-wrapper" style="max-width: 800px;">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Cấu hình chung</h3>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <form id="settingsForm">
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label">Hotline</label>
+                                    <input type="text" class="form-input" id="settingHotline" placeholder="Nhập số điện thoại hotline">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label">Zalo</label>
+                                    <input type="text" class="form-input" id="settingZalo" placeholder="Nhập số điện thoại Zalo">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-input" id="settingAddress" placeholder="Nhập địa chỉ cửa hàng">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <label class="form-label">Logo URL</label>
+                                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                        <input type="text" class="form-input" id="settingLogo" placeholder="Nhập URL logo">
+                                    </div>
+                                    <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;">
+                                        <div class="placeholder">Xem trước Logo</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="btnSaveSettings"><i class="fa-solid fa-save"></i> Lưu cấu hình</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
             </div>
         </main>
     </div>
 
     <!-- ===== PRODUCT MODAL ===== -->
     <div class="modal-overlay" id="productModal">
-        <div class="modal">
+        <div class="modal" style="max-width: 1200px; width: 90vw;">
             <div class="modal-header">
                 <h3 id="productModalTitle">Thêm sản phẩm</h3>
                 <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -251,6 +290,55 @@
                                     <span class="toggle-slider"></span>
                                 </label>
                                 <span class="toggle-label">Đang ưu đãi</span>
+                            </div>
+                            <div class="toggle-group" style="margin-top:10px">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="productActive" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label">Trạng thái (Hiển thị)</span>
+                            </div>
+                        </div>
+                        <div class="form-group full" style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 15px;">
+                            <label class="form-label" style="color: var(--admin-primary);"><i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Chọn sản phẩm ưu đãi</label>
+                                    <select class="form-select" id="comboProductId">
+                                        <option value="">Không có ưu đãi</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Nội dung ưu đãi</label>
+                                    <input type="text" class="form-input" id="comboDiscountText" placeholder="Nhập nội dung ưu đãi (VD: Giảm 50%...)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group full" style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border);">
+                            <label class="form-label" style="color: var(--admin-primary);"><i class="fa-solid fa-gift"></i> Sản Phẩm Mua Kèm Khuyên Dùng</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 1</label>
+                                    <select class="form-select" id="recProduct1">
+                                        <option value="">Không có</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 2</label>
+                                    <select class="form-select" id="recProduct2">
+                                        <option value="">Không có</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 3</label>
+                                    <select class="form-select" id="recProduct3">
+                                        <option value="">Không có</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label" style="font-size: 13px;">Tổng tiền Combo (VNĐ)</label>
+                                    <input type="number" class="form-input" id="comboTotalPriceInput" placeholder="VD: 620000" min="0">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group full">

@@ -2,6 +2,7 @@
    ADMIN PANEL — Gas Việt | Dark Mode Premium Design
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('./base.css');
 
 :root {
     --admin-bg: #f0f5f4;
@@ -310,6 +311,7 @@ body {
 .sidebar-footer {
     padding: 16px 20px;
     border-top: 1px solid var(--admin-border);
+    margin-top: auto;
 }
 
 .sidebar-footer a {
@@ -342,7 +344,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 16px 32px;
-    background: var(--admin-surface);
+    background: var(--color-primary);
     border-bottom: 1px solid var(--admin-border);
     position: sticky;
     top: 0;
@@ -351,8 +353,10 @@ body {
 }
 
 .topbar-left h2 {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--admin-accent);
+    margin: 0;
 }
 
 .topbar-left p {
@@ -407,7 +411,7 @@ body {
 }
 
 .stat-card:hover {
-    border-color: var(--admin-border-light);
+    border-color: var(--color-primary);
     transform: translateY(-2px);
     box-shadow: var(--admin-shadow);
 }
@@ -508,6 +512,7 @@ body {
     color: var(--admin-text-muted);
     cursor: pointer;
     transition: var(--admin-transition);
+    font-size: 14px;
 }
 
 .btn-icon:hover { border-color: var(--admin-primary); color: var(--admin-primary-light); }
@@ -543,6 +548,7 @@ body {
 .table-header-left h3 {
     font-size: 20px;
     font-weight: 700;
+    color: var(--color-primary)
 }
 
 .table-header-right {
@@ -611,7 +617,7 @@ body {
 
 .data-table th {
     text-align: left;
-    padding: 14px 30px;
+    padding: 15px 20px;
     font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
@@ -1295,6 +1301,6 @@ body {
 }
 
 #btnLogout:hover {
-    background-color: var(--admin-danger-bg);
+    background-color: #eb8d8d;
     color: #dc2626;
 }

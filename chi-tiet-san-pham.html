@@ -174,17 +174,7 @@
                     </div>
 
                     <!-- New Gift/Combo Section -->
-                    <div class="pd-gift-box">
-                        <div class="gift-header">
-                            <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
-                        </div>
-                        <div class="gift-item">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7lqaZWCIqY8oaVA1iIXwUWt1-bUJNbd2kCmcXYE9OQ&s" alt="Dây van">
-                            <div class="gift-info">
-                                <p>Giảm 50% Bộ Van Dây Ngắt Tự Động Namilux khi mua kèm</p>
-                            </div>
-                            <input type="checkbox" checked>
-                        </div>
+                    <div class="pd-gift-box" id="pdGiftBox" style="display: none;">
                     </div>
 
                     <form>
@@ -291,7 +281,10 @@
                             <div class="combo-total">620.000đ</div>
                             <div class="combo-save">(Tiết kiệm 80.000đ)</div>
                         </div>
-                        <button class="pd-btn pd-btn-primary combo-btn">Mua Cả Bộ Combo</button>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <a href="tel:1900123123" class="pd-btn pd-btn-contact" style="flex: 1;"><i class="fa-solid fa-phone-volume icon-shake"></i> Gọi ngay chúng tôi</a>
+                            <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ Combo</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -853,7 +846,7 @@
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="hotline-text">
-                            <span>Hỗ trợ tận tâm</span>
+                            <span>Liên hệ ngay</span>
                             <strong>090 123 4567</strong>
                         </div>
                     </a>
@@ -1026,26 +1019,6 @@
             }
         }
 
-        // Setup scrollspy
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.pd-tab-section');
-            const navLinks = document.querySelectorAll('.pd-tab');
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-target') === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
 
         // Lightbox Handler
         let currentLightboxIndex = 0;
@@ -1405,6 +1378,36 @@
                 // Document Title
                 document.title = `${product.name} | Gas Việt`;
                 
+                // ===== COMBO DEAL =====
+                const giftBox = document.querySelector('.pd-gift-box');
+                if (giftBox) {
+                    if (product.comboProductId) {
+                        const comboProduct = ProductDB.getById(product.comboProductId);
+                        if (comboProduct) {
+                            const comboText = product.comboDiscountText || `Tặng kèm ${comboProduct.name} hoặc giảm giá đặc biệt`;
+                            const comboPriceHtml = product.comboTotalPrice ? `<div style="font-weight: bold; color: var(--color-accent); margin-top: 5px;">Giá ưu đãi chung: ${ProductDB.formatPrice(product.comboTotalPrice)}</div>` : '';
+                            giftBox.innerHTML = `
+                                <div class="gift-header">
+                                    <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
+                                </div>
+                                <div class="gift-item">
+                                    <img src="${comboProduct.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${comboProduct.name}">
+                                    <div class="gift-info">
+                                        <p>${comboText}</p>
+                                        ${comboPriceHtml}
+                                    </div>
+                                    <input type="checkbox" checked>
+                                </div>
+                            `;
+                            giftBox.style.display = 'block';
+                        } else {
+                            giftBox.style.display = 'none';
+                        }
+                    } else {
+                        giftBox.style.display = 'none';
+                    }
+                }
+                
                 renderRelatedProducts(product.categoryId, product.id);
             }
             
@@ -1516,7 +1519,8 @@
         // === DYNAMIC PRODUCT LOADING ===
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof ProductDB === 'undefined') return;
-            ProductDB.init();
+            if (typeof ProductDB.init === 'function') ProductDB.init();
+            else if (typeof ProductDB.initAsync === 'function') ProductDB.initAsync();
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             if (!productId) return;
@@ -1587,7 +1591,33 @@
             
             const fullDesc = document.querySelector('#description .pd-tab-pane');
             if (fullDesc) fullDesc.innerHTML = '<p>' + product.description + '</p>';
-            
+            // Update Gift Box (Ưu Đãi Mua Kèm)
+            const giftBox = document.getElementById('pdGiftBox');
+            if (giftBox) {
+                if (product.comboProductId) {
+                    const comboProduct = ProductDB.getById(product.comboProductId);
+                    if (comboProduct) {
+                        giftBox.style.display = 'block';
+                        giftBox.innerHTML = `
+                            <div class="gift-header">
+                                <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
+                            </div>
+                            <div class="gift-item">
+                                <img src="${comboProduct.image}" alt="${comboProduct.name}">
+                                <div class="gift-info">
+                                    <p>${product.comboDiscountText || 'Mua kèm ' + comboProduct.name + ' với giá ưu đãi'}</p>
+                                </div>
+                                <input type="checkbox" checked>
+                            </div>
+                        `;
+                    } else {
+                        giftBox.style.display = 'none';
+                    }
+                } else {
+                    giftBox.style.display = 'none';
+                }
+            }
+
             // Update Specs
             const specsSummary = document.getElementById('pdSpecsSummary');
             if (specsSummary && product.specs) {
@@ -1595,9 +1625,9 @@
                 let html = `
                     <div class="specs-accordion-header" onclick="toggleSpecs()">
                         <h3 class="specs-heading">Thông tin chi tiết</h3>
-                        <i class="fa-solid fa-angles-right specs-toggle-icon"></i>
+                        <i class="fa-solid fa-angles-right specs-toggle-icon" style="transform: rotate(90deg);"></i>
                     </div>
-                    <div class="specs-accordion-content" id="specsContent" style="display: none;">
+                    <div class="specs-accordion-content" id="specsContent" style="display: block;">
                 `;
                 specLines.forEach(line => {
                     const parts = line.split(':');
@@ -1649,9 +1679,9 @@
 
         // Tabs functionality
         function scrollToSection(targetId) {
-            // Update active tab
+            // Force "Mô tả sản phẩm" to remain active always
             document.querySelectorAll('.pd-tab').forEach(tab => {
-                if (tab.getAttribute('data-target') === targetId) {
+                if (tab.getAttribute('data-target') === 'description') {
                     tab.classList.add('active');
                 } else {
                     tab.classList.remove('active');

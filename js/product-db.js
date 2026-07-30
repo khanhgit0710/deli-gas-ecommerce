@@ -5,7 +5,8 @@
 const ProductDB = (() => {
     const PRODUCTS_KEY = 'gasviet_products';
     const CATEGORIES_KEY = 'gasviet_categories';
-    const INIT_KEY = 'gasviet_db_initialized_v3';
+    const SETTINGS_KEY = 'gasviet_settings';
+    const INIT_KEY = 'gasviet_db_initialized_v4';
 
     // ========== SEED DATA ==========
     const seedCategories = [
@@ -33,7 +34,8 @@ const ProductDB = (() => {
             specs: 'Trọng lượng ruột: 12kg ± 100g\nLoại van: Van Ngang (POL) / Van Chụp\nThành phần: Khí LPG tinh khiết (30% Propane - 70% Butane)\nÁp suất thử vỏ: 34kg/cm²',
             featured: true,
             onSale: true,
-            createdAt: '2026-07-01T00:00:00'
+            createdAt: '2026-07-01T00:00:00',
+            recommendedProducts: [42, 45]
         },
         {
             id: 2,
@@ -767,7 +769,24 @@ const ProductDB = (() => {
         }
     ];
 
+    const defaultSettings = {
+        hotline: '1900.123.123',
+        zalo: '0901.111.222',
+        address: '123 Thủ Đức, Hồ Chí Minh',
+        logo: 'assets/logo/logo_primary_gas - Copy.png'
+    };
+
     // ========== HELPERS ==========
+    function _getSettings() {
+        try {
+            return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || defaultSettings;
+        } catch { return defaultSettings; }
+    }
+
+    function _saveSettings(settings) {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    }
+
     function _getProducts() {
         try {
             return JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || [];
@@ -835,7 +854,8 @@ const ProductDB = (() => {
                     const data = await response.json();
                     if (data && data.products) {
                         _saveProducts(data.products);
-                        _saveCategories(data.categories);
+                        _saveCategories(data.categories || []);
+                        if (data.settings) _saveSettings(data.settings);
                         console.log('[ProductDB] Loaded from API.');
                         document.dispatchEvent(new Event('ProductDBReady'));
                         return;
@@ -849,6 +869,7 @@ const ProductDB = (() => {
             if (!localStorage.getItem(INIT_KEY)) {
                 _saveCategories(seedCategories);
                 _saveProducts(seedProducts);
+                _saveSettings(defaultSettings);
                 localStorage.setItem(INIT_KEY, 'true');
                 console.log('[ProductDB] Initialized with seed data.');
                 // Push initial seed data to API so it creates the data.json
@@ -867,7 +888,8 @@ const ProductDB = (() => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         products: _getProducts(),
-                        categories: _getCategories()
+                        categories: _getCategories(),
+                        settings: _getSettings()
                     })
                 });
                 console.log('[ProductDB] Synced to API.');
@@ -883,20 +905,25 @@ const ProductDB = (() => {
             localStorage.removeItem(INIT_KEY);
             localStorage.removeItem(PRODUCTS_KEY);
             localStorage.removeItem(CATEGORIES_KEY);
+            localStorage.removeItem(SETTINGS_KEY);
             this.initAsync();
         },
 
         // ===== PRODUCT CRUD =====
-        getAll() {
-            return _getProducts();
+        getAll(isAdmin = false) {
+            const products = _getProducts();
+            if (isAdmin) return products;
+            return products.filter(p => p.active !== false);
         },
 
         getById(id) {
             return _getProducts().find(p => p.id === parseInt(id));
         },
 
-        getByCategory(categoryId) {
-            return _getProducts().filter(p => p.categoryId === parseInt(categoryId));
+        getByCategory(categoryId, isAdmin = false) {
+            const products = _getProducts().filter(p => p.categoryId === parseInt(categoryId));
+            if (isAdmin) return products;
+            return products.filter(p => p.active !== false);
         },
 
         add(product) {
@@ -909,6 +936,10 @@ const ProductDB = (() => {
                 categoryId: parseInt(product.categoryId),
                 featured: !!product.featured,
                 onSale: !!product.onSale,
+                active: product.active !== false,
+                seoTitle: product.seoTitle || '',
+                seoDesc: product.seoDesc || '',
+                slug: product.slug || '',
                 createdAt: new Date().toISOString()
             };
             products.push(newProduct);
@@ -929,7 +960,11 @@ const ProductDB = (() => {
                 discount: parseInt(data.discount) || 0,
                 categoryId: parseInt(data.categoryId) || products[index].categoryId,
                 featured: !!data.featured,
-                onSale: !!data.onSale
+                onSale: !!data.onSale,
+                active: data.active !== false,
+                seoTitle: data.seoTitle !== undefined ? data.seoTitle : (products[index].seoTitle || ''),
+                seoDesc: data.seoDesc !== undefined ? data.seoDesc : (products[index].seoDesc || ''),
+                slug: data.slug !== undefined ? data.slug : (products[index].slug || '')
             };
             _saveProducts(products);
             this.syncToApi();
@@ -999,30 +1034,30 @@ const ProductDB = (() => {
 
         // ===== QUERY HELPERS =====
         getFeatured() {
-            return _getProducts().filter(p => p.featured);
+            return _getProducts().filter(p => p.featured && p.active !== false);
         },
 
         getOnSale() {
-            return _getProducts().filter(p => p.onSale && p.discount > 0);
+            return _getProducts().filter(p => p.onSale && p.discount > 0 && p.active !== false);
         },
 
         getRelated(productId, limit = 4) {
             const product = this.getById(productId);
             if (!product) return [];
             const sameCategory = _getProducts().filter(
-                p => p.categoryId === product.categoryId && p.id !== parseInt(productId)
+                p => p.categoryId === product.categoryId && p.id !== parseInt(productId) && p.active !== false
             );
             return _shuffleArray(sameCategory).slice(0, limit);
         },
 
         getRandom(limit = 20) {
-            return _shuffleArray(_getProducts()).slice(0, limit);
+            return _shuffleArray(_getProducts().filter(p => p.active !== false)).slice(0, limit);
         },
 
-        paginate(page = 1, perPage = 20, categoryId = null) {
+        paginate(page = 1, perPage = 20, categoryId = null, isAdmin = false) {
             let products = categoryId
-                ? this.getByCategory(categoryId)
-                : _getProducts();
+                ? this.getByCategory(categoryId, isAdmin)
+                : this.getAll(isAdmin);
 
             const totalItems = products.length;
             const totalPages = Math.ceil(totalItems / perPage);
@@ -1040,9 +1075,13 @@ const ProductDB = (() => {
             };
         },
 
-        search(keyword) {
+        search(keyword, isAdmin = false) {
             const kw = keyword.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            return _getProducts().filter(p => {
+            let products = _getProducts();
+            if (!isAdmin) {
+                products = products.filter(p => p.active !== false);
+            }
+            return products.filter(p => {
                 const name = p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
                 return name.includes(kw);
             });
@@ -1071,6 +1110,17 @@ const ProductDB = (() => {
                 featuredCount: products.filter(p => p.featured).length,
                 onSaleCount: products.filter(p => p.onSale && p.discount > 0).length
             };
+        },
+
+        // ===== SETTINGS CRUD =====
+        getSettings() {
+            return _getSettings();
+        },
+
+        updateSettings(newSettings) {
+            _saveSettings(newSettings);
+            this.syncToApi();
+            return newSettings;
         }
     };
 })();
