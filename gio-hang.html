@@ -129,7 +129,7 @@
             color: #999;
             font-size: 1.2rem;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px;
         }
 
         .remove-btn:hover {
@@ -137,8 +137,8 @@
         }
 
         .cart-product-img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
             border-radius: 8px;
             border: 1px solid #eee;
@@ -440,6 +440,89 @@
                 font-size: 2rem;
             }
         }
+
+        .btn-hotline {
+            background-color: var(--color-primary, #245d56);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-hotline:hover {
+            background-color: var(--color-primary-dark, #1a433e);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(36, 93, 86, 0.4);
+            color: white;
+        }
+        .icon-phone-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-hotline:hover .fa-phone {
+            animation: phoneRing 0.1s infinite alternate;
+        }
+        .btn-hotline:hover .icon-phone-wrap::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: 0;
+            animation: phoneRipple 0.8s infinite;
+        }
+        .btn-hotline .fa-phone {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes phoneRing {
+            0% { transform: rotate(-15deg); }
+            100% { transform: rotate(15deg); }
+        }
+        @keyframes phoneRipple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .btn-zalo {
+            background-color: #0084FF;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-zalo:hover {
+            background-color: #006bce;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 132, 255, 0.4);
+            color: white;
+        }
+        .zalo-icon-img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            background: white;
+            border-radius: 50%;
+            padding: 2px;
+        }
     </style>
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
@@ -458,7 +541,6 @@
                     <span class="top-bar-divider"></span>
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
                 </div>
             </div>
         </div>
@@ -621,7 +703,14 @@
                     <span>Tổng cộng (Total)</span>
                     <span id="cart-total">1.760.000đ</span>
                 </div>
-                <button class="btn-checkout">Tiến Hành Thanh Toán</button>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                    <a href="tel:1900123123" class="btn-hotline">
+                        <span class="icon-phone-wrap"><i class="fa-solid fa-phone"></i></span> Gọi 1900.123.123
+                    </a>
+                    <a href="https://zalo.me/1900123123" class="btn-zalo">
+                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" class="zalo-icon-img" alt="zalo"> Chat Zalo
+                    </a>
+                </div>
             </div>
         </div>
 

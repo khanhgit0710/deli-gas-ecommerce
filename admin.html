@@ -55,15 +55,29 @@
                     <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> Bảng điều khiển</a></li>
                 </ul>
 
-                <div class="sidebar-section-title">Quản lý</div>
+                <div class="sidebar-section-title">Sản phẩm</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Sản phẩm</a></li>
                     <li>
-                        <a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mục</a>
-                        <ul class="sidebar-submenu" id="sidebarCategoryTree">
+                        <a href="#" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'; this.querySelector('.fa-chevron-down').style.transform = this.nextElementSibling.style.display === 'block' ? 'rotate(180deg)' : 'none'; return false;" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span><i class="fa-solid fa-folder-tree"></i> Danh mục</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 10px; transition: transform 0.3s;"></i>
+                        </a>
+                        <ul class="sidebar-submenu" id="sidebarCategoryTree" style="display: none; padding-left: 0px; list-style: none; margin-top: 5px; margin-bottom: 5px;">
+                            <li><a href="#" data-section="categories" style="color: #64748b; font-size: 14px; padding: 5px 0;"><i class="fa-solid fa-gear" style="font-size: 10px; margin-right: 5px;"></i> Quản lý danh mục</a></li>
                             <!-- JS will inject categories here -->
                         </ul>
                     </li>
+                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Danh sách sản phẩm</a></li>
+                </ul>
+
+                <div class="sidebar-section-title">Tin tức</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" data-section="news-categories"><i class="fa-solid fa-tags"></i> Danh mục tin tức</a></li>
+                    <li><a href="#" data-section="news"><i class="fa-solid fa-newspaper"></i> Bài viết</a></li>
+                </ul>
+
+                <div class="sidebar-section-title">Hệ thống</div>
+                <ul class="sidebar-menu">
                     <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cấu hình chung</a></li>
                 </ul>
             </nav>
@@ -190,6 +204,73 @@
                     </div>
                 </section>
 
+                <!-- ===== NEWS CATEGORIES SECTION ===== -->
+                <section class="admin-section" id="section-news-categories">
+                    <div class="table-wrapper" style="max-width: 800px;">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Danh mục tin tức</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <button class="btn btn-primary" id="btnAddNewsCategory">
+                                    <i class="fa-solid fa-plus"></i> Thêm danh mục
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px">ID</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Slug</th>
+                                    <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsCategoriesTableBody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ===== NEWS SECTION ===== -->
+                <section class="admin-section" id="section-news">
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Danh sách tin tức</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Tìm kiếm tin tức..." id="newsSearch">
+                                </div>
+                                <button class="btn btn-primary" id="btnAddNews">
+                                    <i class="fa-solid fa-plus"></i> Thêm mới
+                                </button>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px">ID</th>
+                                    <th>Tin tức</th>
+                                    <th class="hide-mobile">Danh mục</th>
+                                    <th class="hide-mobile">Vị trí</th>
+                                    <th class="hide-mobile">Trạng thái</th>
+                                    <th class="hide-mobile">Ngày tạo</th>
+                                    <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsTableBody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- ===== SETTINGS SECTION ===== -->
                 <section class="admin-section" id="section-settings">
                     <div class="table-wrapper" style="max-width: 800px;">
@@ -252,12 +333,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Giá (VNĐ) <span class="required">*</span></label>
-                            <input type="number" class="form-input" id="productPrice" required placeholder="0" min="0">
+                            <label class="form-label">Giá bán (VNĐ) <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="productPrice" required placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Giá sau cập nhật (VNĐ)</label>
+                            <input type="text" class="form-input" id="productFinalPrice" placeholder="0" min="0">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Giảm giá (%)</label>
-                            <input type="number" class="form-input" id="productDiscount" placeholder="0" min="0" max="100" value="0">
+                            <input type="number" class="form-input" id="productDiscount" placeholder="Tự động tính..." readonly style="background-color: #f1f3f5; cursor: not-allowed;" min="0" max="100" value="0">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Hình ảnh</label>
@@ -273,6 +358,22 @@
                                     <i class="fa-solid fa-image"></i>
                                     Xem trước hình ảnh
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ảnh đính kèm (Tối đa 6 ảnh, nhập URL hoặc tải lên)</label>
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                <input type="text" class="form-input" id="additionalImageInput" placeholder="Nhập URL ảnh đính kèm...">
+                                <!-- <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" id="btnAddAdditionalImage" title="Thêm từ URL">
+                                    <i class="fa-solid fa-plus"></i> Thêm
+                                </button> -->
+                                <input type="file" id="additionalImageUpload" accept="image/*" style="display: none;">
+                                <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" onclick="document.getElementById('additionalImageUpload').click()" title="Tải ảnh từ máy tính">
+                                    <i class="fa-solid fa-upload"></i>
+                                </button>
+                            </div>
+                            <div id="additionalImagesPreview" style="display: flex; gap: 8px; overflow-x: auto; flex-wrap: wrap; margin-top: 8px; padding: 5px; border: 1px solid var(--admin-border); border-radius: 6px; min-height: 80px;">
+                                <!-- JS renders here -->
                             </div>
                         </div>
                         <div class="form-group">
@@ -373,15 +474,123 @@
                         <label class="form-label">Tên danh mục <span class="required">*</span></label>
                         <input type="text" class="form-input" id="categoryName" required placeholder="Nhập tên danh mục...">
                     </div>
+                    <div class="form-group" style="margin-bottom:16px">
+                        <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                        <input type="text" class="form-input" id="categorySlug" readonly style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;" placeholder="Tự động tạo từ tên...">
+                    </div>
                     <div class="form-group">
-                        <label class="form-label">Slug (tự tạo)</label>
-                        <input type="text" class="form-input" id="categorySlug" placeholder="Tự động tạo từ tên...">
+                        <label class="form-label">Mô tả danh mục</label>
+                        <textarea class="form-textarea" id="categorySeoDesc" rows="3" placeholder="Nhập mô tả danh mục..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-outline" onclick="closeCategoryModal()">Hủy</button>
                 <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> Lưu danh mục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NEWS CATEGORY MODAL ===== -->
+    <div class="modal-overlay" id="newsCategoryModal">
+        <div class="modal" style="max-width:480px">
+            <div class="modal-header">
+                <h3 id="newsCategoryModalTitle">Thêm danh mục tin tức</h3>
+                <button class="modal-close" onclick="closeNewsCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="newsCategoryForm">
+                    <input type="hidden" id="newsCategoryId">
+                    <div class="form-group" style="margin-bottom:16px">
+                        <label class="form-label">Tên danh mục <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="newsCategoryName" required placeholder="Nhập tên danh mục...">
+                    </div>
+                    <div class="form-group" style="margin-bottom:16px">
+                        <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                        <input type="text" class="form-input" id="newsCategorySlug" readonly style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;" placeholder="Tự động tạo từ tên...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeNewsCategoryModal()">Hủy</button>
+                <button class="btn btn-primary" id="btnSaveNewsCategory"><i class="fa-solid fa-check"></i> Lưu danh mục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NEWS MODAL ===== -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal" style="max-width: 800px; width: 90vw;">
+            <div class="modal-header">
+                <h3 id="newsModalTitle">Thêm tin tức</h3>
+                <button class="modal-close" onclick="closeNewsModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="newsForm">
+                    <input type="hidden" id="newsId">
+                    <div class="form-grid">
+                        <div class="form-group full">
+                            <label class="form-label">Tiêu đề tin tức <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="newsTitle" required placeholder="Nhập tiêu đề tin tức...">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                            <input type="text" class="form-input" id="newsSlug" readonly style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;" placeholder="Tự động tạo từ tiêu đề...">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Hình ảnh đại diện</label>
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                <input type="text" class="form-input" id="newsImage" placeholder="Nhập URL hoặc tải ảnh lên...">
+                                <input type="file" id="newsImageUpload" accept="image/*" style="display: none;">
+                                <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" onclick="document.getElementById('newsImageUpload').click()" title="Tải ảnh từ máy tính">
+                                    <i class="fa-solid fa-upload"></i>
+                                </button>
+                            </div>
+                            <div class="image-preview-box" id="newsImagePreview">
+                                <div class="placeholder">
+                                    <i class="fa-solid fa-image"></i>
+                                    Xem trước hình ảnh
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Nội dung chi tiết</label>
+                            <div id="newsContentEditor" style="height: 350px; background: #fff; font-family: inherit; font-size: 15px;"></div>
+                            <input type="hidden" id="newsContent">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Danh mục <span class="required">*</span></label>
+                            <select class="form-input" id="newsCategorySelect" required>
+                                <!-- Rendered by JS -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Vị trí hiển thị (Bố cục)</label>
+                            <select class="form-input" id="newsPosition">
+                                <option value="default">Mặc định (Tin tức cập nhật - Nhỏ)</option>
+                                <option value="hero_main">Hero Banner - Bài chính (To nhất)</option>
+                                <option value="hero_sub">Hero Banner - Bài phụ (3 ảnh nhỏ)</option>
+                                <option value="trending_main">Tin Cập Nhật - Bài to bên trái</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Tùy chọn</label>
+                            <div style="display: flex; gap: 20px;">
+                                <div class="toggle-group">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="newsActive" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Hiển thị</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeNewsModal()">Hủy</button>
+                <button class="btn btn-primary" id="btnSaveNews"><i class="fa-solid fa-check"></i> Lưu tin tức</button>
             </div>
         </div>
     </div>
@@ -401,6 +610,10 @@
 
     <!-- TOAST CONTAINER -->
     <div class="toast-container" id="toastContainer"></div>
+
+    <!-- QuillJS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <script src="js/product-db.js"></script>
     <script src="js/admin.js"></script>

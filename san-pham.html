@@ -45,7 +45,6 @@
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
                         1900.123.123</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
                 </div>
             </div>
         </div>
@@ -261,11 +260,30 @@
     <script src="js/main.js?v=3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const ITEMS_PER_PAGE = 20;
+            const ITEMS_PER_PAGE = 12;
             let currentPage = 1;
             let currentSearch = '';
-            let currentCategory = '';
+            
+            // Lấy ID danh mục từ URL nếu có
+            const urlParams = new URLSearchParams(window.location.search);
+            let currentCategory = urlParams.get('category') ? parseInt(urlParams.get('category')) : '';
+            
             let currentSort = 'newest';
+
+            function updateSEO(category) {
+                let metaDesc = document.querySelector('meta[name="description"]');
+                if (category) {
+                    if (metaDesc && category.seoDesc) {
+                        metaDesc.setAttribute('content', category.seoDesc);
+                    }
+                    document.title = category.name + " | Gas Việt";
+                } else {
+                    if (metaDesc) {
+                        metaDesc.setAttribute('content', "Danh mục sản phẩm Gas Việt - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.");
+                    }
+                    document.title = "Tất cả sản phẩm | Gas Việt";
+                }
+            }
 
             // 1. Render Sidebar Categories
             function renderSidebar() {
@@ -276,8 +294,9 @@
                 
                 list.innerHTML = categories.map(cat => {
                     const count = ProductDB.getProductCountByCategory(cat.id);
+                    const isActive = currentCategory === cat.id ? 'class="active"' : '';
                     return `
-                        <li><a href="#" data-cat-id="${cat.id}">
+                        <li><a href="/danh-muc/${cat.slug}" data-cat-id="${cat.id}" ${isActive}>
                             ${cat.name} 
                             <span class="sidebar-count">${count}</span>
                             <i class="fa-solid fa-chevron-right"></i>
@@ -287,14 +306,14 @@
                 
                 // Add "All Products" option at top
                 list.insertAdjacentHTML('afterbegin', `
-                    <li><a href="#" data-cat-id="all" class="active">
+                    <li><a href="/san-pham.html" data-cat-id="all" ${currentCategory === '' ? 'class="active"' : ''}>
                         Tất cả sản phẩm
                         <span class="sidebar-count">${ProductDB.getAll().length}</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a></li>
                 `);
 
-                // Add click events
+                // Add click events for SPA feel
                 list.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -304,6 +323,17 @@
                         const catId = link.getAttribute('data-cat-id');
                         currentCategory = catId === 'all' ? '' : parseInt(catId);
                         currentPage = 1; // Reset to page 1
+                        
+                        // Update URL without reload
+                        history.pushState(null, '', link.getAttribute('href'));
+                        
+                        if (currentCategory !== '') {
+                            const catObj = ProductDB.getCategoryById(currentCategory);
+                            updateSEO(catObj);
+                        } else {
+                            updateSEO(null);
+                        }
+
                         renderProducts();
 
                         // Close mobile sidebar if open
@@ -385,16 +415,16 @@
                                     <div class="product-card">
                                         ${hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : ''))}
                                         <div class="product-img">
-                                            <a href="chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                            <a href="/chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
                                         </div>
                                         <div class="product-info">
-                                            <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                            <h3><a href="/chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                                             <div class="product-price">
                                                 <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
                                                 ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
                                             </div>
                                             <div class="product-actions">
-                                                <button class="buy-now-btn" onclick="window.location.href='chi-tiet-san-pham.html?id=${p.id}'">Mua ngay</button>
+                                                <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham.html?id=${p.id}'">Mua ngay</button>
                                                 <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
                                             </div>
                                         </div>
@@ -501,6 +531,20 @@
             }
 
             // Init
+            // Parse initial URL for category
+            const pathSegments = window.location.pathname.split('/').filter(Boolean);
+            if (pathSegments.length >= 2 && pathSegments[0] === 'danh-muc') {
+                const slug = pathSegments[1].replace('.html', '');
+                const cat = ProductDB.getCategoryBySlug(slug);
+                if (cat) {
+                    currentCategory = cat.id;
+                    updateSEO(cat);
+                } else {
+                    updateSEO(null);
+                }
+            } else {
+                updateSEO(null);
+            }
             renderSidebar();
             renderProducts();
         });

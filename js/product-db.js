@@ -6,19 +6,189 @@ const ProductDB = (() => {
     const PRODUCTS_KEY = 'gasviet_products';
     const CATEGORIES_KEY = 'gasviet_categories';
     const SETTINGS_KEY = 'gasviet_settings';
-    const INIT_KEY = 'gasviet_db_initialized_v4';
+    const NEWS_KEY = 'gasviet_news';
+    const NEWS_CATEGORIES_KEY = 'gasviet_news_categories';
+    const INIT_KEY = 'gasviet_db_initialized_v9';
 
     // ========== SEED DATA ==========
     const seedCategories = [
-        { id: 1, name: 'Gas Saigon Petro', slug: 'cat-saigon-petro' },
-        { id: 2, name: 'Gas Petrolimex', slug: 'cat-petrolimex' },
-        { id: 3, name: 'Gas Gia Đình', slug: 'cat-gia-dinh' },
-        { id: 4, name: 'Gas Thủ Đức', slug: 'cat-thu-duc' },
-        { id: 5, name: 'Gas Elf', slug: 'cat-elf' },
-        { id: 6, name: 'Bếp Hồng Ngoại', slug: 'cat-bep-hong-ngoai' },
-        { id: 7, name: 'Bếp Gas Âm', slug: 'cat-bep-am' },
-        { id: 8, name: 'Phụ Kiện (Van, Dây)', slug: 'cat-phu-kien' },
-        { id: 9, name: 'Combo Khuyến Mãi', slug: 'cat-combo' }
+        { id: 1, name: 'Gas Saigon Petro', slug: 'gas-saigon-petro', seoDesc: 'Đại lý phân phối Gas Saigon Petro chính hãng. Các loại bình gas xám, đỏ, xanh 12kg an toàn, chất lượng cao, giá tốt nhất thị trường.' },
+        { id: 2, name: 'Gas Petrolimex', slug: 'gas-petrolimex', seoDesc: 'Đổi bình Gas Petrolimex chính hãng 12kg, 48kg, van chụp, van ngang an toàn tuyệt đối. Giá gas Petrolimex cập nhật mới nhất.' },
+        { id: 3, name: 'Gas Gia Đình', slug: 'gas-gia-dinh', seoDesc: 'Phân phối Gas Gia Đình chính hãng, ngọn lửa xanh mượt tiết kiệm gas. Giao gas nhanh chóng, an toàn, có bảo hiểm cháy nổ.' },
+        { id: 4, name: 'Gas Thủ Đức', slug: 'gas-thu-duc', seoDesc: 'Cung cấp bình Gas Thủ Đức 12kg, 45kg chính hãng, van an toàn. Dịch vụ đổi gas Thủ Đức tận nhà nhanh chóng, uy tín.' },
+        { id: 5, name: 'Gas Elf', slug: 'gas-elf', seoDesc: 'Bình Gas Elf Pháp đỏ 12kg, 6kg, 45kg an toàn, chất lượng Châu Âu. Giao gas Elf chính hãng tận nhà với nhiều ưu đãi.' },
+        { id: 6, name: 'Bếp Hồng Ngoại', slug: 'bep-hong-ngoai', seoDesc: 'Mua bếp điện hồng ngoại đơn, đôi chính hãng Sunhouse, Kangaroo, Bosch. Bếp hồng ngoại cao cấp, đun nấu nhanh, không kén nồi.' },
+        { id: 7, name: 'Bếp Gas Âm', slug: 'bep-gas-am', seoDesc: 'Các dòng bếp gas âm cao cấp Rinnai, Paloma, Electrolux, Sunhouse. Thiết kế sang trọng, tiết kiệm gas, an toàn tuyệt đối.' },
+        { id: 8, name: 'Phụ Kiện (Van, Dây)', slug: 'phu-kien-van-day', seoDesc: 'Phụ kiện gas chính hãng: van ngắt gas tự động, dây dẫn gas bọc inox chống chuột, van Namilux, Katsura cao cấp.' },
+        { id: 9, name: 'Combo Khuyến Mãi', slug: 'combo-khuyen-mai', seoDesc: 'Tổng hợp các bộ combo bình gas, bếp gas, van dây giá siêu tiết kiệm. Mua trọn bộ để nhận ưu đãi lớn và quà tặng hấp dẫn.' }
+    ];
+
+    const seedNewsCategories = [
+        { id: 1, name: 'An toàn Gas', slug: 'an-toan-gas' },
+        { id: 2, name: 'Mẹo vặt nhà bếp', slug: 'meo-vat-nha-bep' },
+        { id: 3, name: 'Khuyến mãi', slug: 'khuyen-mai' },
+        { id: 4, name: 'Sản phẩm mới', slug: 'san-pham-moi' },
+        { id: 5, name: 'Ẩm thực', slug: 'am-thuc' },
+        { id: 6, name: 'Kỹ thuật', slug: 'ky-thuat' }
+    ];
+
+    const seedNews = [
+        {
+            id: 1,
+            title: 'Cẩm Nang Toàn Tập Về Ngành Gas (LPG) & Hướng Dẫn Sử Dụng Bếp Gas An Toàn',
+            slug: 'cam-nang-toan-tap-ve-nganh-gas-lpg',
+            image: 'https://i.pinimg.com/control1/1200x/36/db/be/36dbbe7534d0fb076fa0e8e9f425340b.jpg',
+            content: '<h2>Tổng quan về ngành công nghiệp Gas (LPG) tại Việt Nam</h2><p>Ngành công nghiệp khí hóa lỏng (LPG - Liquefied Petroleum Gas) đóng vai trò sống còn trong sự phát triển kinh tế và đời sống sinh hoạt của hàng triệu gia đình Việt Nam. Từ những năm đầu phát triển cho đến nay, LPG đã trở thành nguồn nhiên liệu không thể thiếu.</p><h3>Khí Gas (LPG) thực chất là gì?</h3><p>Khí LPG là hỗn hợp hydrocarbon nhẹ, chủ yếu bao gồm <strong>Propane (C3H8)</strong> và <strong>Butane (C4H10)</strong>. Trong điều kiện nhiệt độ và áp suất bình thường, LPG tồn tại ở thể khí. Tuy nhiên, để thuận tiện cho việc lưu trữ và vận chuyển, chúng được nén dưới áp suất cao để chuyển sang thể lỏng.</p><h4>Đặc điểm vật lý và hóa học của LPG</h4><ul><li><strong>Không màu, không mùi:</strong> Nguyên bản LPG không có mùi. Mùi đặc trưng mà chúng ta thường ngửi thấy (mùi bắp cải thối) là do nhà sản xuất pha thêm chất tạo mùi Mercaptan (Ethyl Mercaptan) để dễ dàng phát hiện rò rỉ.</li><li><strong>Nặng hơn không khí:</strong> Khi bị rò rỉ, khí gas sẽ chìm xuống sát mặt đất và tích tụ ở những vùng trũng, tạo nên nguy cơ cháy nổ tiềm ẩn nếu có tia lửa điện.</li><li><strong>Nhiệt năng cực cao:</strong> Khi cháy, LPG tỏa ra nhiệt lượng rất lớn (ngọn lửa có thể đạt tới 1900°C), giúp nấu chín thức ăn nhanh chóng.</li></ul><h2>Các tiêu chuẩn an toàn trong thiết kế Bếp Gas hiện đại</h2><p>Bếp gas ngày nay được trang bị rất nhiều công nghệ tối tân để đảm bảo an toàn tuyệt đối cho người sử dụng.</p><h3>Mâm chia lửa và hệ thống cảm biến tự ngắt</h3><p>Mâm chia lửa (Burner) là bộ phận quan trọng nhất quyết định đến hiệu suất đốt cháy và độ bền của bếp. Các loại mâm chia lửa bằng đồng thau nguyên khối (Brass) hoặc hợp kim Sabaf (Ý) luôn được đánh giá cao nhờ khả năng chịu nhiệt tốt và không cong vênh.</p><h4>Công nghệ ngắt gas tự động (Thermocouple)</h4><p>Đây là tính năng an toàn cao cấp nhất trên các bếp gas hiện đại. Cảm biến Thermocouple được đặt ngay cạnh mâm chia lửa. Khi ngọn lửa đột ngột tắt do gió thổi hoặc nước trào, cảm biến sẽ nguội đi và ngay lập tức kích hoạt hệ thống van từ (Solenoid Valve) đóng luồng gas lại, ngăn chặn tuyệt đối tình trạng rò rỉ khí gas ra ngoài môi trường.</p><h2>Hướng dẫn chi tiết sử dụng Bếp Gas an toàn tại gia đình</h2><h3>Quy tắc "Vàng" khi lắp đặt bình gas</h3><p>Vị trí đặt bình gas phải thông thoáng, cách xa nguồn nhiệt và các thiết bị phát sinh tia lửa điện (ổ cắm, công tắc) ít nhất 1.5 mét. Tuyệt đối không đặt bình gas trong tủ bếp kín mít không có lỗ thông hơi.</p><h3>Cách xử lý khẩn cấp khi ngửi thấy mùi gas rò rỉ</h3><p>Nếu bạn bước vào bếp và ngửi thấy mùi gas nồng nặc, hãy giữ bình tĩnh và thực hiện ngay các bước sau:</p><h4>1. Tuyệt đối không phát sinh tia lửa điện</h4><p>Không bật/tắt công tắc điện, không dùng điện thoại di động, không bật quạt máy, không dùng bật lửa. Bất kỳ tia lửa nhỏ nào cũng có thể kích nổ khối khí gas đang tích tụ.</p><h4>2. Khóa van bình gas ngay lập tức</h4><p>Tiến đến bình gas và vặn núm van theo chiều kim đồng hồ (chiều đóng) để cắt đứt nguồn cung cấp gas.</p><h4>3. Mở toang mọi cửa sổ và cửa ra vào</h4><p>Việc này giúp không khí lưu thông, pha loãng nồng độ khí gas trong phòng. Lưu ý dùng bìa carton hoặc quạt nan để quạt đuổi khí gas ra ngoài (chìm sát mặt đất).</p><h2>Kết luận</h2><p>Hiểu rõ về đặc tính của LPG và tuân thủ nghiêm ngặt các quy tắc sử dụng bếp gas an toàn là cách tốt nhất để bảo vệ tổ ấm của bạn. Hãy luôn lựa chọn những đại lý gas uy tín, cung cấp hàng chính hãng, có tem niêm phong và bảo hiểm cháy nổ rõ ràng như <strong>Gas Việt</strong>.</p>',
+            seoTitle: 'Cẩm Nang Ngành Gas (LPG) & Hướng Dẫn Dùng Bếp Gas Chuẩn H1, H2, H3 | Gas Việt',
+            seoDesc: 'Tìm hiểu sâu về LPG (Propane, Butane). Hướng dẫn cấu tạo mâm chia lửa, công nghệ tự ngắt Thermocouple, và quy trình chuẩn xử lý rò rỉ gas an toàn.',
+            categoryId: 1,
+            position: 'hero_main',
+            active: true,
+            createdAt: '2026-07-20T10:00:00'
+        },
+        {
+            id: 2,
+            title: 'Nấu ăn với bếp gas mang lại hương vị tuyệt vời',
+            slug: 'nau-an-voi-bep-gas',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcCEN_u0qNOSj1q24gJ3k76Afm3QJfGNW78nzrKPNPA&s=10',
+            content: '<h2>Lợi ích khi dùng bếp gas</h2><p>Lửa từ bếp gas cung cấp nhiệt lượng tức thì và dễ dàng điều chỉnh. Điều này giúp các món chiên, xào đạt được độ chín hoàn hảo và hương vị đặc trưng, còn gọi là "hương vị của lửa".</p><ul><li>Nhiệt độ ổn định</li><li>Dễ dàng tùy chỉnh mức lửa</li><li>Thích hợp với mọi loại nồi chảo</li></ul>',
+            seoTitle: 'Nấu ăn với bếp gas mang lại hương vị tuyệt vời - Ẩm thực',
+            seoDesc: 'Bếp gas là lựa chọn hoàn hảo để chế biến món ăn ngon. Khám phá cách ngọn lửa gas tạo nên "hương vị của lửa" cho các món chiên xào.',
+            categoryId: 5,
+            position: 'hero_sub',
+            active: true,
+            createdAt: '2026-07-19T10:00:00'
+        },
+        {
+            id: 3,
+            title: 'Làm thế nào để chọn bình gas an toàn',
+            slug: 'binh-gas-an-toan',
+            image: 'https://kenh14cdn.com/zoom/700_438/203336854389633024/2024/8/20/anh-cat-dan-nghe-thuat-lich-ghi-nho-hinh-nen-may-tinh-22543283-1724149878897-17241498802971855222386-0-46-405-694-crop-1724149982222287470039.png',
+            content: '<h2>Các tiêu chí chọn bình gas</h2><p>Bình gas an toàn phải có nguồn gốc xuất xứ rõ ràng, vỏ bình không bị móp méo hay rỉ sét nhiều. Đặc biệt, tem chống hàng giả và niêm phong màng co phải còn nguyên vẹn.</p><p>Luôn ưu tiên đổi gas tại các đại lý chính hãng, uy tín như Gas Việt để đảm bảo chất lượng.</p>',
+            seoTitle: 'Làm thế nào để chọn bình gas an toàn cho gia đình bạn',
+            seoDesc: 'Bí quyết chọn bình gas chính hãng, chất lượng. Tránh xa các loại gas giả, kém chất lượng để bảo vệ an toàn cháy nổ cho ngôi nhà bạn.',
+            categoryId: 1,
+            position: 'hero_sub',
+            active: true,
+            createdAt: '2026-07-18T10:00:00'
+        },
+        {
+            id: 4,
+            title: 'Bình Gas Composite chống cháy nổ',
+            slug: 'binh-gas-composite-chong-chay-no',
+            image: 'https://vangas.com.vn/assets/binh-gas-composite-chong-chay-no-2-Sao.jpg',
+            content: '<h2>Đột phá công nghệ an toàn</h2><p>Bình gas composite được làm từ sợi thủy tinh siêu bền, chịu áp lực cao và hoàn toàn không bị ăn mòn. Đặc biệt, chất liệu này không sinh ra tia lửa điện khi va đập, giúp loại bỏ nguy cơ cháy nổ.</p><img src="https://vangas.com.vn/assets/binh-gas-composite-chong-chay-no-2-Sao.jpg"><p>Sản phẩm này nhẹ hơn bình thép thông thường đến 50%, giúp việc vận chuyển dễ dàng hơn.</p>',
+            seoTitle: 'Bình Gas Composite chống cháy nổ thế hệ mới',
+            seoDesc: 'Tìm hiểu về bình gas composite bọc sợi thủy tinh siêu nhẹ, không rỉ sét, an toàn tuyệt đối chống cháy nổ cho gia đình.',
+            categoryId: 1,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-17T10:00:00'
+        },
+        {
+            id: 5,
+            title: 'Mẹo vệ sinh bếp gas sạch bong như mới',
+            slug: 'meo-ve-sinh-bep-gas-sach-bong',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREDfbpJN9BQsZcMUaDaz3hl4DxMfYHjrLkFJ10o4ugcCRPcoF6BtM-ZDA&s=10',
+            content: '<h2>Các bước vệ sinh bếp gas</h2><p>Dầu mỡ bám lâu ngày không chỉ làm mất thẩm mỹ mà còn gây tắc nghẽn khe thoát lửa. Bạn có thể sử dụng hỗn hợp baking soda và giấm để đánh bay vết bẩn.</p><ul><li>Ngâm kiềng bếp trong nước nóng hòa baking soda.</li><li>Dùng khăn ẩm lau bề mặt kính.</li><li>Dùng bàn chải nhỏ làm sạch mâm chia lửa.</li></ul>',
+            seoTitle: 'Mẹo vệ sinh bếp gas sạch bong như mới trong 5 phút',
+            seoDesc: 'Hướng dẫn cách làm sạch bếp gas bị bám dầu mỡ bằng nguyên liệu tự nhiên như giấm, baking soda siêu nhanh, siêu tiết kiệm.',
+            categoryId: 2,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-16T10:00:00'
+        },
+        {
+            id: 6,
+            title: 'Nấu ăn ngon với ngọn lửa xanh',
+            slug: 'nau-an-ngon-voi-lua-xanh',
+            image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop',
+            content: '<h2>Ngọn lửa xanh - Dấu hiệu của bếp gas tốt</h2><p>Lửa xanh cho thấy khí gas được đốt cháy hoàn toàn, sinh ra nhiệt lượng tối đa và không tạo muội đen dưới đáy nồi. Nếu bếp nhà bạn xuất hiện ngọn lửa đỏ, đó có thể là dấu hiệu cần vệ sinh mâm chia lửa hoặc điều chỉnh lại hệ thống gió.</p>',
+            seoTitle: 'Nấu ăn ngon với ngọn lửa xanh | Bí quyết nhà bếp',
+            seoDesc: 'Tại sao bếp gas nên có ngọn lửa xanh? Cách khắc phục tình trạng bếp gas bị lửa đỏ làm đen đáy nồi dễ dàng nhất.',
+            categoryId: 5,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-15T10:00:00'
+        },
+        {
+            id: 7,
+            title: 'Quy trình lắp đặt gas an toàn tại nhà',
+            slug: 'lap-dat-gas-an-toan-tai-nha',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdCLr1Drw3Zmm8R1xEIAdpHoAQb7b_9AZ0kbFWNdKrrg&s=10',
+            content: '<h2>Đảm bảo an toàn từ khâu lắp đặt</h2><p>Quá trình lắp bình gas cần sự cẩn trọng tuyệt đối. Phải đảm bảo van gas được vặn chặt, không có tiếng xì và không có mùi lạ. Tốt nhất, hãy để các kỹ thuật viên được đào tạo bài bản thực hiện việc này.</p><p>Gas Việt cam kết kiểm tra an toàn 100% bằng bọt xà phòng mỗi khi giao gas.</p>',
+            seoTitle: 'Quy trình lắp đặt gas an toàn tại nhà đúng chuẩn',
+            seoDesc: 'Cách kỹ thuật viên chuyên nghiệp lắp đặt và kiểm tra rò rỉ bình gas tại nhà. Những lưu ý bạn cần quan tâm khi đổi gas.',
+            categoryId: 6,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-14T10:00:00'
+        },
+        {
+            id: 8,
+            title: 'Giá gas tháng 8 dự kiến giảm nhẹ, người tiêu dùng hưởng lợi',
+            slug: 'gia-gas-thang-8-du-kien-giam-nhe',
+            image: 'https://media-cdn-v2.laodong.vn/storage/newsportal/2026/7/16/1736102/Cover-Gia-Gas-2.jpg',
+            content: '<h2>Tin tức thị trường gas mới nhất</h2><p>Theo báo cáo từ các hiệp hội năng lượng, xu hướng giá dầu thô trên thế giới đang hạ nhiệt kéo theo sự bình ổn của giá gas LPG. Dự kiến trong kỳ điều chỉnh ngày 1 tháng 8, giá gas sẽ giảm từ 5.000 đến 10.000 VNĐ cho bình 12kg.</p><p>Đây là một tin vui đối với các hộ gia đình và nhà hàng, giúp giảm thiểu đáng kể chi phí nhiên liệu hàng tháng.</p>',
+            seoTitle: 'Giá gas tháng 8/2026 dự kiến giảm nhẹ | Tin thị trường',
+            seoDesc: 'Cập nhật diễn biến giá gas tháng 8 mới nhất. Giá gas LPG dự kiến giảm, giúp người tiêu dùng tiết kiệm chi phí sinh hoạt.',
+            categoryId: 3,
+            position: 'trending_main',
+            active: true,
+            createdAt: '2026-07-14T10:00:00'
+        },
+        {
+            id: 9,
+            title: 'Cảnh giác với các chiêu trò lừa đảo đổi gas giả mạo',
+            slug: 'canh-giac-voi-cac-chieu-tro-lua-dao',
+            image: 'https://motthegioi.vn/wp-content/uploads/2026/04/bep-gas-chay-bang-nuoc.jpg.webp',
+            content: '<h2>Nhận diện kẻ gian giả danh nhân viên gas</h2><p>Thời gian gần đây, xuất hiện nhiều đối tượng tự xưng là nhân viên công ty gas tới nhà kiểm tra bếp miễn phí. Thực chất, chúng lợi dụng sơ hở để phá hỏng linh kiện hoặc bán van, dây với giá "cắt cổ".</p><p>Hãy cảnh giác và từ chối các dịch vụ "từ trên trời rơi xuống". Chỉ gọi gas tại đại lý uy tín có thông tin rõ ràng.</p>',
+            seoTitle: 'Cảnh giác chiêu trò lừa đảo đổi gas, bảo dưỡng bếp gas mạo danh',
+            seoDesc: 'Cảnh báo thủ đoạn lừa đảo giả danh nhân viên kiểm tra gas để trục lợi. Hướng dẫn cách phòng tránh và chọn đại lý gas uy tín.',
+            categoryId: 1,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-12T10:00:00'
+        },
+        {
+            id: 10,
+            title: 'Cách nhận biết van gas tự ngắt chính hãng',
+            slug: 'cach-nhan-biet-van-gas-tu-ngat',
+            image: 'https://kingshop.vn/data/images/Van-gas-cao-ap-tu-ngat-an-toan-Namilux-NA-538SH-1.jpg',
+            content: '<h2>Phân biệt van chính hãng và hàng nhái</h2><p>Van gas tự ngắt đóng vai trò như một vệ sĩ, tự động khóa gas khi có sự cố đứt dây hay rò rỉ lớn. Tuy nhiên, hàng nhái tràn lan trên thị trường không có chức năng này.</p><ul><li>Logo được dập nổi sắc nét.</li><li>Có tem chống giả của nhà sản xuất (như Namilux, Katsura).</li><li>Cầm nặng tay và gia công tỉ mỉ.</li></ul>',
+            seoTitle: 'Cách nhận biết van gas tự ngắt chính hãng và hàng giả',
+            seoDesc: 'Van gas tự ngắt bảo vệ gia đình bạn khỏi rủi ro cháy nổ. Học cách phân biệt van gas chính hãng Namilux, Katsura với hàng nhái.',
+            categoryId: 6,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-10T10:00:00'
+        },
+        {
+            id: 11,
+            title: 'Khi nào cần thay dây dẫn gas? Dấu hiệu cần biết ngay',
+            slug: 'khi-nao-can-thay-day-dan-gas',
+            image: 'https://cdn.tgdd.vn//News/542986//nhan-biet-may-dieu-hoa-thieu-gas-het-gas-2-730x487.jpg',
+            content: '<h2>Bảo vệ an toàn đường ống dẫn gas</h2><p>Dây dẫn gas được làm bằng cao su, có tuổi thọ khoảng 2-3 năm. Tuy nhiên, nếu bạn phát hiện dây có dấu hiệu chai cứng, nứt nẻ hoặc bị chuột cắn, cần thay ngay lập tức.</p><p>Nên sử dụng loại dây có bọc kẽm chống chuột để tăng cường độ bền và an toàn.</p>',
+            seoTitle: 'Khi nào cần thay dây dẫn gas? Dấu hiệu cần thay mới',
+            seoDesc: 'Dây dẫn gas cũ, rạn nứt là nguyên nhân số 1 gây rò rỉ gas. Dấu hiệu nhận biết và thời gian thay thế dây dẫn gas an toàn bạn cần biết.',
+            categoryId: 6,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-08T10:00:00'
+        },
+        {
+            id: 12,
+            title: 'Sự thật về bình gas vỏ nhựa',
+            slug: 'su-that-ve-binh-gas-vo-nhua',
+            image: 'https://gassaigonvina.com/upload/product/7-8062.png',
+            content: '<h2>Ưu điểm của bình gas bọc nhựa</h2><p>Nhiều người e ngại "vỏ nhựa" dễ cháy, nhưng thực chất đây là lớp nhựa cao cấp bọc ngoài lớp sợi thủy tinh siêu bền. Thiết kế này giúp bình không bị ăn mòn trong môi trường ẩm ướt và dễ dàng quan sát lượng gas còn lại bên trong nhờ lớp nhựa bán trong suốt.</p>',
+            seoTitle: 'Sự thật về bình gas vỏ nhựa (Composite) bạn chưa biết',
+            seoDesc: 'Giải đáp thắc mắc về độ an toàn của bình gas vỏ nhựa composite. Ưu nhược điểm so với bình gas thép truyền thống.',
+            categoryId: 4,
+            position: 'default',
+            active: true,
+            createdAt: '2026-07-05T10:00:00'
+        }
     ];
 
     const seedProducts = [
@@ -807,6 +977,32 @@ const ProductDB = (() => {
         localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
     }
 
+    function _getNewsCategories() {
+        try {
+            return JSON.parse(localStorage.getItem(NEWS_CATEGORIES_KEY)) || [];
+        } catch { return []; }
+    }
+
+    function _saveNewsCategories(categories) {
+        localStorage.setItem(NEWS_CATEGORIES_KEY, JSON.stringify(categories));
+    }
+
+    function _getNews() {
+        try {
+            return JSON.parse(localStorage.getItem(NEWS_KEY)) || [];
+        } catch { return []; }
+    }
+
+    function _saveNews(newsList) {
+        localStorage.setItem(NEWS_KEY, JSON.stringify(newsList));
+    }
+
+    function _nextNewsId() {
+        const news = _getNews();
+        if (news.length === 0) return 1;
+        return Math.max(...news.map(n => n.id)) + 1;
+    }
+
     function _generateSlug(name) {
         return 'cat-' + name
             .toLowerCase()
@@ -824,6 +1020,12 @@ const ProductDB = (() => {
 
     function _nextCategoryId() {
         const cats = _getCategories();
+        if (cats.length === 0) return 1;
+        return Math.max(...cats.map(c => c.id)) + 1;
+    }
+
+    function _nextNewsCategoryId() {
+        const cats = _getNewsCategories();
         if (cats.length === 0) return 1;
         return Math.max(...cats.map(c => c.id)) + 1;
     }
@@ -870,10 +1072,19 @@ const ProductDB = (() => {
                 _saveCategories(seedCategories);
                 _saveProducts(seedProducts);
                 _saveSettings(defaultSettings);
+                _saveNews(seedNews);
+                _saveNewsCategories(seedNewsCategories);
                 localStorage.setItem(INIT_KEY, 'true');
                 console.log('[ProductDB] Initialized with seed data.');
                 // Push initial seed data to API so it creates the data.json
                 this.syncToApi(); 
+            } else {
+                if (_getNewsCategories().length === 0) {
+                    _saveNewsCategories(seedNewsCategories);
+                }
+                if (_getNews().length === 0) {
+                    _saveNews(seedNews);
+                }
             }
             document.dispatchEvent(new Event('ProductDBReady'));
         },
@@ -889,7 +1100,9 @@ const ProductDB = (() => {
                     body: JSON.stringify({
                         products: _getProducts(),
                         categories: _getCategories(),
-                        settings: _getSettings()
+                        settings: _getSettings(),
+                        news: _getNews(),
+                        newsCategories: _getNewsCategories()
                     })
                 });
                 console.log('[ProductDB] Synced to API.');
@@ -906,6 +1119,8 @@ const ProductDB = (() => {
             localStorage.removeItem(PRODUCTS_KEY);
             localStorage.removeItem(CATEGORIES_KEY);
             localStorage.removeItem(SETTINGS_KEY);
+            localStorage.removeItem(NEWS_KEY);
+            localStorage.removeItem(NEWS_CATEGORIES_KEY);
             this.initAsync();
         },
 
@@ -1121,6 +1336,108 @@ const ProductDB = (() => {
             _saveSettings(newSettings);
             this.syncToApi();
             return newSettings;
+        },
+
+        // ===== NEWS CRUD =====
+        getNews(isAdmin = false) {
+            const news = _getNews();
+            if (isAdmin) return news;
+            return news.filter(n => n.active !== false);
+        },
+
+        getNewsById(id) {
+            return _getNews().find(n => n.id === parseInt(id)) || null;
+        },
+
+        addNews(data) {
+            const news = _getNews();
+            const id = _nextNewsId();
+            const newEntry = {
+                id,
+                ...data,
+                slug: data.slug || _generateSlug(data.title),
+                createdAt: new Date().toISOString()
+            };
+            news.push(newEntry);
+            _saveNews(news);
+            this.syncToApi();
+            return newEntry;
+        },
+
+        updateNews(id, data) {
+            const news = _getNews();
+            const index = news.findIndex(n => n.id === parseInt(id));
+            if (index !== -1) {
+                if (data.title && !data.slug) {
+                    data.slug = _generateSlug(data.title);
+                }
+                news[index] = { ...news[index], ...data };
+                _saveNews(news);
+                this.syncToApi();
+                return news[index];
+            }
+            return null;
+        },
+
+        deleteNews(id) {
+            const news = _getNews();
+            const filtered = news.filter(n => n.id !== parseInt(id));
+            _saveNews(filtered);
+            this.syncToApi();
+            return { success: true };
+        },
+
+        // ===== NEWS CATEGORIES CRUD =====
+        getNewsCategories() {
+            return _getNewsCategories();
+        },
+
+        getNewsCategoryById(id) {
+            return _getNewsCategories().find(c => c.id === parseInt(id)) || null;
+        },
+
+        addNewsCategory(data) {
+            const categories = _getNewsCategories();
+            const id = _nextNewsCategoryId();
+            const slug = data.slug || _generateSlug(data.name);
+            if (categories.some(c => c.slug === slug)) {
+                return { success: false, message: 'Danh mục tin tức đã tồn tại!' };
+            }
+            const newCat = { id, name: data.name, slug };
+            categories.push(newCat);
+            _saveNewsCategories(categories);
+            this.syncToApi();
+            return { success: true, category: newCat };
+        },
+
+        updateNewsCategory(id, data) {
+            const categories = _getNewsCategories();
+            const index = categories.findIndex(c => c.id === parseInt(id));
+            if (index !== -1) {
+                const slug = data.slug || _generateSlug(data.name);
+                if (categories.some(c => c.slug === slug && c.id !== parseInt(id))) {
+                    return { success: false, message: 'Đường dẫn tĩnh đã bị trùng với danh mục khác!' };
+                }
+                categories[index] = { ...categories[index], name: data.name, slug };
+                _saveNewsCategories(categories);
+                this.syncToApi();
+                return { success: true, category: categories[index] };
+            }
+            return { success: false, message: 'Không tìm thấy danh mục!' };
+        },
+
+        deleteNewsCategory(id) {
+            const categories = _getNewsCategories();
+            const news = _getNews();
+            
+            if (news.some(n => n.categoryId === parseInt(id))) {
+                return { success: false, message: 'Không thể xóa danh mục đang chứa tin tức!' };
+            }
+
+            const filtered = categories.filter(c => c.id !== parseInt(id));
+            _saveNewsCategories(filtered);
+            this.syncToApi();
+            return { success: true };
         }
     };
 })();

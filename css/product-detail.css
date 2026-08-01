@@ -57,7 +57,7 @@
     border: 1px solid var(--color-gray-200);
     padding: 20px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: var(--border-radius-md);
 }
 
@@ -72,7 +72,7 @@
 .pd-thumbnails {
     display: flex;
     gap: 10px;
-    justify-content: space-between;
+    justify-content: left;
 }
 
 .pd-thumb {
@@ -133,6 +133,8 @@
     margin-top: 5px;
     display: inline-block;
     letter-spacing: 0.5px;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .pd-meta {
@@ -517,10 +519,10 @@
 }
 
 .pd-btn {
-    height: 48px;
-    padding: 0 15px;
+    height: 56px;
+    padding: 0 25px;
     border-radius: var(--border-radius-lg);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -537,6 +539,13 @@
     color: var(--color-white);
     width: 100%;
     border: none;
+    animation: textPulse 1.5s infinite;
+}
+
+@keyframes textPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 .pd-btn-primary:hover {
@@ -554,6 +563,17 @@
 .pd-btn-outline:hover {
     background-color: var(--color-primary);
     color: var(--color-white);
+}
+
+.pd-btn-outline:hover i {
+    animation: cartBounce 0.5s ease-in-out;
+}
+
+@keyframes cartBounce {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(-2px); }
 }
 
 .pd-btn-contact {
@@ -909,6 +929,30 @@
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+/* Hiệu ứng toả ra cho icon điện thoại */
+.icon-ripple-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.icon-ripple-wrap::before, .icon-ripple-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: rippleIcon 1.5s infinite;
+}
+.icon-ripple-wrap::after {
+    animation-delay: 0.75s;
+}
+@keyframes rippleIcon {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
 }
 
 .pd-reviewer-avatar {
@@ -1742,6 +1786,31 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 1.3;
+}
+
+/* Custom styles for the 3 trust badges */
+.trust-item:nth-child(1) {
+    background-color: #e3f2fd;
+    border-color: #bbdefb;
+}
+.trust-item:nth-child(1) i {
+    color: #1e88e5; /* Blue */
+}
+
+.trust-item:nth-child(2) {
+    background-color: #e8f5e9;
+    border-color: #c8e6c9;
+}
+.trust-item:nth-child(2) i {
+    color: #43a047; /* Green */
+}
+
+.trust-item:nth-child(3) {
+    background-color: #fff3e0;
+    border-color: #ffe0b2;
+}
+.trust-item:nth-child(3) i {
+    color: #fb8c00; /* Orange */
 }
 
 @media (max-width: 768px) {

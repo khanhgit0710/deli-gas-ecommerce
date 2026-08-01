@@ -373,6 +373,16 @@
   text-transform: uppercase;
 }
 
+.featured-products-section .badge-top {
+  animation: badgeBlink 1.5s infinite;
+}
+
+@keyframes badgeBlink {
+  0% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 15px rgba(255, 107, 0, 0.8); transform: scale(1.05); }
+  100% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.4); transform: scale(1); }
+}
+
 .featured-products-section .featured-title-wrap h2 {
   font-size: 42px;
   font-weight: 800;
@@ -588,7 +598,7 @@
    MAIN CONTENT (SIDEBAR & PRODUCTS)
    ========================================================================== */
 .main-content-section {
-  padding: 0 0 50px 0;
+  padding: 50px 0 50px 0;
   background-color: var(--color-gray-50);
 }
 
@@ -657,7 +667,6 @@
 .product-area {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .section-header {
@@ -1178,7 +1187,7 @@
 .feature-icon {
   width: 50px;
   height: 50px;
-  background-color: var(--color-accent);
+  background-color: var(--color-primary);
   color: var(--color-white);
   border-radius: 50%;
   display: flex;
@@ -1192,6 +1201,7 @@
 
 .feature-item:hover .feature-icon {
   transform: rotate(360deg);
+  color: var(--color-accent);
 }
 
 .feature-info {
@@ -1499,12 +1509,12 @@
 .flash-deal-container {
   display: flex;
   gap: 20px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 /* Sidebar styling (Left Column) */
 .flash-deal-sidebar {
-  background-color: var(--color-primary-dark);
+  background-color: transparent; /* Changed for border effect */
   color: var(--color-white);
   border-radius: var(--border-radius-lg);
   padding: 20px 15px;
@@ -1518,42 +1528,33 @@
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  z-index: 1;
+}
+
+.flash-deal-sidebar::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background-color: var(--color-primary-dark);
+  border-radius: inherit;
+  z-index: -1;
 }
 
 .flash-deal-sidebar::before {
   content: '';
   position: absolute;
-  top: -50px;
-  left: -50px;
-  width: 150px;
-  height: 150px;
-  background-color: var(--color-accent);
-  opacity: 0.1;
-  border-radius: 50%;
-  filter: blur(40px);
-  animation: glowingBlob 6s infinite ease-in-out;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, transparent, transparent, #ff9800, #ffeb3b, #ff9800, transparent);
+  animation: rotateBorder 3s linear infinite;
+  z-index: -2;
 }
 
-@keyframes glowingBlob {
-  0% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.1;
-  }
-
-  33% {
-    transform: scale(1.2) translate(10px, -10px);
-    opacity: 0.2;
-  }
-
-  66% {
-    transform: scale(0.9) translate(-10px, 10px);
-    opacity: 0.1;
-  }
-
-  100% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.1;
-  }
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .deal-badge-title {
@@ -1561,22 +1562,20 @@
   font-weight: 900;
   letter-spacing: 2px;
   margin-bottom: 5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  animation: saleTitlePulse 2s infinite ease-in-out;
+  color: #fff;
+  animation: textFlashLight 1.5s infinite alternate;
 }
 
-@keyframes saleTitlePulse {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
+@keyframes textFlashLight {
+  0%, 100% { 
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffeb3b, 0 0 40px #ff9800; 
+    color: #fff;
   }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1.02);
+  50% { 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    color: #ffebee;
   }
+}
 }
 
 .deal-divider {
@@ -1699,7 +1698,7 @@
 /* Slider styling (Right Column) */
 .flash-deal-slider-wrapper {
   flex: 1;
-  background-color: var(--color-gray-100);
+  background-color: #245d56;
   border-radius: var(--border-radius-lg);
   padding: 15px 35px 65px 35px;
   position: relative;
@@ -1727,10 +1726,11 @@
   background-color: var(--color-white);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-sm);
-  flex: 0 0 calc(66.66% - 10px);
-  padding: 20px 20px;
+  flex: 0 0 calc(55% - 10px);
+  padding: 30px 20px;
   gap: 20px;
   align-items: center;
+  min-height: 240px;
 }
 
 .deal-horizontal-img {
@@ -5131,7 +5131,7 @@
 .floating-contact-wrapper {
   position: fixed;
   bottom: 30px;
-  left: 30px;
+  right: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -5151,6 +5151,14 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   transition: transform 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .float-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
 }
 
 .float-btn:hover {
@@ -5357,8 +5365,8 @@
 /* Floating Contact Widgets (Global) */
 .floating-contact-wrapper {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -5378,6 +5386,14 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
   transition: transform 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .float-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
 }
 
 .float-btn:hover {
@@ -5581,11 +5597,11 @@
    FEATURED PRODUCTS (DEMO LAYOUT - TRANG CHU)
    ========================================================================== */
 .trang-chu-featured {
-  padding: 30px 20px;
+  padding: 40px 20px;
   /* background: transparent !important;
   border: none !important; */
   border-radius: 20px !important;
-  margin: 60px auto !important;
+  margin: 0px auto !important;
   max-width: 1400px;
   width: calc(100% - 40px);
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important; */
@@ -5794,4 +5810,588 @@
   padding: 0 0 15px 0 !important;
   margin-bottom: 15px !important;
   border-radius: 0 !important;
+}.featured-products-section {
+  padding: 60px 0;
+  background-color: #fff9db; /* M�u v�ng nh?t */
+}
+.trang-chu-featured {
+  padding: 60px 0 !important;
+  margin: 0px 0 !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: unset !important;
+  border-radius: 0 !important;
+}
+.featured-hotline-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.hotline-banner-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hotline-title {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.hotline-number {
+  color: #ef4444;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-top: 5px;
+}
+.hotline-banner-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.btn-hotline-call {
+  background: #b4724b;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.btn-hotline-call:hover {
+  background: #965a39;
+  color: white;
+}
+.btn-hotline-zalo {
+  background: linear-gradient(135deg, #218aff, #86bfff);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.btn-hotline-zalo:hover {
+  opacity: 0.9;
+  color: white;
+}
+.hotline-banner-left {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trust-item-circle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--color-gray-800);
+  font-size: 16px;
+}
+.icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.hotline-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.hotline-banner-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hotline-banner-btns {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+.hotline-title {
+  text-align: center;
+}
+.hotline-number {
+  text-align: center;
+}
+.hotline-section-wrapper {
+  padding-bottom: 60px;
+  background-color: #fff9db; /* Keep the same background as above section, or maybe white? Let's assume white since it's a new section outside, but wait, usually if it's below the yellow section, the user might want it on a white background. Let's not set background-color, let it be default (white). */
+}
+.hotline-section-wrapper .featured-hotline-banner {
+  margin-top: 0;
+}
+.trust-item-circle {
+  display: flex;
+  flex-direction: column; /* icon on top, title below */
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--color-gray-800);
+  font-size: 15px;
+  text-align: center;
+}
+.hotline-banner-right {
+  display: flex;
+  flex-direction: column; /* hotline on top, buttons below */
+  align-items: center;
+  gap: 15px;
+}
+.hotline-banner-left {
+  display: flex;
+  flex-direction: column !important;
+  gap: 20px;
+  align-items: center;
+}
+.hotline-why-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+.hotline-banner-features {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 90px !important;
+  align-items: flex-start;
+}
+.hotline-section-wrapper {
+  background-color: var(--color-primary);
+  padding: 40px 0;
+}
+.hotline-section-wrapper .featured-hotline-banner {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  color: #ffffff !important;
+}
+.hotline-section-wrapper .icon-circle {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+.hotline-section-wrapper .hotline-title {
+  color: #ffffff !important;
+  font-size: 20px;
+  font-weight: 300;
+}
+.hotline-section-wrapper .hotline-number {
+  color: var(--color-accent) !important;
+  font-size: 60px;
+}
+.hotline-section-wrapper .btn-hotline-call {
+  background: var(--color-accent) !important;
+  color: var(--color-primary-dark) !important;
+  border-radius: 12px;
+}
+.hotline-section-wrapper .btn-hotline-call:hover {
+  background: #ffaa00 !important;
+}
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(5deg); }
+  60% { transform: rotate(-5deg); }
+  70% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+.btn-hotline-call i {
+  animation: ring 1.5s infinite ease-in-out;
+}
+.trang-chu-featured .container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.hotline-section-wrapper .container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+.hotline-banner-features {
+  gap: 90px !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  font-size: 20px !important;
+  gap: 15px !important;
+}
+.hotline-section-wrapper .icon-circle {
+  width: 90px !important; /* icon to ln */
+  height: 90px !important;
+  font-size: 40px !important;
+}
+.trang-chu-featured .container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.hotline-section-wrapper .trust-item-circle:hover {
+  transform: translateY(-5px);
+}
+.hotline-section-wrapper .trust-item-circle:hover .icon-circle {
+  background-color: var(--color-accent) !important;
+  color: var(--color-primary-dark) !important;
+  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+}
+.hotline-section-wrapper .icon-circle {
+  transition: all 0.3s ease;
+}
+.btn-hotline-call {
+  transition: all 0.3s ease !important;
+}
+.btn-hotline-call:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+}
+.btn-hotline-zalo {
+  transition: all 0.3s ease !important;
+}
+.btn-hotline-zalo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(33,138,255,0.4);
+  opacity: 1 !important;
+}
+@keyframes pulse-ring-accent {
+  0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 170, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+}
+@keyframes pulse-ring-zalo {
+  0% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(33, 138, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0); }
+}
+@keyframes pulse-ring-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+.hotline-section-wrapper .btn-hotline-call {
+  animation: pulse-ring-accent 2s infinite !important;
+}
+.hotline-section-wrapper .btn-hotline-zalo {
+  animation: pulse-ring-zalo 2s infinite !important;
+  animation-delay: 0.5s !important;
+}
+.float-btn.float-hotline {
+  animation: pulse-ring-red 2s infinite !important;
+}
+
+/* Custom Confirm Modal */
+.custom-confirm-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.custom-confirm-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.custom-confirm-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.custom-confirm-modal.show {
+    transform: translateY(0);
+}
+.confirm-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+.confirm-content p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.btn-confirm-cancel, .btn-confirm-agree {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.btn-confirm-cancel {
+    background-color: #f1f5f9;
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 90px !important;
+  align-items: flex-start;
+}
+.hotline-section-wrapper {
+  background-color: var(--color-primary);
+  padding: 40px 0;
+}
+.hotline-section-wrapper .featured-hotline-banner {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  color: #ffffff !important;
+}
+.hotline-section-wrapper .icon-circle {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+.hotline-section-wrapper .hotline-title {
+  color: #ffffff !important;
+  font-size: 20px;
+  font-weight: 300;
+}
+.hotline-section-wrapper .hotline-number {
+  color: var(--color-accent) !important;
+  font-size: 60px;
+}
+.hotline-section-wrapper .btn-hotline-call {
+  background: var(--color-accent) !important;
+  color: var(--color-primary-dark) !important;
+}
+.hotline-section-wrapper .btn-hotline-call:hover {
+  background: #ffaa00 !important;
+}
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(5deg); }
+  60% { transform: rotate(-5deg); }
+  70% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+.btn-hotline-call i {
+  animation: ring 1.5s infinite ease-in-out;
+}
+.trang-chu-featured .container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.hotline-section-wrapper .container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+.hotline-banner-features {
+  gap: 90px !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  font-size: 20px !important;
+  gap: 15px !important;
+}
+.hotline-section-wrapper .icon-circle {
+  width: 90px !important; /* icon to ln */
+  height: 90px !important;
+  font-size: 40px !important;
+}
+.trang-chu-featured .container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.hotline-section-wrapper .trust-item-circle {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.hotline-section-wrapper .trust-item-circle:hover {
+  transform: translateY(-5px);
+}
+.hotline-section-wrapper .trust-item-circle:hover .icon-circle {
+  background-color: var(--color-accent) !important;
+  color: var(--color-primary-dark) !important;
+  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+}
+.hotline-section-wrapper .icon-circle {
+  transition: all 0.3s ease;
+}
+.btn-hotline-call {
+  transition: all 0.3s ease !important;
+}
+.btn-hotline-call:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+}
+.btn-hotline-zalo {
+  transition: all 0.3s ease !important;
+}
+.btn-hotline-zalo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(33,138,255,0.4);
+  opacity: 1 !important;
+}
+@keyframes pulse-ring-accent {
+  0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 170, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+}
+@keyframes pulse-ring-zalo {
+  0% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(33, 138, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0); }
+}
+@keyframes pulse-ring-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+.hotline-section-wrapper .btn-hotline-call {
+  animation: pulse-ring-accent 2s infinite !important;
+}
+.hotline-section-wrapper .btn-hotline-zalo {
+  animation: pulse-ring-zalo 2s infinite !important;
+  animation-delay: 0.5s !important;
+}
+.float-btn.float-hotline {
+  animation: pulse-ring-red 2s infinite !important;
+}
+
+/* Custom Confirm Modal */
+.custom-confirm-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.custom-confirm-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.custom-confirm-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.custom-confirm-modal.show {
+    transform: translateY(0);
+}
+.confirm-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+.confirm-content p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.btn-confirm-cancel, .btn-confirm-agree {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.btn-confirm-cancel {
+    background-color: #f1f5f9;
+    color: #64748b;
+}
+.btn-confirm-cancel:hover {
+    background-color: #e2e8f0;
+}
+.btn-confirm-agree {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn-confirm-agree:hover {
+    background-color: #c0392b;
+}
+
+/* Hide last top-bar divider */
+.top-bar-right .top-bar-divider:last-child {
+    display: none !important;
+}
+
+.review-btn-static {
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+.review-btn-static:hover {
+    transform: none !important;
+    animation: none !important;
+    box-shadow: none !important;
 }

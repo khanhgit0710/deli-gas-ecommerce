@@ -28,7 +28,6 @@
                     <span class="top-bar-divider"></span>
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-user text-accent"></i> Tài khoản của bạn</a>
                 </div>
             </div>
         </div>
@@ -70,8 +69,8 @@
             <div class="pd-breadcrumbs">
                 <a href="trang-chu.html">Trang chủ</a> <span>&gt;</span>
                 <a href="san-pham.html">Sản Phẩm</a> <span>&gt;</span>
-                <a href="san-pham.html#cat-petrolimex">Gas Petrolimex</a> <span>&gt;</span>
-                <span class="current">Bình Gas Petrolimex 12kg</span>
+                <a href="san-pham.html" id="breadcrumbCategory">Danh mục</a> <span>&gt;</span>
+                <span class="current" id="breadcrumbCurrent">Sản phẩm</span>
             </div>
 
             <!-- Main Product Section -->
@@ -79,8 +78,20 @@
                 <!-- Left: Gallery -->
                 <div class="pd-gallery">
                     <div class="pd-main-image">
-                        <img id="pdMainImage" src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas Petrolimex 12kg" onclick="openLightbox()" style="cursor: pointer;">
+                        <img id="pdMainImage" src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas Petrolimex 12kg" onclick="openImageLightbox(0)" style="cursor: pointer;">
                     </div>
+                    
+                    <!-- Additional Thumbnails container -->
+                    <div class="pd-thumbnails" id="pdThumbnails" style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto;">
+                        <!-- JS renders here -->
+                    </div>
+                    
+                    <style>
+                        .pd-thumb-img { transition: all 0.2s; flex: 0 0 auto; width: 76px; height: 76px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid transparent; background: white; } 
+                        .pd-thumb-img:not(.active) { border: 1px solid #ddd; opacity: 0.6; } 
+                        .pd-thumb-img.active { border: 2px solid var(--color-primary); }
+                        .pd-thumb-img:hover { opacity: 1; }
+                    </style>
                     
                     <!-- Trust Badges -->
                     <div class="pd-trust-badges">
@@ -103,7 +114,7 @@
                 <div class="pd-info">
                     <div class="pd-header">
                         <h1 class="pd-title">Bình gas Petrolimex 12kg</h1>
-                        <span class="pd-badge">Giảm 10%</span>
+                        <span class="pd-badge" style="margin-top: 8px;">Giảm 10%</span>
                     </div>
                     
                     <div class="pd-meta">
@@ -124,7 +135,7 @@
                     </div>
 
                     <!-- New Flash Deal Section -->
-                    <div class="pd-flash-deal">
+                    <div class="pd-flash-deal" style="display: none;">
                         <div class="flash-deal-header">
                             <i class="fa-solid fa-bolt"></i> FLASH DEAL
                         </div>
@@ -148,8 +159,14 @@
                         Bình gas Petrolimex 12kg van ngang chính hãng. Đảm bảo an toàn tuyệt đối với van ngắt tự động, bình gas được kiểm định chất lượng định kỳ. Có tem chống hàng giả và bảo hiểm trách nhiệm.
                     </div>
 
-                    <div class="pd-specs-summary" id="pdSpecsSummary">
-                        <!-- Dynamic specs -->
+                    <div class="pd-specs-summary" id="pdSpecsSummary" style="background: var(--color-gray-50); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">Thông số chi tiết</div>
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 14px;">
+                            <div style="color: var(--color-gray-500);">Thương hiệu:</div><div style="font-weight: 500;">Petrolimex</div>
+                            <div style="color: var(--color-gray-500);">Trọng lượng:</div><div style="font-weight: 500;">12kg</div>
+                            <div style="color: var(--color-gray-500);">Chất liệu vỏ:</div><div style="font-weight: 500;">Thép siêu chuẩn</div>
+                            <div style="color: var(--color-gray-500);">Tình trạng:</div><div style="font-weight: 500; color: #10b981;">Còn mới</div>
+                        </div>
                     </div>
 
                     <!-- New Shipping Badges -->
@@ -192,7 +209,7 @@
 
                         <div class="pd-buttons-wrapper">
                             <div class="pd-buttons-row1">
-                                <a href="tel:1900123123" class="pd-btn pd-btn-contact"><i class="fa-solid fa-phone-volume icon-shake"></i> Gọi ngay chúng tôi</a>
+                                <a href="tel:0909123456" class="pd-btn pd-btn-contact"><span class="icon-ripple-wrap"><i class="fa-solid fa-phone-volume icon-shake"></i></span> 0909 123 456</a>
                                 <button type="button" class="pd-btn pd-btn-outline">
                                     <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
                                     <span class="btn-text" style="font-size: 0.95rem;">Thêm vào giỏ</span>
@@ -282,7 +299,7 @@
                             <div class="combo-save">(Tiết kiệm 80.000đ)</div>
                         </div>
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <a href="tel:1900123123" class="pd-btn pd-btn-contact" style="flex: 1;"><i class="fa-solid fa-phone-volume icon-shake"></i> Gọi ngay chúng tôi</a>
+                            <a href="tel:0909123456" class="pd-btn pd-btn-contact" style="flex: 1;"><i class="fa-solid fa-phone-volume icon-shake"></i> 0909 123 456</a>
                             <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ Combo</button>
                         </div>
                     </div>
@@ -382,21 +399,22 @@
                     
                     <div id="reviewFormContainer" class="review-form-hidden" style="background: var(--color-gray-50); border-radius: var(--border-radius-md); border: 1px solid var(--color-gray-200);">
                         <div style="margin-bottom: 15px; font-size: 18px; font-weight: 600;">Viết đánh giá của bạn</div>
-                        <form>
-                            <div style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <span style="font-size: 16px; color: var(--color-gray-600); margin-left: 10px;">Tuyệt vời</span>
+                        <form id="reviewForm" onsubmit="event.preventDefault(); submitReview();">
+                            <div id="starRatingContainer" style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
+                                <i class="fa-regular fa-star" data-rating="1" onclick="setRating(1)" onmouseover="hoverRating(1)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="2" onclick="setRating(2)" onmouseover="hoverRating(2)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="3" onclick="setRating(3)" onmouseover="hoverRating(3)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="4" onclick="setRating(4)" onmouseover="hoverRating(4)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="5" onclick="setRating(5)" onmouseover="hoverRating(5)" onmouseout="resetRating()"></i>
+                                <span id="ratingText" style="font-size: 16px; color: var(--color-gray-600); margin-left: 10px;">Vui lòng chọn sao</span>
                             </div>
+                            <input type="hidden" id="reviewRating" value="0">
                             <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                                <input type="text" placeholder="Họ và tên" style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
-                                <input type="tel" placeholder="Số điện thoại" style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
+                                <input type="text" id="reviewName" placeholder="Họ và tên *" required style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
+                                <input type="tel" id="reviewPhone" placeholder="Số điện thoại *" required style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
                             </div>
-                            <textarea placeholder="Đánh giá của bạn về sản phẩm..." rows="4" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
-                            <button type="button" class="pd-btn pd-btn-primary" style="padding: 12px 25px; border-radius: 12px; font-size: 16px;" onclick="submitReview()">Gửi đánh giá</button>
+                            <textarea id="reviewText" placeholder="Đánh giá của bạn về sản phẩm... *" required rows="4" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
+                            <button type="submit" style="background-color: var(--color-primary); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600;">Gửi đánh giá</button>
                         </form>
                     </div>
                     </div>
@@ -590,7 +608,7 @@
                     
                     <!-- Load More Button -->
                     <div class="pd-load-more-reviews" style="text-align: center; margin-top: 20px;">
-                        <button id="loadMoreBtn" class="pd-btn pd-btn-outline" style="margin: 40px auto 0; padding: 8px 12px; font-size: 0.95rem; border-radius: 12px;" onclick="loadMoreReviews()">
+                        <button id="loadMoreBtn" class="pd-btn pd-btn-outline" style="margin: 40px auto 0; padding: 8px 12px; font-size: 0.95rem; border-radius: 12px; height: 40px;" onclick="loadMoreReviews()">
                             Xem thêm<i class="fa-solid fa-chevron-down" style="margin-left: 0px;"></i>
                         </button>
                     </div>
@@ -1055,11 +1073,13 @@
             updateLightboxView();
             document.getElementById('productLightbox').style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Ngăn scroll
+            document.documentElement.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
             document.getElementById('productLightbox').style.display = 'none';
             document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
         }
 
         function changeLightboxImage(direction) {
@@ -1197,6 +1217,7 @@
             const lightbox = document.getElementById('productLightbox');
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         }
     </script>
 
@@ -1249,8 +1270,17 @@
                 currentProduct = product;
                 
                 // Set Breadcrumb
-                const breadcrumbCurrent = document.querySelector('.breadcrumb-current');
+                const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
                 if (breadcrumbCurrent) breadcrumbCurrent.textContent = product.name;
+                
+                const breadcrumbCategory = document.getElementById('breadcrumbCategory');
+                if (breadcrumbCategory) {
+                    const category = ProductDB.getCategories().find(c => c.id === product.categoryId);
+                    if (category) {
+                        breadcrumbCategory.textContent = category.name;
+                        breadcrumbCategory.href = `san-pham.html?category=${category.id}`;
+                    }
+                }
                 
                 // Set Title & Badge
                 const title = document.querySelector('.pd-title');
@@ -1312,9 +1342,6 @@
                     if (product.categoryId <= 5) {
                         // For gas cylinders, brand is usually the category name
                         brandName = ProductDB.getCategoryName(product.categoryId);
-                        if (brandName.toLowerCase().startsWith('gas ')) {
-                            brandName = brandName.substring(4);
-                        }
                     } else {
                         // For stoves and accessories, try to match known brands in the name
                         const knownBrands = ['Namilux', 'Bosch', 'Rinnai', 'Sunhouse', 'Kogas', 'Bluestar', 'Junger', 'Katsura', 'Paloma', 'Sakura', 'Teka', 'Electrolux', 'Malloca'];
@@ -1415,12 +1442,22 @@
                 const slider = document.getElementById('relatedSlider');
                 if (!slider) return;
                 
-                // Fetch products in same category or random
-                let related = ProductDB.getByCategory(categoryId).filter(p => p.id !== currentId);
+                // Fetch related products based on logic: Gas (1-5) -> Gas; Stove (6-7) -> Stove
+                let isGas = categoryId >= 1 && categoryId <= 5;
+                let isStove = categoryId >= 6 && categoryId <= 7;
+                
+                let related = ProductDB.getAll().filter(p => {
+                    if (p.id === currentId) return false;
+                    if (isGas) return p.categoryId >= 1 && p.categoryId <= 5;
+                    if (isStove) return p.categoryId >= 6 && p.categoryId <= 7;
+                    return p.categoryId === categoryId;
+                });
+                
+                related = related.sort(() => 0.5 - Math.random());
                 
                 // If not enough related, add random
                 if (related.length < 8) {
-                    let others = ProductDB.getAll().filter(p => p.id !== currentId && p.categoryId !== categoryId);
+                    let others = ProductDB.getAll().filter(p => p.id !== currentId && !related.find(r => r.id === p.id));
                     others = others.sort(() => 0.5 - Math.random());
                     related = related.concat(others.slice(0, 8 - related.length));
                 }
@@ -1466,7 +1503,45 @@
             }
         });
 
+        let currentRating = 0;
+        const ratingTexts = ['', 'Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
+
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('reviewRating').value = rating;
+            updateStars(rating);
+        }
+
+        function hoverRating(rating) {
+            updateStars(rating);
+        }
+
+        function resetRating() {
+            updateStars(currentRating);
+        }
+
+        function updateStars(rating) {
+            const stars = document.querySelectorAll('#starRatingContainer i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.className = 'fa-solid fa-star';
+                } else {
+                    star.className = 'fa-regular fa-star';
+                }
+            });
+            const text = rating > 0 ? ratingTexts[rating] : 'Vui lòng chọn sao';
+            const textEl = document.getElementById('ratingText');
+            if (textEl) textEl.textContent = text;
+        }
+
         function submitReview() {
+            const ratingInput = document.getElementById('reviewRating');
+            if (ratingInput && parseInt(ratingInput.value) === 0) {
+                if(typeof showToast === 'function') showToast('Vui lòng chọn số sao đánh giá!', 'error');
+                else alert('Vui lòng chọn số sao đánh giá!');
+                return;
+            }
+
             // Hide the form
             const formContainer = document.getElementById('reviewFormContainer');
             if (formContainer) {
@@ -1560,8 +1635,41 @@
             if (product.image) {
                 const mainImg = document.getElementById('pdMainImage');
                 if (mainImg) mainImg.src = product.image;
-                const thumbs = document.querySelectorAll('.pd-thumb img');
-                thumbs.forEach(thumb => thumb.src = product.image);
+                
+                // Update Thumbnails
+                const thumbnailsContainer = document.getElementById('pdThumbnails');
+                if (thumbnailsContainer) {
+                    window.imageLightboxImages = [product.image];
+                    let thumbsHTML = `<img src="${product.image}" class="pd-thumb-img active" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
+                    
+                    if (product.images && product.images.length > 0) {
+                        const additionalImgs = product.images.slice(0, 6);
+                        window.imageLightboxImages = [...window.imageLightboxImages, ...additionalImgs];
+                        
+                        additionalImgs.forEach((img, idx) => {
+                            thumbsHTML += `<img src="${img}" class="pd-thumb-img" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
+                        });
+                    }
+                    
+                    
+                    // Hide thumbnails container entirely if there's only 1 image
+                    if (window.imageLightboxImages.length <= 1) {
+                        thumbnailsContainer.style.display = 'none';
+                    } else {
+                        thumbnailsContainer.style.display = 'flex';
+                        // Update onclick handlers to also change lightbox index
+                        thumbnailsContainer.innerHTML = thumbsHTML;
+                        const renderedThumbs = thumbnailsContainer.querySelectorAll('.pd-thumb-img');
+                        renderedThumbs.forEach((el, index) => {
+                            const originalClick = el.onclick;
+                            el.onclick = function(e) {
+                                originalClick.call(this, e);
+                                document.getElementById('pdMainImage').onclick = () => openImageLightbox(index);
+                            };
+                        });
+                    }
+                    document.getElementById('pdMainImage').onclick = () => openImageLightbox(0);
+                }
             }
             
             // Update Price
@@ -1583,6 +1691,32 @@
             } else {
                 if (oldPriceEl) oldPriceEl.style.display = 'none';
                 if (saveBadge) saveBadge.style.display = 'none';
+            }
+            
+            // Update Flash Deal Section
+            const flashDealEl = document.querySelector('.pd-flash-deal');
+            if (flashDealEl) {
+                if (product.onSale || product.discount > 0) {
+                    flashDealEl.style.display = 'flex';
+                    
+                    let unit = 'sản phẩm';
+                    if (product.categoryId >= 1 && product.categoryId <= 5) unit = 'bình';
+                    else if (product.categoryId === 6 || product.categoryId === 7) unit = 'chiếc';
+                    else if (product.categoryId === 8) unit = 'cái';
+                    else if (product.categoryId === 9) unit = 'bộ';
+                    
+                    const progressText = document.querySelector('.progress-text');
+                    const progressFill = document.querySelector('.progress-fill');
+                    if (progressText && progressFill) {
+                        const maxSold = 30 + (product.id % 20);
+                        const sold = Math.floor(maxSold * 0.7) + (product.id % 5);
+                        const percent = Math.round((sold / maxSold) * 100);
+                        progressFill.style.width = percent + '%';
+                        progressText.textContent = `🔥 Đã bán ${sold}/${maxSold} ${unit}`;
+                    }
+                } else {
+                    flashDealEl.style.display = 'none';
+                }
             }
             
             // Update Description
@@ -1624,7 +1758,7 @@
                 const specLines = product.specs.split('\n');
                 let html = `
                     <div class="specs-accordion-header" onclick="toggleSpecs()">
-                        <h3 class="specs-heading">Thông tin chi tiết</h3>
+                        <h3 class="specs-heading">Thông số chi tiết</h3>
                         <i class="fa-solid fa-angles-right specs-toggle-icon" style="transform: rotate(90deg);"></i>
                     </div>
                     <div class="specs-accordion-content" id="specsContent" style="display: block;">
@@ -1654,21 +1788,92 @@
             }
         }
 
-        // Lightbox Functions
-        function openLightbox() {
+        window.currentImageLightboxIndex = 0;
+        window.imageLightboxImages = [];
+
+        function openImageLightbox(index = 0) {
             const modal = document.getElementById("imageLightbox");
-            const img = document.getElementById("pdMainImage");
-            const lightboxImg = document.getElementById("lightboxImg");
-            
+            window.currentImageLightboxIndex = index;
             modal.style.display = "flex";
-            lightboxImg.src = img.src;
+            updateImageLightboxContent();
             
             // Prevent scrolling
             document.body.style.overflow = "hidden";
             document.documentElement.style.overflow = "hidden";
         }
+        
+        function updateImageLightboxContent() {
+            const lightboxImg = document.getElementById("imageLightboxImg");
+            if (window.imageLightboxImages.length === 0) {
+                lightboxImg.src = document.getElementById("pdMainImage").src;
+                return;
+            }
+            
+            lightboxImg.src = window.imageLightboxImages[window.currentImageLightboxIndex];
+            
+            const thumbsContainer = document.getElementById("imageLightboxThumbnails");
+            if (thumbsContainer) {
+                if (window.imageLightboxImages.length <= 1) {
+                    thumbsContainer.style.display = 'none';
+                } else {
+                    thumbsContainer.style.display = 'flex';
+                    let html = '';
+                    window.imageLightboxImages.forEach((img, idx) => {
+                        const isActive = idx === window.currentImageLightboxIndex;
+                        html += `<img src="${img}" onclick="event.stopPropagation(); updateImageLightboxContentForIndex(${idx})" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer; border: 2px solid ${isActive ? 'var(--color-primary)' : 'transparent'}; opacity: ${isActive ? '1' : '0.5'}; background: white; margin: 0 5px; border-radius: 4px; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); flex-shrink: 0; pointer-events: auto;">`;
+                    });
+                    thumbsContainer.innerHTML = html;
+                    
+                    // Keep active thumbnail in view if scrollable
+                    setTimeout(() => {
+                        const activeThumb = thumbsContainer.children[window.currentImageLightboxIndex];
+                        if (activeThumb) {
+                            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                    }, 100);
+                }
+            }
+            
+            // Update counter
+            const counter = document.getElementById("imageLightboxCounter");
+            if (counter && window.imageLightboxImages.length > 0) {
+                if (window.imageLightboxImages.length > 1) {
+                    counter.style.display = 'block';
+                    counter.textContent = `${window.currentImageLightboxIndex + 1} / ${window.imageLightboxImages.length}`;
+                } else {
+                    counter.style.display = 'none';
+                }
+            }
+        }
+        
+        function updateImageLightboxContentForIndex(idx) {
+            window.currentImageLightboxIndex = idx;
+            updateImageLightboxContent();
+        }
+        
+        function imageLightboxPrev(e) {
+            e.stopPropagation();
+            if(window.currentImageLightboxIndex > 0) {
+                window.currentImageLightboxIndex--;
+                updateImageLightboxContent();
+            } else if (window.imageLightboxImages.length > 0) {
+                window.currentImageLightboxIndex = window.imageLightboxImages.length - 1;
+                updateImageLightboxContent();
+            }
+        }
+        
+        function imageLightboxNext(e) {
+            e.stopPropagation();
+            if(window.currentImageLightboxIndex < window.imageLightboxImages.length - 1) {
+                window.currentImageLightboxIndex++;
+                updateImageLightboxContent();
+            } else if (window.imageLightboxImages.length > 0) {
+                window.currentImageLightboxIndex = 0;
+                updateImageLightboxContent();
+            }
+        }
 
-        function closeLightbox(e) {
+        function closeImageLightbox(e) {
             if (e.target.id === 'imageLightbox' || e.target.className === 'lightbox-close') {
                 const modal = document.getElementById("imageLightbox");
                 modal.style.display = "none";
@@ -1714,9 +1919,26 @@
     </div>
 
     <!-- Lightbox Modal -->
-    <div id="imageLightbox" class="lightbox-modal" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-        <img class="lightbox-content" id="lightboxImg">
+    <div id="imageLightbox" class="lightbox-modal" onclick="closeImageLightbox(event)" style="position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); display: none;">
+        <!-- Close btn -->
+        <span class="lightbox-close" onclick="closeImageLightbox(event)" style="position: absolute; top: 20px; right: 25px; color: #fff; font-size: 35px; cursor: pointer; z-index: 10002; transition: 0.2s;">&times;</span>
+        
+        <!-- Navigation -->
+        <button class="lb-nav lb-prev" onclick="imageLightboxPrev(event)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lb-nav lb-next" onclick="imageLightboxNext(event)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i class="fa-solid fa-chevron-right"></i></button>
+        
+        <!-- Main Image -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 10000;">
+            <img class="lightbox-content" id="imageLightboxImg" style="pointer-events: auto; max-height: 75vh; max-width: 90vw; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" onclick="event.stopPropagation();">
+        </div>
+        
+        <!-- Thumbnails -->
+        <div id="imageLightboxThumbnails" style="position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; overflow-x: auto; z-index: 10001; padding: 10px 0; pointer-events: none;" onclick="event.stopPropagation();"></div>
+        
+        <!-- Counter -->
+        <div id="imageLightboxCounter" style="position: absolute; bottom: 25px; right: 25px; background: rgba(0,0,0,0.7); color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 500; z-index: 10002; pointer-events: none; letter-spacing: 1px;">
+            1 / 1
+        </div>
     </div>
 </body>
 </html>

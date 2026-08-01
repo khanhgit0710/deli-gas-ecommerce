@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         dashboard: 'Bảng điều khiển',
         products: 'Quản lý sản phẩm',
         categories: 'Quản lý danh mục',
+        news: 'Quản lý tin tức',
         settings: 'Cấu hình chung'
     };
 
@@ -78,6 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (sectionId === 'dashboard') renderDashboard();
         if (sectionId === 'products') renderProducts();
         if (sectionId === 'categories') renderCategories();
+        if (sectionId === 'news') renderNews();
         if (sectionId === 'settings') renderSettings();
     }
 
@@ -322,6 +324,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('productSearch').addEventListener('input', renderProducts);
     document.getElementById('categoryFilter').addEventListener('change', renderProducts);
 
+    // Format Currency Input
+    function formatCurrencyInput(e) {
+        let val = e.target.value.replace(/[^\d]/g, '');
+        if (val) {
+            val = parseInt(val, 10).toLocaleString('vi-VN').replace(/,/g, '.');
+        }
+        e.target.value = val;
+    }
+
+    document.getElementById('productPrice').addEventListener('input', formatCurrencyInput);
+    document.getElementById('productFinalPrice').addEventListener('input', formatCurrencyInput);
+
+    // Auto-calculate discount
+    function calculateDiscount() {
+        const rawPrice = document.getElementById('productPrice').value.replace(/\./g, '');
+        const rawFinalPrice = document.getElementById('productFinalPrice').value.replace(/\./g, '');
+        
+        const price = parseFloat(rawPrice) || 0;
+        const finalPrice = parseFloat(rawFinalPrice) || 0;
+        const discountInput = document.getElementById('productDiscount');
+        
+        if (price > 0 && finalPrice > 0 && finalPrice < price) {
+            const percentage = ((price - finalPrice) / price) * 100;
+            discountInput.value = Math.ceil(percentage); // Luôn làm tròn lên
+        } else if (finalPrice === price || finalPrice > price || finalPrice === 0) {
+            discountInput.value = 0;
+        }
+    }
+    document.getElementById('productPrice').addEventListener('input', calculateDiscount);
+    document.getElementById('productFinalPrice').addEventListener('input', calculateDiscount);
+
     // ========== PRODUCT MODAL ==========
     window.openProductModal = function (product = null) {
         populateCategoryFilters();
@@ -332,6 +365,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         form.reset();
         document.getElementById('productId').value = '';
         document.getElementById('productDiscount').value = '0';
+        document.getElementById('productFinalPrice').value = '';
         
         // Populate combo select and recommended products
         const comboSelect = document.getElementById('comboProductId');
@@ -362,8 +396,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('productId').value = product.id;
             document.getElementById('productName').value = product.name;
             document.getElementById('productCategory').value = product.categoryId;
-            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productPrice').value = product.price.toLocaleString('vi-VN').replace(/,/g, '.');
             document.getElementById('productDiscount').value = product.discount || 0;
+            const finalPrice = product.price - (product.price * (product.discount || 0) / 100);
+            const displayFinalPrice = product.discount ? Math.round(finalPrice) : product.price;
+            document.getElementById('productFinalPrice').value = displayFinalPrice.toLocaleString('vi-VN').replace(/,/g, '.');
             document.getElementById('productImage').value = product.image || '';
             document.getElementById('productDescription').value = product.description || '';
             document.getElementById('productSpecs').value = product.specs || '';
@@ -381,9 +418,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = recs[1] || '';
             if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = recs[2] || '';
             
+            const imgs = product.images || [];
+            window.currentAdditionalImages = [...imgs];
+            
             if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = product.comboTotalPrice || '';
             
             updateImagePreview();
+            renderAdditionalImages();
         } else {
             title.textContent = 'Thêm sản phẩm mới';
             document.getElementById('productFeatured').checked = true; // Auto "Mới" tag
@@ -397,6 +438,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (document.getElementById('recProduct1')) document.getElementById('recProduct1').value = '';
             if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = '';
             if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = '';
+            
+            if (document.getElementById('recProduct1')) document.getElementById('recProduct1').value = '';
+            if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = '';
+            if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = '';
+            
+            window.currentAdditionalImages = [];
+            renderAdditionalImages();
+            
             if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = '';
         }
 
@@ -454,13 +503,108 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Additional images logic
+    window.currentAdditionalImages = [];
+    
+    function renderAdditionalImages() {
+        const previewBox = document.getElementById('additionalImagesPreview');
+        if (!previewBox) return;
+        previewBox.innerHTML = '';
+        window.currentAdditionalImages.forEach((imgSrc, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.width = '70px';
+            wrapper.style.height = '70px';
+            wrapper.style.border = '1px solid #ddd';
+            wrapper.style.borderRadius = '4px';
+            wrapper.style.overflow = 'hidden';
+            
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.background = 'white';
+            
+            const btnRemove = document.createElement('button');
+            btnRemove.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            btnRemove.style.position = 'absolute';
+            btnRemove.style.top = '2px';
+            btnRemove.style.right = '2px';
+            btnRemove.style.background = 'rgba(255,0,0,0.7)';
+            btnRemove.style.color = 'white';
+            btnRemove.style.border = 'none';
+            btnRemove.style.borderRadius = '50%';
+            btnRemove.style.width = '18px';
+            btnRemove.style.height = '18px';
+            btnRemove.style.cursor = 'pointer';
+            btnRemove.style.display = 'flex';
+            btnRemove.style.alignItems = 'center';
+            btnRemove.style.justifyContent = 'center';
+            btnRemove.style.fontSize = '10px';
+            
+            btnRemove.onclick = () => {
+                window.currentAdditionalImages.splice(index, 1);
+                renderAdditionalImages();
+            };
+            
+            wrapper.appendChild(img);
+            wrapper.appendChild(btnRemove);
+            previewBox.appendChild(wrapper);
+        });
+    }
+
+    const btnAddAdditionalImage = document.getElementById('btnAddAdditionalImage');
+    if (btnAddAdditionalImage) {
+        btnAddAdditionalImage.addEventListener('click', () => {
+            const input = document.getElementById('additionalImageInput');
+            const val = input.value.trim();
+            if (val) {
+                if (window.currentAdditionalImages.length >= 6) {
+                    showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
+                    return;
+                }
+                window.currentAdditionalImages.push(val);
+                input.value = '';
+                renderAdditionalImages();
+            }
+        });
+    }
+
+    const additionalImageUpload = document.getElementById('additionalImageUpload');
+    if (additionalImageUpload) {
+        additionalImageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (window.currentAdditionalImages.length >= 6) {
+                    showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
+                    this.value = '';
+                    return;
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                    showToast('Vui lòng chọn ảnh có kích thước dưới 2MB!', 'error');
+                    this.value = '';
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const base64Str = evt.target.result;
+                    window.currentAdditionalImages.push(base64Str);
+                    renderAdditionalImages();
+                };
+                reader.readAsDataURL(file);
+                this.value = ''; // Reset for next selection
+            }
+        });
+    }
+
     // Save product
     document.getElementById('btnSaveProduct').addEventListener('click', () => {
         const name = document.getElementById('productName').value.trim();
         const categoryId = document.getElementById('productCategory').value;
-        const price = document.getElementById('productPrice').value;
+        const priceRaw = document.getElementById('productPrice').value.replace(/\./g, '');
 
-        if (!name || !categoryId || !price) {
+        if (!name || !categoryId || !priceRaw) {
             showToast('Vui lòng nhập đầy đủ thông tin bắt buộc!', 'error');
             return;
         }
@@ -468,7 +612,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = {
             name,
             categoryId: parseInt(categoryId),
-            price: parseInt(price),
+            price: parseInt(priceRaw),
             discount: parseInt(document.getElementById('productDiscount').value) || 0,
             image: document.getElementById('productImage').value.trim(),
             description: document.getElementById('productDescription').value.trim(),
@@ -480,7 +624,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
             seoDesc: document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : '',
             comboProductId: document.getElementById('comboProductId') ? (parseInt(document.getElementById('comboProductId').value) || null) : null,
-            comboDiscountText: document.getElementById('comboDiscountText') ? document.getElementById('comboDiscountText').value.trim() : ''
+            comboDiscountText: document.getElementById('comboDiscountText') ? document.getElementById('comboDiscountText').value.trim() : '',
+            images: [...window.currentAdditionalImages]
         };
 
         const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;
@@ -550,18 +695,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('categoryId').value = '';
         document.getElementById('categoryName').value = '';
         document.getElementById('categorySlug').value = '';
+        document.getElementById('categorySeoDesc').value = '';
 
         if (category) {
             title.textContent = 'Sửa danh mục';
             document.getElementById('categoryId').value = category.id;
             document.getElementById('categoryName').value = category.name;
             document.getElementById('categorySlug').value = category.slug;
+            document.getElementById('categorySeoDesc').value = category.seoDesc || '';
         } else {
             title.textContent = 'Thêm danh mục mới';
         }
 
         modal.classList.add('active');
     };
+
+    document.getElementById('categoryName').addEventListener('input', function(e) {
+        const slug = e.target.value.toLowerCase()
+            .replace(/đ/g, 'd')
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+        document.getElementById('categorySlug').value = slug;
+    });
 
     window.closeCategoryModal = function () {
         document.getElementById('categoryModal').classList.remove('active');
@@ -592,13 +749,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const slug = document.getElementById('categorySlug').value.trim();
+        const seoDesc = document.getElementById('categorySeoDesc').value.trim();
         const editId = document.getElementById('categoryId').value;
 
         if (editId) {
-            ProductDB.updateCategory(editId, { name, slug });
+            ProductDB.updateCategory(editId, { name, slug, seoDesc });
             showToast('Cập nhật danh mục thành công!', 'success');
         } else {
-            ProductDB.addCategory({ name, slug });
+            ProductDB.addCategory({ name, slug, seoDesc });
             showToast('Thêm danh mục mới thành công!', 'success');
         }
 
@@ -607,6 +765,357 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.getElementById('btnAddCategory').addEventListener('click', () => openCategoryModal());
+
+    // ========== QUILL JS INIT ==========
+    let quillEditor = null;
+    if (document.getElementById('newsContentEditor')) {
+        quillEditor = new Quill('#newsContentEditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image', 'video'],
+                        ['clean']
+                    ],
+                    handlers: {
+                        image: function() {
+                            const value = prompt('Nhập đường dẫn (URL) của hình ảnh:');
+                            if (value) {
+                                const cursorPosition = this.quill.getSelection()?.index || 0;
+                                this.quill.insertEmbed(cursorPosition, 'image', value);
+                                this.quill.setSelection(cursorPosition + 1);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        quillEditor.on('text-change', function() {
+            document.getElementById('newsContent').value = quillEditor.root.innerHTML;
+        });
+    }
+
+    // ========== NEWS CATEGORIES ==========
+    function renderNewsCategories() {
+        const categories = ProductDB.getNewsCategories();
+        const news = ProductDB.getNews(true); // to count articles per category
+        const tbody = document.getElementById('newsCategoriesTableBody');
+
+        if (!tbody) return;
+
+        if (categories.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="table-empty"><i class="fa-solid fa-tags"></i>Chưa có danh mục tin tức nào</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = categories.map(c => {
+            const count = news.filter(n => n.categoryId === c.id).length;
+            return `
+                <tr>
+                    <td style="color:var(--admin-text-dim);font-weight:600;">#${c.id}</td>
+                    <td style="font-weight:600;color:var(--admin-text);">${c.name}</td>
+                    <td style="font-family:monospace;color:var(--admin-text-muted);">${c.slug}</td>
+                    <td style="font-weight:500;">${count} bài viết</td>
+                    <td>
+                        <div class="actions-cell">
+                            <button class="btn-icon success" title="Sửa" onclick="editNewsCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-icon danger" title="Xóa" onclick="deleteNewsCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    window.openNewsCategoryModal = function(cat = null) {
+        const modal = document.getElementById('newsCategoryModal');
+        const title = document.getElementById('newsCategoryModalTitle');
+        const form = document.getElementById('newsCategoryForm');
+
+        form.reset();
+        document.getElementById('newsCategoryId').value = '';
+
+        if (cat) {
+            title.textContent = 'Sửa danh mục tin tức';
+            document.getElementById('newsCategoryId').value = cat.id;
+            document.getElementById('newsCategoryName').value = cat.name;
+            document.getElementById('newsCategorySlug').value = cat.slug || '';
+        } else {
+            title.textContent = 'Thêm danh mục tin tức';
+        }
+        modal.classList.add('active');
+    };
+
+    window.closeNewsCategoryModal = function() {
+        document.getElementById('newsCategoryModal').classList.remove('active');
+    };
+
+    window.editNewsCategory = function(id) {
+        const cat = ProductDB.getNewsCategoryById(id);
+        if (cat) openNewsCategoryModal(cat);
+    };
+
+    window.deleteNewsCategory = function(id, name) {
+        showConfirm('Xóa danh mục', `Bạn có chắc muốn xóa danh mục tin tức "${name}"?`, () => {
+            const res = ProductDB.deleteNewsCategory(id);
+            if (res.success) {
+                showToast('Đã xóa danh mục tin tức!', 'success');
+                renderNewsCategories();
+            } else {
+                showToast(res.message || 'Lỗi khi xóa', 'error');
+            }
+        });
+    };
+
+    document.getElementById('newsCategoryName')?.addEventListener('input', function(e) {
+        const slug = e.target.value.toLowerCase()
+            .replace(/đ/g, 'd')
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+        document.getElementById('newsCategorySlug').value = slug;
+    });
+
+    document.getElementById('btnSaveNewsCategory')?.addEventListener('click', () => {
+        const name = document.getElementById('newsCategoryName').value.trim();
+        if (!name) {
+            showToast('Vui lòng nhập tên danh mục!', 'error');
+            return;
+        }
+
+        const slug = document.getElementById('newsCategorySlug').value.trim();
+        const editId = document.getElementById('newsCategoryId').value;
+
+        let res;
+        if (editId) {
+            res = ProductDB.updateNewsCategory(editId, { name, slug });
+        } else {
+            res = ProductDB.addNewsCategory({ name, slug });
+        }
+
+        if (res.success) {
+            showToast(editId ? 'Cập nhật thành công!' : 'Thêm danh mục mới thành công!', 'success');
+            closeNewsCategoryModal();
+            renderNewsCategories();
+        } else {
+            showToast(res.message || 'Lỗi khi lưu danh mục', 'error');
+        }
+    });
+
+    document.getElementById('btnAddNewsCategory')?.addEventListener('click', () => openNewsCategoryModal());
+
+    // ========== NEWS ==========
+    function renderNews() {
+        const news = ProductDB.getNews(true); // true means isAdmin (returns all including inactive)
+        const searchVal = document.getElementById('newsSearch') ? document.getElementById('newsSearch').value.trim().toLowerCase() : '';
+        const tbody = document.getElementById('newsTableBody');
+
+        if (!tbody) return;
+
+        let filteredNews = news;
+        if (searchVal) {
+            filteredNews = news.filter(n => 
+                n.title.toLowerCase().includes(searchVal) || 
+                (n.slug && n.slug.toLowerCase().includes(searchVal))
+            );
+        }
+
+        if (filteredNews.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="table-empty"><i class="fa-solid fa-newspaper"></i>Chưa có tin tức nào</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = filteredNews.map(n => {
+            const dateStr = n.createdAt ? new Date(n.createdAt).toLocaleDateString('vi-VN') : '—';
+            
+            const catName = n.categoryId ? (ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Chưa phân loại') : 'Chưa phân loại';
+            
+            let posBadge = '';
+            if (n.position === 'hero_main') posBadge = '<span class="badge" style="background:#e8f4fd;color:#0369a1;padding:4px 8px;border-radius:4px;font-size:12px;">Hero Main</span>';
+            else if (n.position === 'hero_sub') posBadge = '<span class="badge" style="background:#f0f9ff;color:#0284c7;padding:4px 8px;border-radius:4px;font-size:12px;">Hero Sub</span>';
+            else if (n.position === 'trending_main') posBadge = '<span class="badge" style="background:#fff7ed;color:#c2410c;padding:4px 8px;border-radius:4px;font-size:12px;">Trending Main</span>';
+            else posBadge = '<span class="badge" style="background:#f1f5f9;color:#64748b;padding:4px 8px;border-radius:4px;font-size:12px;">Mặc định</span>';
+
+            return `
+                <tr>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">#${n.id}</td>
+                    <td>
+                        <div class="product-cell">
+                            <img src="${n.image}" alt="${n.title}" onerror="this.src='https://via.placeholder.com/44?text=No+Img'">
+                            <div class="product-cell-info">
+                                <span class="product-cell-name">${n.title}</span>
+                                <span class="product-cell-cat" style="font-family:monospace;">${n.slug}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="hide-mobile" style="text-align: left;"><span class="badge" style="background:#f1f5f9;color:#475569;padding:4px 8px;border-radius:4px;font-size:13px"><i class="fa-solid fa-tag"></i> ${catName}</span></td>
+                    <td class="hide-mobile" style="text-align: left;">${posBadge}</td>
+                    <td class="hide-mobile" style="text-align: left;">${n.active !== false ? '<span class="badge badge-success" style="background:#d4edda;color:#155724;padding:4px 8px;border-radius:4px;font-size:14px">Đang hiện</span>' : '<span class="badge badge-danger" style="background:#f8d7da;color:#721c24;padding:4px 8px;border-radius:4px;font-size:14px">Đang ẩn</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${dateStr}</td>
+                    <td style="text-align: left;">
+                        <div class="actions-cell" style="justify-content: flex-start;">
+                            <button class="btn-icon success" title="Sửa" onclick="editNews(${n.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-icon danger" title="Xóa" onclick="deleteNews(${n.id}, '${n.title.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    if (document.getElementById('newsSearch')) {
+        document.getElementById('newsSearch').addEventListener('input', renderNews);
+    }
+
+    // News modal
+    window.openNewsModal = function (newsItem = null) {
+        const modal = document.getElementById('newsModal');
+        const title = document.getElementById('newsModalTitle');
+        const form = document.getElementById('newsForm');
+
+        form.reset();
+        document.getElementById('newsId').value = '';
+        updateNewsImagePreview();
+
+        // Populate Categories
+        const catSelect = document.getElementById('newsCategorySelect');
+        const categories = ProductDB.getNewsCategories();
+        catSelect.innerHTML = '<option value="">-- Chọn danh mục --</option>' + 
+            categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+
+        if (newsItem) {
+            title.textContent = 'Sửa tin tức';
+            document.getElementById('newsId').value = newsItem.id;
+            document.getElementById('newsTitle').value = newsItem.title;
+            document.getElementById('newsSlug').value = newsItem.slug || '';
+            document.getElementById('newsImage').value = newsItem.image || '';
+            document.getElementById('newsContent').value = newsItem.content || '';
+            if (quillEditor) quillEditor.root.innerHTML = newsItem.content || '';
+            
+            document.getElementById('newsCategorySelect').value = newsItem.categoryId || '';
+            document.getElementById('newsPosition').value = newsItem.position || 'default';
+            
+            document.getElementById('newsActive').checked = newsItem.active !== false;
+            updateNewsImagePreview();
+        } else {
+            title.textContent = 'Thêm tin tức mới';
+            document.getElementById('newsSlug').value = '';
+            document.getElementById('newsContent').value = '';
+            if (quillEditor) quillEditor.root.innerHTML = '';
+            
+            document.getElementById('newsCategorySelect').value = '';
+            document.getElementById('newsPosition').value = 'default';
+            
+            document.getElementById('newsActive').checked = true;
+        }
+
+        modal.classList.add('active');
+    };
+
+    window.closeNewsModal = function () {
+        document.getElementById('newsModal').classList.remove('active');
+    };
+
+    window.editNews = function (id) {
+        const newsItem = ProductDB.getNewsById(id);
+        if (newsItem) openNewsModal(newsItem);
+    };
+
+    window.deleteNews = function (id, title) {
+        showConfirm('Xóa tin tức', `Bạn có chắc muốn xóa tin tức "${title}"?`, () => {
+            ProductDB.deleteNews(id);
+            showToast('Đã xóa tin tức thành công!', 'success');
+            renderNews();
+        });
+    };
+
+    document.getElementById('newsTitle')?.addEventListener('input', function(e) {
+        const slug = e.target.value.toLowerCase()
+            .replace(/đ/g, 'd')
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+        document.getElementById('newsSlug').value = slug;
+    });
+
+    function updateNewsImagePreview() {
+        const url = document.getElementById('newsImage').value;
+        const box = document.getElementById('newsImagePreview');
+        if (url) {
+            box.innerHTML = `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'><i class=\\'fa-solid fa-image-slash\\'></i>Hình ảnh không hợp lệ</div>'">`;
+        } else {
+            box.innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Xem trước hình ảnh</div>';
+        }
+    }
+    
+    document.getElementById('newsImage')?.addEventListener('input', updateNewsImagePreview);
+
+    const newsImageUpload = document.getElementById('newsImageUpload');
+    if (newsImageUpload) {
+        newsImageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    showToast('Vui lòng chọn ảnh có kích thước dưới 2MB!', 'error');
+                    this.value = '';
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const base64Str = evt.target.result;
+                    document.getElementById('newsImage').value = base64Str;
+                    updateNewsImagePreview();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    document.getElementById('btnSaveNews')?.addEventListener('click', () => {
+        const title = document.getElementById('newsTitle').value.trim();
+        if (!title) {
+            showToast('Vui lòng nhập tiêu đề tin tức!', 'error');
+            return;
+        }
+
+        const catId = document.getElementById('newsCategorySelect').value;
+        if (!catId) {
+            showToast('Vui lòng chọn danh mục tin tức!', 'error');
+            return;
+        }
+
+        const data = {
+            title,
+            slug: document.getElementById('newsSlug').value.trim(),
+            image: document.getElementById('newsImage').value.trim(),
+            content: document.getElementById('newsContent').value.trim(),
+            categoryId: parseInt(catId),
+            position: document.getElementById('newsPosition').value,
+            active: document.getElementById('newsActive').checked
+        };
+
+        const editId = document.getElementById('newsId').value;
+        if (editId) {
+            ProductDB.updateNews(editId, data);
+            showToast('Cập nhật tin tức thành công!', 'success');
+        } else {
+            ProductDB.addNews(data);
+            showToast('Thêm tin tức mới thành công!', 'success');
+        }
+
+        closeNewsModal();
+        renderNews();
+    });
+
+    document.getElementById('btnAddNews')?.addEventListener('click', () => openNewsModal());
 
     // ========== RELOAD DATABASE ==========
     document.getElementById('btnResetDB').addEventListener('click', (e) => {

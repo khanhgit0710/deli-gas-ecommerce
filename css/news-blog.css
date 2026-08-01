@@ -1057,3 +1057,30 @@
     font-size: inherit;
     font-weight: inherit;
 }
+
+/* Share Buttons for Detail Page */
+.share-btn {
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff !important;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.share-btn i {
+    color: #fff !important;
+}
+
+.share-btn.fb { background: #1877F2; }
+.share-btn.fb:hover { background: #0c59bb; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(24, 119, 242, 0.4); }
+
+.share-btn.mess { background: #0084FF; }
+.share-btn.mess:hover { background: #006bce; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0, 132, 255, 0.4); }
+
+.share-btn.link { background: #64748b; }
+.share-btn.link:hover { background: #475569; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(100, 116, 139, 0.4); }

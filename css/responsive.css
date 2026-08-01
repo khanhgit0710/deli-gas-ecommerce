@@ -1920,8 +1920,13 @@
         font-size: 42px !important; 
     }
     .contact-title p {
-        font-size: 15px !important;
+        font-size: 18px !important;
     }
+
+    .contact-title .highlight {
+        font-size: 32px !important;
+    } 
+    
     .contact-title .badge-top {
         font-size: 12px;
         white-space: normal;

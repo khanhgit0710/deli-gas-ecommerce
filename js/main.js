@@ -228,16 +228,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="product-card featured-large-card">
                 ${badgeHtml}
                 <div class="product-img">
-                    <a href="chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                    <a href="/chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
                 </div>
                 <div class="product-info">
-                    <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                    <h3><a href="/chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                     <p class="product-desc">${p.description || ''}</p>
                     <div class="product-price">
                         ${priceHtml}
                     </div>
                     <div class="product-actions">
-                        <button class="buy-now-btn">Mua ngay</button>
+                        <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham.html?id=${p.id}'">Mua ngay</button>
                         <button class="add-to-cart-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>
                 </div>
@@ -894,9 +894,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         const toast = document.createElement('div');
         toast.textContent = message;
-        const bgColor = type === 'error' ? '#e74c3c' : 'var(--color-accent)';
-        const textColor = type === 'error' ? 'white' : 'red';
-        toast.style.cssText = `background-color:${bgColor}; color:${textColor}; padding:12px 20px; border-radius:4px; box-shadow:0 2px 10px rgba(0,0,0,0.2); font-weight:700; font-family:inherit; font-size: 0.95rem; opacity:0; transform:translateX(20px); transition:all 0.3s ease;`;
+        const bgColor = type === 'error' ? '#e74c3c' : 'var(--color-primary, #245d56)';
+        const textColor = type === 'error' ? 'white' : 'var(--color-accent, #f6c02f)';
+        toast.style.cssText = `background-color:${bgColor}; color:${textColor}; padding:20px 30px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.25); font-weight:700; font-family:inherit; font-size: 1.4rem; opacity:0; transform:translateX(20px); transition:all 0.3s ease; z-index:9999;`;
         container.appendChild(toast);
 
         requestAnimationFrame(() => {
@@ -1113,7 +1113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     modalOverlay.innerHTML = `
                         <div class="custom-confirm-modal">
                             <div class="confirm-content">
-                                <p>Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?</p>
+                                <h3>Xác nhận xoá giỏ hàng</h3>
+                                <p>Bạn có chắc chắn muốn xóa toàn bộ sản phẩm trong giỏ hàng không?</p>
                             </div>
                             <div class="confirm-actions">
                                 <button class="btn-confirm-cancel">Huỷ</button>
