@@ -226,7 +226,7 @@
 .full-width-slider {
   position: relative;
   width: 100%;
-  height: 650px;
+  height: 850px;
   overflow: hidden;
   background-color: #e0f4ff;
   /* A light blue fallback color in case contain leaves space */
@@ -253,15 +253,15 @@
 
 /* Banner images for slides */
 .slide:nth-child(1) {
-  background: url('../assets/banner_trangchu_1.jpg') center/100% 100% no-repeat;
+  background: url('../assets/banner_trangchu_1.jpg') center/cover no-repeat;
 }
 
 .slide:nth-child(2) {
-  background: url('../assets/banner_trangchu_2.jpg') center/100% 100% no-repeat;
+  background: url('../assets/banner_trangchu_2.jpg') center/cover no-repeat;
 }
 
 .slide:nth-child(3) {
-  background: url('../assets/banner_trangchu_3.jpg') center/100% 100% no-repeat;
+  background: url('../assets/banner_trangchu_3.jpg') center/cover no-repeat;
 }
 
 .slide-content {
@@ -378,9 +378,20 @@
 }
 
 @keyframes badgeBlink {
-  0% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.4); transform: scale(1); }
-  50% { box-shadow: 0 0 15px rgba(255, 107, 0, 0.8); transform: scale(1.05); }
-  100% { box-shadow: 0 0 5px rgba(255, 107, 0, 0.4); transform: scale(1); }
+  0% {
+    box-shadow: 0 0 5px rgba(255, 107, 0, 0.4);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.8);
+    transform: scale(1.05);
+  }
+
+  100% {
+    box-shadow: 0 0 5px rgba(255, 107, 0, 0.4);
+    transform: scale(1);
+  }
 }
 
 .featured-products-section .featured-title-wrap h2 {
@@ -1040,10 +1051,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--color-gray-200);
-  border-radius: var(--border-radius-sm);
+  border-radius: 12px;
   color: var(--color-gray-800);
   font-weight: 500;
   transition: all var(--transition-fast);
@@ -1202,6 +1213,14 @@
 .feature-item:hover .feature-icon {
   transform: rotate(360deg);
   color: var(--color-accent);
+}
+
+@media (min-width: 992px) {
+  .features-badge-section .feature-icon {
+    width: 68px;
+    height: 68px;
+    font-size: 1.8rem;
+  }
 }
 
 .feature-info {
@@ -1514,7 +1533,8 @@
 
 /* Sidebar styling (Left Column) */
 .flash-deal-sidebar {
-  background-color: transparent; /* Changed for border effect */
+  background-color: transparent;
+  /* Changed for border effect */
   color: var(--color-white);
   border-radius: var(--border-radius-lg);
   padding: 20px 15px;
@@ -1553,8 +1573,13 @@
 }
 
 @keyframes rotateBorder {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .deal-badge-title {
@@ -1567,12 +1592,15 @@
 }
 
 @keyframes textFlashLight {
-  0%, 100% { 
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffeb3b, 0 0 40px #ff9800; 
+
+  0%,
+  100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffeb3b, 0 0 40px #ff9800;
     color: #fff;
   }
-  50% { 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+
+  50% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     color: #ffebee;
   }
 }
@@ -1698,7 +1726,7 @@
 /* Slider styling (Right Column) */
 .flash-deal-slider-wrapper {
   flex: 1;
-  background-color: #245d56;
+  background-color: #337a72;
   border-radius: var(--border-radius-lg);
   padding: 15px 35px 65px 35px;
   position: relative;
@@ -1734,8 +1762,8 @@
 }
 
 .deal-horizontal-img {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -1880,6 +1908,7 @@
    ========================================================================== */
 .site-footer {
   width: 100%;
+  background-color: var(--color-primary-dark);
 }
 
 /* Wavy Consultation Section (Top) */
@@ -3996,6 +4025,13 @@
   margin-right: 10px;
   font-size: 0.9em;
   color: var(--color-gray-500);
+  transition: color 0.3s ease;
+}
+
+.category-list li a:hover .sidebar-count,
+.category-list li a.active .sidebar-count,
+.sidebar-count:hover {
+  color: var(--color-accent);
 }
 
 .header-search-only {
@@ -5783,7 +5819,7 @@
 
 .btn-view-all-featured:hover {
   background: var(--color-primary);
-  color: #fff;
+  color: #fff !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -5810,10 +5846,14 @@
   padding: 0 0 15px 0 !important;
   margin-bottom: 15px !important;
   border-radius: 0 !important;
-}.featured-products-section {
-  padding: 60px 0;
-  background-color: #fff9db; /* M�u v�ng nh?t */
 }
+
+.featured-products-section {
+  padding: 60px 0;
+  background-color: #fff9db;
+  /* M�u v�ng nh?t */
+}
+
 .trang-chu-featured {
   padding: 60px 0 !important;
   margin: 0px 0 !important;
@@ -5822,6 +5862,7 @@
   max-width: unset !important;
   border-radius: 0 !important;
 }
+
 .featured-hotline-banner {
   display: flex;
   justify-content: space-between;
@@ -5834,17 +5875,20 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+
 .hotline-banner-left {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .hotline-title {
   color: #64748b;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
 }
+
 .hotline-number {
   color: #ef4444;
   font-size: 38px;
@@ -5853,11 +5897,13 @@
   line-height: 1;
   margin-top: 5px;
 }
+
 .hotline-banner-right {
   display: flex;
   gap: 15px;
   align-items: center;
 }
+
 .btn-hotline-call {
   background: #b4724b;
   color: white;
@@ -5871,10 +5917,12 @@
   font-size: 16px;
   transition: all 0.3s;
 }
+
 .btn-hotline-call:hover {
   background: #965a39;
   color: white;
 }
+
 .btn-hotline-zalo {
   background: linear-gradient(135deg, #218aff, #86bfff);
   color: white;
@@ -5888,16 +5936,19 @@
   font-size: 16px;
   transition: all 0.3s;
 }
+
 .btn-hotline-zalo:hover {
   opacity: 0.9;
   color: white;
 }
+
 .hotline-banner-left {
   display: flex;
   gap: 30px;
   align-items: center;
   flex-wrap: wrap;
 }
+
 .trust-item-circle {
   display: flex;
   align-items: center;
@@ -5906,6 +5957,7 @@
   color: var(--color-gray-800);
   font-size: 16px;
 }
+
 .icon-circle {
   width: 44px;
   height: 44px;
@@ -5917,38 +5969,57 @@
   justify-content: center;
   font-size: 18px;
 }
+
 .hotline-banner-right {
   display: flex;
   align-items: center;
   gap: 25px;
   flex-wrap: wrap;
 }
+
 .hotline-banner-contact {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .hotline-banner-btns {
   display: flex;
   gap: 40px;
   align-items: center;
 }
+
+@media (min-width: 992px) {
+  .hotline-banner-btns a {
+    min-width: 180px;
+    height: 48px;
+    padding: 0 30px;
+    justify-content: center;
+  }
+}
+
 .hotline-title {
   text-align: center;
 }
+
 .hotline-number {
   text-align: center;
 }
+
 .hotline-section-wrapper {
   padding-bottom: 60px;
-  background-color: #fff9db; /* Keep the same background as above section, or maybe white? Let's assume white since it's a new section outside, but wait, usually if it's below the yellow section, the user might want it on a white background. Let's not set background-color, let it be default (white). */
+  background-color: #fff9db;
+  /* Keep the same background as above section, or maybe white? Let's assume white since it's a new section outside, but wait, usually if it's below the yellow section, the user might want it on a white background. Let's not set background-color, let it be default (white). */
 }
+
 .hotline-section-wrapper .featured-hotline-banner {
   margin-top: 0;
 }
+
 .trust-item-circle {
   display: flex;
-  flex-direction: column; /* icon on top, title below */
+  flex-direction: column;
+  /* icon on top, title below */
   align-items: center;
   gap: 8px;
   font-weight: 600;
@@ -5956,18 +6027,22 @@
   font-size: 15px;
   text-align: center;
 }
+
 .hotline-banner-right {
   display: flex;
-  flex-direction: column; /* hotline on top, buttons below */
+  flex-direction: column;
+  /* hotline on top, buttons below */
   align-items: center;
   gap: 15px;
 }
+
 .hotline-banner-left {
   display: flex;
   flex-direction: column !important;
   gap: 20px;
   align-items: center;
 }
+
 .hotline-why-title {
   color: #fff;
   font-size: 28px;
@@ -5977,6 +6052,7 @@
   margin: 0 0 10px 0;
   text-align: center;
 }
+
 .hotline-banner-features {
   display: flex;
   flex-direction: row !important;
@@ -5984,10 +6060,12 @@
   gap: 90px !important;
   align-items: flex-start;
 }
+
 .hotline-section-wrapper {
   background-color: var(--color-primary);
   padding: 40px 0;
 }
+
 .hotline-section-wrapper .featured-hotline-banner {
   background: transparent !important;
   box-shadow: none !important;
@@ -5995,195 +6073,287 @@
   margin: 0 !important;
   border-radius: 0 !important;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   color: #ffffff !important;
 }
+
 .hotline-section-wrapper .icon-circle {
   border-color: var(--color-accent) !important;
   color: var(--color-accent) !important;
 }
+
 .hotline-section-wrapper .hotline-title {
   color: #ffffff !important;
   font-size: 20px;
   font-weight: 300;
 }
+
 .hotline-section-wrapper .hotline-number {
   color: var(--color-accent) !important;
   font-size: 60px;
 }
+
 .hotline-section-wrapper .btn-hotline-call {
   background: var(--color-accent) !important;
   color: var(--color-primary-dark) !important;
   border-radius: 12px;
 }
+
 .hotline-section-wrapper .btn-hotline-call:hover {
   background: #ffaa00 !important;
 }
+
 @keyframes ring {
-  0% { transform: rotate(0); }
-  10% { transform: rotate(15deg); }
-  20% { transform: rotate(-15deg); }
-  30% { transform: rotate(10deg); }
-  40% { transform: rotate(-10deg); }
-  50% { transform: rotate(5deg); }
-  60% { transform: rotate(-5deg); }
-  70% { transform: rotate(0); }
-  100% { transform: rotate(0); }
+  0% {
+    transform: rotate(0);
+  }
+
+  10% {
+    transform: rotate(15deg);
+  }
+
+  20% {
+    transform: rotate(-15deg);
+  }
+
+  30% {
+    transform: rotate(10deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  60% {
+    transform: rotate(-5deg);
+  }
+
+  70% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
 }
+
 .btn-hotline-call i {
   animation: ring 1.5s infinite ease-in-out;
 }
+
 .trang-chu-featured .container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
+
 .hotline-section-wrapper .container {
   max-width: 1400px !important;
   margin: 0 auto !important;
 }
+
 .hotline-banner-features {
   gap: 90px !important;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   font-size: 20px !important;
   gap: 15px !important;
 }
+
 .hotline-section-wrapper .icon-circle {
-  width: 90px !important; /* icon to ln */
+  width: 90px !important;
+  /* icon to ln */
   height: 90px !important;
   font-size: 40px !important;
 }
+
 .trang-chu-featured .container {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   transition: transform 0.3s ease;
   cursor: pointer;
 }
+
 .hotline-section-wrapper .trust-item-circle:hover {
   transform: translateY(-5px);
 }
+
 .hotline-section-wrapper .trust-item-circle:hover .icon-circle {
   background-color: var(--color-accent) !important;
   color: var(--color-primary-dark) !important;
-  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+  box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
 }
+
 .hotline-section-wrapper .icon-circle {
   transition: all 0.3s ease;
 }
+
 .btn-hotline-call {
   transition: all 0.3s ease !important;
 }
+
 .btn-hotline-call:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+  box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
 }
+
 .btn-hotline-zalo {
   transition: all 0.3s ease !important;
 }
+
 .btn-hotline-zalo:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(33,138,255,0.4);
+  box-shadow: 0 5px 15px rgba(33, 138, 255, 0.4);
   opacity: 1 !important;
 }
+
 @keyframes pulse-ring-accent {
-  0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(255, 170, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 170, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 0, 0);
+  }
 }
+
 @keyframes pulse-ring-zalo {
-  0% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(33, 138, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(33, 138, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 138, 255, 0);
+  }
 }
+
 @keyframes pulse-ring-red {
-  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
 }
 
 .hotline-section-wrapper .btn-hotline-call {
   animation: pulse-ring-accent 2s infinite !important;
 }
+
 .hotline-section-wrapper .btn-hotline-zalo {
   animation: pulse-ring-zalo 2s infinite !important;
   animation-delay: 0.5s !important;
 }
+
 .float-btn.float-hotline {
   animation: pulse-ring-red 2s infinite !important;
 }
 
 /* Custom Confirm Modal */
 .custom-confirm-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
+
 .custom-confirm-overlay.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
+
 .custom-confirm-modal {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
+
 .custom-confirm-modal.show {
-    transform: translateY(0);
+  transform: translateY(0);
 }
+
 .confirm-content h3 {
-    margin-top: 0;
-    color: #333;
-    font-size: 1.25rem;
-    margin-bottom: 15px;
+  margin-top: 0;
+  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
 }
+
 .confirm-content p {
-    color: #666;
-    margin-bottom: 25px;
-    font-size: 1rem;
-    line-height: 1.5;
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
+
 .confirm-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
-.btn-confirm-cancel, .btn-confirm-agree {
-    padding: 10px 25px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
+.btn-confirm-cancel,
+.btn-confirm-agree {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 .btn-confirm-cancel {
-    background-color: #f1f5f9;
+  background-color: #f1f5f9;
   display: flex;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   gap: 90px !important;
   align-items: flex-start;
 }
+
 .hotline-section-wrapper {
   background-color: var(--color-primary);
   padding: 40px 0;
 }
+
 .hotline-section-wrapper .featured-hotline-banner {
   background: transparent !important;
   box-shadow: none !important;
@@ -6191,207 +6361,347 @@
   margin: 0 !important;
   border-radius: 0 !important;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   color: #ffffff !important;
 }
+
 .hotline-section-wrapper .icon-circle {
   border-color: var(--color-accent) !important;
   color: var(--color-accent) !important;
 }
+
 .hotline-section-wrapper .hotline-title {
   color: #ffffff !important;
   font-size: 20px;
   font-weight: 300;
 }
+
 .hotline-section-wrapper .hotline-number {
   color: var(--color-accent) !important;
   font-size: 60px;
 }
+
 .hotline-section-wrapper .btn-hotline-call {
   background: var(--color-accent) !important;
   color: var(--color-primary-dark) !important;
 }
+
 .hotline-section-wrapper .btn-hotline-call:hover {
   background: #ffaa00 !important;
 }
+
 @keyframes ring {
-  0% { transform: rotate(0); }
-  10% { transform: rotate(15deg); }
-  20% { transform: rotate(-15deg); }
-  30% { transform: rotate(10deg); }
-  40% { transform: rotate(-10deg); }
-  50% { transform: rotate(5deg); }
-  60% { transform: rotate(-5deg); }
-  70% { transform: rotate(0); }
-  100% { transform: rotate(0); }
+  0% {
+    transform: rotate(0);
+  }
+
+  10% {
+    transform: rotate(15deg);
+  }
+
+  20% {
+    transform: rotate(-15deg);
+  }
+
+  30% {
+    transform: rotate(10deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  60% {
+    transform: rotate(-5deg);
+  }
+
+  70% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
 }
+
 .btn-hotline-call i {
   animation: ring 1.5s infinite ease-in-out;
 }
+
 .trang-chu-featured .container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
+
 .hotline-section-wrapper .container {
   max-width: 1400px !important;
   margin: 0 auto !important;
 }
+
 .hotline-banner-features {
   gap: 90px !important;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   font-size: 20px !important;
   gap: 15px !important;
 }
+
 .hotline-section-wrapper .icon-circle {
-  width: 90px !important; /* icon to ln */
+  width: 90px !important;
+  /* icon to ln */
   height: 90px !important;
   font-size: 40px !important;
 }
+
 .trang-chu-featured .container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-left: 0 ;
+  padding-right: 0 ;
 }
+
 .hotline-section-wrapper .trust-item-circle {
   transition: transform 0.3s ease;
   cursor: pointer;
 }
+
 .hotline-section-wrapper .trust-item-circle:hover {
   transform: translateY(-5px);
 }
+
 .hotline-section-wrapper .trust-item-circle:hover .icon-circle {
   background-color: var(--color-accent) !important;
   color: var(--color-primary-dark) !important;
-  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+  box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
 }
+
 .hotline-section-wrapper .icon-circle {
   transition: all 0.3s ease;
 }
+
 .btn-hotline-call {
   transition: all 0.3s ease !important;
 }
+
 .btn-hotline-call:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255,183,0,0.4);
+  box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
 }
+
 .btn-hotline-zalo {
   transition: all 0.3s ease !important;
 }
+
 .btn-hotline-zalo:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(33,138,255,0.4);
+  box-shadow: 0 5px 15px rgba(33, 138, 255, 0.4);
   opacity: 1 !important;
 }
+
 @keyframes pulse-ring-accent {
-  0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(255, 170, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 170, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 170, 0, 0);
+  }
 }
+
 @keyframes pulse-ring-zalo {
-  0% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(33, 138, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(33, 138, 255, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 138, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(33, 138, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 138, 255, 0);
+  }
 }
+
 @keyframes pulse-ring-red {
-  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(255, 0, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
 }
 
 .hotline-section-wrapper .btn-hotline-call {
   animation: pulse-ring-accent 2s infinite !important;
 }
+
 .hotline-section-wrapper .btn-hotline-zalo {
   animation: pulse-ring-zalo 2s infinite !important;
   animation-delay: 0.5s !important;
 }
+
 .float-btn.float-hotline {
   animation: pulse-ring-red 2s infinite !important;
 }
 
 /* Custom Confirm Modal */
 .custom-confirm-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
+
 .custom-confirm-overlay.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
+
 .custom-confirm-modal {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
+
 .custom-confirm-modal.show {
-    transform: translateY(0);
+  transform: translateY(0);
 }
+
 .confirm-content h3 {
-    margin-top: 0;
-    color: #333;
-    font-size: 1.25rem;
-    margin-bottom: 15px;
+  margin-top: 0;
+  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
 }
+
 .confirm-content p {
-    color: #666;
-    margin-bottom: 25px;
-    font-size: 1rem;
-    line-height: 1.5;
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
+
 .confirm-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
-.btn-confirm-cancel, .btn-confirm-agree {
-    padding: 10px 25px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.btn-confirm-cancel {
-    background-color: #f1f5f9;
-    color: #64748b;
-}
-.btn-confirm-cancel:hover {
-    background-color: #e2e8f0;
-}
+
+.btn-confirm-cancel,
 .btn-confirm-agree {
-    background-color: #e74c3c;
-    color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+.btn-confirm-cancel {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.btn-confirm-cancel:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-confirm-agree {
+  background-color: #e74c3c;
+  color: white;
+}
+
 .btn-confirm-agree:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
 /* Hide last top-bar divider */
 .top-bar-right .top-bar-divider:last-child {
-    display: none !important;
+  display: none !important;
 }
 
 .review-btn-static {
-    transition: background-color 0.3s ease, color 0.3s ease !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
 }
+
 .review-btn-static:hover {
-    transform: none !important;
-    animation: none !important;
-    box-shadow: none !important;
+  transform: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+/* Icon Shake & Pulse Animation */
+@keyframes iconShakeAnim {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-20deg); }
+  20% { transform: rotate(20deg); }
+  30% { transform: rotate(-20deg); }
+  40% { transform: rotate(20deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes iconPulseRingAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+.icon-shake {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: iconShakeAnim 1.5s infinite;
+  z-index: 1;
+}
+
+.icon-shake::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -1;
+  animation: iconPulseRingAnim 1.5s infinite ease-out;
 }

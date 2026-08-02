@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.logo-img').forEach(img => {
                 img.src = settings.logo;
             });
-            document.querySelectorAll('.footer-logo').forEach(img => {
-                if(img.tagName === 'IMG') img.src = settings.logo;
+            document.querySelectorAll('.footer-logo img').forEach(img => {
+                img.src = settings.logo;
             });
         }
 
@@ -54,6 +54,42 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const span = dynHotline.querySelector('span');
                 if(span) span.textContent = settings.hotline;
             }
+
+            // Update phone in top-bar-right
+            document.querySelectorAll('.top-bar-link').forEach(a => {
+                if (a.querySelector('.fa-phone')) {
+                    a.href = `tel:${hotlineClean}`;
+                    const span = a.querySelector('span');
+                    if (span) span.textContent = settings.hotline;
+                    else {
+                        const i = a.querySelector('i');
+                        if (i) {
+                            a.innerHTML = '';
+                            a.appendChild(i);
+                            a.append(' ' + settings.hotline);
+                        } else {
+                            a.textContent = settings.hotline;
+                        }
+                    }
+                }
+            });
+
+            // Replace hardcoded hotline in the DOM
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while (node = walker.nextNode()) {
+                let text = node.nodeValue;
+                if (text.includes('090 123 4567')) {
+                    text = text.split('090 123 4567').join(settings.hotline);
+                }
+                if (text.includes('1900.123.123')) {
+                    text = text.split('1900.123.123').join(settings.hotline);
+                }
+                if (text.includes('1900 123 123')) {
+                    text = text.split('1900 123 123').join(settings.hotline);
+                }
+                node.nodeValue = text;
+            }
         }
 
         // Apply Zalo
@@ -86,6 +122,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                         }
                     }
                 }
+            });
+
+            // Replace hardcoded addresses
+            document.querySelectorAll('.contact-info-list li, .info-block p, .info-block').forEach(el => {
+                if (el.innerHTML.includes('475A')) {
+                    if (el.tagName.toLowerCase() === 'li') {
+                        el.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${settings.address}`;
+                    } else if (el.tagName.toLowerCase() === 'p') {
+                        el.innerHTML = settings.address;
+                    }
+                }
+            });
+
+            // Update Google Map iframe
+            document.querySelectorAll('iframe[src*="google.com/maps"]').forEach(iframe => {
+                iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
             });
         }
     }

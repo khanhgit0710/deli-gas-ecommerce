@@ -1675,22 +1675,15 @@
 }
 
 @media (max-width: 768px) {
-    .combo-items {
-        flex-direction: column;
-    }
-
-    .combo-plus {
-        transform: rotate(90deg);
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr;
-    }
 
     .pd-trust-badges {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         padding: 10px;
+    }
+    
+    .combo-action {
+        margin: 0 auto;
     }
 
     .trust-item i {
@@ -1704,10 +1697,31 @@
 }
 
 @media (max-width: 480px) {
+    .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pd-combo-section {
+        padding: 25px 0px 25px 14px !important;
+        margin: 20px 0;
+    }
+
+    .combo-action {
+        min-width: 0 !important;
+        width: 100%;
+        padding: 20px 15px !important;
+    }
+
+    .combo-action .combo-btn-group
+     {
+        width: 90% !important;
+        margin: 15px auto 0 auto !important;
+    }
+
     .combo-items {
         display: grid !important;
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 0px;
         width: 100%;
         padding-bottom: 0;
     }
@@ -1743,6 +1757,14 @@
     .flash-deal-progress-wrap {
         width: 100%;
         order: 3;
+    }
+
+    .pd-review-summary {
+        gap: 20px !important;
+    }
+
+    .pd-reviews {
+        margin-top: 0px !important;
     }
 }
 
@@ -1820,10 +1842,12 @@
 
     .trust-item {
         padding: 10px 5px;
+        height: 100%;
     }
 
     .trust-item i {
-        font-size: 20px;
+        font-size: 24px;
+        margin-bottom: 6px;
     }
 
     .trust-item span {

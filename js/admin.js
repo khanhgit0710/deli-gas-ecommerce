@@ -4,6 +4,16 @@
  */
 document.addEventListener('DOMContentLoaded', async () => {
     await ProductDB.initAsync();
+    
+    // Apply logo to admin screen if exists
+    const adminSettings = ProductDB.getSettings();
+    if (adminSettings && adminSettings.logo) {
+        const loginLogo = document.querySelector('.login-logo img');
+        if (loginLogo) loginLogo.src = adminSettings.logo;
+        const sidebarLogo = document.querySelector('.sidebar-header img');
+        if (sidebarLogo) sidebarLogo.src = adminSettings.logo;
+    }
+
     // ========== AUTHENTICATION ==========
     const loginOverlay = document.getElementById('adminLoginOverlay');
     const adminLayout = document.getElementById('adminLayout');
@@ -80,6 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (sectionId === 'products') renderProducts();
         if (sectionId === 'categories') renderCategories();
         if (sectionId === 'news') renderNews();
+        if (sectionId === 'news-categories') renderNewsCategories();
         if (sectionId === 'settings') renderSettings();
     }
 
@@ -225,7 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <tr>
                     <td>
                         <div class="product-cell">
-                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=No+Img'">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
                             <div class="product-cell-info">
                                 <span class="product-cell-name">${p.name}</span>
                                 <span class="product-cell-cat">${ProductDB.getCategoryName(p.categoryId)}</span>
@@ -244,6 +255,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ========== PRODUCTS ==========
+    let currentProductPage = 1;
+    const productsPerPage = 20;
+
+    window.changeProductPage = function(page) {
+        currentProductPage = page;
+        renderProducts();
+    };
+
     function populateCategoryFilters() {
         const categories = ProductDB.getCategories();
         
@@ -262,7 +281,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         select.value = currentSelectValue;
     }
 
-    function renderProducts() {
+    function renderProducts(resetPage = false) {
+        if (resetPage === true) currentProductPage = 1;
         populateCategoryFilters();
         const searchVal = document.getElementById('productSearch').value.trim();
         const catFilter = document.getElementById('categoryFilter').value;
@@ -278,23 +298,46 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const tbody = document.getElementById('productsTableBody');
         const countText = document.getElementById('productCountText');
+        const pagination = document.getElementById('productPagination');
 
         if (products.length === 0) {
             tbody.innerHTML = '<tr><td colspan="7" class="table-empty"><i class="fa-solid fa-box-open"></i>Không tìm thấy sản phẩm nào</td></tr>';
             countText.textContent = '0 sản phẩm';
+            if (pagination) pagination.innerHTML = '';
             return;
         }
 
         countText.textContent = `${products.length} sản phẩm`;
 
-        tbody.innerHTML = products.map(p => {
+        const totalPages = Math.ceil(products.length / productsPerPage);
+        if (currentProductPage > totalPages) currentProductPage = totalPages;
+        if (currentProductPage < 1) currentProductPage = 1;
+
+        const startIndex = (currentProductPage - 1) * productsPerPage;
+        const endIndex = Math.min(startIndex + productsPerPage, products.length);
+        const paginatedProducts = products.slice(startIndex, endIndex);
+
+        if (pagination) {
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentProductPage) {
+                    html += `<button class="btn btn-primary btn-sm" style="padding: 5px 10px; height: 30px; display: inline-flex; align-items: center; justify-content: center;">${i}</button>`;
+                } else {
+                    html += `<button class="btn btn-outline btn-sm" style="padding: 5px 10px; height: 30px; display: inline-flex; align-items: center; justify-content: center;" onclick="changeProductPage(${i})">${i}</button>`;
+                }
+            }
+            pagination.innerHTML = html;
+        }
+
+        tbody.innerHTML = paginatedProducts.map((p, index) => {
             const discountedPrice = ProductDB.getDiscountedPrice(p);
+            const serialNumber = startIndex + index + 1;
             return `
                 <tr>
-                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">#${p.id}</td>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">${serialNumber}</td>
                     <td>
                         <div class="product-cell">
-                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=No+Img'">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
                             <div class="product-cell-info">
                                 <span class="product-cell-name">${p.name}</span>
                                 <span class="product-cell-cat">${ProductDB.getCategoryName(p.categoryId)}</span>
@@ -321,8 +364,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Search & filter events
-    document.getElementById('productSearch').addEventListener('input', renderProducts);
-    document.getElementById('categoryFilter').addEventListener('change', renderProducts);
+    document.getElementById('productSearch').addEventListener('input', () => renderProducts(true));
+    document.getElementById('categoryFilter').addEventListener('change', () => renderProducts(true));
 
     // Format Currency Input
     function formatCurrencyInput(e) {
@@ -474,7 +517,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const url = document.getElementById('productImage').value;
         const box = document.getElementById('imagePreview');
         if (url) {
-            box.innerHTML = `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'><i class=\\'fa-solid fa-image-slash\\'></i>Hình ảnh không hợp lệ</div>'">`;
+            box.innerHTML = `<img src="${url}" alt="Xem trước" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'><i class=\\'fa-solid fa-image-slash\\'></i>Hình ảnh không hợp lệ</div>'">`;
         } else {
             box.innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Xem trước hình ảnh</div>';
         }
@@ -555,18 +598,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const btnAddAdditionalImage = document.getElementById('btnAddAdditionalImage');
+    const inputAdditionalImage = document.getElementById('additionalImageInput');
+
+    function addAdditionalImageFromUrl() {
+        if (!inputAdditionalImage) return;
+        const val = inputAdditionalImage.value.trim();
+        if (val) {
+            if (window.currentAdditionalImages.length >= 6) {
+                showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
+                return;
+            }
+            window.currentAdditionalImages.push(val);
+            inputAdditionalImage.value = '';
+            renderAdditionalImages();
+        }
+    }
+
     if (btnAddAdditionalImage) {
-        btnAddAdditionalImage.addEventListener('click', () => {
-            const input = document.getElementById('additionalImageInput');
-            const val = input.value.trim();
-            if (val) {
-                if (window.currentAdditionalImages.length >= 6) {
-                    showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
-                    return;
-                }
-                window.currentAdditionalImages.push(val);
-                input.value = '';
-                renderAdditionalImages();
+        btnAddAdditionalImage.addEventListener('click', addAdditionalImageFromUrl);
+    }
+    
+    if (inputAdditionalImage) {
+        inputAdditionalImage.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission if inside a form
+                addAdditionalImageFromUrl();
             }
         });
     }
@@ -938,9 +994,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const catName = n.categoryId ? (ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Chưa phân loại') : 'Chưa phân loại';
             
             let posBadge = '';
-            if (n.position === 'hero_main') posBadge = '<span class="badge" style="background:#e8f4fd;color:#0369a1;padding:4px 8px;border-radius:4px;font-size:12px;">Hero Main</span>';
-            else if (n.position === 'hero_sub') posBadge = '<span class="badge" style="background:#f0f9ff;color:#0284c7;padding:4px 8px;border-radius:4px;font-size:12px;">Hero Sub</span>';
-            else if (n.position === 'trending_main') posBadge = '<span class="badge" style="background:#fff7ed;color:#c2410c;padding:4px 8px;border-radius:4px;font-size:12px;">Trending Main</span>';
+            if (n.position === 'hero_main') posBadge = '<span class="badge" style="background:#e8f4fd;color:#0369a1;padding:4px 8px;border-radius:4px;font-size:12px;">Bài nổi bật (Chính)</span>';
+            else if (n.position === 'hero_sub') posBadge = '<span class="badge" style="background:#f0f9ff;color:#0284c7;padding:4px 8px;border-radius:4px;font-size:12px;">Bài nổi bật (Phụ)</span>';
+            else if (n.position === 'trending_main') posBadge = '<span class="badge" style="background:#fff7ed;color:#c2410c;padding:4px 8px;border-radius:4px;font-size:12px;">Tin cập nhật (Chính)</span>';
             else posBadge = '<span class="badge" style="background:#f1f5f9;color:#64748b;padding:4px 8px;border-radius:4px;font-size:12px;">Mặc định</span>';
 
             return `
@@ -995,6 +1051,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('newsId').value = newsItem.id;
             document.getElementById('newsTitle').value = newsItem.title;
             document.getElementById('newsSlug').value = newsItem.slug || '';
+            document.getElementById('newsAuthor').value = newsItem.author || '';
             document.getElementById('newsImage').value = newsItem.image || '';
             document.getElementById('newsContent').value = newsItem.content || '';
             if (quillEditor) quillEditor.root.innerHTML = newsItem.content || '';
@@ -1095,6 +1152,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = {
             title,
             slug: document.getElementById('newsSlug').value.trim(),
+            author: document.getElementById('newsAuthor').value.trim(),
             image: document.getElementById('newsImage').value.trim(),
             content: document.getElementById('newsContent').value.trim(),
             categoryId: parseInt(catId),

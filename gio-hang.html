@@ -62,7 +62,11 @@
             .cart-banner {
                 flex-direction: column;
                 text-align: center;
-                padding: 20px;
+                padding: 8px;
+            }
+
+            .order-summary {
+                padding: 8px !important;
             }
         }
 
@@ -120,7 +124,7 @@
         .product-col {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 8px; /* Giảm khoảng cách */
         }
 
         .remove-btn {
@@ -129,7 +133,8 @@
             color: #999;
             font-size: 1.2rem;
             cursor: pointer;
-            padding: 8px;
+            transition: color 0.3s;
+            padding-right: 5px; /* Giảm thêm khoảng cách */
         }
 
         .remove-btn:hover {
@@ -137,13 +142,13 @@
         }
 
         .cart-product-img {
-            width: 80px;
-            height: 80px;
+            width: 110px; /* Hình ảnh to lên */
+            height: 110px;
             object-fit: contain;
             border-radius: 8px;
-            border: 1px solid #eee;
+            background: #fff;
             padding: 5px;
-            background-color: white;
+            border: 1px solid var(--color-gray-200, #e9ecef);
         }
 
         .cart-product-info h4 {
@@ -242,16 +247,19 @@
         .btn-clear {
             color: #1e824c;
             background: none;
-            border: none;
-            cursor: pointer;
+            border: 1px solid #1e824c; /* Chuẩn bị viền */
+            padding: 6px 12px;
+            border-radius: 12px;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
             font-size: 16px;
         }
 
         .btn-clear:hover {
             color: var(--color-accent);
-            text-decoration: underline;
-
+            border-color: var(--color-accent); /* Hover border nổi bật */
+            background-color: var(--color-accent-light, rgba(246, 192, 47, 0.1)); /* Light accent background */
         }
 
         /* Order Summary */
@@ -432,7 +440,34 @@
             background-color: #e5b127;
         }
 
+        @media (max-width: 768px) {
+            .features-section {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 15px;
+            }
+            .feature-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px;
+                gap: 15px;
+            }
+            .feature-text h4 {
+                font-size: 16px;
+            }
+            .feature-text p {
+                font-size: 14px;
+            }
+        }
+
         @media (max-width: 576px) {
+            .features-section {
+                grid-template-columns: 1fr !important;
+            }
+            .feature-item {
+                flex-direction: row;
+                text-align: left;
+            }
             .newsletter-form {
                 flex-direction: column;
             }
@@ -443,7 +478,7 @@
 
         .btn-hotline {
             background-color: var(--color-primary, #245d56);
-            color: white;
+            color: var(--color-accent, #f6c02f);
             text-align: center;
             text-decoration: none;
             padding: 12px;
@@ -522,6 +557,26 @@
             background: white;
             border-radius: 50%;
             padding: 2px;
+        }
+        @media (max-width: 480px) {
+            .cart-contact-btns {
+                flex-direction: row !important;
+            }
+            .cart-contact-btns > a {
+                flex: 1;
+                font-size: 16px; /* Tăng fz lên */
+                padding: 0 5px; /* Đổi padding vì đã set height cứng */
+                height: 46px; /* Chiều cao 46px */
+                display: flex;
+                flex-direction: row; /* Cùng 1 hàng */
+                justify-content: center;
+                align-items: center;
+                gap: 8px; /* Khoảng cách icon và text */
+                text-align: center;
+            }
+            .cart-contact-btns > a img.zalo-icon-img {
+                width: 24px; /* Chỉnh lại size icon Zalo nếu cần */
+            }
         }
     </style>
     <link rel="stylesheet" href="css/responsive.css">
@@ -703,7 +758,7 @@
                     <span>Tổng cộng (Total)</span>
                     <span id="cart-total">1.760.000đ</span>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <div class="cart-contact-btns" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
                     <a href="tel:1900123123" class="btn-hotline">
                         <span class="icon-phone-wrap"><i class="fa-solid fa-phone"></i></span> Gọi 1900.123.123
                     </a>

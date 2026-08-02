@@ -57,11 +57,27 @@ function renderNewsList() {
     }
 
     // 2. Chuyên Mục Yêu Thích
-    let filtersHtml = `<a href="javascript:void(0)" class="active" onclick="filterNewsGrid(null, this)"><h3>Tất cả</h3></a>`;
+    let filtersHtml = `<div class="nb-tab-indicator" id="nb-tab-indicator"></div>`;
+    filtersHtml += `<a href="javascript:void(0)" class="active" onclick="filterNewsGrid(null, this)"><h3>Tất cả</h3></a>`;
     categories.slice(0, 4).forEach(c => {
         filtersHtml += `<a href="javascript:void(0)" onclick="filterNewsGrid(${c.id}, this)"><h3>${c.name}</h3></a>`;
     });
     if(document.getElementById('news-category-filters')) document.getElementById('news-category-filters').innerHTML = filtersHtml;
+
+    window.updateNbTabIndicator = function(element) {
+        const indicator = document.getElementById('nb-tab-indicator');
+        if (indicator && element) {
+            indicator.style.width = element.offsetWidth + 'px';
+            indicator.style.height = element.offsetHeight + 'px';
+            indicator.style.left = element.offsetLeft + 'px';
+            indicator.style.top = element.offsetTop + 'px';
+        }
+    };
+
+    window.addEventListener('resize', () => {
+        const activeTab = document.querySelector('#news-category-filters a.active');
+        if(activeTab) updateNbTabIndicator(activeTab);
+    });
 
     // Grid items (default position)
     const defaultNews = allNews.filter(n => n.position === 'default');
@@ -70,7 +86,10 @@ function renderNewsList() {
         // Update active class
         const links = document.querySelectorAll('#news-category-filters a');
         links.forEach(l => l.classList.remove('active'));
-        if(element) element.classList.add('active');
+        if(element) {
+            element.classList.add('active');
+            updateNbTabIndicator(element);
+        }
         
         let filtered = defaultNews;
         if (categoryId !== null) {
@@ -101,6 +120,10 @@ function renderNewsList() {
     // Initial render
     if(document.getElementById('news-favorites-grid')) {
         window.filterNewsGrid(null, document.querySelector('#news-category-filters a.active'));
+        setTimeout(() => {
+            const activeTab = document.querySelector('#news-category-filters a.active');
+            if(activeTab) updateNbTabIndicator(activeTab);
+        }, 100);
     }
 
     // 3. Tin Cập Nhật
@@ -198,12 +221,11 @@ function renderNewsDetail() {
                     <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop"
                         alt="Author">
                     <div>
-                        <strong>Ban Biên Tập</strong>
-                        <span>Gas Việt</span>
+                        <strong>${newsItem.author || 'Ban Biên Tập'}</strong>
                     </div>
                 </div>
                 <div class="nb-date">
-                    <i class="fa-regular fa-clock"></i> <span class="hide-text-mobile">Cập nhật:</span> ${formatDate(newsItem.createdAt)}
+                    <i class="fa-regular fa-clock"></i> <span class="hide-text-mobile">Đăng ngày:</span> ${formatDate(newsItem.createdAt)}
                 </div>
             </div>
         </div>

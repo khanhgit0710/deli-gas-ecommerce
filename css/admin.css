@@ -533,10 +533,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 20px 24px 10px;
     border-bottom: 1px solid var(--admin-border);
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 12px; 
 }
 
 .table-header-left {

@@ -9,10 +9,13 @@
 
 /* Common Buttons */
 .nb-btn-dark {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
     background-color: var(--color-primary);
     color: var(--color-white);
-    padding: 12px 24px;
+    padding: 0 24px;
     border-radius: 12px;
     text-decoration: none;
     font-weight: 500;
@@ -29,7 +32,7 @@
     display: inline-block;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
-    padding: 10px 20px;
+    padding: 6px 20px;
     border-radius: 12px;
     text-decoration: none;
     font-weight: 500;
@@ -47,8 +50,14 @@
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
     gap: 40px;
-    align-items: center;
+    align-items: stretch;
     margin-bottom: 80px;
+}
+.nb-hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 .nb-hero-text h2 {
     font-size: 3.5rem;
@@ -67,9 +76,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    min-height: 500px;
 }
 .nb-img-large {
-    height: 500px;
+    height: 100%;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
@@ -93,10 +103,12 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
 }
 .nb-img-small-stack img {
     width: 100%;
-    height: calc(250px - 10px);
+    flex: 1;
+    min-height: 0;
     object-fit: cover;
     border-radius: 20px;
     background-color: #e0e0e0;
@@ -126,6 +138,15 @@
     gap: 15px;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+}
+.nb-tab-indicator {
+    position: absolute;
+    background-color: var(--color-accent);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    pointer-events: none;
 }
 .nb-dest-filters a {
     text-decoration: none;
@@ -137,17 +158,15 @@
     border-radius: 12px;
     transition: all 0.3s;
     position: relative;
-    overflow: hidden;
+    z-index: 2;
 }
 .nb-dest-filters a:hover {
-    background-color: var(--color-accent);
     color: var(--color-primary-dark);
 }
 .nb-dest-filters a.active {
-    background-color: var(--color-accent);
+    background-color: transparent;
     color: var(--color-primary-dark);
     font-weight: 600;
-    border-bottom: none;
 }
 .nb-dest-select {
     border: none;

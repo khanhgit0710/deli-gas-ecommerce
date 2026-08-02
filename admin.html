@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Admin Panel | Gas Việt</title>
+    <title>Quản Trị | Gas Việt</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
@@ -17,7 +17,7 @@
                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo">
             </div>
             <h2>Đăng Nhập Quản Trị</h2>
-            <p>Vui lòng đăng nhập để truy cập Admin GasViet</p>
+            <p>Vui lòng đăng nhập để truy cập Hệ thống Quản trị GasViet</p>
             <form id="adminLoginForm">
                 <div class="form-group" style="margin-bottom: 15px;">
                     <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Tài khoản</label>
@@ -97,7 +97,7 @@
                     <h2 id="pageTitle">Bảng điều khiển</h2>
                 </div>
                 <div class="topbar-right">
-                    <span style="font-size:16px;color:var(--admin-text-muted)">Xin chào, <strong style="color:var(--admin-text)">Admin</strong></span>
+                    <span style="font-size:16px;color:var(--color-accent)">Xin chào, <strong style="color:var(--color-accent)">Admin</strong></span>
                 </div>
             </div>
 
@@ -168,8 +168,9 @@
                             </tbody>
                         </table>
                         </div>
-                        <div class="table-footer">
+                        <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="productCountText">0 sản phẩm</span>
+                            <div id="productPagination" class="pagination" style="display: flex; gap: 5px;"></div>
                         </div>
                     </div>
                 </section>
@@ -223,6 +224,7 @@
                                     <th style="width:40px">ID</th>
                                     <th>Tên danh mục</th>
                                     <th>Slug</th>
+                                    <th>Số bài viết</th>
                                     <th style="width:120px; white-space: nowrap;">Thao tác</th>
                                 </tr>
                             </thead>
@@ -538,6 +540,10 @@
                             <input type="text" class="form-input" id="newsSlug" readonly style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;" placeholder="Tự động tạo từ tiêu đề...">
                         </div>
                         <div class="form-group full">
+                            <label class="form-label">Tác giả (Nguồn)</label>
+                            <input type="text" class="form-input" id="newsAuthor" placeholder="Nhập tên tác giả hoặc nguồn bài viết...">
+                        </div>
+                        <div class="form-group full">
                             <label class="form-label">Hình ảnh đại diện</label>
                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                                 <input type="text" class="form-input" id="newsImage" placeholder="Nhập URL hoặc tải ảnh lên...">
@@ -568,8 +574,8 @@
                             <label class="form-label">Vị trí hiển thị (Bố cục)</label>
                             <select class="form-input" id="newsPosition">
                                 <option value="default">Mặc định (Tin tức cập nhật - Nhỏ)</option>
-                                <option value="hero_main">Hero Banner - Bài chính (To nhất)</option>
-                                <option value="hero_sub">Hero Banner - Bài phụ (3 ảnh nhỏ)</option>
+                                <option value="hero_main">Bài viết nổi bật - Chính (To nhất)</option>
+                                <option value="hero_sub">Bài viết nổi bật - Phụ (3 ảnh nhỏ)</option>
                                 <option value="trending_main">Tin Cập Nhật - Bài to bên trái</option>
                             </select>
                         </div>

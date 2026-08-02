@@ -160,7 +160,7 @@
                     </div>
 
                     <div class="pd-specs-summary" id="pdSpecsSummary" style="background: var(--color-gray-50); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">Thông số chi tiết</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">Thông số kỹ thuật</div>
                         <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 14px;">
                             <div style="color: var(--color-gray-500);">Thương hiệu:</div><div style="font-weight: 500;">Petrolimex</div>
                             <div style="color: var(--color-gray-500);">Trọng lượng:</div><div style="font-weight: 500;">12kg</div>
@@ -1758,7 +1758,7 @@
                 const specLines = product.specs.split('\n');
                 let html = `
                     <div class="specs-accordion-header" onclick="toggleSpecs()">
-                        <h3 class="specs-heading">Thông số chi tiết</h3>
+                        <div class="specs-heading">Thông số kỹ thuật</div>
                         <i class="fa-solid fa-angles-right specs-toggle-icon" style="transform: rotate(90deg);"></i>
                     </div>
                     <div class="specs-accordion-content" id="specsContent" style="display: block;">

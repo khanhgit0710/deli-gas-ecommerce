@@ -22,7 +22,7 @@
             scroll-behavior: smooth;
         }
     </style>
-    <link rel="stylesheet" href="css/responsive.css?v=1784899759733">
+    <link rel="stylesheet" href="css/responsive.css?v=9999999999999">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 </head>
 
@@ -128,7 +128,7 @@
                 <div id="dynamicProductSections">
                     <!-- Products load here -->
                 </div>
-                
+
                 <div class="pagination" id="paginationWrapper" style="display: none;">
                     <!-- Pagination buttons -->
                 </div>
@@ -263,11 +263,11 @@
             const ITEMS_PER_PAGE = 12;
             let currentPage = 1;
             let currentSearch = '';
-            
+
             // Lấy ID danh mục từ URL nếu có
             const urlParams = new URLSearchParams(window.location.search);
             let currentCategory = urlParams.get('category') ? parseInt(urlParams.get('category')) : '';
-            
+
             let currentSort = 'newest';
 
             function updateSEO(category) {
@@ -291,7 +291,7 @@
                 if (!list) return;
 
                 const categories = ProductDB.getCategories();
-                
+
                 list.innerHTML = categories.map(cat => {
                     const count = ProductDB.getProductCountByCategory(cat.id);
                     const isActive = currentCategory === cat.id ? 'class="active"' : '';
@@ -303,7 +303,7 @@
                         </a></li>
                     `;
                 }).join('');
-                
+
                 // Add "All Products" option at top
                 list.insertAdjacentHTML('afterbegin', `
                     <li><a href="/san-pham.html" data-cat-id="all" ${currentCategory === '' ? 'class="active"' : ''}>
@@ -319,14 +319,14 @@
                         e.preventDefault();
                         list.querySelectorAll('a').forEach(l => l.classList.remove('active'));
                         link.classList.add('active');
-                        
+
                         const catId = link.getAttribute('data-cat-id');
                         currentCategory = catId === 'all' ? '' : parseInt(catId);
                         currentPage = 1; // Reset to page 1
-                        
+
                         // Update URL without reload
                         history.pushState(null, '', link.getAttribute('href'));
-                        
+
                         if (currentCategory !== '') {
                             const catObj = ProductDB.getCategoryById(currentCategory);
                             updateSEO(catObj);
@@ -380,7 +380,7 @@
                 // Pagination
                 const totalItems = products.length;
                 const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-                
+
                 // Ensure current page is valid
                 if (currentPage > totalPages) currentPage = totalPages || 1;
 
@@ -409,9 +409,9 @@
                         </div>
                         <div class="products-grid">
                             ${paginatedProducts.map(p => {
-                                const discountedPrice = ProductDB.getDiscountedPrice(p);
-                                const hasDiscount = p.discount > 0;
-                                return `
+                    const discountedPrice = ProductDB.getDiscountedPrice(p);
+                    const hasDiscount = p.discount > 0;
+                    return `
                                     <div class="product-card">
                                         ${hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : ''))}
                                         <div class="product-img">
@@ -430,7 +430,7 @@
                                         </div>
                                     </div>
                                 `;
-                            }).join('')}
+                }).join('')}
                         </div>
                     </div>
                 `;
@@ -443,18 +443,18 @@
 
             function renderPagination(totalPages) {
                 const wrapper = document.getElementById('paginationWrapper');
-                
+
                 if (totalPages <= 1) {
                     wrapper.style.display = 'none';
                     return;
                 }
-                
+
                 wrapper.style.display = 'flex';
                 let html = '';
-                
+
                 // Prev btn
                 html += `<button class="page-btn" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : `onclick="changePage(${currentPage - 1})"`}><i class="fa-solid fa-chevron-left"></i></button>`;
-                
+
                 // Pages
                 for (let i = 1; i <= totalPages; i++) {
                     html += `<button class="page-num ${currentPage === i ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
@@ -462,11 +462,11 @@
 
                 // Next btn
                 html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : `onclick="changePage(${currentPage + 1})"`}><i class="fa-solid fa-chevron-right"></i></button>`;
-                
+
                 wrapper.innerHTML = html;
             }
 
-            window.changePage = function(page) {
+            window.changePage = function (page) {
                 currentPage = page;
                 renderProducts();
                 window.scrollTo({ top: 300, behavior: 'smooth' });
@@ -481,10 +481,10 @@
                     currentSearch = searchInput.value.trim();
                     currentCategory = ''; // clear category filter
                     currentPage = 1;
-                    
+
                     // Reset sidebar active state
                     document.querySelectorAll('.category-list a').forEach(l => l.classList.remove('active'));
-                    
+
                     renderProducts();
                 }
             }
@@ -497,18 +497,18 @@
             // Custom Dropdown for Sorting
             const sortOptions = document.querySelectorAll('.dropdown-options li');
             const dropdownSelected = document.querySelector('.dropdown-selected span');
-            
+
             sortOptions.forEach(opt => {
                 opt.addEventListener('click', () => {
                     setTimeout(() => {
                         const val = opt.textContent.trim();
                         dropdownSelected.textContent = 'Sắp xếp: ' + val;
-                        
+
                         if (val.includes('Mới nhất')) currentSort = 'newest';
                         else if (val.includes('Thấp đến Cao')) currentSort = 'price-asc';
                         else if (val.includes('Cao đến Thấp')) currentSort = 'price-desc';
                         else if (val.includes('Bán chạy nhất')) currentSort = 'best-selling';
-                        
+
                         currentPage = 1;
                         renderProducts();
                     }, 10);
