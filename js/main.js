@@ -265,7 +265,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         let html = featuredProds.map(p => {
             const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price) + 'đ';
             let badgeHtml = '';
-            if (p.onSale && p.discount > 0) {
+            if (p.badgeText) {
+                badgeHtml = `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>`;
+            } else if (p.onSale && p.discount > 0) {
                 badgeHtml = `<div class="product-badge badge-discount" style="background-color: #e11d48;">-${p.discount}%</div>`;
             } else if (p.featured) {
                 badgeHtml = `<div class="product-badge" style="background-color: #f59e0b;">BÁN CHẠY</div>`;
@@ -1070,7 +1072,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             let totalItems = 0;
 
             cart.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
+                let itemBasePrice = item.price;
+                let addonsHtml = '';
+                
+                if (item.isCombo && item.addons && item.addons.length > 0) {
+                    item.addons.forEach((addon, aIdx) => {
+                        if (addon.checked) itemBasePrice += addon.price;
+                        addonsHtml += `
+                            <label style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; cursor: pointer; width: 100%;">
+                                <input type="checkbox" class="cart-addon-check" data-item-index="${index}" data-addon-index="${aIdx}" ${addon.checked ? 'checked' : ''} style="accent-color: var(--color-primary); transform: scale(1.1); margin: 4px 0 0 0; flex-shrink: 0;">
+                                ${addon.image ? `<img src="${addon.image}" alt="${addon.name}" style="width: 44px; height: 44px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0;">` : ''}
+                                <div style="flex: 1; line-height: 1.3; min-width: 0;">
+                                    <div style="font-size: 15px; font-weight: 500; color: #444; word-wrap: break-word;">${addon.name}</div>
+                                    <div style="font-size: 14px; color: var(--color-primary); margin-top: 2px;">+${addon.price.toLocaleString('vi-VN')}đ</div>
+                                </div>
+                            </label>
+                        `;
+                    });
+                    if (addonsHtml) {
+                        addonsHtml = `<div class="cart-addons" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e0e0e0;">${addonsHtml}</div>`;
+                    }
+                }
+
+                const itemTotal = itemBasePrice * item.quantity;
                 totalAmount += itemTotal;
                 totalItems += item.quantity;
 
@@ -1081,11 +1105,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <button class="remove-btn" data-index="${index}"><i class="fa-solid fa-xmark"></i></button>
                             <img src="${item.image}" alt="${item.name}" class="cart-product-img">
                             <div class="cart-product-info">
-                                <h4>${item.name}</h4>
+                                <h4 style="margin: 0; font-size: 16px;">${item.name}</h4>
+                                ${addonsHtml}
                             </div>
                         </div>
                     </td>
-                    <td style="font-weight: 500;">${item.price.toLocaleString('vi-VN')}đ</td>
+                    <td style="font-weight: 500;">${itemBasePrice.toLocaleString('vi-VN')}đ</td>
                     <td>
                         <div class="qty-controls">
                             <button class="qty-btn qty-minus" data-index="${index}"><i class="fa-solid fa-minus"></i></button>
@@ -1119,7 +1144,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             const minuses = document.querySelectorAll('.qty-minus');
             const pluses = document.querySelectorAll('.qty-plus');
             const removes = document.querySelectorAll('.remove-btn');
+            const addonChecks = document.querySelectorAll('.cart-addon-check');
             const clearBtn = document.querySelector('.btn-clear');
+
+            addonChecks.forEach(check => {
+                check.addEventListener('change', function () {
+                    const itemIdx = this.getAttribute('data-item-index');
+                    const addonIdx = this.getAttribute('data-addon-index');
+                    const cart = getCart();
+                    
+                    if (cart[itemIdx] && cart[itemIdx].addons && cart[itemIdx].addons[addonIdx]) {
+                        cart[itemIdx].addons[addonIdx].checked = this.checked;
+                        saveCart(cart);
+                        renderCart();
+                    }
+                });
+            });
 
             minuses.forEach(btn => {
                 btn.addEventListener('click', function () {
@@ -1245,6 +1285,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Initialize
         updateComboPrice();
+
+        const comboBtn = document.querySelector('.combo-btn');
+        if (comboBtn) {
+            comboBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const cart = getCart();
+                
+                const items = Array.from(comboChecks).map(check => {
+                    const itemEl = check.closest('.combo-item');
+                    return {
+                        name: itemEl.querySelector('span').textContent.trim(),
+                        price: parseInt(itemEl.querySelector('.combo-item-price').textContent.replace(/[^0-9]/g, '')),
+                        image: itemEl.querySelector('img').src,
+                        checked: check.checked
+                    };
+                });
+                
+                if (items.length === 0) return;
+                
+                const mainItem = items[0];
+                if (!mainItem.checked) {
+                    showToast('Vui lòng chọn sản phẩm chính!', 'error');
+                    return;
+                }
+
+                const addons = items.slice(1).map(addon => ({
+                    name: addon.name,
+                    price: addon.price,
+                    image: addon.image,
+                    checked: addon.checked
+                }));
+
+                // Try to find exact same combo
+                const existingItem = cart.find(i => i.name === mainItem.name && i.isCombo === true);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                    existingItem.addons = addons; // update addons to latest selection
+                } else {
+                    cart.push({
+                        name: mainItem.name,
+                        price: mainItem.price,
+                        image: mainItem.image,
+                        quantity: 1,
+                        isCombo: true,
+                        addons: addons
+                    });
+                }
+
+                saveCart(cart);
+                showToast('Đã thêm Combo vào giỏ hàng!', 'success');
+            });
+        }
     }
 
     /* ==========================================================================

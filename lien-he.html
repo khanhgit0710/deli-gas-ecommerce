@@ -35,52 +35,8 @@
 
 
     <!-- TOP BAR (Từ trang chủ) -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-inner">
-                <div class="top-bar-left">
-                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
-                </div>
-                <div class="top-bar-right">
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
-                        Hồ Chí Minh</a>
-                    <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
-                        1900.123.123</a>
-                    <span class="top-bar-divider"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- HEADER (Từ trang chủ) -->
-    <header class="header">
-        <div class="container header-inner">
-            <!-- Logo -->
-            <a href="trang-chu.html" class="logo">
-                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
-            </a>
-
-            <!-- Main Links -->
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="trang-chu.html">Trang Chủ</a></li>
-                    <li><a href="index.html">Về Chúng Tôi</a></li>
-                    <li><a href="san-pham.html">Sản Phẩm</a></li>
-                    <li><a href="tin-tuc.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html" class="active">Liên Hệ</a></li>
-                </ul>
-            </nav>
-
-            <!-- Actions -->
-            <div class="header-actions">
-                <button class="cart-btn-primary">
-                    <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
-                    <span class="cart-badge">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <site-header></site-header>
+    <script defer src="components/header.js"></script>
 
     <main class="contact-page-wrapper">
         <!-- HERO BANNER -->
@@ -103,7 +59,7 @@
             
             <!-- Faded Slanted Image Background (Right Side) -->
             <div style="position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: 1; -webkit-mask-image: linear-gradient(105deg, transparent 10%, black 50%); mask-image: linear-gradient(105deg, transparent 10%, black 50%);">
-                <img src="https://i.pinimg.com/1200x/2c/25/77/2c2577036f767b1f298c60aa8fe0b21e.jpg" alt="Tổng đài CSKH" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+                <img loading="lazy" src="https://i.pinimg.com/1200x/2c/25/77/2c2577036f767b1f298c60aa8fe0b21e.jpg" alt="Tổng đài CSKH" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
             </div>
         </section>
         <!-- CONTACT MAIN SECTION -->
@@ -179,7 +135,7 @@
                         
                         <div class="qr-col">
                             <div class="qr-scan-box">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=LienHeGiaoGas" alt="Scan to Contact" class="qr-image">
+                                <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=LienHeGiaoGas" alt="Scan to Contact" class="qr-image">
                                 <div class="scan-line"></div>
                             </div>
                             <p class="qr-text">Quét mã để liên hệ</p>
@@ -334,7 +290,7 @@
 
 
     <!-- JS -->
-    <script src="js/main.js"></script>
+    <script defer src="js/main.js"></script>
 
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">

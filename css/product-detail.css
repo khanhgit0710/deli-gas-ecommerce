@@ -1935,12 +1935,14 @@
 
 @media (max-width: 576px) {
     .spec-row {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: flex-start;
     }
 
     .spec-title {
-        flex: 0 0 100%;
-        margin-bottom: 5px;
+        flex: 0 0 40%;
+        margin-bottom: 0;
+        padding-right: 10px;
     }
 }
 

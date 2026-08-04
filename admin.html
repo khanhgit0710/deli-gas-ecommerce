@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -274,7 +274,24 @@
                 </section>
 
                 <!-- ===== SETTINGS SECTION ===== -->
+                
                 <section class="admin-section" id="section-settings">
+                    <div class="admin-card" style="margin-bottom: 20px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Dữ liệu (Backup)</h3>
+                        </div>
+                        <div class="card-body">
+                            <p style="margin-bottom: 15px; color: var(--admin-text-muted);">Tính năng Sao lưu (Export) và Phục hồi (Import) dữ liệu toàn bộ hệ thống. Nên thường xuyên tải về để dự phòng.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button id="btnExportData" class="btn btn-primary" style="background-color: #10b981; border: none;"><i class="fa-solid fa-download"></i> Export Dữ Liệu (.xlsx)</button>
+                                <label class="btn btn-outline" style="cursor: pointer;">
+                                    <i class="fa-solid fa-upload"></i> Import Dữ Liệu
+                                    <input type="file" id="importDataInput" accept=".xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display: none;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="table-wrapper" style="max-width: 800px;">
                         <div class="table-header">
                             <div class="table-header-left">
@@ -376,6 +393,20 @@
                             </div>
                             <div id="additionalImagesPreview" style="display: flex; gap: 8px; overflow-x: auto; flex-wrap: wrap; margin-top: 8px; padding: 5px; border: 1px solid var(--admin-border); border-radius: 6px; min-height: 80px;">
                                 <!-- JS renders here -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Nhãn nổi bật (Badge)</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" class="form-input" id="productBadgeText" placeholder="VD: Mới, Tặng quà, Flash Sale..." maxlength="20" style="flex: 1;">
+                                <select class="form-select" id="productBadgeColor" style="width: 150px;">
+                                    <option value="#ef4444">Màu Đỏ</option>
+                                    <option value="#22c55e">Màu Xanh lá</option>
+                                    <option value="#3b82f6">Màu Xanh dương</option>
+                                    <option value="#f59e0b">Màu Vàng</option>
+                                    <option value="#8b5cf6">Màu Tím</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -619,9 +650,18 @@
 
     <!-- QuillJS -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script defer src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-    <script src="js/product-db.js"></script>
-    <script src="js/admin.js"></script>
+    <script defer src="js/product-db.js"></script>
+    
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script defer src="js/admin-core.js"></script>
+    <script defer src="js/admin-dashboard.js"></script>
+    <script defer src="js/admin-categories.js"></script>
+    <script defer src="js/admin-products.js"></script>
+    <script defer src="js/admin-news-categories.js"></script>
+    <script defer src="js/admin-news.js"></script>
+    <script defer src="js/admin-settings.js"></script>
+
 </body>
 </html>

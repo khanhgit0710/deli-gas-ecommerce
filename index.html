@@ -22,52 +22,8 @@
 <body>
 
     <!-- TOP BAR (Từ trang chủ) -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-inner">
-                <div class="top-bar-left">
-                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
-                </div>
-                <div class="top-bar-right">
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
-                        Hồ Chí Minh</a>
-                    <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
-                        1900.123.123</a>
-                    <span class="top-bar-divider"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- HEADER (Từ trang chủ) -->
-    <header class="header">
-        <div class="container header-inner">
-            <!-- Logo -->
-            <a href="trang-chu.html" class="logo">
-                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
-            </a>
-
-            <!-- Main Links -->
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="trang-chu.html">Trang Chủ</a></li>
-                    <li><a href="index.html" class="active">Về Chúng Tôi</a></li>
-                    <li><a href="san-pham.html">Sản Phẩm</a></li>
-                    <li><a href="tin-tuc.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html">Liên Hệ</a></li>
-                </ul>
-            </nav>
-
-            <!-- Actions -->
-            <div class="header-actions">
-                <button class="cart-btn-primary">
-                    <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
-                    <span class="cart-badge">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <site-header></site-header>
+    <script defer src="components/header.js"></script>
 
     <!-- ABOUT PAGE CONTENT (Bọc trong class để không đụng độ CSS) -->
     <main class="about-page-wrapper">
@@ -96,7 +52,7 @@
 
         <!-- TRUCK IMAGE -->
         <div class="hero-images container truck-anim">
-            <img src="assets/item_banner_about.png" alt="GasViet Hero Image">
+            <img loading="lazy" src="assets/item_banner_about.png" alt="GasViet Hero Image">
         </div>
 
         <!-- CLIENTS LOGO SLIDER -->
@@ -170,9 +126,9 @@
 
                 <div class="mission-images">
                     <div class="grid-overlay"></div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQccUkCfjFg96Nxr3YjaRyCBm9cDb_kvpNnh8alnPuA&s=10"
+                    <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQccUkCfjFg96Nxr3YjaRyCBm9cDb_kvpNnh8alnPuA&s=10"
                         alt="Kitchen" class="img-main-mission">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcURBbObkVCgNkAYeX4rp5WXM_HpHAKVe8PeF-tfBxPw&s=10"
+                    <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcURBbObkVCgNkAYeX4rp5WXM_HpHAKVe8PeF-tfBxPw&s=10"
                         alt="Cow on beach" class="img-sub-mission">
                 </div>
             </div>
@@ -255,7 +211,7 @@
                             </div>
                         </div>
                         <div class="spotlight-img-wrap">
-                            <img src="https://bepdonghoa.com/upload/images/bep-gas-am-rvb-2gi-b-uro9yurk%20-%20Copy.png"
+                            <img loading="lazy" src="https://bepdonghoa.com/upload/images/bep-gas-am-rvb-2gi-b-uro9yurk%20-%20Copy.png"
                                 alt="Bếp gas âm Rinnai">
                         </div>
                     </div>
@@ -265,7 +221,7 @@
                         <!-- Item 1 -->
                         <a href="chi-tiet-san-pham.html" class="bento-item">
                             <div class="bento-item-img">
-                                <img src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png"
+                                <img loading="lazy" src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png"
                                     alt="Bình Gas Saigon Petro Xám 12kg">
                             </div>
                             <h4 class="bento-item-title">Gas Saigon Petro Xám 12kg</h4>
@@ -275,7 +231,7 @@
                         <!-- Item 2 -->
                         <a href="chi-tiet-san-pham.html" class="bento-item">
                             <div class="bento-item-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10"
+                                <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10"
                                     alt="Bếp hồng ngoại Junger">
                             </div>
                             <h4 class="bento-item-title">Bếp hồng ngoại Junger MT-21</h4>
@@ -285,7 +241,7 @@
                         <!-- Item 3 -->
                         <a href="chi-tiet-san-pham.html" class="bento-item">
                             <div class="bento-item-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCBXtJgfeDbv6isnJWlZYNTvJJdSL5TvUClyN_-z_YJg&s=10"
+                                <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCBXtJgfeDbv6isnJWlZYNTvJJdSL5TvUClyN_-z_YJg&s=10"
                                     alt="Bình Petrolimex 45kg">
                             </div>
                             <h4 class="bento-item-title">Bình Petrolimex 45kg (Công nghiệp)</h4>
@@ -295,7 +251,7 @@
                         <!-- Item 4 -->
                         <a href="chi-tiet-san-pham.html" class="bento-item">
                             <div class="bento-item-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF4eu_DgVyBuhH6pl1lpYTFCWrZJoYE55On5OipJvciA&s"
+                                <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF4eu_DgVyBuhH6pl1lpYTFCWrZJoYE55On5OipJvciA&s"
                                     alt="Van ngắt gas tự động">
                             </div>
                             <h4 class="bento-item-title">Van gas tự động Namilux NA-337S</h4>
@@ -375,19 +331,19 @@
                     <!-- Cột Phải -->
                     <div class="promise-col-right">
                         <div class="image-grid-creative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSY_Xma_vXv3ox7mczezemRw6PqDNQiA9CKNDRSNWFxQ&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSY_Xma_vXv3ox7mczezemRw6PqDNQiA9CKNDRSNWFxQ&s=10"
                                 alt="Grid 1" class="img-1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpkuuyRgjVxpDUA5ARKlxz2ksBl6nT6ASA2vXLl2ufWg&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpkuuyRgjVxpDUA5ARKlxz2ksBl6nT6ASA2vXLl2ufWg&s=10"
                                 alt="Grid 2" class="img-2">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcURBbObkVCgNkAYeX4rp5WXM_HpHAKVe8PeF-tfBxPw&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcURBbObkVCgNkAYeX4rp5WXM_HpHAKVe8PeF-tfBxPw&s=10"
                                 alt="Grid 3" class="img-3">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6Tqq19yUwBmSJL6-sE9q-eKo4tVNm0Q-VaOmKcwoOw&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6Tqq19yUwBmSJL6-sE9q-eKo4tVNm0Q-VaOmKcwoOw&s=10"
                                 alt="Grid 4" class="img-4">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH6gafTmQJkWEb_2PdgMl8g1_q-uwMhUq908uV8Vq4FA&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH6gafTmQJkWEb_2PdgMl8g1_q-uwMhUq908uV8Vq4FA&s=10"
                                 alt="Grid 5" class="img-5">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_aidWObxtPXTrfq14R_JHGZIeiheoqmA55mlziSm1Ug&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_aidWObxtPXTrfq14R_JHGZIeiheoqmA55mlziSm1Ug&s=10"
                                 alt="Grid 6" class="img-6">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQolIJjr83cpS5FEmLNC1p5JxbGTNN-CZvFtZARW9X1cA&s=10"
+                            <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQolIJjr83cpS5FEmLNC1p5JxbGTNN-CZvFtZARW9X1cA&s=10"
                                 alt="Grid 7" class="img-7">
                         </div>
                     </div>
@@ -412,7 +368,7 @@
                     <!-- Card 1 -->
                     <div class="value-card">
                         <div class="value-img-wrap">
-                            <img src="https://baokhanhhoa.vn/file/e7837c02857c8ca30185a8c39b582c03/dataimages/202106/original/images5455060__o_n_ki_m_tra_th_c_t__t_i_Chi_nh_nh_C_ng_ty_c__ph_n_Gas_Mi_n_Trung_..jpg"
+                            <img loading="lazy" src="https://baokhanhhoa.vn/file/e7837c02857c8ca30185a8c39b582c03/dataimages/202106/original/images5455060__o_n_ki_m_tra_th_c_t__t_i_Chi_nh_nh_C_ng_ty_c__ph_n_Gas_Mi_n_Trung_..jpg"
                                 alt="Chất lượng">
                         </div>
                         <div class="value-content">
@@ -427,7 +383,7 @@
                     <!-- Card 2 (Center) -->
                     <div class="value-card value-card-center">
                         <div class="value-img-wrap">
-                            <img src="https://giaogasbinhduong.com/upload/filemanager/NewFolder/giao-gas-lai-thieu-thuan-an-binh-duong.jpg"
+                            <img loading="lazy" src="https://giaogasbinhduong.com/upload/filemanager/NewFolder/giao-gas-lai-thieu-thuan-an-binh-duong.jpg"
                                 alt="Dịch vụ">
                         </div>
                         <div class="value-content">
@@ -443,7 +399,7 @@
                     <!-- Card 3 -->
                     <div class="value-card">
                         <div class="value-img-wrap">
-                            <img src="https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2024/07/01/gia-gas-1612143291439929636523-26744118698164463509201.jpg"
+                            <img loading="lazy" src="https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2024/07/01/gia-gas-1612143291439929636523-26744118698164463509201.jpg"
                                 alt="Giá cả">
                         </div>
                         <div class="value-content">
@@ -570,7 +526,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAK9hLx-FhuGSoAXgq6B0JsvHFNGeYdYg1Mdrs7aj8EA&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAK9hLx-FhuGSoAXgq6B0JsvHFNGeYdYg1Mdrs7aj8EA&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -598,7 +554,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBpDdhxxyT9PJ24wN0R1WOdUeT7sn0Euf-qjrzeMXCHg&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBpDdhxxyT9PJ24wN0R1WOdUeT7sn0Euf-qjrzeMXCHg&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -626,7 +582,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiDqbGqmo5rRckZ0V7ruv6TX3_xRDQNV0XOmewx47dqQ&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiDqbGqmo5rRckZ0V7ruv6TX3_xRDQNV0XOmewx47dqQ&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -654,7 +610,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnGDfkLJBjlh6twMoRAQS_RC5YdMh9YH1WPrz6XS7YAw&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnGDfkLJBjlh6twMoRAQS_RC5YdMh9YH1WPrz6XS7YAw&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -682,7 +638,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCOhZNpui6Ubgr77Qx8ECllOuL1n5DRfoZN30HvTLvhA&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCOhZNpui6Ubgr77Qx8ECllOuL1n5DRfoZN30HvTLvhA&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -710,7 +666,7 @@
                             <div class="feedback-card">
                                 <div class="fb-header">
                                     <div class="fb-user">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFxbmTp4LJvY5rOValx9DlD2LXwNfVuy_XpzYZQM8Xgg&s=10"
+                                        <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFxbmTp4LJvY5rOValx9DlD2LXwNfVuy_XpzYZQM8Xgg&s=10"
                                             alt="Avatar">
                                         <div>
                                             <div
@@ -744,127 +700,15 @@
 
     <!-- FOOTER (Từ trang chủ) -->
 
-    <footer class="site-footer">
-        <!-- Consultation Section with Wave -->
-        <div class="footer-consultation">
-            <!-- SVG Wave shape Top -->
-            <div class="custom-shape-divider-top">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                    preserveAspectRatio="none">
-                    <path d="M0,120 C400,0 800,120 1200,40 V120 H0 Z" class="shape-fill"></path>
-                </svg>
-            </div>
-
-            <div class="container consultation-container">
-                <div class="consultation-content">
-                    <div class="consultation-title">Tư vấn khách hàng</div>
-                    <p>Để lại số điện thoại, chuyên viên của chúng tôi sẽ liên hệ với bạn trong vòng 5 phút!</p>
-                </div>
-
-                <div class="consultation-form-wrap">
-                    <form class="consultation-form">
-                        <input type="tel" placeholder="Nhập số điện thoại của bạn..." required>
-                        <button type="submit" class="consult-submit-btn">Gửi thông tin</button>
-                    </form>
-                </div>
-
-                <div class="footer-contact-actions">
-                    <a href="tel:0901234567" class="footer-hotline">
-                        <div class="icon-ring">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div class="hotline-text">
-                            <span>Liên hệ ngay</span>
-                            <strong>090 123 4567</strong>
-                        </div>
-                    </a>
-
-                    <a href="https://zalo.me/0901234567" target="_blank" class="footer-zalo">
-                        <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo Chat"
-                            onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
-                        <span>Chat Zalo</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- SVG Wave shape -->
-            <div class="custom-shape-divider-bottom">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                    preserveAspectRatio="none">
-                    <path d="M0,120 C300,0 900,120 1200,30 V120 H0 Z" class="shape-fill"></path>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Main Footer -->
-        <div class="footer-main">
-            <div class="container">
-                <div class="footer-grid">
-                    <!-- Column 1: About -->
-                    <div class="footer-col footer-col-about">
-                        <div class="footer-logo">
-                            <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo">
-                        </div>
-                        <p class="footer-desc">
-                            Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
-                            nhà với đội ngũ chuyên nghiệp.
-                        </p>
-                        <div class="footer-socials">
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Column 2: Nav Links -->
-                    <div class="footer-col">
-                        <div class="footer-col-title">Dịch vụ</div>
-                        <ul>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="san-pham.html">Sản Phẩm</a></li>
-                            <li><a href="#">Tin tức & Blog</a></li>
-                            <li><a href="#">Tuyển dụng</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 3: Contact Info -->
-                    <div class="footer-col">
-                        <div class="footer-col-title">Liên Hệ</div>
-                        <ul class="contact-info-list">
-                            <li><i class="fa-solid fa-location-dot"></i> 475A Điện Biên Phủ, Phường 25, Quận Bình Thạnh,
-                                TP.HCM</li>
-                            <li><i class="fa-solid fa-phone"></i> 090 123 4567</li>
-                            <li><i class="fa-solid fa-envelope"></i> hotro@giaogas.vn</li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 4: Map & Certification -->
-                    <div class="footer-col">
-                        <img src="/assets/logo/bocongthuong_logo.png" alt="Bộ Công Thương"
-                            style="max-width: 180px; margin-bottom: 15px; display: block;">
-                        <div class="footer-map"
-                            style="border-radius: 8px; overflow: hidden; height: 200px; width: 100%;">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1256743939634!2d106.7118949!3d10.8016869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer-bottom">
-                    <p>&copy; 2026 Gas Việt. Hân hạnh phục vụ quý khách.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <site-footer></site-footer>
 
 
 
 
     <!-- JS -->
-    <script src="js/product-db.js"></script>
-    <script src="js/main.js"></script>
+    <script defer src="js/product-db.js"></script>
+    <script defer src="components/footer.js"></script>
+    <script defer src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.bento-showcase-container');
@@ -893,7 +737,7 @@
                             </div>
                         </div>
                         <div class="spotlight-img-wrap">
-                            <img src="${spotlightProduct.image}" alt="${spotlightProduct.name}">
+                            <img loading="lazy" src="${spotlightProduct.image}" alt="${spotlightProduct.name}">
                         </div>
                     </div>
                     <div class="bento-grid-right">
@@ -904,7 +748,7 @@
                     html += `
                         <a href="chi-tiet-san-pham.html?id=${p.id}" class="bento-item">
                             <div class="bento-item-img">
-                                <img src="${p.image}" alt="${p.name}">
+                                <img loading="lazy" src="${p.image}" alt="${p.name}">
                             </div>
                             <h4 class="bento-item-title">${p.name}</h4>
                             <div class="bento-item-price">${ProductDB.formatPrice(pPrice)}</div>

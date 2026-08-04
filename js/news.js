@@ -242,8 +242,8 @@ function renderNewsDetail() {
             <!-- Share and Tags -->
             <div class="nb-detail-footer" style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
                 <div class="nb-tags" style="display: flex; align-items: center;">
-                    <strong>Danh mục:</strong>
-                    <a href="javascript:void(0)" style="margin-left:8px; padding: 4px 12px; background: #f1f5f9; border-radius: 20px; text-decoration: none; border: 1px solid #64748b; color: #64748b; font-size: 14px; display: inline-block;">${catName}</a>
+                    <strong>Từ khoá:</strong>
+                    <a href="javascript:void(0)" style="margin-left:8px; padding: 2px 12px; background: #f1f5f9; border-radius: 20px; text-decoration: none; border: 1px solid #64748b; color: #64748b; font-size: 14px; display: inline-block;">${catName}</a>
                 </div>
                 <div class="nb-share" style="display: flex; align-items: center;">
                     <strong>Chia sẻ:</strong>
@@ -255,7 +255,7 @@ function renderNewsDetail() {
 
             <!-- Related Articles -->
             ${related.length > 0 ? `
-            <div class="nb-related" style="margin-top: 50px;">
+            <div class="nb-related" style="margin-top: 20px;">
                 <h3 style="font-size: 24px; margin-bottom: 20px; color: #0f172a;">Bài viết liên quan</h3>
                 <div class="nb-archive-grid">
                     ${relatedHtml}

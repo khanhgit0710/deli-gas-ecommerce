@@ -308,12 +308,29 @@
 
     /* Kéo ảnh tràn lề màn hình */
     .nb-detail-featured-img img,
-    .nb-detail-content img {
+    .nb-content-inner img {
         margin-left: -8px !important;
         margin-right: -8px !important;
         width: calc(100% + 16px) !important;
         max-width: none !important;
         border-radius: 0 !important;
+    }
+
+    /* Giảm khoảng cách margin trên dưới của nội dung bài viết trên mobile */
+    .nb-content-inner p {
+        margin-bottom: 10px !important;
+    }
+    .nb-content-inner h2 {
+        margin: 10px 0 10px !important;
+    }
+    .nb-content-inner h3,
+    .nb-content-inner h4,
+    .nb-content-inner h5 {
+        margin: 10px 0 10px !important;
+    }
+    .nb-content-inner ul,
+    .nb-content-inner ol {
+        margin-bottom: 12px !important;
     }
 
     /* Thu nhỏ padding của contact-info-area và dàn hàng ngang */
@@ -365,13 +382,14 @@
     /* CART TABLE MOBILE FIX */
     .cart-table th:first-child,
     .cart-table td:first-child {
-        width: 65% !important;
-        min-width: 240px !important;
+        width: 70% !important;
+        min-width: 320px !important;
     }
 
     .cart-product-info {
         text-align: left !important;
         flex: 1;
+        min-width: 0;
     }
 
     .cart-product-info h4 {
@@ -397,7 +415,7 @@
     }
 
     .pagination {
-        margin-top: 10px;
+        margin-top: 0px;
     }
 
     .pd-trust-badges {
@@ -528,7 +546,7 @@
         overflow-x: auto !important;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        gap: 15px !important;
+        gap: 8px !important;
         padding: 15px;
         background-color: #f8f9fb;
     }
@@ -1071,7 +1089,7 @@
     .about-values,
     .about-stats,
     .about-process {
-        padding: 60px 0 !important;
+        padding: 50px 0 !important;
     }
 }
 
@@ -2152,6 +2170,7 @@
 
     .pagination {
         flex-wrap: wrap;
+        /* margin-top: 40px; */
     }
 }
 
@@ -2207,7 +2226,7 @@
     }
 
     .contact-title .highlight {
-        font-size: 32px !important;
+        font-size: 26px !important;
     }
 
     .contact-title .badge-top {
@@ -2275,7 +2294,7 @@
     .process-timeline {
         overflow-x: auto !important;
         scroll-snap-type: x mandatory;
-        padding-bottom: 20px;
+        padding-bottom: 0px;
         -ms-overflow-style: none;
         scrollbar-width: none;
         justify-content: flex-start !important;
@@ -2408,7 +2427,7 @@
     }
 
     .hotline-section-wrapper .hotline-number {
-        font-size: 60px !important;
+        font-size: 40px !important;
     }
 }
 
@@ -2418,7 +2437,7 @@
     }
 
     .hotline-section-wrapper .hotline-number {
-        font-size: 60px !important;
+        font-size: 40px !important;
     }
 
     .hotline-section-wrapper .hotline-banner-features {
@@ -2546,8 +2565,8 @@
     }
 
     .deal-horizontal-info .buy-now-btn {
-        padding: 6px 16px !important;
-        font-size: 13px !important;
+        padding: 9px 16px !important;
+        font-size: 14px !important;
         font-weight: 600;
         border-radius: 8px !important;
         display: inline-flex;
@@ -2556,6 +2575,10 @@
         align-self: flex-start !important;
         /* Ôm trái */
         margin-top: 0;
+    }
+
+    .product-actions {
+        margin-top: 0px !important;
     }
 
     .pd-trust-badges {
@@ -2824,4 +2847,161 @@
     .about-page-wrapper .about-hero h1 {
         margin-bottom: 15px;
     }
+
+    .about-page-wrapper .about-feedback {
+        padding: 50px 0 30px !important;
+    }
+
+    .about-page-wrapper .feedback-slider {
+        gap: 15px !important;
+    }
+
+    .nb-detail-container {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .nb-detail-header h1 {
+        margin: 5px;
+    }
+
+    .nb-detail-meta {
+        margin-top: 15px;
+    }
+
+    .nb-author img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .nb-author strong {
+        font-size: 18px !important;
+    }
+
+    .nb-date {
+        font-size: 14px !important;
+    }
+
+    .nb-author {
+        gap: 10px !important;
+    }
+
+    .nb-detail-featured-img img {
+        margin-bottom: 0px !important;
+    }
+
+    .nb-content-inner h2 {
+        font-size: 24px !important;
+    }
+
+        .nb-content-inner h3 {
+        font-size: 22px !important;
+    }
+
+        .nb-content-inner h4 {
+        font-size: 20px !important;
+    }
+
+    .nb-tags a {
+        font-size: 14px !important;
+        padding: 0px 10px !important;
+    }
+
+    .nb-detail-footer {
+        gap: 15px !important;
+        margin-top: 20px !important;
+    }
+
+    .nb-related h3 {
+        margin-top: 10px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .nb-detail-header {
+        margin-bottom: 20px !important;
+    }
+
+        .nb-archive-card-body .nb-cat {
+        margin-bottom: 0px !important;
+    }
+
+    .nb-related .nb-archive-card-body h3 {
+        margin-top: 8px !important;
+    }
+
+    .nb-archive-card-body h3 a {
+        font-size: 20px !important;
+    }
+
+    .review-form-visible {
+        padding: 20px 10px 20px 10px !important;
+    }
+
+    .pd-specs-summary {
+        margin-top: 15px !important;
+    }
+
+    .pd-desc-short {
+        margin-bottom: 10px !important;
+    }
+
+    .featured-products-section .badge-top {
+        animation: badgeBlinkMobile 1.5s infinite !important;
+        margin-left: 10px !important;
+    }
+
+    .flash-deal-container {
+        gap: 5px !important;
+    }
+
+    .featured-slider-container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .glass-grid {
+        gap: 8px !important;
+    }
+
+    .process-timeline {
+        gap: 10px !important;
+    }
+
+    .values-header p {
+        margin-bottom: 30px !important;
+    }
+
+    .about-page-wrapper .promise-header {
+        margin-bottom: 30px !important;
+    }
+
+    .about-page-wrapper .mission-content p {
+        margin-bottom: 30px !important;
+    }
+
+    .about-page-wrapper .feedback-desc {
+        margin-bottom: 30px !important;
+    }
+
+    .process-timeline {
+        margin-top: 30px !important;
+    }
+        
+
+}
+/* Fix overflow badge-top breathing animation on mobile */
+@keyframes badgeBlinkMobile {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 107, 0, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 107, 0, 0.8);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 107, 0, 0.4);
+        transform: scale(1);
+    }
+
 }

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bình Gas Petrolimex 12kg chính hãng, an toàn, tiết kiệm. Giao gas nhanh chóng tận nhà với nhiều ưu đãi hấp dẫn từ Gas Việt.">
+    <meta name="description"
+        content="Bình Gas Petrolimex 12kg chính hãng, an toàn, tiết kiệm. Giao gas nhanh chóng tận nhà với nhiều ưu đãi hấp dẫn từ Gas Việt.">
     <title>Bình gas Petrolimex 12kg | Gas Việt</title>
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,51 +17,8 @@
 </head>
 
 <body>
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-inner">
-                <div class="top-bar-left">
-                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
-                </div>
-                <div class="top-bar-right">
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức, Hồ Chí Minh</a>
-                    <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i> 1900.123.123</a>
-                    <span class="top-bar-divider"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- HEADER -->
-    <header class="header">
-        <div class="container header-inner">
-            <!-- Logo -->
-            <a href="trang-chu.html" class="logo">
-                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
-            </a>
-
-            <!-- Main Links -->
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="trang-chu.html">Trang Chủ</a></li>
-                    <li><a href="index.html">Về Chúng Tôi</a></li>
-                    <li><a href="san-pham.html" class="active">Sản Phẩm</a></li>
-                    <li><a href="tin-tuc.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html">Liên Hệ</a></li>
-                </ul>
-            </nav>
-
-            <!-- Actions -->
-            <div class="header-actions">
-                <button class="cart-btn-primary">
-                    <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
-                    <span class="cart-badge">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <site-header></site-header>
+    <script defer src="components/header.js"></script>
 
     <!-- PRODUCT DETAIL MAIN WRAPPER -->
     <div class="pd-page-wrapper">
@@ -78,21 +36,44 @@
                 <!-- Left: Gallery -->
                 <div class="pd-gallery">
                     <div class="pd-main-image">
-                        <img id="pdMainImage" src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas Petrolimex 12kg" onclick="openImageLightbox(0)" style="cursor: pointer;">
+                        <img loading="lazy" id="pdMainImage"
+                            src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
+                            alt="Bình Gas Petrolimex 12kg" onclick="openImageLightbox(0)" style="cursor: pointer;">
                     </div>
-                    
+
                     <!-- Additional Thumbnails container -->
-                    <div class="pd-thumbnails" id="pdThumbnails" style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto;">
+                    <div class="pd-thumbnails" id="pdThumbnails"
+                        style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto;">
                         <!-- JS renders here -->
                     </div>
-                    
+
                     <style>
-                        .pd-thumb-img { transition: all 0.2s; flex: 0 0 auto; width: 76px; height: 76px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid transparent; background: white; } 
-                        .pd-thumb-img:not(.active) { border: 1px solid #ddd; opacity: 0.6; } 
-                        .pd-thumb-img.active { border: 2px solid var(--color-primary); }
-                        .pd-thumb-img:hover { opacity: 1; }
+                        .pd-thumb-img {
+                            transition: all 0.2s;
+                            flex: 0 0 auto;
+                            width: 76px;
+                            height: 76px;
+                            object-fit: cover;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            border: 2px solid transparent;
+                            background: white;
+                        }
+
+                        .pd-thumb-img:not(.active) {
+                            border: 1px solid #ddd;
+                            opacity: 0.6;
+                        }
+
+                        .pd-thumb-img.active {
+                            border: 2px solid var(--color-primary);
+                        }
+
+                        .pd-thumb-img:hover {
+                            opacity: 1;
+                        }
                     </style>
-                    
+
                     <!-- Trust Badges -->
                     <div class="pd-trust-badges">
                         <div class="trust-item">
@@ -116,7 +97,7 @@
                         <h1 class="pd-title">Bình gas Petrolimex 12kg</h1>
                         <span class="pd-badge" style="margin-top: 8px;">Giảm 10%</span>
                     </div>
-                    
+
                     <div class="pd-meta">
                         <span id="pdBrand">Thương hiệu: Petrolimex</span>
                         <span class="pd-meta-divider" id="pdWeightDivider">|</span>
@@ -130,7 +111,8 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </span>
-                            <span><span id="headerRatingText">4.8</span> (<span id="headerReviewCount">5</span> đánh giá)</span>
+                            <span><span id="headerRatingText">4.8</span> (<span id="headerReviewCount">5</span> đánh
+                                giá)</span>
                         </div>
                     </div>
 
@@ -140,12 +122,15 @@
                             <i class="fa-solid fa-bolt"></i> FLASH DEAL
                         </div>
                         <div class="flash-deal-progress-wrap">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 93%;"></div></div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 93%;"></div>
+                            </div>
                             <span class="progress-text">🔥 Đã bán 28/30 bình</span>
                         </div>
                         <div class="flash-deal-timer">
-                            <span class="timer-label">KẾT THÚC TRONG</span> 
-                            <span class="time-box">00</span> : <span class="time-box">25</span> : <span class="time-box">26</span>
+                            <span class="timer-label">KẾT THÚC TRONG</span>
+                            <span class="time-box">00</span> : <span class="time-box">25</span> : <span
+                                class="time-box">26</span>
                         </div>
                     </div>
 
@@ -156,16 +141,24 @@
                     </div>
 
                     <div class="pd-desc-short">
-                        Bình gas Petrolimex 12kg van ngang chính hãng. Đảm bảo an toàn tuyệt đối với van ngắt tự động, bình gas được kiểm định chất lượng định kỳ. Có tem chống hàng giả và bảo hiểm trách nhiệm.
+                        Bình gas Petrolimex 12kg van ngang chính hãng. Đảm bảo an toàn tuyệt đối với van ngắt tự động,
+                        bình gas được kiểm định chất lượng định kỳ. Có tem chống hàng giả và bảo hiểm trách nhiệm.
                     </div>
 
-                    <div class="pd-specs-summary" id="pdSpecsSummary" style="background: var(--color-gray-50); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">Thông số kỹ thuật</div>
+                    <div class="pd-specs-summary" id="pdSpecsSummary"
+                        style="background: var(--color-gray-50); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div
+                            style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">
+                            Thông số kỹ thuật</div>
                         <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 14px;">
-                            <div style="color: var(--color-gray-500);">Thương hiệu:</div><div style="font-weight: 500;">Petrolimex</div>
-                            <div style="color: var(--color-gray-500);">Trọng lượng:</div><div style="font-weight: 500;">12kg</div>
-                            <div style="color: var(--color-gray-500);">Chất liệu vỏ:</div><div style="font-weight: 500;">Thép siêu chuẩn</div>
-                            <div style="color: var(--color-gray-500);">Tình trạng:</div><div style="font-weight: 500; color: #10b981;">Còn mới</div>
+                            <div style="color: var(--color-gray-500);">Thương hiệu:</div>
+                            <div style="font-weight: 500;">Petrolimex</div>
+                            <div style="color: var(--color-gray-500);">Trọng lượng:</div>
+                            <div style="font-weight: 500;">12kg</div>
+                            <div style="color: var(--color-gray-500);">Chất liệu vỏ:</div>
+                            <div style="font-weight: 500;">Thép siêu chuẩn</div>
+                            <div style="color: var(--color-gray-500);">Tình trạng:</div>
+                            <div style="font-weight: 500; color: #10b981;">Còn mới</div>
                         </div>
                     </div>
 
@@ -209,7 +202,8 @@
 
                         <div class="pd-buttons-wrapper">
                             <div class="pd-buttons-row1">
-                                <a href="tel:0909123456" class="pd-btn pd-btn-contact"><span class="icon-ripple-wrap"><i class="fa-solid fa-phone-volume icon-shake"></i></span> 0909 123 456</a>
+                                <a href="tel:0909123456" class="pd-btn pd-btn-contact"><span class="icon-ripple-wrap"><i
+                                            class="fa-solid fa-phone-volume icon-shake"></i></span> 0909 123 456</a>
                                 <button type="button" class="pd-btn pd-btn-outline">
                                     <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
                                     <span class="btn-text" style="font-size: 0.95rem;">Thêm vào giỏ</span>
@@ -225,8 +219,10 @@
             <div class="pd-tabs-wrapper">
                 <div class="pd-tabs-container sticky-tabs" id="stickyTabs">
                     <div class="pd-tabs">
-                        <div class="pd-tab active" onclick="scrollToSection('description')" data-target="description">Mô tả sản phẩm</div>
-                        <div class="pd-tab" onclick="scrollToSection('policy')" data-target="policy">Chính sách giao hàng</div>
+                        <div class="pd-tab active" onclick="scrollToSection('description')" data-target="description">Mô
+                            tả sản phẩm</div>
+                        <div class="pd-tab" onclick="scrollToSection('policy')" data-target="policy">Chính sách giao
+                            hàng</div>
                     </div>
                 </div>
 
@@ -234,26 +230,33 @@
                     <div id="description" class="pd-tab-section">
                         <h2 class="section-title">Mô tả sản phẩm</h2>
                         <div class="pd-tab-pane">
-                            <p><strong>Bình gas Petrolimex 12kg</strong> là sản phẩm được người tiêu dùng tin tưởng lựa chọn nhiều nhất nhờ độ an toàn cao và thương hiệu uy tín lâu năm trên thị trường.</p>
+                            <p><strong>Bình gas Petrolimex 12kg</strong> là sản phẩm được người tiêu dùng tin tưởng lựa
+                                chọn nhiều nhất nhờ độ an toàn cao và thương hiệu uy tín lâu năm trên thị trường.</p>
                             <p>Đặc điểm nổi bật:</p>
                             <ul>
-                                <li>Bình gas được sản xuất trên dây chuyền hiện đại, vỏ bình làm bằng thép đặc chủng có khả năng chịu áp lực cao.</li>
-                                <li>Khí gas tinh khiết, khi cháy cho ngọn lửa xanh, không sinh ra muội than làm đen đáy nồi, tiết kiệm chi phí nhiên liệu.</li>
-                                <li>Được niêm phong bằng màng co chống hàng giả, tem chống giả công nghệ cao của Bộ Công An.</li>
+                                <li>Bình gas được sản xuất trên dây chuyền hiện đại, vỏ bình làm bằng thép đặc chủng có
+                                    khả năng chịu áp lực cao.</li>
+                                <li>Khí gas tinh khiết, khi cháy cho ngọn lửa xanh, không sinh ra muội than làm đen đáy
+                                    nồi, tiết kiệm chi phí nhiên liệu.</li>
+                                <li>Được niêm phong bằng màng co chống hàng giả, tem chống giả công nghệ cao của Bộ Công
+                                    An.</li>
                                 <li>Bảo hiểm trách nhiệm cho mỗi bình gas lên đến hàng tỷ đồng.</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div id="policy" class="pd-tab-section">
                         <h2 class="section-title">Chính sách giao hàng</h2>
                         <div class="pd-tab-pane">
                             <p>Tại Gas Việt, chúng tôi cam kết mang đến dịch vụ tốt nhất cho khách hàng:</p>
                             <ul>
-                                <li><strong>Giao hàng hỏa tốc:</strong> Giao gas tận nhà chỉ trong vòng 15-30 phút kể từ khi nhận đơn đặt hàng.</li>
+                                <li><strong>Giao hàng hỏa tốc:</strong> Giao gas tận nhà chỉ trong vòng 15-30 phút kể từ
+                                    khi nhận đơn đặt hàng.</li>
                                 <li><strong>Miễn phí vận chuyển:</strong> Áp dụng cho các khu vực nội thành.</li>
-                                <li><strong>Lắp đặt & kiểm tra:</strong> Nhân viên kỹ thuật sẽ lắp đặt, thay ron an toàn mới, kiểm tra rò rỉ bằng bọt xà phòng trước khi bàn giao.</li>
-                                <li><strong>Bảo trì định kỳ:</strong> Hỗ trợ kiểm tra bếp gas, dây dẫn và van miễn phí mỗi khi giao gas.</li>
+                                <li><strong>Lắp đặt & kiểm tra:</strong> Nhân viên kỹ thuật sẽ lắp đặt, thay ron an toàn
+                                    mới, kiểm tra rò rỉ bằng bọt xà phòng trước khi bàn giao.</li>
+                                <li><strong>Bảo trì định kỳ:</strong> Hỗ trợ kiểm tra bếp gas, dây dẫn và van miễn phí
+                                    mỗi khi giao gas.</li>
                             </ul>
                         </div>
                     </div>
@@ -268,7 +271,9 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-1">
                             <label for="combo-1">
-                                <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Bình Gas 12kg">
+                                <img loading="lazy"
+                                    src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
+                                    alt="Bình Gas 12kg">
                                 <span>Bình Gas 12kg</span>
                                 <div class="combo-item-price">420.000đ</div>
                             </label>
@@ -277,7 +282,9 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-2">
                             <label for="combo-2">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHV6courXMlCB2CI2dnsIBG34gJABKXMlxmqO5_tzz1A&s=10" alt="Van ngắt tự động">
+                                <img loading="lazy"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHV6courXMlCB2CI2dnsIBG34gJABKXMlxmqO5_tzz1A&s=10"
+                                    alt="Van ngắt tự động">
                                 <span>Van Ngắt Katsura</span>
                                 <div class="combo-item-price">120.000đ</div>
                             </label>
@@ -286,7 +293,9 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-3">
                             <label for="combo-3">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsAKe3cq_AaxqR5w_U2T5pUK6-h4v5RoQ5XVfbVJFzdg&s=10" alt="Dây gas lõi thép">
+                                <img loading="lazy"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsAKe3cq_AaxqR5w_U2T5pUK6-h4v5RoQ5XVfbVJFzdg&s=10"
+                                    alt="Dây gas lõi thép">
                                 <span>Dây Gas Lõi Thép</span>
                                 <div class="combo-item-price">80.000đ</div>
                             </label>
@@ -299,8 +308,10 @@
                             <div class="combo-save">(Tiết kiệm 80.000đ)</div>
                         </div>
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <a href="tel:0909123456" class="pd-btn pd-btn-contact" style="flex: 1;"><i class="fa-solid fa-phone-volume icon-shake"></i> 0909 123 456</a>
-                            <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ Combo</button>
+                            <a href="tel:0909123456" class="pd-btn pd-btn-contact" style="flex: 1;"><i
+                                    class="fa-solid fa-phone-volume icon-shake"></i> 0909 123 456</a>
+                            <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ
+                                Combo</button>
                         </div>
                     </div>
                 </div>
@@ -308,7 +319,8 @@
 
             <!-- Cam Kết Quy Trình Giao Gas & Lắp Đặt An Toàn -->
             <div class="pd-process-section">
-                <h2 class="section-title center-title" style="margin-bottom: 30px; font-weight: 700;">Quy Trình Giao & Lắp Đặt An Toàn 100%</h2>
+                <h2 class="section-title center-title" style="margin-bottom: 30px; font-weight: 700;">Quy Trình Giao &
+                    Lắp Đặt An Toàn 100%</h2>
                 <div class="process-grid">
                     <div class="process-step">
                         <div class="step-number">01</div>
@@ -338,12 +350,19 @@
             </div>
 
             <!-- Reviews Section -->
-            <div class="pd-reviews-section" style="background: var(--color-white); padding: 40px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: 0px;">
-                <h2 style="font-size: var(--fz-h2); font-weight: 700; color: var(--color-primary-dark); margin-bottom: 30px; border-bottom: 2px solid var(--color-primary); padding-bottom: 10px; display: inline-block;">Đánh giá từ khách hàng</h2>
+            <div class="pd-reviews-section"
+                style="background: var(--color-white); padding: 40px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: 0px;">
+                <h2
+                    style="font-size: var(--fz-h2); font-weight: 700; color: var(--color-primary-dark); margin-bottom: 30px; border-bottom: 2px solid var(--color-primary); padding-bottom: 10px; display: inline-block;">
+                    Đánh giá từ khách hàng</h2>
                 <div class="pd-reviews">
-                    <div class="pd-review-summary" style="align-items: center; justify-content: flex-start; width: 100%; gap: 40px; margin-bottom: 30px; display: flex; flex-wrap: wrap;">
+                    <div class="pd-review-summary"
+                        style="align-items: center; justify-content: flex-start; width: 100%; gap: 40px; margin-bottom: 30px; display: flex; flex-wrap: wrap;">
                         <div class="pd-review-average" style="text-align: left; width: 180px;">
-                            <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;"><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;" id="averageRatingText">4.8</a></div>
+                            <div
+                                style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;">
+                                <a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;"
+                                    id="averageRatingText">4.8</a></div>
                             <div class="stars" id="averageRatingStars">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
@@ -353,290 +372,394 @@
                             </div>
                             <p>Dựa trên (<span id="totalReviewCount">5</span>) đánh giá</p>
                         </div>
-                        
-                        <div class="pd-review-breakdown" style="flex: 1; min-width: 250px; max-width: 400px; border-left: 1px solid var(--color-gray-200); padding-left: 40px;">
+
+                        <div class="pd-review-breakdown"
+                            style="flex: 1; min-width: 250px; max-width: 400px; border-left: 1px solid var(--color-gray-200); padding-left: 40px;">
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">5 sao</span>
-                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div id="bar-5" style="width: 85%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
+                                <div
+                                    style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div id="bar-5"
+                                        style="width: 85%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;">
+                                    </div>
                                 </div>
-                                <span id="percent-5" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">85%</span>
+                                <span id="percent-5"
+                                    style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">85%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">4 sao</span>
-                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div id="bar-4" style="width: 10%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
+                                <div
+                                    style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div id="bar-4"
+                                        style="width: 10%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;">
+                                    </div>
                                 </div>
-                                <span id="percent-4" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">10%</span>
+                                <span id="percent-4"
+                                    style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">10%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">3 sao</span>
-                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div id="bar-3" style="width: 5%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
+                                <div
+                                    style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div id="bar-3"
+                                        style="width: 5%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;">
+                                    </div>
                                 </div>
-                                <span id="percent-3" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">5%</span>
+                                <span id="percent-3"
+                                    style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">5%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">2 sao</span>
-                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div id="bar-2" style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
+                                <div
+                                    style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div id="bar-2"
+                                        style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;">
+                                    </div>
                                 </div>
-                                <span id="percent-2" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                                <span id="percent-2"
+                                    style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
                             </div>
                             <div style="display: flex; align-items: center;">
                                 <span style="font-weight: 500; width: 45px; font-size: 16px;">1 sao</span>
-                                <div style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
-                                    <div id="bar-1" style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;"></div>
+                                <div
+                                    style="flex: 1; height: 12px; background: var(--color-gray-200); border-radius: 6px; margin: 0 15px; overflow: hidden;">
+                                    <div id="bar-1"
+                                        style="width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease;">
+                                    </div>
                                 </div>
-                                <span id="percent-1" style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
+                                <span id="percent-1"
+                                    style="color: var(--color-gray-600); width: 40px; text-align: right; font-size: 0.95rem;">0%</span>
                             </div>
                         </div>
 
                         <div style="margin-left: auto;">
-                            <button id="writeReviewBtn" class="pd-btn pd-btn-outline" style="padding: 10px 20px; transition: opacity 0.3s ease;" onclick="document.getElementById('reviewFormContainer').classList.remove('review-form-hidden'); document.getElementById('reviewFormContainer').classList.add('review-form-visible'); this.style.opacity = '0'; setTimeout(() => this.style.display = 'none', 300);">Viết đánh giá</button>
+                            <button id="writeReviewBtn" class="pd-btn pd-btn-outline"
+                                style="padding: 10px 20px; transition: opacity 0.3s ease;"
+                                onclick="document.getElementById('reviewFormContainer').classList.remove('review-form-hidden'); document.getElementById('reviewFormContainer').classList.add('review-form-visible'); this.style.opacity = '0'; setTimeout(() => this.style.display = 'none', 300);">Viết
+                                đánh giá</button>
                         </div>
                     </div>
-                    
-                    <div id="reviewFormContainer" class="review-form-hidden" style="background: var(--color-gray-50); border-radius: var(--border-radius-md); border: 1px solid var(--color-gray-200);">
+
+                    <div id="reviewFormContainer" class="review-form-hidden"
+                        style="background: var(--color-gray-50); border-radius: var(--border-radius-md); border: 1px solid var(--color-gray-200);">
                         <div style="margin-bottom: 15px; font-size: 18px; font-weight: 600;">Viết đánh giá của bạn</div>
                         <form id="reviewForm" onsubmit="event.preventDefault(); submitReview();">
-                            <div id="starRatingContainer" style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
-                                <i class="fa-regular fa-star" data-rating="1" onclick="setRating(1)" onmouseover="hoverRating(1)" onmouseout="resetRating()"></i>
-                                <i class="fa-regular fa-star" data-rating="2" onclick="setRating(2)" onmouseover="hoverRating(2)" onmouseout="resetRating()"></i>
-                                <i class="fa-regular fa-star" data-rating="3" onclick="setRating(3)" onmouseover="hoverRating(3)" onmouseout="resetRating()"></i>
-                                <i class="fa-regular fa-star" data-rating="4" onclick="setRating(4)" onmouseover="hoverRating(4)" onmouseout="resetRating()"></i>
-                                <i class="fa-regular fa-star" data-rating="5" onclick="setRating(5)" onmouseover="hoverRating(5)" onmouseout="resetRating()"></i>
-                                <span id="ratingText" style="font-size: 16px; color: var(--color-gray-600); margin-left: 10px;">Vui lòng chọn sao</span>
+                            <div id="starRatingContainer"
+                                style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
+                                <i class="fa-regular fa-star" data-rating="1" onclick="setRating(1)"
+                                    onmouseover="hoverRating(1)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="2" onclick="setRating(2)"
+                                    onmouseover="hoverRating(2)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="3" onclick="setRating(3)"
+                                    onmouseover="hoverRating(3)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="4" onclick="setRating(4)"
+                                    onmouseover="hoverRating(4)" onmouseout="resetRating()"></i>
+                                <i class="fa-regular fa-star" data-rating="5" onclick="setRating(5)"
+                                    onmouseover="hoverRating(5)" onmouseout="resetRating()"></i>
+                                <span id="ratingText"
+                                    style="font-size: 16px; color: var(--color-gray-600); margin-left: 10px;">Vui lòng
+                                    chọn sao</span>
                             </div>
                             <input type="hidden" id="reviewRating" value="0">
                             <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                                <input type="text" id="reviewName" placeholder="Họ và tên *" required style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
-                                <input type="tel" id="reviewPhone" placeholder="Số điện thoại *" required style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
+                                <input type="text" id="reviewName" placeholder="Họ và tên *" required
+                                    style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
+                                <input type="tel" id="reviewPhone" placeholder="Số điện thoại *" required
+                                    style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
                             </div>
-                            <textarea id="reviewText" placeholder="Đánh giá của bạn về sản phẩm... *" required rows="4" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
-                            <button type="submit" style="background-color: var(--color-primary); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600;">Gửi đánh giá</button>
+                            <textarea id="reviewText" placeholder="Đánh giá của bạn về sản phẩm... *" required rows="4"
+                                style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
+                            <button type="submit"
+                                style="background-color: var(--color-primary); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600;">Gửi
+                                đánh giá</button>
                         </form>
                     </div>
+                </div>
+
+                <div class="pd-ugc-section"
+                    style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200);">
+                    <div
+                        style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);">
+                        <i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình
+                        ảnh & Video thực tế từ người mua (6)</div>
+                    <div class="ugc-gallery">
+                        <img loading="lazy"
+                            src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png"
+                            alt="Khách hàng 1" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy"
+                            src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg"
+                            alt="Khách hàng 2" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s"
+                            alt="Khách hàng 3" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy"
+                            src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
+                            alt="Khách hàng 4" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy"
+                            src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png"
+                            alt="Khách hàng 5" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10"
+                            alt="Khách hàng 6" onclick="openLightboxForUGC(this.src)">
                     </div>
-                    
-                    <div class="pd-ugc-section" style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200);">
-                        <div style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);"><i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh & Video thực tế từ người mua (6)</div>
-                        <div class="ugc-gallery">
-                            <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Khách hàng 1" onclick="openLightboxForUGC(this.src)">
-                            <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Khách hàng 2" onclick="openLightboxForUGC(this.src)">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Khách hàng 3" onclick="openLightboxForUGC(this.src)">
-                            <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Khách hàng 4" onclick="openLightboxForUGC(this.src)">
-                            <img src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png" alt="Khách hàng 5" onclick="openLightboxForUGC(this.src)">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10" alt="Khách hàng 6" onclick="openLightboxForUGC(this.src)">
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="pd-review-list">
-                        <!-- Review 1 -->
-                        <div class="pd-review-item">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar">H</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Hoàng Anh</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
+                <div class="pd-review-list">
+                    <!-- Review 1 -->
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar">H</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Hoàng Anh</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
                                     </div>
                                 </div>
-                                <div class="pd-review-date">15/07/2026</div>
                             </div>
-                            <div class="pd-review-content">
-                                <p>Gas chất lượng tốt, lửa xanh đều. Nhân viên giao hàng rất nhanh và nhiệt tình, thay van và kiểm tra cẩn thận trước khi về. Sẽ tiếp tục ủng hộ Gas Việt.</p>
-                                <div class="pd-review-images">
-                                    <img src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png" alt="Review Image">
-                                    <img src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg" alt="Review Image">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s" alt="Review Image">
-                                </div>
-                            </div>
+                            <div class="pd-review-date">15/07/2026</div>
                         </div>
-
-                        <!-- Review 2 -->
-                        <div class="pd-review-item">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar">T</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Trần Minh Tâm</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">10/07/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Bình gas chính hãng, có dán tem mác đầy đủ nên rất yên tâm. Giá cả hợp lý so với mặt bằng chung.</p>
-                                <div class="pd-review-images">
-                                    <img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Review Image">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 3 -->
-                        <div class="pd-review-item">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-primary); color: white;">L</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Lê Thị Hoa</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">02/07/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Dịch vụ tuyệt vời. Gọi cái là 15 phút sau có mặt ngay, đúng lúc đang nấu dở bữa cơm. Cảm ơn các bạn nhé!</p>
-                                <div class="pd-review-images">
-                                    <img src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png" alt="Review Image">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10" alt="Review Image">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 4 -->
-                        <div class="pd-review-item">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-accent); color: white;">N</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Nguyễn Văn Nam</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">01/07/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Sản phẩm ổn, giao hàng hơi chậm một chút nhưng vẫn chấp nhận được.</p>
-                            </div>
-                        </div>
-
-                        <!-- Review 5 -->
-                        <div class="pd-review-item">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-gray-500); color: white;">P</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Phạm Thanh</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">28/06/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Gas xài bình thường, nhưng nhân viên chưa nhiệt tình lắm khi lắp đặt.</p>
-                            </div>
-                        </div>
-                        <!-- Extra Reviews (Hidden initially) -->
-                        <!-- Review 4 -->
-                        <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1s ease-in-out;">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-gray-600); color: white;">P</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Phạm Văn Dũng</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">28/06/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Sản phẩm rất tốt, an toàn. Tôi đã sử dụng gas Petrolimex nhiều năm và luôn hài lòng với chất lượng.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Review 5 -->
-                        <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1.5s ease-in-out;">
-                            <div class="pd-review-header">
-                                <div class="pd-reviewer-info">
-                                    <div class="pd-reviewer-avatar" style="background-color: var(--color-accent); color: white;">N</div>
-                                    <div>
-                                        <div class="pd-reviewer-name">Nguyễn Thị Mai</div>
-                                        <div class="pd-reviewer-stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-review-date">20/06/2026</div>
-                            </div>
-                            <div class="pd-review-content">
-                                <p>Giao hàng rất nhanh, giá cả phải chăng. Nhân viên lắp đặt rất nhiệt tình hướng dẫn cách sử dụng an toàn.</p>
+                        <div class="pd-review-content">
+                            <p>Gas chất lượng tốt, lửa xanh đều. Nhân viên giao hàng rất nhanh và nhiệt tình, thay van
+                                và kiểm tra cẩn thận trước khi về. Sẽ tiếp tục ủng hộ Gas Việt.</p>
+                            <div class="pd-review-images">
+                                <img loading="lazy"
+                                    src="https://gassaigonvina.com/upload/product/binh-gas-12kg-mau-xam-gas-saigonpetro-tp-hcm-902.png"
+                                    alt="Review Image">
+                                <img loading="lazy"
+                                    src="https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg"
+                                    alt="Review Image">
+                                <img loading="lazy"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s"
+                                    alt="Review Image">
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Load More Button -->
-                    <div class="pd-load-more-reviews" style="text-align: center; margin-top: 20px;">
-                        <button id="loadMoreBtn" class="pd-btn pd-btn-outline" style="margin: 40px auto 0; padding: 8px 12px; font-size: 0.95rem; border-radius: 12px; height: 40px;" onclick="loadMoreReviews()">
-                            Xem thêm<i class="fa-solid fa-chevron-down" style="margin-left: 0px;"></i>
-                        </button>
+
+                    <!-- Review 2 -->
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar">T</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Trần Minh Tâm</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">10/07/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Bình gas chính hãng, có dán tem mác đầy đủ nên rất yên tâm. Giá cả hợp lý so với mặt bằng
+                                chung.</p>
+                            <div class="pd-review-images">
+                                <img loading="lazy"
+                                    src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
+                                    alt="Review Image">
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Review 3 -->
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar"
+                                    style="background-color: var(--color-primary); color: white;">L</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Lê Thị Hoa</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">02/07/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Dịch vụ tuyệt vời. Gọi cái là 15 phút sau có mặt ngay, đúng lúc đang nấu dở bữa cơm. Cảm
+                                ơn các bạn nhé!</p>
+                            <div class="pd-review-images">
+                                <img loading="lazy"
+                                    src="https://www.giaogasnhanh.vn/upload/product/gasviet-1-7016-300x480-667.png"
+                                    alt="Review Image">
+                                <img loading="lazy"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTc-hvpwqlB-HFdPbcHDp7Kf7Lt9oG57h0NyKBuuOSWQ&s=10"
+                                    alt="Review Image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar"
+                                    style="background-color: var(--color-accent); color: white;">N</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Nguyễn Văn Nam</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">01/07/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Sản phẩm ổn, giao hàng hơi chậm một chút nhưng vẫn chấp nhận được.</p>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar"
+                                    style="background-color: var(--color-gray-500); color: white;">P</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Phạm Thanh</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">28/06/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Gas xài bình thường, nhưng nhân viên chưa nhiệt tình lắm khi lắp đặt.</p>
+                        </div>
+                    </div>
+                    <!-- Extra Reviews (Hidden initially) -->
+                    <!-- Review 4 -->
+                    <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1s ease-in-out;">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar"
+                                    style="background-color: var(--color-gray-600); color: white;">P</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Phạm Văn Dũng</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">28/06/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Sản phẩm rất tốt, an toàn. Tôi đã sử dụng gas Petrolimex nhiều năm và luôn hài lòng với
+                                chất lượng.</p>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1.5s ease-in-out;">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar"
+                                    style="background-color: var(--color-accent); color: white;">N</div>
+                                <div>
+                                    <div class="pd-reviewer-name">Nguyễn Thị Mai</div>
+                                    <div class="pd-reviewer-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">20/06/2026</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>Giao hàng rất nhanh, giá cả phải chăng. Nhân viên lắp đặt rất nhiệt tình hướng dẫn cách
+                                sử dụng an toàn.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="pd-load-more-reviews" style="text-align: center; margin-top: 20px;">
+                    <button id="loadMoreBtn" class="pd-btn pd-btn-outline"
+                        style="margin: 40px auto 0; padding: 8px 12px; font-size: 0.95rem; border-radius: 12px; height: 40px;"
+                        onclick="loadMoreReviews()">
+                        Xem thêm<i class="fa-solid fa-chevron-down" style="margin-left: 0px;"></i>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- FAQ Section -->
     <section class="pd-faq-section" style="padding: 60px 0; background: var(--color-gray-50);">
         <div class="container">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 40px; font-weight: 700;">Câu Hỏi Thường Gặp</h2>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 40px; font-weight: 700;">Câu Hỏi Thường
+                Gặp</h2>
             <div class="faq-accordion">
                 <div class="faq-item">
-                    <div class="faq-question">Làm sao để biết bình gas Petrolimex 12kg là thật hay giả? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Bình gas Petrolimex chính hãng luôn có logo chữ "P" dập nổi rõ nét trên quai xách hoặc vai bình. Màng co niêm phong tại van phải còn nguyên vẹn, không có dấu hiệu bị rách hay chắp vá. Đặc biệt, bình gas thật được dán tem chống hàng giả tích hợp công nghệ nước của Bộ Công An. Khi bạn thoa một chút nước lên bề mặt tem, dòng chữ "Petrolimex" ẩn sẽ lập tức hiện ra rõ ràng. Ngoài ra, trọng lượng vỏ bình và ruột gas (12kg) luôn được cân đo chính xác, bạn có thể yêu cầu nhân viên cân lại ngay tại nhà để kiểm chứng.</div>
+                    <div class="faq-question">Làm sao để biết bình gas Petrolimex 12kg là thật hay giả? <i
+                            class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Bình gas Petrolimex chính hãng luôn có logo chữ "P" dập nổi rõ nét trên quai
+                        xách hoặc vai bình. Màng co niêm phong tại van phải còn nguyên vẹn, không có dấu hiệu bị rách
+                        hay chắp vá. Đặc biệt, bình gas thật được dán tem chống hàng giả tích hợp công nghệ nước của Bộ
+                        Công An. Khi bạn thoa một chút nước lên bề mặt tem, dòng chữ "Petrolimex" ẩn sẽ lập tức hiện ra
+                        rõ ràng. Ngoài ra, trọng lượng vỏ bình và ruột gas (12kg) luôn được cân đo chính xác, bạn có thể
+                        yêu cầu nhân viên cân lại ngay tại nhà để kiểm chứng.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Gas Việt có hỗ trợ thu đổi vỏ bình của hãng khác không? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Có, Gas Việt hoàn toàn hỗ trợ khách hàng thu đổi vỏ bình gas từ các thương hiệu khác sang bình gas Petrolimex chính hãng. Chúng tôi chấp nhận vỏ bình của hầu hết các thương hiệu uy tín trên thị trường miễn là vỏ bình còn nguyên vẹn, không bị biến dạng nghiêm trọng hay rỉ sét quá mức. Mức phí bù chênh lệch (nếu có) sẽ được tính toán cực kỳ hợp lý và minh bạch, tùy thuộc vào tình trạng và thương hiệu vỏ bình cũ của bạn. Nhân viên của chúng tôi sẽ báo giá chi tiết và tư vấn tận tình trước khi tiến hành đổi bình.</div>
+                    <div class="faq-question">Gas Việt có hỗ trợ thu đổi vỏ bình của hãng khác không? <i
+                            class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Có, Gas Việt hoàn toàn hỗ trợ khách hàng thu đổi vỏ bình gas từ các thương
+                        hiệu khác sang bình gas Petrolimex chính hãng. Chúng tôi chấp nhận vỏ bình của hầu hết các
+                        thương hiệu uy tín trên thị trường miễn là vỏ bình còn nguyên vẹn, không bị biến dạng nghiêm
+                        trọng hay rỉ sét quá mức. Mức phí bù chênh lệch (nếu có) sẽ được tính toán cực kỳ hợp lý và minh
+                        bạch, tùy thuộc vào tình trạng và thương hiệu vỏ bình cũ của bạn. Nhân viên của chúng tôi sẽ báo
+                        giá chi tiết và tư vấn tận tình trước khi tiến hành đổi bình.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Phí giao hàng và lắp đặt tại nhà tính như thế nào? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Dịch vụ giao hàng và lắp đặt tại Gas Việt là hoàn toàn MIỄN PHÍ đối với khu vực nội thành. Khi bạn đặt hàng, đội ngũ nhân viên kỹ thuật giàu kinh nghiệm của chúng tôi sẽ giao gas đến tận bếp nhà bạn trong thời gian nhanh nhất (thường chỉ từ 15-30 phút). Không chỉ giao hàng, nhân viên sẽ tiến hành tháo lắp đúng kỹ thuật, thay mới ron an toàn (miễn phí) và sử dụng thiết bị dò khí hoặc bọt xà phòng để kiểm tra rò rỉ kỹ lưỡng. Chúng tôi cam kết đảm bảo an toàn tuyệt đối 100% trước khi bàn giao và thanh toán.</div>
+                    <div class="faq-question">Phí giao hàng và lắp đặt tại nhà tính như thế nào? <i
+                            class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Dịch vụ giao hàng và lắp đặt tại Gas Việt là hoàn toàn MIỄN PHÍ đối với khu
+                        vực nội thành. Khi bạn đặt hàng, đội ngũ nhân viên kỹ thuật giàu kinh nghiệm của chúng tôi sẽ
+                        giao gas đến tận bếp nhà bạn trong thời gian nhanh nhất (thường chỉ từ 15-30 phút). Không chỉ
+                        giao hàng, nhân viên sẽ tiến hành tháo lắp đúng kỹ thuật, thay mới ron an toàn (miễn phí) và sử
+                        dụng thiết bị dò khí hoặc bọt xà phòng để kiểm tra rò rỉ kỹ lưỡng. Chúng tôi cam kết đảm bảo an
+                        toàn tuyệt đối 100% trước khi bàn giao và thanh toán.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Khi phát hiện mùi gas lạ trong bếp thì xử lý ra sao? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Khi bạn ngửi thấy mùi gas lạ (mùi trứng thối đặc trưng), điều đầu tiên là phải giữ bình tĩnh và TUYỆT ĐỐI KHÔNG bật/tắt quạt, công tắc điện, không dùng điện thoại hay tạo ra bất kỳ tia lửa nào (kể cả bật lửa hay diêm). Ngay lập tức, hãy khóa chặt van bình gas lại. Sau đó, mở toang tất cả các cửa chính và cửa sổ để khí gas thoát ra ngoài, làm thông thoáng khu vực bếp. Cuối cùng, hãy di chuyển ra khu vực an toàn và gọi ngay cho Hotline hỗ trợ khẩn cấp của Gas Việt. Kỹ thuật viên của chúng tôi sẽ nhanh chóng có mặt để kiểm tra và xử lý triệt để sự cố, đảm bảo an toàn cho gia đình bạn.</div>
+                    <div class="faq-question">Khi phát hiện mùi gas lạ trong bếp thì xử lý ra sao? <i
+                            class="fa-solid fa-plus"></i></div>
+                    <div class="faq-answer">Khi bạn ngửi thấy mùi gas lạ (mùi trứng thối đặc trưng), điều đầu tiên là
+                        phải giữ bình tĩnh và TUYỆT ĐỐI KHÔNG bật/tắt quạt, công tắc điện, không dùng điện thoại hay tạo
+                        ra bất kỳ tia lửa nào (kể cả bật lửa hay diêm). Ngay lập tức, hãy khóa chặt van bình gas lại.
+                        Sau đó, mở toang tất cả các cửa chính và cửa sổ để khí gas thoát ra ngoài, làm thông thoáng khu
+                        vực bếp. Cuối cùng, hãy di chuyển ra khu vực an toàn và gọi ngay cho Hotline hỗ trợ khẩn cấp của
+                        Gas Việt. Kỹ thuật viên của chúng tôi sẽ nhanh chóng có mặt để kiểm tra và xử lý triệt để sự cố,
+                        đảm bảo an toàn cho gia đình bạn.</div>
                 </div>
             </div>
         </div>
@@ -648,25 +771,30 @@
             <div class="section-header">
                 <h2>Các sản phẩm liên quan</h2>
             </div>
-            
+
             <div class="featured-slider-wrapper">
-                <button class="slider-btn slider-nav-left" id="prevRelatedBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-btn slider-nav-left" id="prevRelatedBtn"><i
+                        class="fa-solid fa-chevron-left"></i></button>
                 <div class="featured-slider-container">
                     <div class="products-flex" id="relatedSlider">
                         <!-- Product 1 -->
                         <div class="product-card">
                             <div class="product-badge badge-discount">Giảm 10%</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRltHKJkCxUPSl4ZRSrIGHf8zQXtVVNzojk9iQ-U-ud5w&s=10" alt="Gas Công Nghiệp"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRltHKJkCxUPSl4ZRSrIGHf8zQXtVVNzojk9iQ-U-ud5w&s=10"
+                                        alt="Gas Công Nghiệp"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Công Nghiệp 45kg</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình
+                                        Gas Công Nghiệp 45kg</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">1.550.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -674,16 +802,20 @@
                         <!-- Product 2 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtkHqzY2phhXgoT6-g2tLLRHmZZPVj7Iov1l_BW_DqyA&s=10" alt="Dây van"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtkHqzY2phhXgoT6-g2tLLRHmZZPVj7Iov1l_BW_DqyA&s=10"
+                                        alt="Dây van"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bộ Van Dây Ngắt Tự Động Namilux</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bộ
+                                        Van Dây Ngắt Tự Động Namilux</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">250.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -692,16 +824,20 @@
                         <div class="product-card">
                             <div class="product-badge badge-new">Mới</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUggeQl1dq4UxPiaxmXhyPAV7GE8KrI9NLI4e2VEUBlQ&s=10" alt="Bếp Gas"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUggeQl1dq4UxPiaxmXhyPAV7GE8KrI9NLI4e2VEUBlQ&s=10"
+                                        alt="Bếp Gas"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp Gas Đôi Rinnai RV-365</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp
+                                        Gas Đôi Rinnai RV-365</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">850.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -709,34 +845,42 @@
                         <!-- Product 4 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm44A98Y86OR6GU-VpbyV0f3oQD2QUhdxIAftDe6fkkA&s=10" alt="Cân"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm44A98Y86OR6GU-VpbyV0f3oQD2QUhdxIAftDe6fkkA&s=10"
+                                        alt="Cân"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Cân Đồng Hồ Báo Gas</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Cân
+                                        Đồng Hồ Báo Gas</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">90.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Product 5 -->
                         <div class="product-card">
                             <div class="product-badge badge-discount">Giảm 5%</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png" alt="Gas Gia Đình"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png"
+                                        alt="Gas Gia Đình"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Gia Đình 12kg</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình
+                                        Gas Gia Đình 12kg</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">410.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -744,16 +888,20 @@
                         <!-- Product 6 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNk7x0uKT-_hX5gSFkzMZIqs3Ajt243opvGYf67MKlnQ&s=10" alt="Dây dẫn Gas"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNk7x0uKT-_hX5gSFkzMZIqs3Ajt243opvGYf67MKlnQ&s=10"
+                                        alt="Dây dẫn Gas"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Dây Dẫn Gas Lõi Thép</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Dây
+                                        Dẫn Gas Lõi Thép</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">120.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -761,16 +909,20 @@
                         <!-- Product 7 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTWzsxIoIpr_j0bT2px0sd46weqdnuUzjFgnxX2P6sZw&s=10" alt="Bếp Gas Âm"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTWzsxIoIpr_j0bT2px0sd46weqdnuUzjFgnxX2P6sZw&s=10"
+                                        alt="Bếp Gas Âm"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp Gas Âm Sunhouse</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bếp
+                                        Gas Âm Sunhouse</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">1.250.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -778,16 +930,20 @@
                         <!-- Product 8 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpLcfGmx_MR64O7EwtTraZHBNfTKvj_oAdVABgn8OdUA&s=10" alt="Gas Elf"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpLcfGmx_MR64O7EwtTraZHBNfTKvj_oAdVABgn8OdUA&s=10"
+                                        alt="Gas Elf"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình Gas Elf Đỏ 12.5kg</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Bình
+                                        Gas Elf Đỏ 12.5kg</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">440.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -796,16 +952,20 @@
                         <div class="product-card">
                             <div class="product-badge badge-hot">HOT</div>
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQicOktFxYffoyky2C5Zirj67Ssp05MP1YuRcUTe8z_wA&s=10" alt="Van Katsura"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQicOktFxYffoyky2C5Zirj67Ssp05MP1YuRcUTe8z_wA&s=10"
+                                        alt="Van Katsura"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Van Ngắt Tự Động Katsura Nhật Bản</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Van
+                                        Ngắt Tự Động Katsura Nhật Bản</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">350.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
@@ -813,137 +973,49 @@
                         <!-- Product 10 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0HYG3k1qkYUWfw1JK5gQsK2ImKz10KKkYvBrzDkGupQ&s=10" alt="Bảo hiểm"></a>
+                                <a href="chi-tiet-san-pham.html"><img loading="lazy"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0HYG3k1qkYUWfw1JK5gQsK2ImKz10KKkYvBrzDkGupQ&s=10"
+                                        alt="Bảo hiểm"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html" style="color: inherit; text-decoration: none;">Thiết Bị Cảnh Báo Rò Rỉ Gas</a></h3>
+                                <h3><a href="chi-tiet-san-pham.html"
+                                        style="color: inherit; text-decoration: none;">Thiết Bị Cảnh Báo Rò Rỉ Gas</a>
+                                </h3>
                                 <div class="product-price">
                                     <span class="price-current">280.000đ</span>
                                 </div>
                                 <div class="product-actions">
                                     <button class="buy-now-btn">Mua ngay</button>
-                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
+                                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ
+                                        hàng</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="slider-btn slider-nav-right" id="nextRelatedBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="slider-btn slider-nav-right" id="nextRelatedBtn"><i
+                        class="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
-        <!-- Consultation Section with Wave -->
-        <div class="footer-consultation">
-            <!-- SVG Wave shape Top -->
-            <div class="custom-shape-divider-top">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                    preserveAspectRatio="none">
-                    <path d="M0,120 C400,0 800,120 1200,40 V120 H0 Z" class="shape-fill"></path>
-                </svg>
-            </div>
-
-            <div class="container consultation-container">
-                <div class="consultation-content">
-                    <div class="consultation-title">Tư vấn khách hàng</div>
-                    <p>Để lại số điện thoại, chuyên viên của chúng tôi sẽ liên hệ với bạn trong vòng 5 phút!</p>
-                </div>
-
-                <div class="consultation-form-wrap">
-                    <form class="consultation-form">
-                        <input type="tel" placeholder="Nhập số điện thoại của bạn..." required>
-                        <button type="submit" class="consult-submit-btn">Gửi thông tin</button>
-                    </form>
-                </div>
-
-                <div class="footer-contact-actions">
-                    <a href="tel:0901234567" class="footer-hotline">
-                        <div class="icon-ring">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div class="hotline-text">
-                            <span>Liên hệ ngay</span>
-                            <strong>090 123 4567</strong>
-                        </div>
-                    </a>
-
-                    <a href="https://zalo.me/0901234567" target="_blank" class="footer-zalo">
-                        <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo Chat"
-                            onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
-                        <span>Chat Zalo</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- SVG Wave shape -->
-            <div class="custom-shape-divider-bottom">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                    preserveAspectRatio="none">
-                    <path d="M0,120 C300,0 900,120 1200,30 V120 H0 Z" class="shape-fill"></path>
-                </svg>
-            </div>
-        </div>
-
-        <div class="footer-main">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-col footer-col-about">
-                        <div class="footer-logo">
-                            <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo">
-                        </div>
-                        <p class="footer-desc">
-                            Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
-                            nhà với đội ngũ chuyên nghiệp.
-                        </p>
-                        <div class="footer-socials">
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="footer-col">
-                        <div class="footer-col-title">Dịch vụ</div>
-                        <ul>
-                            <li><a href="/index.html">Về chúng tôi</a></li>
-                            <li><a href="/san-pham.html">Sản phẩm</a></li>
-                            <li><a href="/tin-tuc.html">Tin tức & Blog</a></li>
-                            <li><a href="/lien-he.html">Liên hệ</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <div class="footer-col-title">Liên Hệ</div>
-                        <ul class="contact-info-list">
-                            <li><i class="fa-solid fa-location-dot"></i> 475A Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP.HCM</li>
-                            <li><i class="fa-solid fa-phone"></i> 090 123 4567</li>
-                            <li><i class="fa-solid fa-envelope"></i> hotro@giaogas.vn</li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <img src="assets/logo/bocongthuong_logo.png" alt="Bộ Công Thương" style="max-width: 180px; margin-bottom: 15px; display: block;" onerror="this.style.display='none'">
-                        <div class="footer-map" style="border-radius: 8px; overflow: hidden; height: 200px; width: 100%;">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1256743939634!2d106.7118949!3d10.8016869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer-bottom">
-                    <p>&copy; 2026 Gas Việt. Hân hạnh phục vụ quý khách.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <site-footer></site-footer>
 
     <!-- JS -->
-    <script src="js/main.js"></script>
+    <script defer src="components/footer.js"></script>
+    <script defer src="js/main.js"></script>
     <style>
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
     <script>
@@ -951,11 +1023,11 @@
         function loadMoreReviews() {
             const btn = document.getElementById('loadMoreBtn');
             const extraReviews = document.querySelectorAll('.extra-review');
-            
+
             // Show loading state
             btn.innerHTML = 'Đang tải <i class="fa-solid fa-spinner fa-spin" style="margin-left: 5px;"></i>';
             btn.disabled = true;
-            
+
             // Simulate delay
             setTimeout(() => {
                 extraReviews.forEach(review => {
@@ -973,7 +1045,7 @@
 
         function decreaseQty() {
             let qty = document.getElementById('qtyInput');
-            if(parseInt(qty.value) > 1) {
+            if (parseInt(qty.value) > 1) {
                 qty.value = parseInt(qty.value) - 1;
             }
         }
@@ -982,7 +1054,7 @@
         function changeImage(element) {
             const src = element.querySelector('img').src;
             document.getElementById('pdMainImage').src = src;
-            
+
             // Update active state
             document.querySelectorAll('.pd-thumb').forEach(thumb => {
                 thumb.classList.remove('active');
@@ -995,9 +1067,9 @@
             let h = 0;
             let m = 25;
             let s = 26;
-            
+
             const timeBoxes = document.querySelectorAll('.flash-deal-timer .time-box');
-            if(timeBoxes.length < 3) return;
+            if (timeBoxes.length < 3) return;
 
             setInterval(() => {
                 if (s > 0) {
@@ -1016,13 +1088,13 @@
                         }
                     }
                 }
-                
+
                 timeBoxes[0].textContent = h.toString().padStart(2, '0');
                 timeBoxes[1].textContent = m.toString().padStart(2, '0');
                 timeBoxes[2].textContent = s.toString().padStart(2, '0');
             }, 1000);
         }
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             startFlashDealTimer();
         });
@@ -1033,7 +1105,7 @@
             const element = document.getElementById(sectionId);
             if (element) {
                 const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-                window.scrollTo({top: y, behavior: 'smooth'});
+                window.scrollTo({ top: y, behavior: 'smooth' });
             }
         }
 
@@ -1050,7 +1122,7 @@
                 return thumb.querySelector('img').src;
             });
             lightboxThumbs = Array.from(thumbElements).map(thumb => thumb.querySelector('img').src);
-            
+
             const thumbContainer = document.getElementById('lightboxThumbnails');
             if (thumbContainer) {
                 thumbContainer.innerHTML = '';
@@ -1069,7 +1141,7 @@
             const currentSrc = document.getElementById('pdMainImage').src;
             currentLightboxIndex = lightboxImages.indexOf(currentSrc);
             if (currentLightboxIndex === -1) currentLightboxIndex = 0;
-            
+
             updateLightboxView();
             document.getElementById('productLightbox').style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Ngăn scroll
@@ -1088,7 +1160,7 @@
             if (currentLightboxIndex >= lightboxImages.length) currentLightboxIndex = 0;
             updateLightboxView();
         }
-        
+
         function setLightboxImage(index) {
             currentLightboxIndex = index;
             updateLightboxView();
@@ -1096,13 +1168,13 @@
 
         function updateLightboxView() {
             document.getElementById('lightboxMainImage').src = lightboxImages[currentLightboxIndex];
-            
+
             if (isUGCMode) {
                 document.getElementById('lightboxCounter').innerText = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length + ' (Ảnh thực tế)';
             } else {
                 document.getElementById('lightboxCounter').innerText = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length;
             }
-            
+
             // Update active thumbnail
             const thumbContainer = document.getElementById('lightboxThumbnails');
             if (thumbContainer) {
@@ -1121,7 +1193,7 @@
         function calculateReviewRatings() {
             const reviews = document.querySelectorAll('.pd-review-item');
             const totalReviews = reviews.length;
-            
+
             if (totalReviews === 0) return;
 
             let totalStars = 0;
@@ -1178,7 +1250,7 @@
                 const percentage = Math.round((starCounts[i] / totalReviews) * 100);
                 const barEl = document.getElementById(`bar-${i}`);
                 const percentTextEl = document.getElementById(`percent-${i}`);
-                
+
                 if (barEl) {
                     setTimeout(() => {
                         barEl.style.width = `${percentage}%`;
@@ -1209,11 +1281,11 @@
             lightboxImages = Array.from(ugcImages).map(img => img.src);
             currentLightboxIndex = lightboxImages.indexOf(src);
             if (currentLightboxIndex === -1) currentLightboxIndex = 0;
-            
+
             document.getElementById('lightboxThumbnails').innerHTML = ''; // Hide thumbs for UGC
-            
+
             updateLightboxView();
-            
+
             const lightbox = document.getElementById('productLightbox');
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -1222,28 +1294,31 @@
     </script>
 
     <!-- Lightbox -->
-    <div id="productLightbox" class="pd-lightbox" style="display: none;" onclick="if(event.target === this || event.target.classList.contains('pd-lightbox-content-wrap')) closeLightbox();">
+    <div id="productLightbox" class="pd-lightbox" style="display: none;"
+        onclick="if(event.target === this || event.target.classList.contains('pd-lightbox-content-wrap')) closeLightbox();">
         <span class="pd-lightbox-close" onclick="closeLightbox()">&times;</span>
-        <button class="pd-lightbox-nav prev" onclick="changeLightboxImage(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="pd-lightbox-nav prev" onclick="changeLightboxImage(-1)"><i
+                class="fa-solid fa-chevron-left"></i></button>
         <div class="pd-lightbox-content-wrap">
-            <img id="lightboxMainImage" class="pd-lightbox-content" src="">
+            <img loading="lazy" id="lightboxMainImage" class="pd-lightbox-content" src="">
         </div>
-        <button class="pd-lightbox-nav next" onclick="changeLightboxImage(1)"><i class="fa-solid fa-chevron-right"></i></button>
-        
+        <button class="pd-lightbox-nav next" onclick="changeLightboxImage(1)"><i
+                class="fa-solid fa-chevron-right"></i></button>
+
         <div class="pd-lightbox-bottom">
             <div class="pd-lightbox-thumbnails" id="lightboxThumbnails"></div>
             <div class="pd-lightbox-counter" id="lightboxCounter">1 / 6</div>
         </div>
     </div>
     <!-- JS -->
-    <script src="js/product-db.js"></script>
+    <script defer src="js/product-db.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Get product ID from URL
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             let currentProduct = null;
-            
+
             // If no ID or invalid, redirect to san-pham.html
             if (!productId) {
                 // For development demo, fallback to ID 1 if none provided
@@ -1252,7 +1327,7 @@
             } else {
                 loadProductDetails(parseInt(productId));
             }
-            
+
             function loadProductDetails(id) {
                 const product = ProductDB.getById(id);
                 if (!product) {
@@ -1266,13 +1341,13 @@
                     `;
                     return;
                 }
-                
+
                 currentProduct = product;
-                
+
                 // Set Breadcrumb
                 const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
                 if (breadcrumbCurrent) breadcrumbCurrent.textContent = product.name;
-                
+
                 const breadcrumbCategory = document.getElementById('breadcrumbCategory');
                 if (breadcrumbCategory) {
                     const category = ProductDB.getCategories().find(c => c.id === product.categoryId);
@@ -1281,11 +1356,11 @@
                         breadcrumbCategory.href = `san-pham.html?category=${category.id}`;
                     }
                 }
-                
+
                 // Set Title & Badge
                 const title = document.querySelector('.pd-title');
                 if (title) title.textContent = product.name;
-                
+
                 const badge = document.querySelector('.pd-badge');
                 if (badge) {
                     if (product.discount > 0) {
@@ -1295,27 +1370,27 @@
                         badge.style.display = 'none';
                     }
                 }
-                
+
                 // Set Images
                 const mainImg = document.getElementById('pdMainImage');
                 if (mainImg) mainImg.src = product.image;
-                
+
                 const lightboxMain = document.getElementById('lightboxMainImage');
                 if (lightboxMain) lightboxMain.src = product.image;
-                
+
                 // In a real app we'd have multiple images, here we'll just set all thumbs to the same image for demo
                 document.querySelectorAll('.pd-thumb img').forEach(img => {
                     img.src = product.image;
                 });
-                
+
                 // Set Prices
                 const discountedPrice = ProductDB.getDiscountedPrice(product);
                 const priceCurrent = document.querySelector('.pd-price');
                 const priceOld = document.querySelector('.pd-price-old');
                 const saveBadge = document.querySelector('.pd-save-badge');
-                
+
                 if (priceCurrent) priceCurrent.textContent = ProductDB.formatPrice(discountedPrice);
-                
+
                 if (product.discount > 0) {
                     if (priceOld) {
                         priceOld.textContent = ProductDB.formatPrice(product.price);
@@ -1329,23 +1404,23 @@
                     if (priceOld) priceOld.style.display = 'none';
                     if (saveBadge) saveBadge.style.display = 'none';
                 }
-                
+
                 // Set Description
                 const desc = document.querySelector('.pd-desc-short');
                 if (desc) desc.textContent = product.description || 'Sản phẩm chính hãng chất lượng cao.';
-                
+
                 // Set Meta Data
                 const pdBrand = document.getElementById('pdBrand');
                 if (pdBrand) {
                     let brandName = 'Gas Việt'; // default
-                    
+
                     if (product.categoryId <= 5) {
                         // For gas cylinders, brand is usually the category name
                         brandName = ProductDB.getCategoryName(product.categoryId);
                     } else {
                         // For stoves and accessories, try to match known brands in the name
                         const knownBrands = ['Namilux', 'Bosch', 'Rinnai', 'Sunhouse', 'Kogas', 'Bluestar', 'Junger', 'Katsura', 'Paloma', 'Sakura', 'Teka', 'Electrolux', 'Malloca'];
-                        
+
                         const lowerName = product.name.toLowerCase();
                         for (let b of knownBrands) {
                             if (lowerName.includes(b.toLowerCase())) {
@@ -1353,13 +1428,13 @@
                                 break;
                             }
                         }
-                        
+
                         // If no known brand found, fallback to something generic or keep default
                         if (brandName === 'Gas Việt') {
                             brandName = 'Chính hãng';
                         }
                     }
-                    
+
                     pdBrand.textContent = `Thương hiệu: ${brandName}`;
                 }
 
@@ -1373,7 +1448,7 @@
                     // Extract weight from product name if possible, else default 12kg
                     const weightMatch = product.name.match(/\b(12|12\.5|45)kg\b/i);
                     const weightText = weightMatch ? weightMatch[0] : '12kg';
-                    
+
                     if (pdWeight) {
                         pdWeight.style.display = 'inline-block';
                         pdWeight.textContent = `Trọng lượng: ${weightText}`;
@@ -1392,7 +1467,7 @@
                     if (pdWeightDivider) pdWeightDivider.style.display = 'none';
                     if (pdVariations) pdVariations.style.display = 'none';
                 }
-                
+
                 // Set Specs Tab
                 const specsTab = document.querySelector('#specs .pd-tab-pane');
                 if (specsTab && product.specs) {
@@ -1404,7 +1479,7 @@
 
                 // Document Title
                 document.title = `${product.name} | Gas Việt`;
-                
+
                 // ===== COMBO DEAL =====
                 const giftBox = document.querySelector('.pd-gift-box');
                 if (giftBox) {
@@ -1418,7 +1493,7 @@
                                     <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
                                 </div>
                                 <div class="gift-item">
-                                    <img src="${comboProduct.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${comboProduct.name}">
+                                    <img loading="lazy" src="${comboProduct.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${comboProduct.name}">
                                     <div class="gift-info">
                                         <p>${comboText}</p>
                                         ${comboPriceHtml}
@@ -1434,36 +1509,36 @@
                         giftBox.style.display = 'none';
                     }
                 }
-                
+
                 renderRelatedProducts(product.categoryId, product.id);
             }
-            
+
             function renderRelatedProducts(categoryId, currentId) {
                 const slider = document.getElementById('relatedSlider');
                 if (!slider) return;
-                
+
                 // Fetch related products based on logic: Gas (1-5) -> Gas; Stove (6-7) -> Stove
                 let isGas = categoryId >= 1 && categoryId <= 5;
                 let isStove = categoryId >= 6 && categoryId <= 7;
-                
+
                 let related = ProductDB.getAll().filter(p => {
                     if (p.id === currentId) return false;
                     if (isGas) return p.categoryId >= 1 && p.categoryId <= 5;
                     if (isStove) return p.categoryId >= 6 && p.categoryId <= 7;
                     return p.categoryId === categoryId;
                 });
-                
+
                 related = related.sort(() => 0.5 - Math.random());
-                
+
                 // If not enough related, add random
                 if (related.length < 8) {
                     let others = ProductDB.getAll().filter(p => p.id !== currentId && !related.find(r => r.id === p.id));
                     others = others.sort(() => 0.5 - Math.random());
                     related = related.concat(others.slice(0, 8 - related.length));
                 }
-                
+
                 related = related.slice(0, 8); // Take top 8
-                
+
                 let html = related.map(p => {
                     const discountedPrice = ProductDB.getDiscountedPrice(p);
                     const hasDiscount = p.discount > 0;
@@ -1471,7 +1546,7 @@
                         <div class="product-card">
                             ${hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : ''))}
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                <a href="chi-tiet-san-pham.html?id=${p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
                             </div>
                             <div class="product-info">
                                 <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
@@ -1487,7 +1562,7 @@
                         </div>
                     `;
                 }).join('');
-                
+
                 // Add "View All" card
                 html += `
                     <div class="product-card view-all-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center; background-color: var(--color-gray-50); border: 2px dashed var(--color-gray-300);" onclick="window.location.href='san-pham.html'">
@@ -1498,7 +1573,7 @@
                         <p style="color: var(--color-gray-600); font-size: 0.9rem; padding: 0 15px;">Khám phá thêm hàng trăm sản phẩm khác</p>
                     </div>
                 `;
-                
+
                 slider.innerHTML = html;
             }
         });
@@ -1537,7 +1612,7 @@
         function submitReview() {
             const ratingInput = document.getElementById('reviewRating');
             if (ratingInput && parseInt(ratingInput.value) === 0) {
-                if(typeof showToast === 'function') showToast('Vui lòng chọn số sao đánh giá!', 'error');
+                if (typeof showToast === 'function') showToast('Vui lòng chọn số sao đánh giá!', 'error');
                 else alert('Vui lòng chọn số sao đánh giá!');
                 return;
             }
@@ -1548,7 +1623,7 @@
                 formContainer.classList.remove('review-form-visible');
                 formContainer.classList.add('review-form-hidden');
             }
-            
+
             // Show the write button again
             const writeBtn = document.getElementById('writeReviewBtn');
             if (writeBtn) {
@@ -1571,7 +1646,7 @@
                 </div>
             `;
             document.body.appendChild(popup);
-            
+
             // Animate in
             setTimeout(() => {
                 document.getElementById('successOverlay').style.opacity = '1';
@@ -1580,7 +1655,7 @@
             }, 50);
         }
 
-        window.closeSuccessPopup = function() {
+        window.closeSuccessPopup = function () {
             const overlay = document.getElementById('successOverlay');
             const modal = document.getElementById('successModal');
             if (overlay && modal) {
@@ -1599,10 +1674,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             if (!productId) return;
-            
+
             const product = ProductDB.getById(productId);
             if (!product) return;
-            
+
             // Update Page Title and Breadcrumb
             document.title = product.name + ' | Gas Việt';
             const breadcrumbs = document.querySelectorAll('.pd-breadcrumbs a');
@@ -1614,11 +1689,11 @@
                     breadcrumbs[2].href = 'san-pham.html';
                 }
             }
-            
+
             // Update Title
             const titleEl = document.querySelector('.pd-title');
             if (titleEl) titleEl.textContent = product.name;
-            
+
             // Update Brand/Weight if combo
             if (product.categoryId === 9) {
                 const brandEl = document.getElementById('pdBrand');
@@ -1630,28 +1705,28 @@
                 const variations = document.getElementById('pdVariations');
                 if (variations) variations.style.display = 'none';
             }
-            
+
             // Update Image
             if (product.image) {
                 const mainImg = document.getElementById('pdMainImage');
                 if (mainImg) mainImg.src = product.image;
-                
+
                 // Update Thumbnails
                 const thumbnailsContainer = document.getElementById('pdThumbnails');
                 if (thumbnailsContainer) {
                     window.imageLightboxImages = [product.image];
-                    let thumbsHTML = `<img src="${product.image}" class="pd-thumb-img active" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
-                    
+                    let thumbsHTML = `<img loading="lazy" src="${product.image}" class="pd-thumb-img active" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
+
                     if (product.images && product.images.length > 0) {
                         const additionalImgs = product.images.slice(0, 6);
                         window.imageLightboxImages = [...window.imageLightboxImages, ...additionalImgs];
-                        
+
                         additionalImgs.forEach((img, idx) => {
-                            thumbsHTML += `<img src="${img}" class="pd-thumb-img" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
+                            thumbsHTML += `<img loading="lazy" src="${img}" class="pd-thumb-img" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
                         });
                     }
-                    
-                    
+
+
                     // Hide thumbnails container entirely if there's only 1 image
                     if (window.imageLightboxImages.length <= 1) {
                         thumbnailsContainer.style.display = 'none';
@@ -1662,7 +1737,7 @@
                         const renderedThumbs = thumbnailsContainer.querySelectorAll('.pd-thumb-img');
                         renderedThumbs.forEach((el, index) => {
                             const originalClick = el.onclick;
-                            el.onclick = function(e) {
+                            el.onclick = function (e) {
                                 originalClick.call(this, e);
                                 document.getElementById('pdMainImage').onclick = () => openImageLightbox(index);
                             };
@@ -1671,12 +1746,12 @@
                     document.getElementById('pdMainImage').onclick = () => openImageLightbox(0);
                 }
             }
-            
+
             // Update Price
             const priceEl = document.querySelector('.pd-price');
             const oldPriceEl = document.querySelector('.pd-price-old');
             const saveBadge = document.querySelector('.pd-save-badge');
-            
+
             if (priceEl) priceEl.textContent = product.price.toLocaleString('vi-VN') + 'đ';
             if (product.oldPrice || product.discount) {
                 const oldPrice = product.oldPrice || Math.round(product.price / (1 - product.discount / 100));
@@ -1692,19 +1767,19 @@
                 if (oldPriceEl) oldPriceEl.style.display = 'none';
                 if (saveBadge) saveBadge.style.display = 'none';
             }
-            
+
             // Update Flash Deal Section
             const flashDealEl = document.querySelector('.pd-flash-deal');
             if (flashDealEl) {
                 if (product.onSale || product.discount > 0) {
                     flashDealEl.style.display = 'flex';
-                    
+
                     let unit = 'sản phẩm';
                     if (product.categoryId >= 1 && product.categoryId <= 5) unit = 'bình';
                     else if (product.categoryId === 6 || product.categoryId === 7) unit = 'chiếc';
                     else if (product.categoryId === 8) unit = 'cái';
                     else if (product.categoryId === 9) unit = 'bộ';
-                    
+
                     const progressText = document.querySelector('.progress-text');
                     const progressFill = document.querySelector('.progress-fill');
                     if (progressText && progressFill) {
@@ -1718,11 +1793,11 @@
                     flashDealEl.style.display = 'none';
                 }
             }
-            
+
             // Update Description
             const shortDesc = document.querySelector('.pd-desc-short');
             if (shortDesc) shortDesc.textContent = product.description;
-            
+
             const fullDesc = document.querySelector('#description .pd-tab-pane');
             if (fullDesc) fullDesc.innerHTML = '<p>' + product.description + '</p>';
             // Update Gift Box (Ưu Đãi Mua Kèm)
@@ -1737,7 +1812,7 @@
                                 <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
                             </div>
                             <div class="gift-item">
-                                <img src="${comboProduct.image}" alt="${comboProduct.name}">
+                                <img loading="lazy" src="${comboProduct.image}" alt="${comboProduct.name}">
                                 <div class="gift-info">
                                     <p>${product.comboDiscountText || 'Mua kèm ' + comboProduct.name + ' với giá ưu đãi'}</p>
                                 </div>
@@ -1796,21 +1871,21 @@
             window.currentImageLightboxIndex = index;
             modal.style.display = "flex";
             updateImageLightboxContent();
-            
+
             // Prevent scrolling
             document.body.style.overflow = "hidden";
             document.documentElement.style.overflow = "hidden";
         }
-        
+
         function updateImageLightboxContent() {
             const lightboxImg = document.getElementById("imageLightboxImg");
             if (window.imageLightboxImages.length === 0) {
                 lightboxImg.src = document.getElementById("pdMainImage").src;
                 return;
             }
-            
+
             lightboxImg.src = window.imageLightboxImages[window.currentImageLightboxIndex];
-            
+
             const thumbsContainer = document.getElementById("imageLightboxThumbnails");
             if (thumbsContainer) {
                 if (window.imageLightboxImages.length <= 1) {
@@ -1820,10 +1895,10 @@
                     let html = '';
                     window.imageLightboxImages.forEach((img, idx) => {
                         const isActive = idx === window.currentImageLightboxIndex;
-                        html += `<img src="${img}" onclick="event.stopPropagation(); updateImageLightboxContentForIndex(${idx})" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer; border: 2px solid ${isActive ? 'var(--color-primary)' : 'transparent'}; opacity: ${isActive ? '1' : '0.5'}; background: white; margin: 0 5px; border-radius: 4px; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); flex-shrink: 0; pointer-events: auto;">`;
+                        html += `<img loading="lazy" src="${img}" onclick="event.stopPropagation(); updateImageLightboxContentForIndex(${idx})" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer; border: 2px solid ${isActive ? 'var(--color-primary)' : 'transparent'}; opacity: ${isActive ? '1' : '0.5'}; background: white; margin: 0 5px; border-radius: 4px; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.5); flex-shrink: 0; pointer-events: auto;">`;
                     });
                     thumbsContainer.innerHTML = html;
-                    
+
                     // Keep active thumbnail in view if scrollable
                     setTimeout(() => {
                         const activeThumb = thumbsContainer.children[window.currentImageLightboxIndex];
@@ -1833,7 +1908,7 @@
                     }, 100);
                 }
             }
-            
+
             // Update counter
             const counter = document.getElementById("imageLightboxCounter");
             if (counter && window.imageLightboxImages.length > 0) {
@@ -1845,15 +1920,15 @@
                 }
             }
         }
-        
+
         function updateImageLightboxContentForIndex(idx) {
             window.currentImageLightboxIndex = idx;
             updateImageLightboxContent();
         }
-        
+
         function imageLightboxPrev(e) {
             e.stopPropagation();
-            if(window.currentImageLightboxIndex > 0) {
+            if (window.currentImageLightboxIndex > 0) {
                 window.currentImageLightboxIndex--;
                 updateImageLightboxContent();
             } else if (window.imageLightboxImages.length > 0) {
@@ -1861,10 +1936,10 @@
                 updateImageLightboxContent();
             }
         }
-        
+
         function imageLightboxNext(e) {
             e.stopPropagation();
-            if(window.currentImageLightboxIndex < window.imageLightboxImages.length - 1) {
+            if (window.currentImageLightboxIndex < window.imageLightboxImages.length - 1) {
                 window.currentImageLightboxIndex++;
                 updateImageLightboxContent();
             } else if (window.imageLightboxImages.length > 0) {
@@ -1892,14 +1967,14 @@
                     tab.classList.remove('active');
                 }
             });
-            
+
             // Scroll to the section
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 const offset = 80;
                 const elementPosition = targetSection.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - offset;
-                
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
@@ -1907,39 +1982,52 @@
             }
         }
     </script>
-    <script src="js/product-db.js"></script>
+    <script defer src="js/product-db.js"></script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
             <i class="fa-solid fa-phone"></i>
         </a>
         <a href="https://zalo.me/0901234567" target="_blank" class="float-btn float-zalo" title="Chat Zalo">
-            <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo" onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
+            <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo"
+                onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
         </a>
     </div>
 
     <!-- Lightbox Modal -->
-    <div id="imageLightbox" class="lightbox-modal" onclick="closeImageLightbox(event)" style="position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); display: none;">
+    <div id="imageLightbox" class="lightbox-modal" onclick="closeImageLightbox(event)"
+        style="position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.9); display: none;">
         <!-- Close btn -->
-        <span class="lightbox-close" onclick="closeImageLightbox(event)" style="position: absolute; top: 20px; right: 25px; color: #fff; font-size: 35px; cursor: pointer; z-index: 10002; transition: 0.2s;">&times;</span>
-        
+        <span class="lightbox-close" onclick="closeImageLightbox(event)"
+            style="position: absolute; top: 20px; right: 25px; color: #fff; font-size: 35px; cursor: pointer; z-index: 10002; transition: 0.2s;">&times;</span>
+
         <!-- Navigation -->
-        <button class="lb-nav lb-prev" onclick="imageLightboxPrev(event)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="lb-nav lb-next" onclick="imageLightboxNext(event)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i class="fa-solid fa-chevron-right"></i></button>
-        
+        <button class="lb-nav lb-prev" onclick="imageLightboxPrev(event)"
+            style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i
+                class="fa-solid fa-chevron-left"></i></button>
+        <button class="lb-nav lb-next" onclick="imageLightboxNext(event)"
+            style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; z-index: 10002; display: flex; align-items: center; justify-content: center; transition: 0.2s;"><i
+                class="fa-solid fa-chevron-right"></i></button>
+
         <!-- Main Image -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 10000;">
-            <img class="lightbox-content" id="imageLightboxImg" style="pointer-events: auto; max-height: 75vh; max-width: 90vw; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" onclick="event.stopPropagation();">
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 10000;">
+            <img loading="lazy" class="lightbox-content" id="imageLightboxImg"
+                style="pointer-events: auto; max-height: 75vh; max-width: 90vw; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);"
+                onclick="event.stopPropagation();">
         </div>
-        
+
         <!-- Thumbnails -->
-        <div id="imageLightboxThumbnails" style="position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; overflow-x: auto; z-index: 10001; padding: 10px 0; pointer-events: none;" onclick="event.stopPropagation();"></div>
-        
+        <div id="imageLightboxThumbnails"
+            style="position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; overflow-x: auto; z-index: 10001; padding: 10px 0; pointer-events: none;"
+            onclick="event.stopPropagation();"></div>
+
         <!-- Counter -->
-        <div id="imageLightboxCounter" style="position: absolute; bottom: 25px; right: 25px; background: rgba(0,0,0,0.7); color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 500; z-index: 10002; pointer-events: none; letter-spacing: 1px;">
+        <div id="imageLightboxCounter"
+            style="position: absolute; bottom: 25px; right: 25px; background: rgba(0,0,0,0.7); color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 500; z-index: 10002; pointer-events: none; letter-spacing: 1px;">
             1 / 1
         </div>
     </div>
 </body>
-</html>
 
+</html>
