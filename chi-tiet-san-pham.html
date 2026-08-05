@@ -461,7 +461,19 @@
                                     chọn sao</span>
                             </div>
                             <input type="hidden" id="reviewRating" value="0">
-                            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                            <style>
+                                .review-inputs-row {
+                                    display: flex;
+                                    gap: 15px;
+                                    margin-bottom: 15px;
+                                }
+                                @media (max-width: 480px) {
+                                    .review-inputs-row {
+                                        flex-direction: column;
+                                    }
+                                }
+                            </style>
+                            <div class="review-inputs-row">
                                 <input type="text" id="reviewName" placeholder="Họ và tên *" required
                                     style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); outline: none;">
                                 <input type="tel" id="reviewPhone" placeholder="Số điện thoại *" required

@@ -1498,7 +1498,9 @@
     }
 
     .nb-hero {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
+        margin-top: 10px;
+
     }
 
     .flash-deal-slider-wrapper {
@@ -1582,7 +1584,7 @@
 
     .about-page-wrapper .about-hero p {
         font-size: 16px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     .about-page-wrapper .hero-badge {
@@ -2621,6 +2623,7 @@
 
     .cart-banner {
         gap: 0px !important;
+        margin-bottom: 30px !important;
     }
 
     .feature-text h4 {
@@ -2887,7 +2890,7 @@
     }
 
     .nb-detail-featured-img img {
-        margin-bottom: 0px !important;
+        margin-bottom: 5px !important;
     }
 
     .nb-content-inner h2 {
@@ -2947,7 +2950,7 @@
 
     .featured-products-section .badge-top {
         animation: badgeBlinkMobile 1.5s infinite !important;
-        margin-left: 10px !important;
+        margin-left: 5px !important;
     }
 
     .flash-deal-container {
@@ -2955,8 +2958,8 @@
     }
 
     .featured-slider-container {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 
     .glass-grid {
@@ -2986,7 +2989,26 @@
     .process-timeline {
         margin-top: 30px !important;
     }
-        
+
+    .bento-showcase-container {
+        gap: 15px;
+    }
+
+    .nb-destinations {
+        margin-bottom: 40px !important;
+    }
+
+    .nb-latest-content {
+        gap: 20px;
+    }
+
+    .nb-latest {
+        margin-bottom: 50px !important;
+    }
+
+    .nb-dest-card-info {
+        padding: 10px 5px !important;
+    }
 
 }
 /* Fix overflow badge-top breathing animation on mobile */

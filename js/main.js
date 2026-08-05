@@ -1130,7 +1130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         function updateCartTotals(items, amount) {
             const subtotalEl = document.getElementById('cart-subtotal');
             const totalEl = document.getElementById('cart-total');
-            const itemsCountEl = document.querySelector('.summary-row:first-child span:last-child');
+            const itemsCountEl = document.querySelector('.order-summary .summary-row:nth-of-type(1) span:last-child');
             const bannerQtyEl = document.querySelector('.cart-banner-content h2 strong');
 
             const formattedAmount = amount.toLocaleString('vi-VN') + 'đ';

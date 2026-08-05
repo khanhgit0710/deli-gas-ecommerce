@@ -28,6 +28,26 @@
         .site-footer .custom-shape-divider-bottom {
             display: none !important;
         }
+
+        @media (max-width: 480px) {
+            .hero-contact-btns {
+                gap: 8px !important;
+            }
+            .hero-contact-btns a {
+                padding: 8px 12px !important;
+                font-size: 16px !important;
+                gap: 5px !important;
+                white-space: nowrap;
+            }
+
+            .contact-main {
+                padding: 50px 0;
+            }
+
+            .custom-contact-form input {
+                padding: 12px 20px;
+            }
+        }
     </style>
 </head>
 
@@ -46,11 +66,11 @@
                     <div class="badge-top" style="margin-bottom: 15px; display: inline-block; background: rgba(255,255,255,0.15); color: white; padding: 6px 15px; border-radius: 20px; font-weight: 600; letter-spacing: 1px; font-size: 13px;">— TỔNG ĐÀI CHĂM SÓC KHÁCH HÀNG</div>
                     <h1 style="font-size: 46px; font-weight: 900; margin-bottom: 20px; line-height: 1.25; text-transform: uppercase; color: #fff">Gas Việt Luôn Sẵn Sàng<br><span class="highlight" style="color: var(--color-accent);">Hỗ Trợ Bạn 24/7</span></h1>
                     <p style="font-size: 18px; opacity: 0.95; margin: 0 0 35px; line-height: 1.6; font-weight: 400;">Giao gas siêu tốc 15 - 30 phút. Hãy để chúng tôi chăm sóc căn bếp của bạn.</p>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <a href="tel:1900123123" class="pd-btn" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(251, 191, 36, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(251, 191, 36, 0.4)';" style="background-color: var(--color-accent); color: var(--color-primary-dark); border: none; padding: 15px 35px; border-radius: 30px; font-weight: 700; font-size: 18px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);">
+                    <div class="hero-contact-btns" style="display: flex; gap: 15px; flex-wrap: nowrap;">
+                        <a href="tel:1900123123" class="pd-btn hero-btn" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(251, 191, 36, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(251, 191, 36, 0.4)';" style="background-color: var(--color-accent); color: var(--color-primary-dark); border: none; padding: 10px 30px; border-radius: 30px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);">
                             <i class="fa-solid fa-phone-volume icon-shake"></i> Gọi Ngay 1900.123.123
                         </a>
-                        <a href="https://zalo.me/0901234567" target="_blank" class="pd-btn" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(255, 255, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 255, 255, 0.2)';" style="background-color: none; color: var(--color-accent); border: 1.5px solid var(--color-accent); padding: 15px 35px; border-radius: 30px; font-weight: 700; font-size: 18px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);">
+                        <a href="https://zalo.me/0901234567" target="_blank" class="pd-btn hero-btn" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(255, 255, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 255, 255, 0.2)';" style="background-color: transparent; color: var(--color-accent); border: 1.5px solid var(--color-accent); padding: 10px 30px; border-radius: 30px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);">
                             <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo" style="width: 28px; height: 28px; border-radius: 5px; object-fit: cover;"> Kết nối chúng tôi
                         </a>
                     </div>
