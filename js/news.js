@@ -47,7 +47,7 @@ function renderNewsList() {
                 <div class="nb-img-small-stack">
         `;
         heroSubs.forEach(sub => {
-            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href='chi-tiet-tin-tuc.html?slug=${sub.slug}'" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
+            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href=''" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
         });
         heroHtml += `
                 </div>
@@ -104,7 +104,7 @@ function renderNewsList() {
             gridNews.forEach(n => {
                 const catName = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
                 gridHtml += `
-                    <div class="nb-dest-card" onclick="window.location.href='chi-tiet-tin-tuc.html?slug=${n.slug}'" style="cursor:pointer;">
+                    <div class="nb-dest-card" onclick="window.location.href=''" style="cursor:pointer;">
                         <img src="${n.image}" alt="${n.title}">
                         <div class="nb-dest-card-info">
                             <h4><a href="chi-tiet-tin-tuc.html?slug=${n.slug}">${n.title}</a></h4>
@@ -135,7 +135,7 @@ function renderNewsList() {
         const catName = ProductDB.getNewsCategoryById(trendingMain.categoryId)?.name || 'Khác';
         latestHtml += `
             <div class="nb-latest-main">
-                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href='chi-tiet-tin-tuc.html?slug=${trendingMain.slug}'" style="cursor:pointer;">
+                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href=''" style="cursor:pointer;">
                 <div class="nb-latest-main-info">
                     <span class="nb-cat">${catName}</span>
                     <h3><a href="chi-tiet-tin-tuc.html?slug=${trendingMain.slug}">${trendingMain.title}</a></h3>
@@ -150,7 +150,7 @@ function renderNewsList() {
             const cat = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
             latestHtml += `
                 <div class="nb-list-item">
-                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href='chi-tiet-tin-tuc.html?slug=${n.slug}'" style="cursor:pointer;">
+                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href=''" style="cursor:pointer;">
                     <div class="nb-list-item-info">
                         <span class="nb-cat">${cat}</span>
                         <h3><a href="chi-tiet-tin-tuc.html?slug=${n.slug}">${n.title}</a></h3>
@@ -201,7 +201,7 @@ function renderNewsDetail() {
     related.forEach(n => {
         relatedHtml += `
             <div class="nb-archive-card">
-                <img src="${n.image}" alt="${n.title}" onclick="window.location.href='chi-tiet-tin-tuc.html?slug=${n.slug}'" style="cursor:pointer">
+                <img src="${n.image}" alt="${n.title}" onclick="window.location.href=''" style="cursor:pointer">
                 <div class="nb-archive-card-body">
                     <span class="nb-cat">${catName}</span>
                     <h3><a href="chi-tiet-tin-tuc.html?slug=${n.slug}">${n.title}</a></h3>

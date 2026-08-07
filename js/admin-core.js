@@ -72,10 +72,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     pageTitle = document.getElementById('pageTitle');
 
     const sectionTitles = {
-        dashboard: 'Bảng điều khiển',
-        products: 'Quản lý sản phẩm',
-        categories: 'Quản lý danh mục',
+        'dashboard': 'Bảng điều khiển',
+        'products': 'Quản lý sản phẩm',
+        'flash-deals': 'Quản lý Sale Off',
+        'categories': 'Quản lý danh mục',
         news: 'Quản lý tin tức',
+        'news-categories': 'Danh mục tin tức',
         settings: 'Cấu hình chung'
     };
 

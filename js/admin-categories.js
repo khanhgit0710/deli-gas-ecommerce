@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td style="color:var(--admin-text-dim);font-weight:600">#${c.id}</td>
                     <td><strong>${c.name}</strong></td>
                     <td style="color:var(--admin-text-dim);font-family:monospace;font-size:12px">${c.slug}</td>
-                    <td><span class="cat-product-count">${count}</span></td>
-                    <td>
-                        <div class="actions-cell">
+                    <td style="text-align: center;"><span class="cat-product-count">${count}</span></td>
+                    <td style="text-align: center;">
+                        <div class="actions-cell" style="justify-content: center;">
                             <button class="btn-icon success" title="Sửa" onclick="editCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn-icon danger" title="Xóa" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>

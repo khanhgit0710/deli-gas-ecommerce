@@ -471,5 +471,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btnAddProduct').addEventListener('click', () => openProductModal());
 
+    // ========== SALE OFF 50% ==========
+    window.renderSaleOff = function() {
+        const products = ProductDB.getAll(true).filter(p => p.isSaleOff50);
+        const tbody = document.getElementById('saleOffTableBody');
+        
+        if (!tbody) return;
+
+        if (products.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-tags"></i> Chưa có sản phẩm Sale Off 50%</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = products.map((p, index) => {
+            const discountedPrice = ProductDB.getDiscountedPrice(p);
+            return `
+                <tr>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:center;">${p.id}</td>
+                    <td>
+                        <div class="product-cell">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
 
 });

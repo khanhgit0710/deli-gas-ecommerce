@@ -149,7 +149,7 @@
 
                 // Add "All Products" option at top
                 list.insertAdjacentHTML('afterbegin', `
-                    <li><a href="/san-pham.html" data-cat-id="all" ${currentCategory === '' ? 'class="active"' : ''}>
+                    <li><a href="/san-pham" data-cat-id="all" ${currentCategory === '' ? 'class="active"' : ''}>
                         Tất cả sản phẩm
                         <span class="sidebar-count">${ProductDB.getAll().length}</span>
                         <i class="fa-solid fa-chevron-right"></i>
@@ -267,7 +267,7 @@
                                                 ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
                                             </div>
                                             <div class="product-actions">
-                                                <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham.html?id=${p.id}'">Mua ngay</button>
+                                                <button class="buy-now-btn" onclick="window.location.href=''">Mua ngay</button>
                                                 <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
                                             </div>
                                         </div>

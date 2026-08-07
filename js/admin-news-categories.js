@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('newsCategoryId').value = cat.id;
             document.getElementById('newsCategoryName').value = cat.name;
             document.getElementById('newsCategorySlug').value = cat.slug || '';
+            document.getElementById('newsCategorySeoDesc').value = cat.seoDesc || '';
         } else {
             title.textContent = 'Thêm danh mục tin tức';
         }
@@ -92,13 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const slug = document.getElementById('newsCategorySlug').value.trim();
+        const seoDesc = document.getElementById('newsCategorySeoDesc').value.trim();
         const editId = document.getElementById('newsCategoryId').value;
 
         let res;
         if (editId) {
-            res = ProductDB.updateNewsCategory(editId, { name, slug });
+            res = ProductDB.updateNewsCategory(editId, { name, slug, seoDesc });
         } else {
-            res = ProductDB.addNewsCategory({ name, slug });
+            res = ProductDB.addNewsCategory({ name, slug, seoDesc });
         }
 
         if (res.success) {

@@ -24,12 +24,12 @@ const ProductDB = (() => {
     ];
 
     const seedNewsCategories = [
-        { id: 1, name: 'An toàn Gas', slug: 'an-toan-gas' },
-        { id: 2, name: 'Mẹo vặt nhà bếp', slug: 'meo-vat-nha-bep' },
-        { id: 3, name: 'Khuyến mãi', slug: 'khuyen-mai' },
-        { id: 4, name: 'Sản phẩm mới', slug: 'san-pham-moi' },
-        { id: 5, name: 'Ẩm thực', slug: 'am-thuc' },
-        { id: 6, name: 'Kỹ thuật', slug: 'ky-thuat' }
+        { id: 1, name: 'An toàn Gas', slug: 'an-toan-gas', seoDesc: 'Tin tức và cẩm nang về an toàn sử dụng gas' },
+        { id: 2, name: 'Mẹo vặt nhà bếp', slug: 'meo-vat-nha-bep', seoDesc: 'Các mẹo vặt hữu ích cho không gian bếp của bạn' },
+        { id: 3, name: 'Khuyến mãi', slug: 'khuyen-mai', seoDesc: 'Cập nhật các chương trình ưu đãi và giảm giá mới nhất' },
+        { id: 4, name: 'Sản phẩm mới', slug: 'san-pham-moi', seoDesc: 'Giới thiệu các dòng sản phẩm gas và bếp gas mới' },
+        { id: 5, name: 'Ẩm thực', slug: 'am-thuc', seoDesc: 'Khám phá ẩm thực và các món ngon mỗi ngày' },
+        { id: 6, name: 'Kỹ thuật', slug: 'ky-thuat', seoDesc: 'Chia sẻ kiến thức kỹ thuật về gas và thiết bị bếp' }
     ];
 
     const seedNews = [
@@ -204,6 +204,9 @@ const ProductDB = (() => {
             specs: 'Trọng lượng ruột: 12kg ± 100g\nLoại van: Van Ngang (POL) / Van Chụp\nThành phần: Khí LPG tinh khiết (30% Propane - 70% Butane)\nÁp suất thử vỏ: 34kg/cm²',
             featured: true,
             onSale: true,
+            isSaleOff50: true,
+            isFlashDeal: true,
+            flashDealDesc: 'Giảm cực mạnh dịp cuối tuần',
             createdAt: '2026-07-01T00:00:00',
             recommendedProducts: [42, 45]
         },
@@ -218,6 +221,7 @@ const ProductDB = (() => {
             specs: 'Trọng lượng ruột: 12kg ± 100g\nLoại van: Van Ngang (vặn ren)\nMàu vỏ: Xanh lá / Xanh dương\nTiêu chuẩn: TCVN 6223:2017',
             featured: false,
             onSale: false,
+            isSaleOff50: true,
             createdAt: '2026-07-01T00:01:00'
         },
         {
@@ -553,6 +557,8 @@ const ProductDB = (() => {
             specs: 'Loại bếp: Bếp đơn\nCông suất: 2000W\nTiện ích: Có tay cầm xách tiện lợi\nHẹn giờ: Có',
             featured: false,
             onSale: false,
+            isFlashDeal: true,
+            flashDealDesc: 'Khuyến mãi đặc biệt trong ngày',
             createdAt: '2026-07-06T00:01:00'
         },
         {
@@ -592,6 +598,8 @@ const ProductDB = (() => {
             specs: 'Loại bếp: Bếp đơn cao cấp\nCông suất: 2200W\nMặt kính: Schott Ceran (Đức)\nXuất xứ: Linh kiện Đức / Lắp ráp Thái Lan',
             featured: true,
             onSale: false,
+            isFlashDeal: true,
+            flashDealDesc: 'Hàng Đức cao cấp giảm cực sốc',
             createdAt: '2026-07-06T00:04:00'
         },
         {
@@ -1058,6 +1066,8 @@ const ProductDB = (() => {
                         _saveProducts(data.products);
                         _saveCategories(data.categories || []);
                         if (data.settings) _saveSettings(data.settings);
+                        if (data.news) _saveNews(data.news);
+                        if (data.newsCategories) _saveNewsCategories(data.newsCategories);
                         console.log('[ProductDB] Loaded from API.');
                         document.dispatchEvent(new Event('ProductDBReady'));
                         return;
@@ -1077,13 +1087,49 @@ const ProductDB = (() => {
                 localStorage.setItem(INIT_KEY, 'true');
                 console.log('[ProductDB] Initialized with seed data.');
                 // Push initial seed data to API so it creates the data.json
-                this.syncToApi(); 
+                this.syncToApi();
             } else {
-                if (_getNewsCategories().length === 0) {
+                let nc = _getNewsCategories();
+                if (nc.length === 0) {
                     _saveNewsCategories(seedNewsCategories);
+                } else {
+                    let updated = false;
+                    nc = nc.map(c => {
+                        if (!c.seoDesc) {
+                            const seed = seedNewsCategories.find(s => s.id === c.id);
+                            if (seed) {
+                                c.seoDesc = seed.seoDesc;
+                                updated = true;
+                            }
+                        }
+                        return c;
+                    });
+                    if (updated) {
+                        _saveNewsCategories(nc);
+                        this.syncToApi();
+                    }
                 }
                 if (_getNews().length === 0) {
                     _saveNews(seedNews);
+                }
+
+                // MIGRATION: Ensure seed flash deals are set for existing DB
+                let prods = _getProducts();
+                let pUpdated = false;
+                if (!prods.some(p => p.isFlashDeal)) {
+                    prods = prods.map(p => {
+                        const seed = seedProducts.find(s => s.id === p.id);
+                        if (seed && seed.isFlashDeal) {
+                            p.isFlashDeal = true;
+                            p.flashDealDesc = seed.flashDealDesc;
+                            pUpdated = true;
+                        }
+                        return p;
+                    });
+                    if (pUpdated) {
+                        _saveProducts(prods);
+                        this.syncToApi();
+                    }
                 }
             }
             document.dispatchEvent(new Event('ProductDBReady'));
@@ -1151,6 +1197,7 @@ const ProductDB = (() => {
                 categoryId: parseInt(product.categoryId),
                 featured: !!product.featured,
                 onSale: !!product.onSale,
+                isSaleOff50: !!product.isSaleOff50,
                 active: product.active !== false,
                 seoTitle: product.seoTitle || '',
                 seoDesc: product.seoDesc || '',
@@ -1176,6 +1223,10 @@ const ProductDB = (() => {
                 categoryId: parseInt(data.categoryId) || products[index].categoryId,
                 featured: !!data.featured,
                 onSale: !!data.onSale,
+                isSaleOff50: data.isSaleOff50 !== undefined ? !!data.isSaleOff50 : !!products[index].isSaleOff50,
+                isFlashDeal: data.isFlashDeal !== undefined ? !!data.isFlashDeal : !!products[index].isFlashDeal,
+                flashDealDesc: data.flashDealDesc !== undefined ? data.flashDealDesc : (products[index].flashDealDesc || ''),
+                flashDealPrice: data.flashDealPrice !== undefined ? parseInt(data.flashDealPrice) : (products[index].flashDealPrice || 0),
                 active: data.active !== false,
                 seoTitle: data.seoTitle !== undefined ? data.seoTitle : (products[index].seoTitle || ''),
                 seoDesc: data.seoDesc !== undefined ? data.seoDesc : (products[index].seoDesc || ''),
@@ -1209,7 +1260,8 @@ const ProductDB = (() => {
             const newCat = {
                 id: _nextCategoryId(),
                 name: category.name,
-                slug: category.slug || _generateSlug(category.name)
+                slug: category.slug || _generateSlug(category.name),
+                seoDesc: category.seoDesc || ''
             };
             cats.push(newCat);
             _saveCategories(cats);
@@ -1224,7 +1276,8 @@ const ProductDB = (() => {
             cats[index] = {
                 ...cats[index],
                 name: data.name || cats[index].name,
-                slug: data.slug || _generateSlug(data.name || cats[index].name)
+                slug: data.slug || _generateSlug(data.name || cats[index].name),
+                seoDesc: data.seoDesc !== undefined ? data.seoDesc : (cats[index].seoDesc || '')
             };
             _saveCategories(cats);
             this.syncToApi();
@@ -1241,6 +1294,41 @@ const ProductDB = (() => {
             _saveCategories(filtered);
             this.syncToApi();
             return { success: true };
+        },
+
+        toggleFlashDeal(id, isFlashDeal) {
+            const products = _getProducts();
+            const index = products.findIndex(p => p.id === parseInt(id));
+            if (index !== -1) {
+                products[index].isFlashDeal = isFlashDeal;
+                if (isFlashDeal && !products[index].flashDealDesc) {
+                    products[index].flashDealDesc = 'Giá sốc không thể bỏ lỡ!';
+                }
+                if (isFlashDeal && !products[index].flashDealPrice) {
+                    products[index].flashDealPrice = Math.round(products[index].price * 0.9); // Default 10% off
+                }
+                _saveProducts(products);
+                this.syncToApi();
+                return true;
+            }
+            return false;
+        },
+
+        getFlashDealProducts() {
+            return _getProducts().filter(p => p.isFlashDeal && p.active !== false);
+        },
+
+        updateFlashDealData(id, desc, price) {
+            const products = _getProducts();
+            const index = products.findIndex(p => p.id === parseInt(id));
+            if (index !== -1) {
+                if (desc !== undefined) products[index].flashDealDesc = desc;
+                if (price !== undefined) products[index].flashDealPrice = parseInt(price) || 0;
+                _saveProducts(products);
+                this.syncToApi();
+                return true;
+            }
+            return false;
         },
 
         getProductCountByCategory(categoryId) {
@@ -1306,6 +1394,8 @@ const ProductDB = (() => {
         formatPrice: _formatPrice,
 
         getDiscountedPrice(product) {
+            if (product.isFlashDeal && product.flashDealPrice) return parseInt(product.flashDealPrice);
+            if (product.isSaleOff50) return Math.round(product.price * 0.5);
             if (!product.discount || product.discount <= 0) return product.price;
             return Math.round(product.price * (1 - product.discount / 100));
         },
@@ -1403,7 +1493,7 @@ const ProductDB = (() => {
             if (categories.some(c => c.slug === slug)) {
                 return { success: false, message: 'Danh mục tin tức đã tồn tại!' };
             }
-            const newCat = { id, name: data.name, slug };
+            const newCat = { id, name: data.name, slug, seoDesc: data.seoDesc || '' };
             categories.push(newCat);
             _saveNewsCategories(categories);
             this.syncToApi();
@@ -1418,7 +1508,7 @@ const ProductDB = (() => {
                 if (categories.some(c => c.slug === slug && c.id !== parseInt(id))) {
                     return { success: false, message: 'Đường dẫn tĩnh đã bị trùng với danh mục khác!' };
                 }
-                categories[index] = { ...categories[index], name: data.name, slug };
+                categories[index] = { ...categories[index], name: data.name, slug, seoDesc: data.seoDesc !== undefined ? data.seoDesc : (categories[index].seoDesc || '') };
                 _saveNewsCategories(categories);
                 this.syncToApi();
                 return { success: true, category: categories[index] };
@@ -1429,7 +1519,7 @@ const ProductDB = (() => {
         deleteNewsCategory(id) {
             const categories = _getNewsCategories();
             const news = _getNews();
-            
+
             if (news.some(n => n.categoryId === parseInt(id))) {
                 return { success: false, message: 'Không thể xóa danh mục đang chứa tin tức!' };
             }
