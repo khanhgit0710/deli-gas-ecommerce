@@ -1015,8 +1015,8 @@
     <site-footer></site-footer>
 
     <!-- JS -->
-    <script defer src="components/footer.js"></script>
-    <script defer src="js/main.js"></script>
+    <script defer src="/components/footer.js"></script>
+    <script defer src="/js/main.js"></script>
     <style>
         @keyframes fadeIn {
             from {
@@ -1381,7 +1381,7 @@
                     const category = ProductDB.getCategories().find(c => c.id === product.categoryId);
                     if (category) {
                         breadcrumbCategory.textContent = category.name;
-                        breadcrumbCategory.href = `/san-pham.html?category=${category.id}`;
+                        breadcrumbCategory.href = `/${category.slug || category.id}`;
                     }
                 }
 
@@ -2010,7 +2010,7 @@
             }
         }
     </script>
-    <script defer src="js/product-db.js"></script>
+    <script defer src="/js/product-db.js"></script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
