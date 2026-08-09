@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin Core Module
  * Handles initialization, auth, navigation, and utilities.
  */
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const logoutBtn = document.createElement('a');
         logoutBtn.id = 'btnLogout';
         logoutBtn.href = '#';
-        logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> ÄÄƒng xuáº¥t';
+        logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Đăng xuất';
 
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     pageTitle = document.getElementById('pageTitle');
 
     const sectionTitles = {
-        'dashboard': 'Báº£ng Ä‘iá»u khiá»ƒn',
-        'products': 'Quáº£n lÃ½ sáº£n pháº©m',
-        'flash-deals': 'Quáº£n lÃ½ Sale Off',
-        'categories': 'Quáº£n lÃ½ danh má»¥c',
-        news: 'Quáº£n lÃ½ tin tá»©c',
-        'news-categories': 'Danh má»¥c tin tá»©c',
-        settings: 'Cáº¥u hÃ¬nh chung'
+        'dashboard': 'Bảng điều khiển',
+        'products': 'Quản lý sản phẩm',
+        'flash-deals': 'Quản lý Sale Off',
+        'categories': 'Quản lý danh mục',
+        news: 'Quản lý tin tức',
+        'news-categories': 'Danh mục tin tức',
+        settings: 'Cấu hình chung'
     };
 
     window.switchSection = function(sectionId) {

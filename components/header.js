@@ -1,4 +1,4 @@
-﻿class SiteHeader extends HTMLElement {
+class SiteHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <!-- TOP BAR -->
@@ -6,11 +6,11 @@
         <div class="container">
             <div class="top-bar-inner">
                 <div class="top-bar-left">
-                    <span class="top-bar-welcome">ChÃ o má»«ng Ä‘áº¿n vá»›i Gas Viá»‡t! HÃ¢n háº¡nh phá»¥c vá»¥ quÃ½ khÃ¡ch</span>
+                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
                 </div>
                 <div class="top-bar-right">
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thá»§ Äá»©c,
-                        Há»“ ChÃ­ Minh</a>
+                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
+                        Hồ Chí Minh</a>
                     <span class="top-bar-divider"></span>
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
                         1900.123.123</a>
@@ -30,18 +30,18 @@
             <!-- Main Links -->
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="/trang-chu.html" data-path="trang-chu.html">Trang Chá»§</a></li>
-                    <li><a href="/ve-chung-toi.html" data-path="ve-chung-toi.html">Vá» ChÃºng TÃ´i</a></li>
-                    <li><a href="/san-pham.html" data-path="san-pham.html,chi-tiet-san-pham.html">Sáº£n Pháº©m</a></li>
-                    <li><a href="/tin-tuc.html" data-path="tin-tuc.html,danh-sach-tin-tuc.html,chi-tiet-tin-tuc.html,chuyen-muc-an-toan-gas.html">Tin Tá»©c</a></li>
-                    <li><a href="/lien-he.html" data-path="lien-he.html">LiÃªn Há»‡</a></li>
+                    <li><a href="/trang-chu.html" data-path="trang-chu.html">Trang Chủ</a></li>
+                    <li><a href="/ve-chung-toi.html" data-path="ve-chung-toi.html">Về Chúng Tôi</a></li>
+                    <li><a href="/san-pham.html" data-path="san-pham.html,chi-tiet-san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="/tin-tuc.html" data-path="tin-tuc.html,danh-sach-tin-tuc.html,chi-tiet-tin-tuc.html,chuyen-muc-an-toan-gas.html">Tin Tức</a></li>
+                    <li><a href="/lien-he.html" data-path="lien-he.html">Liên Hệ</a></li>
                 </ul>
             </nav>
 
             <!-- Actions -->
             <div class="header-actions">
                 <button class="cart-btn-primary" onclick="window.location.href='/gio-hang.html'">
-                    <i class="fa-solid fa-bag-shopping"></i> Giá» hÃ ng
+                    <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
                     <span class="cart-badge">0</span>
                 </button>
             </div>

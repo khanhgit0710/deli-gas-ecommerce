@@ -1,4 +1,4 @@
-﻿@import url('./base.css');
+@import url('./base.css');
 
 /* ==========================================================================
    TOP BAR
@@ -967,7 +967,7 @@
   white-space: nowrap;
 }
 
-/* HIÃƒÂ¡Ã‚Â»Ã¢â‚¬Â U ÃƒÂ¡Ã‚Â»Ã‚Â¨NG LINE SÃƒÆ’Ã‚ÂNG BÃƒÂ¡Ã‚ÂºÃ‚Â°NG BACKGROUND POSITION (KHÃƒÆ’Ã¢â‚¬ÂNG CÃƒÂ¡Ã‚ÂºÃ‚Â¦N OVERFLOW HIDDEN) */
+/* HIÃ¡Â»â€ U Ã¡Â»Â¨NG LINE SÃƒÂNG BÃ¡ÂºÂ°NG BACKGROUND POSITION (KHÃƒâ€NG CÃ¡ÂºÂ¦N OVERFLOW HIDDEN) */
 .buy-now-btn,
 .product-actions .add-to-cart-btn,
 .btn-search,
@@ -1688,7 +1688,7 @@
   color: var(--color-gray-900);
   transform: translateY(-2px);
   animation: none;
-  /* Dá»«ng hiá»‡u á»©ng khi hover */
+  /* Dừng hiệu ứng khi hover */
 }
 
 /* Timer in Sidebar */
@@ -2295,9 +2295,9 @@
   /* Dark Teal */
   --about-primary-light: #0d4d4d;
   --about-accent: var(--color-accent);
-  /* DÃƒÂ¹ng mÃƒÂ u accent cÃ¡Â»Â§a hÃ¡Â»â€¡ thÃ¡Â»â€˜ng */
+  /* DÃ¹ng mÃ u accent cá»§a há»‡ thá»‘ng */
   --about-accent-hover: #c99c33;
-  /* MÃƒÂ u hover tÃ†Â°Ã†Â¡ng Ã¡Â»Â©ng */
+  /* MÃ u hover tÆ°Æ¡ng á»©ng */
   --about-text: #333333;
   --about-text-muted: #666666;
   --about-bg-gray: #f9f9f9;
@@ -2323,9 +2323,9 @@
   overflow: hidden;
   z-index: 1;
   border: none;
-  /* Ã„ÂÃ¡ÂºÂ£m bÃ¡ÂºÂ£o khÃƒÂ´ng cÃƒÂ³ border */
+  /* Äáº£m báº£o khÃ´ng cÃ³ border */
   transform: translateZ(0);
-  /* SÃ¡Â»Â­a lÃ¡Â»â€”i viÃ¡Â»Ân bÃ¡Â»â€¹ rÃ„Æ’ng cÃ†Â°a/lÃ¡Â»â„¢ mÃƒÂ u nÃ¡Â»Ân trÃƒÂªn safari/chrome */
+  /* Sá»­a lá»—i viá»n bá»‹ rÄƒng cÆ°a/lá»™ mÃ u ná»n trÃªn safari/chrome */
 }
 
 .about-page-wrapper .btn-about::before {
@@ -2431,7 +2431,7 @@
   background-color: var(--about-primary);
   position: relative;
   padding: 160px 0 240px;
-  /* GiÃ¡ÂºÂ£m height cÃ¡Â»Â§a banner lÃ¡ÂºÂ¡i */
+  /* Giáº£m height cá»§a banner láº¡i */
   color: var(--color-white);
   text-align: center;
   overflow: hidden;
@@ -2445,11 +2445,11 @@
   top: 0;
   right: 0;
   width: 65%;
-  /* Ã¡ÂºÂ¢nh bg hero dÃƒÂ i ra */
+  /* áº¢nh bg hero dÃ i ra */
   height: 100%;
   background: url('/assets/item1_banner_about.png') no-repeat right center;
   background-size: 90% 100%;
-  /* GiÃ¡ÂºÂ£m chiÃ¡Â» u cao Ã¡ÂºÂ£nh, giÃ¡Â»Â¯ nguyÃƒÂªn width Ã„â€˜Ã¡Â»Æ’ lÃ¡Â»â„¢ Ã„â€˜Ã¡Â»Â§ chi tiÃ¡ÂºÂ¿t */
+  /* Giáº£m chiá» u cao áº£nh, giá»¯ nguyÃªn width Ä‘á»ƒ lá»™ Ä‘á»§ chi tiáº¿t */
   -webkit-mask-image: linear-gradient(110deg, transparent 20%, black 50%);
   mask-image: linear-gradient(110deg, transparent 20%, black 50%);
   z-index: 1;
@@ -2465,7 +2465,7 @@
   border-radius: 50%;
   background: url('https://i.pinimg.com/736x/35/39/cc/3539cc8aba722a6f1da3713afc9b2650.jpg') no-repeat center;
   background-size: cover;
-  /* Apply Ã¡ÂºÂ£nh vÃƒÂ o kÃƒÂ­n khung trÃƒÂ²n */
+  /* Apply áº£nh vÃ o kÃ­n khung trÃ²n */
   border: 15px solid var(--about-accent);
   z-index: 99;
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
@@ -2477,7 +2477,7 @@
   left: 0;
   width: 100%;
   height: 9vw;
-  /* LÃƒÂ m cho shape ngÃ¡ÂºÂ¯n lÃ¡ÂºÂ¡i */
+  /* LÃ m cho shape ngáº¯n láº¡i */
   z-index: 2;
 }
 
@@ -2495,7 +2495,7 @@
   margin-bottom: 20px;
   color: var(--color-accent);
 
-  /* HiÃ¡Â»â€¡u Ã¡Â»Â©ng Ã„â€˜Ã¡Â»â€¢ khÃ¡Â»â€˜i 3D lÃƒÂ¬, hÃƒÂ²a trÃ¡Â»â„¢n mÃ¡Â»â€¹n mÃƒÂ ng vÃ¡Â»â€ºi nÃ¡Â»Ân tÃ¡Â»â€˜i */
+  /* Hiá»‡u á»©ng Ä‘á»• khá»‘i 3D lÃ¬, hÃ²a trá»™n má»‹n mÃ ng vá»›i ná»n tá»‘i */
   text-shadow:
     0 1px 0 rgba(0, 0, 0, 0.2),
     0 2px 0 rgba(0, 0, 0, 0.3),
@@ -2520,22 +2520,22 @@
   z-index: 3;
   max-width: 1200px;
   margin: -390px auto 0;
-  /* Ã„ iÃ¡Â» u chÃ¡Â»â€°nh lÃ¡ÂºÂ¡i margin do banner thÃ¡ÂºÂ¥p hÃ†Â¡n */
+  /* Ä iá» u chá»‰nh láº¡i margin do banner tháº¥p hÆ¡n */
   display: flex;
   justify-content: flex-start;
   margin-left: -70px;
-  /* NhÃƒÂ­ch qua trÃƒÂ¡i */
+  /* NhÃ­ch qua trÃ¡i */
   pointer-events: none;
 }
 
 .about-page-wrapper .hero-images img {
   width: 85%;
-  /* LÃ m áº£nh to hÆ¡n ná»¯a */
+  /* Làm ảnh to hơn nữa */
   max-width: 1100px;
   display: block;
 }
 
-/* Táº¡o bÃ³ng nhÃ¢n táº¡o má»m máº¡i Ä‘Ã¨ lÃªn section dÆ°á»›i, khÃ´ng bá»‹ cáº¯t ngang */
+/* Tạo bóng nhân tạo mềm mại đè lên section dưới, không bị cắt ngang */
 .about-page-wrapper .hero-images::after {
   content: '';
   position: absolute;
@@ -2561,7 +2561,7 @@
   font-size: 28px;
   font-weight: 800;
   color: var(--color-primary);
-  /* MÃƒÂ u xanh Ã„â€˜Ã¡ÂºÂ­m primary */
+  /* MÃ u xanh Ä‘áº­m primary */
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -2581,7 +2581,7 @@
   display: flex;
   width: max-content;
   animation: scroll-clients 30s linear infinite;
-  /* ChÃ¡ÂºÂ­m lÃ¡ÂºÂ¡i xÃƒÂ­u vÃƒÂ¬ giÃ¡Â»Â content dÃƒÂ i hÃ†Â¡n */
+  /* Cháº­m láº¡i xÃ­u vÃ¬ giá» content dÃ i hÆ¡n */
 }
 
 .about-page-wrapper .marquee-content:hover {
@@ -2590,18 +2590,18 @@
 
 .about-page-wrapper .marquee-content img {
   height: 90px;
-  /* Ã¡ÂºÂ¢nh logo to hÃ†Â¡n */
+  /* áº¢nh logo to hÆ¡n */
   object-fit: contain;
   margin: 0 60px;
-  /* TÃ„Æ’ng khoÃ¡ÂºÂ£ng cÃƒÂ¡ch ra xÃƒÂ­u */
+  /* TÄƒng khoáº£ng cÃ¡ch ra xÃ­u */
   filter: grayscale(0%);
 }
 
 .about-page-wrapper .marquee-content img[alt="Petro Gas"] {
   height: 130px;
-  /* RiÃƒÂªng logo Petro to hÃ†Â¡n hÃ¡ÂºÂ³n */
+  /* RiÃªng logo Petro to hÆ¡n háº³n */
   transform: translateY(-15px);
-  /* NhÃƒÂ­ch lÃƒÂªn trÃƒÂªn mÃ¡Â»â„¢t tÃƒÂ­ */
+  /* NhÃ­ch lÃªn trÃªn má»™t tÃ­ */
 }
 
 @keyframes scroll-clients {
@@ -2735,7 +2735,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* HiÃ¡Â»â€¡u Ã¡Â»Â©ng ÃƒÂ¡nh sÃƒÂ¡ng trÃ†Â°Ã¡Â»Â£t ngang vÃƒÂ  thuÃ¡Â»â„¢c tÃƒÂ­nh chung cho tÃ¡ÂºÂ¥t cÃ¡ÂºÂ£ btn */
+/* Hiá»‡u á»©ng Ã¡nh sÃ¡ng trÆ°á»£t ngang vÃ  thuá»™c tÃ­nh chung cho táº¥t cáº£ btn */
 .about-page-wrapper [class*="btn-"] {
   position: relative;
   overflow: hidden;
@@ -2745,7 +2745,7 @@
   justify-content: center;
   padding: 0 30px;
   gap: 10px;
-  /* Ã„ÂÃ¡ÂºÂ·t lÃ¡ÂºÂ¡i padding dÃ¡Â»Âc bÃ¡ÂºÂ±ng 0 Ã„â€˜Ã¡Â»Æ’ flexbox cÃ„Æ’n giÃ¡Â»Â¯a chuÃ¡ÂºÂ©n */
+  /* Äáº·t láº¡i padding dá»c báº±ng 0 Ä‘á»ƒ flexbox cÄƒn giá»¯a chuáº©n */
 }
 
 .about-page-wrapper [class*="btn-"]::after {
@@ -3100,7 +3100,7 @@
   border-radius: 15px;
 }
 
-/* SECTION 4: GIÃƒÂ TRÃ¡Â»Å  MANG LÃ¡ÂºÂ I */
+/* SECTION 4: GIÃ TRá»Š MANG Láº I */
 .about-page-wrapper .values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3166,9 +3166,9 @@
   align-items: center;
   justify-content: center;
   height: 48px;
-  /* Chuáº©n 48px */
+  /* Chuẩn 48px */
   width: 180px;
-  /* Giáº£m width vÃ  báº±ng nhau */
+  /* Giảm width và bằng nhau */
   border: 1px solid #ddd;
   border-radius: 30px;
   color: var(--color-gray-700);
@@ -3190,9 +3190,9 @@
   align-items: center;
   justify-content: center;
   height: 48px;
-  /* Chuáº©n 48px */
+  /* Chuẩn 48px */
   width: 180px;
-  /* Giáº£m width vÃ  báº±ng nhau */
+  /* Giảm width và bằng nhau */
   background: var(--color-primary-dark);
   border-radius: 30px;
   color: var(--color-white);
@@ -4219,7 +4219,7 @@
   margin-bottom: 50px;
 }
 
-/* Spotlight Card (TrÃ¡i) */
+/* Spotlight Card (Trái) */
 .bento-spotlight {
   position: relative;
   border-radius: 20px;
@@ -4351,7 +4351,7 @@
   transform: scale(1.05) rotate(-2deg);
 }
 
-/* Grid LÆ°á»›i (Pháº£i) */
+/* Grid Lưới (Phải) */
 .bento-grid-right {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4566,7 +4566,7 @@
   color: #fff !important;
 }
 
-/* 1. DISCOUNT BADGE (Giáº£m giÃ¡) - Orange/Red */
+/* 1. DISCOUNT BADGE (Giảm giá) - Orange/Red */
 .product-badge.badge-discount {
   background: linear-gradient(135deg, #ff9800, #ff5722) !important;
   box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4) !important;
@@ -4576,7 +4576,7 @@
   border: 3px solid #ff9800;
 }
 
-/* 2. NEW BADGE (Má»›i) - Green/Teal */
+/* 2. NEW BADGE (Mới) - Green/Teal */
 .product-badge.badge-new {
   background: linear-gradient(135deg, #11998e, #38ef7d) !important;
   box-shadow: 0 4px 10px rgba(17, 153, 142, 0.4) !important;
@@ -4586,7 +4586,7 @@
   border: 3px solid #11998e;
 }
 
-/* 3. HOT BADGE (Ná»•i báº­t) - Pink/Red */
+/* 3. HOT BADGE (Nổi bật) - Pink/Red */
 .product-badge.badge-hot {
   background: linear-gradient(135deg, #ff416c, #ff4b2b) !important;
   box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4) !important;
@@ -5093,9 +5093,9 @@
 .step-number {
   position: absolute;
   top: -15px;
-  /* Náº±m lá»‡ch nháº¹ lÃªn trÃªn */
+  /* Nằm lệch nhẹ lên trên */
   right: -5px;
-  /* Lá»‡ch sang pháº£i má»™t xÃ­u */
+  /* Lệch sang phải một xíu */
   font-size: 110px;
   font-weight: 900;
   color: rgba(15, 44, 40, 0.04);
@@ -5328,9 +5328,9 @@
 .step-number {
   position: absolute;
   top: -15px;
-  /* Náº±m lá»‡ch nháº¹ lÃªn trÃªn */
+  /* Nằm lệch nhẹ lên trên */
   right: -5px;
-  /* Lá»‡ch sang pháº£i má»™t xÃ­u */
+  /* Lệch sang phải một xíu */
   font-size: 110px;
   font-weight: 900;
   color: rgba(15, 44, 40, 0.04);
@@ -5851,7 +5851,7 @@
 .featured-products-section {
   padding: 60px 0;
   background-color: #fff9db;
-  /* Mï¿½u vï¿½ng nh?t */
+  /* M�u v�ng nh?t */
 }
 
 .trang-chu-featured {

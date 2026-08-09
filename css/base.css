@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
 :root {
   /* Main Colors */
@@ -8,7 +8,7 @@
   --color-white: #ffffff;
   
   /* Grays / Backgrounds */
-  --color-gray-50: #f0f5f4; /* Background phá»¥ (XÃ¡m phá»›t xanh ngá»c) */
+  --color-gray-50: #f0f5f4; /* Background phụ (Xám phớt xanh ngọc) */
   --color-gray-100: #e6efed;
   --color-gray-200: #d3e2df;
   --color-gray-300: #b7d0cb;
@@ -19,12 +19,12 @@
   --color-gray-900: #212529;
 
   /* Typography Variables */
-  /* --- CÃC Cáº¤P Báº¬C CHÃNH (HEADERS) --- */
+  /* --- CÁC CẤP BẬC CHÍNH (HEADERS) --- */
   --fz-h1: 2rem;       /* ~32px */
   --fz-h2: 1.5rem;     /* ~24px */
   --fz-h3: 1.25rem;    /* ~20px */
 
-  /* --- CÃC Cáº¤P Báº¬C PHá»¤ & UI --- */
+  /* --- CÁC CẤP BẬC PHỤ & UI --- */
   --fz-h4: 1.125rem;   /* ~18px */
   --fz-h5: 1rem;       /* ~16px */
   --fz-h6: 0.875rem;   /* ~14px */

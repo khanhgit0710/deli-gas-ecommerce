@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin settings Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = document.getElementById('settingLogo').value;
         const box = document.getElementById('settingLogoPreview');
         if (url) {
-            box.innerHTML = `<img src="${url}" alt="Logo Preview" style="max-height: 100%; object-fit: contain;" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'>Logo khÃ´ng há»£p lá»‡</div>'">`;
+            box.innerHTML = `<img src="${url}" alt="Logo Preview" style="max-height: 100%; object-fit: contain;" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'>Logo không hợp lệ</div>'">`;
         } else {
-            box.innerHTML = '<div class="placeholder">Xem trÆ°á»›c Logo</div>';
+            box.innerHTML = '<div class="placeholder">Xem trước Logo</div>';
         }
     }
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 logo: document.getElementById('settingLogo').value.trim()
             };
             ProductDB.updateSettings(newSettings);
-            showToast('LÆ°u cáº¥u hÃ¬nh thÃ nh cÃ´ng!', 'success');
+            showToast('Lưu cấu hình thành công!', 'success');
         });
     }
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnExportData) {
         btnExportData.addEventListener('click', () => {
             if (typeof XLSX === 'undefined') {
-                showToast('ThÆ° viá»‡n Excel Ä‘ang táº£i, vui lÃ²ng thá»­ láº¡i sau giÃ¢y lÃ¡t!', 'warning');
+                showToast('Thư viện Excel đang tải, vui lòng thử lại sau giây lát!', 'warning');
                 return;
             }
             try {
@@ -72,34 +72,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Products
                 const products = getParsedData('gasviet_products');
                 const wsProducts = XLSX.utils.json_to_sheet(products);
-                XLSX.utils.book_append_sheet(wb, wsProducts, "Sáº£n Pháº©m");
+                XLSX.utils.book_append_sheet(wb, wsProducts, "Sản Phẩm");
                 
                 // Categories
                 const categories = getParsedData('gasviet_categories');
                 const wsCategories = XLSX.utils.json_to_sheet(categories);
-                XLSX.utils.book_append_sheet(wb, wsCategories, "Danh Má»¥c");
+                XLSX.utils.book_append_sheet(wb, wsCategories, "Danh Mục");
                 
                 // Settings (is an object, so we wrap it in array)
                 const rawSettings = localStorage.getItem('gasviet_settings');
                 const settings = rawSettings ? [JSON.parse(rawSettings)] : [];
                 const wsSettings = XLSX.utils.json_to_sheet(settings);
-                XLSX.utils.book_append_sheet(wb, wsSettings, "Cáº¥u HÃ¬nh");
+                XLSX.utils.book_append_sheet(wb, wsSettings, "Cấu Hình");
                 
                 // News
                 const news = getParsedData('gasviet_news');
                 const wsNews = XLSX.utils.json_to_sheet(news);
-                XLSX.utils.book_append_sheet(wb, wsNews, "Tin Tá»©c");
+                XLSX.utils.book_append_sheet(wb, wsNews, "Tin Tức");
                 
                 // News Categories
                 const newsCategories = getParsedData('gasviet_news_categories');
                 const wsNewsCategories = XLSX.utils.json_to_sheet(newsCategories);
-                XLSX.utils.book_append_sheet(wb, wsNewsCategories, "Danh Má»¥c Tin Tá»©c");
+                XLSX.utils.book_append_sheet(wb, wsNewsCategories, "Danh Mục Tin Tức");
                 
                 XLSX.writeFile(wb, `gasviet_backup_${new Date().toISOString().slice(0, 10)}.xlsx`);
-                showToast('ÄÃ£ táº£i xuá»‘ng file Excel sao lÆ°u!', 'success');
+                showToast('Đã tải xuống file Excel sao lưu!', 'success');
             } catch (err) {
                 console.error(err);
-                showToast('Lá»—i khi xuáº¥t file Excel!', 'error');
+                showToast('Lỗi khi xuất file Excel!', 'error');
             }
         });
     }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const file = e.target.files[0];
             if (!file) return;
             if (typeof XLSX === 'undefined') {
-                showToast('ThÆ° viá»‡n Excel Ä‘ang táº£i, vui lÃ²ng thá»­ láº¡i sau giÃ¢y lÃ¡t!', 'warning');
+                showToast('Thư viện Excel đang tải, vui lòng thử lại sau giây lát!', 'warning');
                 return;
             }
             
@@ -125,26 +125,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         return ws ? XLSX.utils.sheet_to_json(ws) : null;
                     };
                     
-                    const products = getSheetJSON("Sáº£n Pháº©m");
+                    const products = getSheetJSON("Sản Phẩm");
                     if (products) localStorage.setItem('gasviet_products', JSON.stringify(products));
                     
-                    const categories = getSheetJSON("Danh Má»¥c");
+                    const categories = getSheetJSON("Danh Mục");
                     if (categories) localStorage.setItem('gasviet_categories', JSON.stringify(categories));
                     
-                    const settings = getSheetJSON("Cáº¥u HÃ¬nh");
+                    const settings = getSheetJSON("Cấu Hình");
                     if (settings && settings.length > 0) localStorage.setItem('gasviet_settings', JSON.stringify(settings[0]));
                     
-                    const news = getSheetJSON("Tin Tá»©c");
+                    const news = getSheetJSON("Tin Tức");
                     if (news) localStorage.setItem('gasviet_news', JSON.stringify(news));
                     
-                    const newsCategories = getSheetJSON("Danh Má»¥c Tin Tá»©c");
+                    const newsCategories = getSheetJSON("Danh Mục Tin Tức");
                     if (newsCategories) localStorage.setItem('gasviet_news_categories', JSON.stringify(newsCategories));
                     
-                    showToast('Phá»¥c há»“i dá»¯ liá»‡u thÃ nh cÃ´ng! Äang táº£i láº¡i trang...', 'success');
+                    showToast('Phục hồi dữ liệu thành công! Đang tải lại trang...', 'success');
                     setTimeout(() => window.location.reload(), 1500);
                 } catch (error) {
                     console.error(error);
-                    showToast('File Excel khÃ´ng há»£p lá»‡ hoáº·c bá»‹ lá»—i!', 'error');
+                    showToast('File Excel không hợp lệ hoặc bị lỗi!', 'error');
                 }
             };
             reader.readAsArrayBuffer(file);

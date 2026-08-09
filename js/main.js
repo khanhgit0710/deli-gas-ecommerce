@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     if (typeof ProductDB !== 'undefined') {
         await ProductDB.initAsync();
         applyGlobalSettings();
@@ -26,7 +26,7 @@
                 a.href = `tel:${hotlineClean}`;
                 
                 // Don't append text to floating buttons which are designed to be icon-only
-                // Also exclude pd-btn-contact which has custom text "Gá»i ngay chÃºng tÃ´i"
+                // Also exclude pd-btn-contact which has custom text "Gọi ngay chúng tôi"
                 if (a.classList.contains('float-btn') || a.classList.contains('pd-btn-contact')) return;
 
                 const strong = a.querySelector('strong');
@@ -263,14 +263,14 @@
         }
         
         let html = featuredProds.map(p => {
-            const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price) + 'Ä‘';
+            const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price) + 'đ';
             let badgeHtml = '';
             if (p.badgeText) {
                 badgeHtml = `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>`;
             } else if (p.onSale && p.discount > 0) {
                 badgeHtml = `<div class="product-badge badge-discount" style="background-color: #e11d48;">-${p.discount}%</div>`;
             } else if (p.featured) {
-                badgeHtml = `<div class="product-badge" style="background-color: #f59e0b;">BÃN CHáº Y</div>`;
+                badgeHtml = `<div class="product-badge" style="background-color: #f59e0b;">BÁN CHẠY</div>`;
             }
             
             let priceHtml = `<span class="price-current">${formatPrice(p.price - (p.price * p.discount / 100))}</span>`;
@@ -304,7 +304,7 @@
         <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href='/san-pham.html'">
             <div style="text-align: center; color: var(--color-accent); padding: 40px;">
                 <div style="font-size: 3rem; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right"></i></div>
-                <h3 style="font-size: 1.2rem; margin: 0;">Xem táº¥t cáº£ sáº£n pháº©m</h3>
+                <h3 style="font-size: 1.2rem; margin: 0;">Xem tất cả sản phẩm</h3>
             </div>
         </div>
         `;
@@ -349,7 +349,7 @@
 
                 // Update placeholder
                 if (searchInput) {
-                    searchInput.placeholder = `TÃ¬m kiáº¿m trong ${this.innerText}...`;
+                    searchInput.placeholder = `Tìm kiếm trong ${this.innerText}...`;
                 }
             });
         });
@@ -696,7 +696,7 @@
 
             // Instantly change text and icon while they slide to their new positions
             btnIcon.className = 'fa-solid fa-check';
-            btnText.textContent = 'ThÃ nh cÃ´ng!';
+            btnText.textContent = 'Thành công!';
 
             // Reset form and button after 3.5 seconds
             setTimeout(() => {
@@ -890,16 +890,16 @@
 
             if (currentScrollY > 150) {
                 if (currentScrollY > lastScrollY) {
-                    // KÃ©o xuá»‘ng -> áº©n header
+                    // Kéo xuống -> ẩn header
                     header.classList.add('header-hidden');
                     document.body.classList.add('is-header-hidden');
                 } else {
-                    // KÃ©o lÃªn -> hiá»‡n header
+                    // Kéo lên -> hiện header
                     header.classList.remove('header-hidden');
                     document.body.classList.remove('is-header-hidden');
                 }
             } else {
-                // á»ž trÃªn cÃ¹ng -> luÃ´n hiá»‡n
+                // Ở trên cùng -> luôn hiện
                 header.classList.remove('header-hidden');
                 document.body.classList.remove('is-header-hidden');
             }
@@ -913,9 +913,9 @@
        ========================================================================== */
     if (!localStorage.getItem('gas_cart_seeded')) {
         const initialCart = [
-            { name: 'BÃ¬nh Gas Saigon Petro 12kg', price: 360000, image: 'https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg', quantity: 4 },
-            { name: 'Van Ä‘iá»u Ã¡p Namilux', price: 120000, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s', quantity: 2 },
-            { name: 'DÃ¢y Dáº«n Gas ThÃ¡i Lan', price: 80000, image: 'https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png', quantity: 1 }
+            { name: 'Bình Gas Saigon Petro 12kg', price: 360000, image: 'https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg', quantity: 4 },
+            { name: 'Van điều áp Namilux', price: 120000, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s', quantity: 2 },
+            { name: 'Dây Dẫn Gas Thái Lan', price: 80000, image: 'https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png', quantity: 1 }
         ];
         localStorage.setItem('gas_cart', JSON.stringify(initialCart));
         localStorage.setItem('gas_cart_seeded', 'true');
@@ -930,7 +930,7 @@
             if (section) {
                 const productCards = section.querySelectorAll('.product-card');
                 if (productCards.length > 0) {
-                    countSpan.textContent = `(${productCards.length} sáº£n pháº©m)`;
+                    countSpan.textContent = `(${productCards.length} sản phẩm)`;
                 }
             }
         }
@@ -1015,7 +1015,7 @@
             saveCart(cart);
 
             // Show toast popup
-            showToast('ÄÃ£ thÃªm sáº£n pháº©m vÃ o giá» hÃ ng!', 'success');
+            showToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
         });
     });
 
@@ -1046,7 +1046,7 @@
             }
             saveCart(cart);
 
-            showToast('ÄÃ£ thÃªm sáº£n pháº©m vÃ o giá» hÃ ng!', 'success');
+            showToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
         });
     }
 
@@ -1057,7 +1057,7 @@
             cartTableBody.innerHTML = '';
 
             if (cart.length === 0) {
-                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giá» hÃ ng cá»§a báº¡n Ä‘ang trá»‘ng.<br><br><a href="trang-chu.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiáº¿p tá»¥c mua sáº¯m</a></td></tr>';
+                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="trang-chu.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
                 updateCartTotals(0, 0);
 
                 const cartActions = document.querySelector('.cart-actions');
@@ -1084,7 +1084,7 @@
                                 ${addon.image ? `<img src="${addon.image}" alt="${addon.name}" style="width: 44px; height: 44px; object-fit: cover; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0;">` : ''}
                                 <div style="flex: 1; line-height: 1.3; min-width: 0;">
                                     <div style="font-size: 15px; font-weight: 500; color: #444; word-wrap: break-word;">${addon.name}</div>
-                                    <div style="font-size: 14px; color: var(--color-primary); margin-top: 2px;">+${addon.price.toLocaleString('vi-VN')}Ä‘</div>
+                                    <div style="font-size: 14px; color: var(--color-primary); margin-top: 2px;">+${addon.price.toLocaleString('vi-VN')}đ</div>
                                 </div>
                             </label>
                         `;
@@ -1110,7 +1110,7 @@
                             </div>
                         </div>
                     </td>
-                    <td style="font-weight: 500;">${itemBasePrice.toLocaleString('vi-VN')}Ä‘</td>
+                    <td style="font-weight: 500;">${itemBasePrice.toLocaleString('vi-VN')}đ</td>
                     <td>
                         <div class="qty-controls">
                             <button class="qty-btn qty-minus" data-index="${index}"><i class="fa-solid fa-minus"></i></button>
@@ -1118,7 +1118,7 @@
                             <button class="qty-btn qty-plus" data-index="${index}"><i class="fa-solid fa-plus"></i></button>
                         </div>
                     </td>
-                    <td style="font-weight: 600; color: #333;">${itemTotal.toLocaleString('vi-VN')}Ä‘</td>
+                    <td style="font-weight: 600; color: #333;">${itemTotal.toLocaleString('vi-VN')}đ</td>
                 `;
                 cartTableBody.appendChild(tr);
             });
@@ -1133,7 +1133,7 @@
             const itemsCountEl = document.querySelector('.order-summary .summary-row:nth-of-type(1) span:last-child');
             const bannerQtyEl = document.querySelector('.cart-banner-content h2 strong');
 
-            const formattedAmount = amount.toLocaleString('vi-VN') + 'Ä‘';
+            const formattedAmount = amount.toLocaleString('vi-VN') + 'đ';
             if (subtotalEl) subtotalEl.textContent = formattedAmount;
             if (totalEl) totalEl.textContent = formattedAmount;
             if (itemsCountEl) itemsCountEl.textContent = items;
@@ -1190,7 +1190,7 @@
                     cart.splice(idx, 1);
                     saveCart(cart);
                     renderCart();
-                    showToast('ÄÃ£ xÃ³a sáº£n pháº©m khá»i giá» hÃ ng', 'error');
+                    showToast('Đã xóa sản phẩm khỏi giỏ hàng', 'error');
                 });
             });
 
@@ -1205,12 +1205,12 @@
                     modalOverlay.innerHTML = `
                         <div class="custom-confirm-modal">
                             <div class="confirm-content">
-                                <h3>XÃ¡c nháº­n xoÃ¡ giá» hÃ ng</h3>
-                                <p>Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a toÃ n bá»™ sáº£n pháº©m trong giá» hÃ ng khÃ´ng?</p>
+                                <h3>Xác nhận xoá giỏ hàng</h3>
+                                <p>Bạn có chắc chắn muốn xóa toàn bộ sản phẩm trong giỏ hàng không?</p>
                             </div>
                             <div class="confirm-actions">
-                                <button class="btn-confirm-cancel">Huá»·</button>
-                                <button class="btn-confirm-agree">Äá»“ng Ã½</button>
+                                <button class="btn-confirm-cancel">Huỷ</button>
+                                <button class="btn-confirm-agree">Đồng ý</button>
                             </div>
                         </div>
                     `;
@@ -1239,7 +1239,7 @@
                     agreeBtn.addEventListener('click', () => {
                         saveCart([]);
                         renderCart();
-                        showToast('ÄÃ£ xÃ³a toÃ n bá»™ giá» hÃ ng', 'error');
+                        showToast('Đã xóa toàn bộ giỏ hàng', 'error');
                         closeModal();
                     });
                 });
@@ -1271,10 +1271,10 @@
 
             const saveEl = document.querySelector('.combo-save');
             if (checkedCount === comboChecks.length) {
-                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'Ä‘';
+                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
                 if (saveEl) saveEl.style.display = 'block';
             } else {
-                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'Ä‘';
+                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
                 if (saveEl) saveEl.style.display = 'none';
             }
         }
@@ -1306,7 +1306,7 @@
                 
                 const mainItem = items[0];
                 if (!mainItem.checked) {
-                    showToast('Vui lÃ²ng chá»n sáº£n pháº©m chÃ­nh!', 'error');
+                    showToast('Vui lòng chọn sản phẩm chính!', 'error');
                     return;
                 }
 
@@ -1334,7 +1334,7 @@
                 }
 
                 saveCart(cart);
-                showToast('ÄÃ£ thÃªm Combo vÃ o giá» hÃ ng!', 'success');
+                showToast('Đã thêm Combo vào giỏ hàng!', 'success');
             });
         }
     }

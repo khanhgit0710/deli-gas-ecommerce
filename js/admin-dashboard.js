@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin dashboard Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,28 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="stat-icon primary"><i class="fa-solid fa-box-open"></i></div>
                 <div class="stat-info">
                     <h3>${stats.totalProducts}</h3>
-                    <p>Tá»•ng sáº£n pháº©m</p>
+                    <p>Tổng sản phẩm</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon success"><i class="fa-solid fa-folder-tree"></i></div>
                 <div class="stat-info">
                     <h3>${stats.totalCategories}</h3>
-                    <p>Danh má»¥c</p>
+                    <p>Danh mục</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon warning"><i class="fa-solid fa-star"></i></div>
                 <div class="stat-info">
                     <h3>${stats.featuredCount}</h3>
-                    <p>Sáº£n pháº©m ná»•i báº­t</p>
+                    <p>Sản phẩm nổi bật</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon danger"><i class="fa-solid fa-tags"></i></div>
                 <div class="stat-info">
                     <h3>${stats.onSaleCount}</h3>
-                    <p>Äang Æ°u Ä‘Ã£i</p>
+                    <p>Đang ưu đãi</p>
                 </div>
             </div>
         `;
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const featured = ProductDB.getFeatured();
         const tbody = document.getElementById('featuredTableBody');
         if (featured.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="table-empty"><i class="fa-solid fa-star"></i>ChÆ°a cÃ³ sáº£n pháº©m ná»•i báº­t</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" class="table-empty"><i class="fa-solid fa-star"></i>Chưa có sản phẩm nổi bật</td></tr>';
             return;
         }
         tbody.innerHTML = featured.map(p => {
@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </td>
                     <td style="text-align: left;"><span class="price-text">${ProductDB.formatPrice(discountedPrice)}</span></td>
-                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="price-discount">-${p.discount}%</span>` : 'â€”'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="price-discount">-${p.discount}%</span>` : '—'}</td>
                     <td class="hide-mobile" style="text-align: left;">
-                        ${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i> Ná»•i báº­t</span>' : ''}
-                        ${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i> Æ¯u Ä‘Ã£i</span>' : ''}
+                        ${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i> Nổi bật</span>' : ''}
+                        ${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i> Ưu đãi</span>' : ''}
                     </td>
                 </tr>
             `;
