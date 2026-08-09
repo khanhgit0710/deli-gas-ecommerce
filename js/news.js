@@ -38,7 +38,7 @@ function renderNewsList() {
             <div class="nb-hero-text">
                 <h2>${heroMain.title}</h2>
                 <p>${(heroMain.content || '').replace(/<[^>]+>/g, '').substring(0, 150)}...</p>
-                <a href="/chi-tiet-tin-tuc/" class="nb-btn-dark">Đọc bài nổi bật</a>
+                <a href="/chi-tiet-tin-tuc/${heroMain.slug}" class="nb-btn-dark">Đọc bài nổi bật</a>
             </div>
             <div class="nb-hero-images">
                 <div class="nb-img-large">
@@ -47,7 +47,7 @@ function renderNewsList() {
                 <div class="nb-img-small-stack">
         `;
         heroSubs.forEach(sub => {
-            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href=''" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
+            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${sub.slug}'" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
         });
         heroHtml += `
                 </div>
@@ -104,10 +104,10 @@ function renderNewsList() {
             gridNews.forEach(n => {
                 const catName = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
                 gridHtml += `
-                    <div class="nb-dest-card" onclick="window.location.href=''" style="cursor:pointer;">
+                    <div class="nb-dest-card" onclick="window.location.href='/chi-tiet-tin-tuc/${n.slug}'" style="cursor:pointer;">
                         <img src="${n.image}" alt="${n.title}">
                         <div class="nb-dest-card-info">
-                            <h4><a href="/chi-tiet-tin-tuc/">${n.title}</a></h4>
+                            <h4><a href="/chi-tiet-tin-tuc/${n.slug}">${n.title}</a></h4>
                             <span><a href="javascript:void(0)" style="color:white; text-decoration:none;">${catName}</a></span>
                         </div>
                     </div>
@@ -135,10 +135,10 @@ function renderNewsList() {
         const catName = ProductDB.getNewsCategoryById(trendingMain.categoryId)?.name || 'Khác';
         latestHtml += `
             <div class="nb-latest-main">
-                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href=''" style="cursor:pointer;">
+                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${trendingMain.slug}'" style="cursor:pointer;">
                 <div class="nb-latest-main-info">
                     <span class="nb-cat">${catName}</span>
-                    <h3><a href="/chi-tiet-tin-tuc/">${trendingMain.title}</a></h3>
+                    <h3><a href="/chi-tiet-tin-tuc/${trendingMain.slug}">${trendingMain.title}</a></h3>
                     <div class="nb-meta">${formatDate(trendingMain.createdAt)}</div>
                     <p>${(trendingMain.content || '').replace(/<[^>]+>/g, '').substring(0, 150)}...</p>
                 </div>
@@ -150,10 +150,10 @@ function renderNewsList() {
             const cat = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
             latestHtml += `
                 <div class="nb-list-item">
-                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href=''" style="cursor:pointer;">
+                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${n.slug}'" style="cursor:pointer;">
                     <div class="nb-list-item-info">
                         <span class="nb-cat">${cat}</span>
-                        <h3><a href="/chi-tiet-tin-tuc/">${n.title}</a></h3>
+                        <h3><a href="/chi-tiet-tin-tuc/${n.slug}">${n.title}</a></h3>
                         <div class="nb-meta">${formatDate(n.createdAt)}</div>
                     </div>
                 </div>
@@ -167,7 +167,16 @@ function renderNewsList() {
 
 function renderNewsDetail() {
     const urlParams = new URLSearchParams(window.location.search);
-    const slug = urlParams.get('slug');
+    let slug = urlParams.get('slug');
+    
+    // Nếu Nginx bẻ link ngầm, trình duyệt sẽ không có ?slug=, cần lấy từ pathname
+    if (!slug) {
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        if (pathSegments.length >= 2 && pathSegments[0] === 'chi-tiet-tin-tuc') {
+            slug = pathSegments[1].replace('.html', '');
+        }
+    }
+
     const allNews = ProductDB.getNews(false);
     
     let newsItem = null;
@@ -201,10 +210,10 @@ function renderNewsDetail() {
     related.forEach(n => {
         relatedHtml += `
             <div class="nb-archive-card">
-                <img src="${n.image}" alt="${n.title}" onclick="window.location.href=''" style="cursor:pointer">
+                <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${n.slug}'" style="cursor:pointer">
                 <div class="nb-archive-card-body">
                     <span class="nb-cat">${catName}</span>
-                    <h3><a href="/chi-tiet-tin-tuc/">${n.title}</a></h3>
+                    <h3><a href="/chi-tiet-tin-tuc/${n.slug}">${n.title}</a></h3>
                     <p>${(n.content || '').replace(/<[^>]+>/g, '').substring(0, 80)}...</p>
                     <div class="nb-meta">${formatDate(n.createdAt)}</div>
                 </div>
