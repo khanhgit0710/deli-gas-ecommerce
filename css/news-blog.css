@@ -1,4 +1,4 @@
-/* News Blog CSS - Based on the wireframe */
+﻿/* News Blog CSS - Based on the wireframe */
 
 .new-blog-container {
     max-width: 1200px;
@@ -605,7 +605,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Overlay xéo: Nửa bên trái đậm hơn, nửa bên phải trong suốt hơn */
+    /* Overlay xÃ©o: Ná»­a bÃªn trÃ¡i Ä‘áº­m hÆ¡n, ná»­a bÃªn pháº£i trong suá»‘t hÆ¡n */
     background: linear-gradient(105deg, rgba(36, 93, 86, 0.9) 0%, rgba(36, 93, 86, 0.85) 55%, rgba(0, 0, 0, 0.4) 55%, rgba(0, 0, 0, 0.4) 100%);
     z-index: -1;
 }

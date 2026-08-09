@@ -1,4 +1,4 @@
-/* CSS specific to the product detail page */
+﻿/* CSS specific to the product detail page */
 .pd-page-wrapper {
     background-color: var(--color-gray-50);
     padding: 30px 0 0px;
@@ -931,7 +931,7 @@
     gap: 15px;
 }
 
-/* Hiệu ứng toả ra cho icon điện thoại */
+/* Hiá»‡u á»©ng toáº£ ra cho icon Ä‘iá»‡n thoáº¡i */
 .icon-ripple-wrap {
     position: relative;
     display: inline-flex;

@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hệ thống quản trị Gas Việt - Đăng nhập quản lý sản phẩm, đơn hàng và tin tức.">
-    <meta name="keywords" content="quản lý gas việt, admin gas việt, quản trị website">
+    <meta name="description" content="Há»‡ thá»‘ng quáº£n trá»‹ Gas Viá»‡t - ÄÄƒng nháº­p quáº£n lÃ½ sáº£n pháº©m, Ä‘Æ¡n hÃ ng vÃ  tin tá»©c.">
+    <meta name="keywords" content="quáº£n lÃ½ gas viá»‡t, admin gas viá»‡t, quáº£n trá»‹ website">
     <meta name="robots" content="noindex, nofollow">
-    <title>Quản Lý Gas Việt | Admin Panel</title>
+    <title>Quáº£n LÃ½ Gas Viá»‡t | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
@@ -20,31 +20,31 @@
             <div class="login-logo">
                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo">
             </div>
-            <h2>Đăng Nhập Quản Trị</h2>
-            <p>Vui lòng đăng nhập để truy cập Hệ thống Quản trị GasViet</p>
+            <h2>ÄÄƒng Nháº­p Quáº£n Trá»‹</h2>
+            <p>Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ truy cáº­p Há»‡ thá»‘ng Quáº£n trá»‹ GasViet</p>
             <form id="adminLoginForm">
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Tài
-                        khoản</label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">TÃ i
+                        khoáº£n</label>
                     <input type="text" id="loginUsername" class="admin-input" required
-                        placeholder="Tài khoản (demo: admin)">
+                        placeholder="TÃ i khoáº£n (demo: admin)">
                 </div>
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Mật
-                        khẩu</label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Máº­t
+                        kháº©u</label>
                     <input type="password" id="loginPassword" class="admin-input" required
-                        placeholder="Mật khẩu (demo: admin)">
+                        placeholder="Máº­t kháº©u (demo: admin)">
                 </div>
                 <div id="loginError"
                     style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">
-                    Sai tài khoản hoặc mật khẩu!</div>
+                    Sai tÃ i khoáº£n hoáº·c máº­t kháº©u!</div>
                 <button type="submit" class="admin-btn admin-btn-primary"
-                    style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">Đăng Nhập</button>
+                    style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">ÄÄƒng Nháº­p</button>
             </form>
             <div style="text-align: center; margin-top: 20px;">
                 <a href="trang-chu.html"
                     style="color: var(--admin-text-muted); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: var(--admin-transition);">
-                    <i class="fa-solid fa-arrow-left"></i> Quay lại website
+                    <i class="fa-solid fa-arrow-left"></i> Quay láº¡i website
                 </a>
             </div>
         </div>
@@ -54,7 +54,7 @@
     <div class="modal-overlay" id="manageFlashDealsModal">
         <div class="modal" style="max-width: 600px;">
             <div class="modal-header">
-                <h3>Chọn sản phẩm Sale Off</h3>
+                <h3>Chá»n sáº£n pháº©m Sale Off</h3>
                 <span class="modal-close"
                     onclick="document.getElementById('manageFlashDealsModal').classList.remove('active')"><i
                         class="fa-solid fa-times"></i></span>
@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <div class="search-box" style="margin-bottom: 15px;">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Tìm sản phẩm..." id="flashDealsSearchInput">
+                    <input type="text" placeholder="TÃ¬m sáº£n pháº©m..." id="flashDealsSearchInput">
                 </div>
                 <div
                     style="max-height: 400px; overflow-y: auto; border: 1px solid var(--admin-border); border-radius: 6px;">
@@ -71,7 +71,7 @@
                             <tr>
                                 <th style="width: 40px; text-align: center;"><i class="fa-solid fa-check-double"></i></th>
                                 <th style="width: 40px;">ID</th>
-                                <th>Tên sản phẩm</th>
+                                <th>TÃªn sáº£n pháº©m</th>
                             </tr>
                         </thead>
                         <tbody id="flashDealsSelectionTable">
@@ -87,26 +87,26 @@
     <div class="modal-overlay" id="editFlashDealModal">
         <div class="modal" style="max-width: 500px;">
             <div class="modal-header">
-                <h3>Chỉnh sửa Sale Off</h3>
+                <h3>Chá»‰nh sá»­a Sale Off</h3>
                 <span class="modal-close" onclick="document.getElementById('editFlashDealModal').classList.remove('active')"><i class="fa-solid fa-times"></i></span>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="editFlashDealId">
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Sản phẩm</label>
+                    <label class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Sáº£n pháº©m</label>
                     <div id="editFlashDealProductName" style="font-weight: 600; font-size: 14px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #e2e8f0;"></div>
                 </div>
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label for="editFlashDealPrice" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Giá Sale Off (đ)</label>
-                    <input type="text" id="editFlashDealPrice" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px;" placeholder="Ví dụ: 99.000">
+                    <label for="editFlashDealPrice" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">GiÃ¡ Sale Off (Ä‘)</label>
+                    <input type="text" id="editFlashDealPrice" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px;" placeholder="VÃ­ dá»¥: 99.000">
                 </div>
                 <div class="form-group" style="margin-bottom: 20px;">
-                    <label for="editFlashDealDesc" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Mô tả Deal</label>
-                    <textarea id="editFlashDealDesc" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px; resize: vertical;" rows="3" placeholder="Nhập mô tả deal..."></textarea>
+                    <label for="editFlashDealDesc" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">MÃ´ táº£ Deal</label>
+                    <textarea id="editFlashDealDesc" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px; resize: vertical;" rows="3" placeholder="Nháº­p mÃ´ táº£ deal..."></textarea>
                 </div>
                 <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                    <button class="btn btn-outline" onclick="document.getElementById('editFlashDealModal').classList.remove('active')">Hủy</button>
-                    <button class="btn btn-primary" onclick="saveFlashDealEdit()">Lưu thay đổi</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('editFlashDealModal').classList.remove('active')">Há»§y</button>
+                    <button class="btn btn-primary" onclick="saveFlashDealEdit()">LÆ°u thay Ä‘á»•i</button>
                 </div>
             </div>
         </div>
@@ -121,42 +121,42 @@
                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo"
                     style="width: 100%; height: 50px; object-fit: center;">
                 <!-- <div class="sidebar-brand">
-                    <span class="sidebar-brand-name">Gas Việt</span>
+                    <span class="sidebar-brand-name">Gas Viá»‡t</span>
                     <span class="sidebar-brand-sub">Admin Panel</span>
                 </div> -->
             </div>
 
             <nav class="sidebar-nav">
-                <div class="sidebar-section-title">Tổng quan</div>
+                <div class="sidebar-section-title">Tá»•ng quan</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> Bảng
-                            điều khiển</a></li>
+                    <li><a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-chart-pie"></i> Báº£ng
+                            Ä‘iá»u khiá»ƒn</a></li>
                 </ul>
 
-                <div class="sidebar-section-title">Sản phẩm</div>
+                <div class="sidebar-section-title">Sáº£n pháº©m</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mục</a></li>
-                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Danh sách sản phẩm</a>
+                    <li><a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh má»¥c</a></li>
+                    <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Danh sÃ¡ch sáº£n pháº©m</a>
                     </li>
-                    <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i> Quản lý Sale Off</a></li>
+                    <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i> Quáº£n lÃ½ Sale Off</a></li>
                 </ul>
 
-                <div class="sidebar-section-title">Tin tức</div>
+                <div class="sidebar-section-title">Tin tá»©c</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" data-section="news-categories"><i class="fa-solid fa-tags"></i> Danh mục tin tức</a>
+                    <li><a href="#" data-section="news-categories"><i class="fa-solid fa-tags"></i> Danh má»¥c tin tá»©c</a>
                     </li>
-                    <li><a href="#" data-section="news"><i class="fa-solid fa-newspaper"></i> Bài viết</a></li>
+                    <li><a href="#" data-section="news"><i class="fa-solid fa-newspaper"></i> BÃ i viáº¿t</a></li>
                 </ul>
 
-                <div class="sidebar-section-title">Hệ thống</div>
+                <div class="sidebar-section-title">Há»‡ thá»‘ng</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cấu hình chung</a></li>
+                    <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cáº¥u hÃ¬nh chung</a></li>
                 </ul>
             </nav>
 
             <div class="sidebar-footer">
                 <a href="trang-chu.html"><i class="fa-solid fa-arrow-left"></i> Xem website</a>
-                <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> Tải lại dữ liệu</a>
+                <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> Táº£i láº¡i dá»¯ liá»‡u</a>
             </div>
         </aside>
 
@@ -166,10 +166,10 @@
             <div class="admin-topbar">
                 <div class="topbar-left">
                     <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
-                    <h2 id="pageTitle">Bảng điều khiển</h2>
+                    <h2 id="pageTitle">Báº£ng Ä‘iá»u khiá»ƒn</h2>
                 </div>
                 <div class="topbar-right">
-                    <span style="font-size:16px;color:var(--color-accent)">Xin chào, <strong
+                    <span style="font-size:16px;color:var(--color-accent)">Xin chÃ o, <strong
                             style="color:var(--color-accent)">Admin</strong></span>
                 </div>
             </div>
@@ -183,17 +183,17 @@
                     <div class="table-wrapper">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3><i class="fa-solid fa-fire" style="color:var(--admin-accent)"></i> Sản phẩm nổi bật
+                                <h3><i class="fa-solid fa-fire" style="color:var(--admin-accent)"></i> Sáº£n pháº©m ná»•i báº­t
                                 </h3>
                             </div>
                         </div>
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Sản phẩm</th>
-                                    <th>Giá</th>
-                                    <th class="hide-mobile">Giảm giá</th>
-                                    <th class="hide-mobile">Trạng thái</th>
+                                    <th>Sáº£n pháº©m</th>
+                                    <th>GiÃ¡</th>
+                                    <th class="hide-mobile">Giáº£m giÃ¡</th>
+                                    <th class="hide-mobile">Tráº¡ng thÃ¡i</th>
                                 </tr>
                             </thead>
                             <tbody id="featuredTableBody">
@@ -208,18 +208,18 @@
                     <div class="table-wrapper">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Danh sách sản phẩm</h3>
+                                <h3>Danh sÃ¡ch sáº£n pháº©m</h3>
                             </div>
                             <div class="table-header-right">
                                 <div class="search-box">
                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Tìm kiếm sản phẩm..." id="productSearch">
+                                    <input type="text" placeholder="TÃ¬m kiáº¿m sáº£n pháº©m..." id="productSearch">
                                 </div>
                                 <select class="filter-select" id="categoryFilter">
-                                    <option value="">Tất cả danh mục</option>
+                                    <option value="">Táº¥t cáº£ danh má»¥c</option>
                                 </select>
                                 <button class="btn btn-primary" id="btnAddProduct">
-                                    <i class="fa-solid fa-plus"></i> Thêm mới
+                                    <i class="fa-solid fa-plus"></i> ThÃªm má»›i
                                 </button>
                             </div>
                         </div>
@@ -228,13 +228,13 @@
                                 <thead>
                                     <tr>
                                         <th style="width:40px">ID</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Giá</th>
-                                        <th class="hide-mobile">Giảm giá</th>
-                                        <th class="hide-mobile">Nổi bật</th>
-                                        <th class="hide-mobile">Ưu đãi</th>
-                                        <th class="hide-mobile">Trạng thái</th>
-                                        <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                        <th>Sáº£n pháº©m</th>
+                                        <th>GiÃ¡</th>
+                                        <th class="hide-mobile">Giáº£m giÃ¡</th>
+                                        <th class="hide-mobile">Ná»•i báº­t</th>
+                                        <th class="hide-mobile">Æ¯u Ä‘Ã£i</th>
+                                        <th class="hide-mobile">Tráº¡ng thÃ¡i</th>
+                                        <th style="width:120px; white-space: nowrap;">Thao tÃ¡c</th>
                                     </tr>
                                 </thead>
                                 <tbody id="productsTableBody">
@@ -244,7 +244,7 @@
                         </div>
                         <div class="table-footer"
                             style="display: flex; justify-content: space-between; align-items: center;">
-                            <span id="productCountText">0 sản phẩm</span>
+                            <span id="productCountText">0 sáº£n pháº©m</span>
                             <div id="productPagination" class="pagination" style="display: flex; gap: 5px;"></div>
                         </div>
                     </div>
@@ -255,11 +255,11 @@
                     <div class="table-wrapper">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Quản lý Sale Off</h3>
+                                <h3>Quáº£n lÃ½ Sale Off</h3>
                             </div>
                             <div class="table-header-right">
                                 <button class="btn btn-primary" id="btnManageFlashDeals">
-                                    <i class="fa-solid fa-plus"></i> Chọn sản phẩm
+                                    <i class="fa-solid fa-plus"></i> Chá»n sáº£n pháº©m
                                 </button>
                             </div>
                         </div>
@@ -268,10 +268,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width:40px">ID</th>
-                                        <th>Sản phẩm</th>
-                                        <th style="width:160px">Giá Sale Off</th>
-                                        <th style="width:300px">Mô tả Deal</th>
-                                        <th style="width:80px; text-align:center;">Hành động</th>
+                                        <th>Sáº£n pháº©m</th>
+                                        <th style="width:160px">GiÃ¡ Sale Off</th>
+                                        <th style="width:300px">MÃ´ táº£ Deal</th>
+                                        <th style="width:80px; text-align:center;">HÃ nh Ä‘á»™ng</th>
                                     </tr>
                                 </thead>
                                 <tbody id="flashDealsTableBody">
@@ -287,11 +287,11 @@
                     <div class="table-wrapper">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Danh sách danh mục</h3>
+                                <h3>Danh sÃ¡ch danh má»¥c</h3>
                             </div>
                             <div class="table-header-right">
                                 <button class="btn btn-primary" id="btnAddCategory">
-                                    <i class="fa-solid fa-plus"></i> Thêm danh mục
+                                    <i class="fa-solid fa-plus"></i> ThÃªm danh má»¥c
                                 </button>
                             </div>
                         </div>
@@ -299,10 +299,10 @@
                             <thead>
                                 <tr>
                                     <th style="width:40px">ID</th>
-                                    <th>Tên danh mục</th>
+                                    <th>TÃªn danh má»¥c</th>
                                     <th>Slug</th>
-                                    <th style="text-align: center;">Số sản phẩm</th>
-                                    <th style="width:120px; white-space: nowrap; text-align: center;">Thao tác</th>
+                                    <th style="text-align: center;">Sá»‘ sáº£n pháº©m</th>
+                                    <th style="width:120px; white-space: nowrap; text-align: center;">Thao tÃ¡c</th>
                                 </tr>
                             </thead>
                             <tbody id="categoriesTableBody">
@@ -317,11 +317,11 @@
                     <div class="table-wrapper" style="max-width: 800px;">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Danh mục tin tức</h3>
+                                <h3>Danh má»¥c tin tá»©c</h3>
                             </div>
                             <div class="table-header-right">
                                 <button class="btn btn-primary" id="btnAddNewsCategory">
-                                    <i class="fa-solid fa-plus"></i> Thêm danh mục
+                                    <i class="fa-solid fa-plus"></i> ThÃªm danh má»¥c
                                 </button>
                             </div>
                         </div>
@@ -329,10 +329,10 @@
                             <thead>
                                 <tr>
                                     <th style="width:40px">ID</th>
-                                    <th>Tên danh mục</th>
+                                    <th>TÃªn danh má»¥c</th>
                                     <th>Slug</th>
-                                    <th>Số bài viết</th>
-                                    <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                    <th>Sá»‘ bÃ i viáº¿t</th>
+                                    <th style="width:120px; white-space: nowrap;">Thao tÃ¡c</th>
                                 </tr>
                             </thead>
                             <tbody id="newsCategoriesTableBody">
@@ -347,15 +347,15 @@
                     <div class="table-wrapper">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Danh sách tin tức</h3>
+                                <h3>Danh sÃ¡ch tin tá»©c</h3>
                             </div>
                             <div class="table-header-right">
                                 <div class="search-box">
                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Tìm kiếm tin tức..." id="newsSearch">
+                                    <input type="text" placeholder="TÃ¬m kiáº¿m tin tá»©c..." id="newsSearch">
                                 </div>
                                 <button class="btn btn-primary" id="btnAddNews">
-                                    <i class="fa-solid fa-plus"></i> Thêm mới
+                                    <i class="fa-solid fa-plus"></i> ThÃªm má»›i
                                 </button>
                             </div>
                         </div>
@@ -364,12 +364,12 @@
                                 <thead>
                                     <tr>
                                         <th style="width:40px">ID</th>
-                                        <th>Tin tức</th>
-                                        <th class="hide-mobile">Danh mục</th>
-                                        <th class="hide-mobile">Vị trí</th>
-                                        <th class="hide-mobile">Trạng thái</th>
-                                        <th class="hide-mobile">Ngày tạo</th>
-                                        <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                        <th>Tin tá»©c</th>
+                                        <th class="hide-mobile">Danh má»¥c</th>
+                                        <th class="hide-mobile">Vá»‹ trÃ­</th>
+                                        <th class="hide-mobile">Tráº¡ng thÃ¡i</th>
+                                        <th class="hide-mobile">NgÃ y táº¡o</th>
+                                        <th style="width:120px; white-space: nowrap;">Thao tÃ¡c</th>
                                     </tr>
                                 </thead>
                                 <tbody id="newsTableBody">
@@ -385,17 +385,17 @@
                 <section class="admin-section" id="section-settings">
                     <div class="admin-card" style="margin-bottom: 20px;">
                         <div class="card-header">
-                            <h3 class="card-title">Quản lý Dữ liệu (Backup)</h3>
+                            <h3 class="card-title">Quáº£n lÃ½ Dá»¯ liá»‡u (Backup)</h3>
                         </div>
                         <div class="card-body">
-                            <p style="margin-bottom: 15px; color: var(--admin-text-muted);">Tính năng Sao lưu (Export)
-                                và Phục hồi (Import) dữ liệu toàn bộ hệ thống. Nên thường xuyên tải về để dự phòng.</p>
+                            <p style="margin-bottom: 15px; color: var(--admin-text-muted);">TÃ­nh nÄƒng Sao lÆ°u (Export)
+                                vÃ  Phá»¥c há»“i (Import) dá»¯ liá»‡u toÃ n bá»™ há»‡ thá»‘ng. NÃªn thÆ°á»ng xuyÃªn táº£i vá» Ä‘á»ƒ dá»± phÃ²ng.</p>
                             <div style="display: flex; gap: 10px;">
                                 <button id="btnExportData" class="btn btn-primary"
                                     style="background-color: #10b981; border: none;"><i
-                                        class="fa-solid fa-download"></i> Export Dữ Liệu (.xlsx)</button>
+                                        class="fa-solid fa-download"></i> Export Dá»¯ Liá»‡u (.xlsx)</button>
                                 <label class="btn btn-outline" style="cursor: pointer;">
-                                    <i class="fa-solid fa-upload"></i> Import Dữ Liệu
+                                    <i class="fa-solid fa-upload"></i> Import Dá»¯ Liá»‡u
                                     <input type="file" id="importDataInput"
                                         accept=".xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                         style="display: none;">
@@ -407,7 +407,7 @@
                     <div class="table-wrapper" style="max-width: 800px;">
                         <div class="table-header">
                             <div class="table-header-left">
-                                <h3>Cấu hình chung</h3>
+                                <h3>Cáº¥u hÃ¬nh chung</h3>
                             </div>
                         </div>
                         <div style="padding: 20px;">
@@ -415,30 +415,30 @@
                                 <div class="form-group" style="margin-bottom: 15px;">
                                     <label class="form-label">Hotline</label>
                                     <input type="text" class="form-input" id="settingHotline"
-                                        placeholder="Nhập số điện thoại hotline">
+                                        placeholder="Nháº­p sá»‘ Ä‘iá»‡n thoáº¡i hotline">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 15px;">
                                     <label class="form-label">Zalo</label>
                                     <input type="text" class="form-input" id="settingZalo"
-                                        placeholder="Nhập số điện thoại Zalo">
+                                        placeholder="Nháº­p sá»‘ Ä‘iá»‡n thoáº¡i Zalo">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 15px;">
-                                    <label class="form-label">Địa chỉ</label>
+                                    <label class="form-label">Äá»‹a chá»‰</label>
                                     <input type="text" class="form-input" id="settingAddress"
-                                        placeholder="Nhập địa chỉ cửa hàng">
+                                        placeholder="Nháº­p Ä‘á»‹a chá»‰ cá»­a hÃ ng">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 20px;">
                                     <label class="form-label">Logo URL</label>
                                     <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                                         <input type="text" class="form-input" id="settingLogo"
-                                            placeholder="Nhập URL logo">
+                                            placeholder="Nháº­p URL logo">
                                     </div>
                                     <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;">
-                                        <div class="placeholder">Xem trước Logo</div>
+                                        <div class="placeholder">Xem trÆ°á»›c Logo</div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="btnSaveSettings"><i
-                                        class="fa-solid fa-save"></i> Lưu cấu hình</button>
+                                        class="fa-solid fa-save"></i> LÆ°u cáº¥u hÃ¬nh</button>
                             </form>
                         </div>
                     </div>
@@ -451,7 +451,7 @@
     <div class="modal-overlay" id="productModal">
         <div class="modal" style="max-width: 1200px; width: 90vw;">
             <div class="modal-header">
-                <h3 id="productModalTitle">Thêm sản phẩm</h3>
+                <h3 id="productModalTitle">ThÃªm sáº£n pháº©m</h3>
                 <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
@@ -459,63 +459,63 @@
                     <input type="hidden" id="productId">
                     <div class="form-grid">
                         <div class="form-group full">
-                            <label class="form-label">Tên sản phẩm <span class="required">*</span></label>
+                            <label class="form-label">TÃªn sáº£n pháº©m <span class="required">*</span></label>
                             <input type="text" class="form-input" id="productName" required
-                                placeholder="Nhập tên sản phẩm...">
+                                placeholder="Nháº­p tÃªn sáº£n pháº©m...">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Danh mục <span class="required">*</span></label>
+                            <label class="form-label">Danh má»¥c <span class="required">*</span></label>
                             <select class="form-select" id="productCategory" required>
-                                <option value="">Chọn danh mục</option>
+                                <option value="">Chá»n danh má»¥c</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Giá bán (VNĐ) <span class="required">*</span></label>
+                            <label class="form-label">GiÃ¡ bÃ¡n (VNÄ) <span class="required">*</span></label>
                             <input type="text" class="form-input" id="productPrice" required placeholder="0" min="0">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Giá sau cập nhật (VNĐ)</label>
+                            <label class="form-label">GiÃ¡ sau cáº­p nháº­t (VNÄ)</label>
                             <input type="text" class="form-input" id="productFinalPrice" placeholder="0" min="0">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Giảm giá (%)</label>
-                            <input type="number" class="form-input" id="productDiscount" placeholder="Tự động tính..."
+                            <label class="form-label">Giáº£m giÃ¡ (%)</label>
+                            <input type="number" class="form-input" id="productDiscount" placeholder="Tá»± Ä‘á»™ng tÃ­nh..."
                                 readonly style="background-color: #f1f3f5; cursor: not-allowed;" min="0" max="100"
                                 value="0">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Hình ảnh</label>
+                            <label class="form-label">HÃ¬nh áº£nh</label>
                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                                 <input type="text" class="form-input" id="productImage"
-                                    placeholder="Nhập URL hoặc tải ảnh lên...">
+                                    placeholder="Nháº­p URL hoáº·c táº£i áº£nh lÃªn...">
                                 <input type="file" id="productImageUpload" accept="image/*" style="display: none;">
                                 <button type="button" class="btn"
                                     style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;"
                                     onclick="document.getElementById('productImageUpload').click()"
-                                    title="Tải ảnh từ máy tính">
+                                    title="Táº£i áº£nh tá»« mÃ¡y tÃ­nh">
                                     <i class="fa-solid fa-upload"></i>
                                 </button>
                             </div>
                             <div class="image-preview-box" id="imagePreview">
                                 <div class="placeholder">
                                     <i class="fa-solid fa-image"></i>
-                                    Xem trước hình ảnh
+                                    Xem trÆ°á»›c hÃ¬nh áº£nh
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Ảnh đính kèm (Tối đa 6 ảnh, nhập URL hoặc tải lên)</label>
+                            <label class="form-label">áº¢nh Ä‘Ã­nh kÃ¨m (Tá»‘i Ä‘a 6 áº£nh, nháº­p URL hoáº·c táº£i lÃªn)</label>
                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                                 <input type="text" class="form-input" id="additionalImageInput"
-                                    placeholder="Nhập URL ảnh đính kèm...">
-                                <!-- <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" id="btnAddAdditionalImage" title="Thêm từ URL">
-                                    <i class="fa-solid fa-plus"></i> Thêm
+                                    placeholder="Nháº­p URL áº£nh Ä‘Ã­nh kÃ¨m...">
+                                <!-- <button type="button" class="btn" style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;" id="btnAddAdditionalImage" title="ThÃªm tá»« URL">
+                                    <i class="fa-solid fa-plus"></i> ThÃªm
                                 </button> -->
                                 <input type="file" id="additionalImageUpload" accept="image/*" style="display: none;">
                                 <button type="button" class="btn"
                                     style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;"
                                     onclick="document.getElementById('additionalImageUpload').click()"
-                                    title="Tải ảnh từ máy tính">
+                                    title="Táº£i áº£nh tá»« mÃ¡y tÃ­nh">
                                     <i class="fa-solid fa-upload"></i>
                                 </button>
                             </div>
@@ -526,108 +526,108 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Nhãn nổi bật (Badge)</label>
+                            <label class="form-label">NhÃ£n ná»•i báº­t (Badge)</label>
                             <div style="display: flex; gap: 10px;">
                                 <input type="text" class="form-input" id="productBadgeText"
-                                    placeholder="VD: Mới, Tặng quà, Flash Sale..." maxlength="20" style="flex: 1;">
+                                    placeholder="VD: Má»›i, Táº·ng quÃ , Flash Sale..." maxlength="20" style="flex: 1;">
                                 <select class="form-select" id="productBadgeColor" style="width: 150px;">
-                                    <option value="#ef4444">Màu Đỏ</option>
-                                    <option value="#22c55e">Màu Xanh lá</option>
-                                    <option value="#3b82f6">Màu Xanh dương</option>
-                                    <option value="#f59e0b">Màu Vàng</option>
-                                    <option value="#8b5cf6">Màu Tím</option>
+                                    <option value="#ef4444">MÃ u Äá»</option>
+                                    <option value="#22c55e">MÃ u Xanh lÃ¡</option>
+                                    <option value="#3b82f6">MÃ u Xanh dÆ°Æ¡ng</option>
+                                    <option value="#f59e0b">MÃ u VÃ ng</option>
+                                    <option value="#8b5cf6">MÃ u TÃ­m</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Tùy chọn</label>
+                            <label class="form-label">TÃ¹y chá»n</label>
                             <div class="toggle-group">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="productFeatured">
                                     <span class="toggle-slider"></span>
                                 </label>
-                                <span class="toggle-label">Sản phẩm nổi bật</span>
+                                <span class="toggle-label">Sáº£n pháº©m ná»•i báº­t</span>
                             </div>
                             <div class="toggle-group" style="margin-top:10px">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="productOnSale">
                                     <span class="toggle-slider"></span>
                                 </label>
-                                <span class="toggle-label">Đang ưu đãi</span>
+                                <span class="toggle-label">Äang Æ°u Ä‘Ã£i</span>
                             </div>
                             <div class="toggle-group" style="margin-top:10px">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="productActive" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
-                                <span class="toggle-label">Trạng thái (Hiển thị)</span>
+                                <span class="toggle-label">Tráº¡ng thÃ¡i (Hiá»ƒn thá»‹)</span>
                             </div>
                         </div>
                         <div class="form-group full"
                             style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 15px;">
                             <label class="form-label" style="color: var(--admin-primary);"><i
-                                    class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm</label>
+                                    class="fa-solid fa-gift"></i> Æ¯u ÄÃ£i Mua KÃ¨m</label>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Chọn sản phẩm ưu đãi</label>
+                                    <label class="form-label" style="font-size: 13px;">Chá»n sáº£n pháº©m Æ°u Ä‘Ã£i</label>
                                     <select class="form-select" id="comboProductId">
-                                        <option value="">Không có ưu đãi</option>
+                                        <option value="">KhÃ´ng cÃ³ Æ°u Ä‘Ã£i</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Nội dung ưu đãi</label>
+                                    <label class="form-label" style="font-size: 13px;">Ná»™i dung Æ°u Ä‘Ã£i</label>
                                     <input type="text" class="form-input" id="comboDiscountText"
-                                        placeholder="Nhập nội dung ưu đãi (VD: Giảm 50%...)">
+                                        placeholder="Nháº­p ná»™i dung Æ°u Ä‘Ã£i (VD: Giáº£m 50%...)">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group full"
                             style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border);">
                             <label class="form-label" style="color: var(--admin-primary);"><i
-                                    class="fa-solid fa-gift"></i> Sản Phẩm Mua Kèm Khuyên Dùng</label>
+                                    class="fa-solid fa-gift"></i> Sáº£n Pháº©m Mua KÃ¨m KhuyÃªn DÃ¹ng</label>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 1</label>
+                                    <label class="form-label" style="font-size: 13px;">Sáº£n pháº©m 1</label>
                                     <select class="form-select" id="recProduct1">
-                                        <option value="">Không có</option>
+                                        <option value="">KhÃ´ng cÃ³</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 2</label>
+                                    <label class="form-label" style="font-size: 13px;">Sáº£n pháº©m 2</label>
                                     <select class="form-select" id="recProduct2">
-                                        <option value="">Không có</option>
+                                        <option value="">KhÃ´ng cÃ³</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Sản phẩm 3</label>
+                                    <label class="form-label" style="font-size: 13px;">Sáº£n pháº©m 3</label>
                                     <select class="form-select" id="recProduct3">
-                                        <option value="">Không có</option>
+                                        <option value="">KhÃ´ng cÃ³</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="form-label" style="font-size: 13px;">Tổng tiền Combo (VNĐ)</label>
+                                    <label class="form-label" style="font-size: 13px;">Tá»•ng tiá»n Combo (VNÄ)</label>
                                     <input type="number" class="form-input" id="comboTotalPriceInput"
                                         placeholder="VD: 620000" min="0">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Mô tả</label>
+                            <label class="form-label">MÃ´ táº£</label>
                             <textarea class="form-textarea" id="productDescription" rows="3"
-                                placeholder="Nhập mô tả sản phẩm..."></textarea>
+                                placeholder="Nháº­p mÃ´ táº£ sáº£n pháº©m..."></textarea>
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Thông số kỹ thuật</label>
+                            <label class="form-label">ThÃ´ng sá»‘ ká»¹ thuáº­t</label>
                             <textarea class="form-textarea" id="productSpecs" rows="4"
-                                placeholder="Mỗi thông số trên 1 dòng..."></textarea>
+                                placeholder="Má»—i thÃ´ng sá»‘ trÃªn 1 dÃ²ng..."></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeProductModal()">Hủy</button>
-                <button class="btn btn-primary" id="btnSaveProduct"><i class="fa-solid fa-check"></i> Lưu sản
-                    phẩm</button>
+                <button class="btn btn-outline" onclick="closeProductModal()">Há»§y</button>
+                <button class="btn btn-primary" id="btnSaveProduct"><i class="fa-solid fa-check"></i> LÆ°u sáº£n
+                    pháº©m</button>
             </div>
         </div>
     </div>
@@ -636,34 +636,34 @@
     <div class="modal-overlay" id="categoryModal">
         <div class="modal" style="max-width:480px">
             <div class="modal-header">
-                <h3 id="categoryModalTitle">Thêm danh mục</h3>
+                <h3 id="categoryModalTitle">ThÃªm danh má»¥c</h3>
                 <button class="modal-close" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <form id="categoryForm">
                     <input type="hidden" id="categoryId">
                     <div class="form-group" style="margin-bottom:16px">
-                        <label class="form-label">Tên danh mục <span class="required">*</span></label>
+                        <label class="form-label">TÃªn danh má»¥c <span class="required">*</span></label>
                         <input type="text" class="form-input" id="categoryName" required
-                            placeholder="Nhập tên danh mục...">
+                            placeholder="Nháº­p tÃªn danh má»¥c...">
                     </div>
                     <div class="form-group" style="margin-bottom:16px">
-                        <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                        <label class="form-label">ÄÆ°á»ng dáº«n tÄ©nh (Tá»± sinh)</label>
                         <input type="text" class="form-input" id="categorySlug" readonly
                             style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;"
-                            placeholder="Tự động tạo từ tên...">
+                            placeholder="Tá»± Ä‘á»™ng táº¡o tá»« tÃªn...">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Mô tả danh mục</label>
+                        <label class="form-label">MÃ´ táº£ danh má»¥c</label>
                         <textarea class="form-textarea" id="categorySeoDesc" rows="3"
-                            placeholder="Nhập mô tả danh mục..."></textarea>
+                            placeholder="Nháº­p mÃ´ táº£ danh má»¥c..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeCategoryModal()">Hủy</button>
-                <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> Lưu danh
-                    mục</button>
+                <button class="btn btn-outline" onclick="closeCategoryModal()">Há»§y</button>
+                <button class="btn btn-primary" id="btnSaveCategory"><i class="fa-solid fa-check"></i> LÆ°u danh
+                    má»¥c</button>
             </div>
         </div>
     </div>
@@ -672,7 +672,7 @@
     <div class="modal-overlay" id="newsCategoryModal">
         <div class="modal" style="max-width:480px">
             <div class="modal-header">
-                <h3 id="newsCategoryModalTitle">Thêm danh mục tin tức</h3>
+                <h3 id="newsCategoryModalTitle">ThÃªm danh má»¥c tin tá»©c</h3>
                 <button class="modal-close" onclick="closeNewsCategoryModal()"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
@@ -680,26 +680,26 @@
                 <form id="newsCategoryForm">
                     <input type="hidden" id="newsCategoryId">
                     <div class="form-group" style="margin-bottom:16px">
-                        <label class="form-label">Tên danh mục <span class="required">*</span></label>
+                        <label class="form-label">TÃªn danh má»¥c <span class="required">*</span></label>
                         <input type="text" class="form-input" id="newsCategoryName" required
-                            placeholder="Nhập tên danh mục...">
+                            placeholder="Nháº­p tÃªn danh má»¥c...">
                     </div>
                     <div class="form-group" style="margin-bottom:16px">
-                        <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                        <label class="form-label">ÄÆ°á»ng dáº«n tÄ©nh (Tá»± sinh)</label>
                         <input type="text" class="form-input" id="newsCategorySlug" readonly
                             style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;"
-                            placeholder="Tự động tạo từ tên...">
+                            placeholder="Tá»± Ä‘á»™ng táº¡o tá»« tÃªn...">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Mô tả danh mục tin tức</label>
-                        <textarea class="form-textarea" id="newsCategorySeoDesc" rows="3" placeholder="Nhập mô tả danh mục..."></textarea>
+                        <label class="form-label">MÃ´ táº£ danh má»¥c tin tá»©c</label>
+                        <textarea class="form-textarea" id="newsCategorySeoDesc" rows="3" placeholder="Nháº­p mÃ´ táº£ danh má»¥c..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeNewsCategoryModal()">Hủy</button>
-                <button class="btn btn-primary" id="btnSaveNewsCategory"><i class="fa-solid fa-check"></i> Lưu danh
-                    mục</button>
+                <button class="btn btn-outline" onclick="closeNewsCategoryModal()">Há»§y</button>
+                <button class="btn btn-primary" id="btnSaveNewsCategory"><i class="fa-solid fa-check"></i> LÆ°u danh
+                    má»¥c</button>
             </div>
         </div>
     </div>
@@ -708,7 +708,7 @@
     <div class="modal-overlay" id="newsModal">
         <div class="modal" style="max-width: 800px; width: 90vw;">
             <div class="modal-header">
-                <h3 id="newsModalTitle">Thêm tin tức</h3>
+                <h3 id="newsModalTitle">ThÃªm tin tá»©c</h3>
                 <button class="modal-close" onclick="closeNewsModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
@@ -716,71 +716,71 @@
                     <input type="hidden" id="newsId">
                     <div class="form-grid">
                         <div class="form-group full">
-                            <label class="form-label">Tiêu đề tin tức <span class="required">*</span></label>
+                            <label class="form-label">TiÃªu Ä‘á» tin tá»©c <span class="required">*</span></label>
                             <input type="text" class="form-input" id="newsTitle" required
-                                placeholder="Nhập tiêu đề tin tức...">
+                                placeholder="Nháº­p tiÃªu Ä‘á» tin tá»©c...">
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
+                            <label class="form-label">ÄÆ°á»ng dáº«n tÄ©nh (Tá»± sinh)</label>
                             <input type="text" class="form-input" id="newsSlug" readonly
                                 style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;"
-                                placeholder="Tự động tạo từ tiêu đề...">
+                                placeholder="Tá»± Ä‘á»™ng táº¡o tá»« tiÃªu Ä‘á»...">
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Tác giả (Nguồn)</label>
+                            <label class="form-label">TÃ¡c giáº£ (Nguá»“n)</label>
                             <input type="text" class="form-input" id="newsAuthor"
-                                placeholder="Nhập tên tác giả hoặc nguồn bài viết...">
+                                placeholder="Nháº­p tÃªn tÃ¡c giáº£ hoáº·c nguá»“n bÃ i viáº¿t...">
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Hình ảnh đại diện</label>
+                            <label class="form-label">HÃ¬nh áº£nh Ä‘áº¡i diá»‡n</label>
                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                                 <input type="text" class="form-input" id="newsImage"
-                                    placeholder="Nhập URL hoặc tải ảnh lên...">
+                                    placeholder="Nháº­p URL hoáº·c táº£i áº£nh lÃªn...">
                                 <input type="file" id="newsImageUpload" accept="image/*" style="display: none;">
                                 <button type="button" class="btn"
                                     style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;"
                                     onclick="document.getElementById('newsImageUpload').click()"
-                                    title="Tải ảnh từ máy tính">
+                                    title="Táº£i áº£nh tá»« mÃ¡y tÃ­nh">
                                     <i class="fa-solid fa-upload"></i>
                                 </button>
                             </div>
                             <div class="image-preview-box" id="newsImagePreview">
                                 <div class="placeholder">
                                     <i class="fa-solid fa-image"></i>
-                                    Xem trước hình ảnh
+                                    Xem trÆ°á»›c hÃ¬nh áº£nh
                                 </div>
                             </div>
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Nội dung chi tiết</label>
+                            <label class="form-label">Ná»™i dung chi tiáº¿t</label>
                             <div id="newsContentEditor"
                                 style="height: 350px; background: #fff; font-family: inherit; font-size: 15px;"></div>
                             <input type="hidden" id="newsContent">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Danh mục <span class="required">*</span></label>
+                            <label class="form-label">Danh má»¥c <span class="required">*</span></label>
                             <select class="form-input" id="newsCategorySelect" required>
                                 <!-- Rendered by JS -->
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Vị trí hiển thị (Bố cục)</label>
+                            <label class="form-label">Vá»‹ trÃ­ hiá»ƒn thá»‹ (Bá»‘ cá»¥c)</label>
                             <select class="form-input" id="newsPosition">
-                                <option value="default">Mặc định (Tin tức cập nhật - Nhỏ)</option>
-                                <option value="hero_main">Bài viết nổi bật - Chính (To nhất)</option>
-                                <option value="hero_sub">Bài viết nổi bật - Phụ (3 ảnh nhỏ)</option>
-                                <option value="trending_main">Tin Cập Nhật - Bài to bên trái</option>
+                                <option value="default">Máº·c Ä‘á»‹nh (Tin tá»©c cáº­p nháº­t - Nhá»)</option>
+                                <option value="hero_main">BÃ i viáº¿t ná»•i báº­t - ChÃ­nh (To nháº¥t)</option>
+                                <option value="hero_sub">BÃ i viáº¿t ná»•i báº­t - Phá»¥ (3 áº£nh nhá»)</option>
+                                <option value="trending_main">Tin Cáº­p Nháº­t - BÃ i to bÃªn trÃ¡i</option>
                             </select>
                         </div>
                         <div class="form-group full">
-                            <label class="form-label">Tùy chọn</label>
+                            <label class="form-label">TÃ¹y chá»n</label>
                             <div style="display: flex; gap: 20px;">
                                 <div class="toggle-group">
                                     <label class="toggle-switch">
                                         <input type="checkbox" id="newsActive" checked>
                                         <span class="toggle-slider"></span>
                                     </label>
-                                    <span class="toggle-label">Hiển thị</span>
+                                    <span class="toggle-label">Hiá»ƒn thá»‹</span>
                                 </div>
                             </div>
                         </div>
@@ -788,8 +788,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeNewsModal()">Hủy</button>
-                <button class="btn btn-primary" id="btnSaveNews"><i class="fa-solid fa-check"></i> Lưu tin tức</button>
+                <button class="btn btn-outline" onclick="closeNewsModal()">Há»§y</button>
+                <button class="btn btn-primary" id="btnSaveNews"><i class="fa-solid fa-check"></i> LÆ°u tin tá»©c</button>
             </div>
         </div>
     </div>
@@ -799,11 +799,11 @@
     <div class="confirm-overlay" id="confirmDialog">
         <div class="confirm-dialog">
             <div class="confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <h3 id="confirmTitle">Xác nhận xóa</h3>
-            <p id="confirmMessage">Bạn có chắc chắn muốn xóa mục này?</p>
+            <h3 id="confirmTitle">XÃ¡c nháº­n xÃ³a</h3>
+            <p id="confirmMessage">Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a má»¥c nÃ y?</p>
             <div class="confirm-actions">
-                <button class="btn btn-outline" onclick="closeConfirm()">Hủy</button>
-                <button class="btn btn-danger" id="btnConfirmAction"><i class="fa-solid fa-trash"></i> Xóa</button>
+                <button class="btn btn-outline" onclick="closeConfirm()">Há»§y</button>
+                <button class="btn btn-danger" id="btnConfirmAction"><i class="fa-solid fa-trash"></i> XÃ³a</button>
             </div>
         </div>
     </div>

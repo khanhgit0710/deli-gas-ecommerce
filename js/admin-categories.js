@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin categories Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.getElementById('categoriesTableBody');
 
         if (categories.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-folder-tree"></i>Chưa có danh mục nào</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-folder-tree"></i>ChÆ°a cÃ³ danh má»¥c nÃ o</td></tr>';
             return;
         }
 
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td style="text-align: center;"><span class="cat-product-count">${count}</span></td>
                     <td style="text-align: center;">
                         <div class="actions-cell" style="justify-content: center;">
-                            <button class="btn-icon success" title="Sửa" onclick="editCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-icon danger" title="Xóa" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn-icon success" title="Sá»­a" onclick="editCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-icon danger" title="XÃ³a" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('categorySeoDesc').value = '';
 
         if (category) {
-            title.textContent = 'Sửa danh mục';
+            title.textContent = 'Sá»­a danh má»¥c';
             document.getElementById('categoryId').value = category.id;
             document.getElementById('categoryName').value = category.name;
             document.getElementById('categorySlug').value = category.slug;
             document.getElementById('categorySeoDesc').value = category.seoDesc || '';
         } else {
-            title.textContent = 'Thêm danh mục mới';
+            title.textContent = 'ThÃªm danh má»¥c má»›i';
         }
 
         modal.classList.add('active');
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('categoryName').addEventListener('input', function(e) {
         const slug = e.target.value.toLowerCase()
-            .replace(/đ/g, 'd')
+            .replace(/Ä‘/g, 'd')
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             .replace(/[^a-z0-9]/g, '-')
             .replace(/-+/g, '-')
@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteCategory = function (id, name) {
-        showConfirm('Xóa danh mục', `Bạn có chắc muốn xóa danh mục "${name}"?`, () => {
+        showConfirm('XÃ³a danh má»¥c', `Báº¡n cÃ³ cháº¯c muá»‘n xÃ³a danh má»¥c "${name}"?`, () => {
             const result = ProductDB.deleteCategory(id);
             if (result.success) {
-                showToast('Đã xóa danh mục thành công!', 'success');
+                showToast('ÄÃ£ xÃ³a danh má»¥c thÃ nh cÃ´ng!', 'success');
                 renderCategories();
             } else {
                 showToast(result.message, 'error');
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnSaveCategory').addEventListener('click', () => {
         const name = document.getElementById('categoryName').value.trim();
         if (!name) {
-            showToast('Vui lòng nhập tên danh mục!', 'error');
+            showToast('Vui lÃ²ng nháº­p tÃªn danh má»¥c!', 'error');
             return;
         }
 
@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (editId) {
             ProductDB.updateCategory(editId, { name, slug, seoDesc });
-            showToast('Cập nhật danh mục thành công!', 'success');
+            showToast('Cáº­p nháº­t danh má»¥c thÃ nh cÃ´ng!', 'success');
         } else {
             ProductDB.addCategory({ name, slug, seoDesc });
-            showToast('Thêm danh mục mới thành công!', 'success');
+            showToast('ThÃªm danh má»¥c má»›i thÃ nh cÃ´ng!', 'success');
         }
 
         closeCategoryModal();
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ],
                     handlers: {
                         image: function() {
-                            const value = prompt('Nhập đường dẫn (URL) của hình ảnh:');
+                            const value = prompt('Nháº­p Ä‘Æ°á»ng dáº«n (URL) cá»§a hÃ¬nh áº£nh:');
                             if (value) {
                                 const cursorPosition = this.quill.getSelection()?.index || 0;
                                 this.quill.insertEmbed(cursorPosition, 'image', value);

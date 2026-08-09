@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin products Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Filter dropdown
         const filter = document.getElementById('categoryFilter');
         const currentFilterValue = filter.value;
-        filter.innerHTML = '<option value="">Tất cả danh mục</option>' +
+        filter.innerHTML = '<option value="">Táº¥t cáº£ danh má»¥c</option>' +
             categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
         filter.value = currentFilterValue;
 
         // Modal dropdown
         const select = document.getElementById('productCategory');
         const currentSelectValue = select.value;
-        select.innerHTML = '<option value="">Chọn danh mục</option>' +
+        select.innerHTML = '<option value="">Chá»n danh má»¥c</option>' +
             categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
         select.value = currentSelectValue;
     }
@@ -49,13 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const pagination = document.getElementById('productPagination');
 
         if (products.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7" class="table-empty"><i class="fa-solid fa-box-open"></i>Không tìm thấy sản phẩm nào</td></tr>';
-            countText.textContent = '0 sản phẩm';
+            tbody.innerHTML = '<tr><td colspan="7" class="table-empty"><i class="fa-solid fa-box-open"></i>KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m nÃ o</td></tr>';
+            countText.textContent = '0 sáº£n pháº©m';
             if (pagination) pagination.innerHTML = '';
             return;
         }
 
-        countText.textContent = `${products.length} sản phẩm`;
+        countText.textContent = `${products.length} sáº£n pháº©m`;
 
         const totalPages = Math.ceil(products.length / productsPerPage);
         if (currentProductPage > totalPages) currentProductPage = totalPages;
@@ -96,14 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="price-text">${ProductDB.formatPrice(discountedPrice)}</span>
                         ${p.discount > 0 ? `<br><s style="font-size:14px;color:var(--admin-text-dim)">${ProductDB.formatPrice(p.price)}</s>` : ''}
                     </td>
-                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="badge badge-sale">-${p.discount}%</span>` : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td class="hide-mobile" style="text-align: left;">${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td class="hide-mobile" style="text-align: left;">${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i></span>' : '<span style="color:var(--admin-text-dim)">—</span>'}</td>
-                    <td class="hide-mobile" style="text-align: left;">${p.active !== false ? '<span class="badge badge-success" style="background:#d4edda;color:#155724;padding:4px 8px;border-radius:4px;font-size:14px">Đang hiện</span>' : '<span class="badge badge-danger" style="background:#f8d7da;color:#721c24;padding:4px 8px;border-radius:4px;font-size:14px">Đang ẩn</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.discount > 0 ? `<span class="badge badge-sale">-${p.discount}%</span>` : '<span style="color:var(--admin-text-dim)">â€”</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.featured ? '<span class="badge badge-featured"><i class="fa-solid fa-star"></i></span>' : '<span style="color:var(--admin-text-dim)">â€”</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.onSale ? '<span class="badge badge-sale"><i class="fa-solid fa-tag"></i></span>' : '<span style="color:var(--admin-text-dim)">â€”</span>'}</td>
+                    <td class="hide-mobile" style="text-align: left;">${p.active !== false ? '<span class="badge badge-success" style="background:#d4edda;color:#155724;padding:4px 8px;border-radius:4px;font-size:14px">Äang hiá»‡n</span>' : '<span class="badge badge-danger" style="background:#f8d7da;color:#721c24;padding:4px 8px;border-radius:4px;font-size:14px">Äang áº©n</span>'}</td>
                     <td style="text-align: left;">
                         <div class="actions-cell" style="justify-content: flex-start;">
-                            <button class="btn-icon success" title="Sửa" onclick="editProduct(${p.id})"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-icon danger" title="Xóa" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn-icon success" title="Sá»­a" onclick="editProduct(${p.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-icon danger" title="XÃ³a" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (price > 0 && finalPrice > 0 && finalPrice < price) {
             const percentage = ((price - finalPrice) / price) * 100;
-            discountInput.value = Math.ceil(percentage); // Luôn làm tròn lên
+            discountInput.value = Math.ceil(percentage); // LuÃ´n lÃ m trÃ²n lÃªn
         } else if (finalPrice === price || finalPrice > price || finalPrice === 0) {
             discountInput.value = 0;
         }
@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rec2 = document.getElementById('recProduct2');
         const rec3 = document.getElementById('recProduct3');
         
-        let comboHTML = '<option value="">Không có ưu đãi</option>';
-        let recHTML = '<option value="">-- Chọn sản phẩm --</option>';
+        let comboHTML = '<option value="">KhÃ´ng cÃ³ Æ°u Ä‘Ã£i</option>';
+        let recHTML = '<option value="">-- Chá»n sáº£n pháº©m --</option>';
         
         ProductDB.getAll().forEach(p => {
             if (!product || p.id !== product.id) {
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateImagePreview();
 
         if (product) {
-            title.textContent = 'Sửa sản phẩm';
+            title.textContent = 'Sá»­a sáº£n pháº©m';
             document.getElementById('productId').value = product.id;
             document.getElementById('productName').value = product.name;
             document.getElementById('productCategory').value = product.categoryId;
@@ -221,8 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
             updateImagePreview();
             renderAdditionalImages();
         } else {
-            title.textContent = 'Thêm sản phẩm mới';
-            document.getElementById('productFeatured').checked = true; // Auto "Mới" tag
+            title.textContent = 'ThÃªm sáº£n pháº©m má»›i';
+            document.getElementById('productFeatured').checked = true; // Auto "Má»›i" tag
             document.getElementById('productOnSale').checked = false;
             if (document.getElementById('productActive')) document.getElementById('productActive').checked = true;
             if (document.getElementById('productSlug')) document.getElementById('productSlug').value = '';
@@ -257,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteProduct = function (id, name) {
-        showConfirm('Xóa sản phẩm', `Bạn có chắc muốn xóa "${name}"? Hành động này không thể hoàn tác.`, () => {
+        showConfirm('XÃ³a sáº£n pháº©m', `Báº¡n cÃ³ cháº¯c muá»‘n xÃ³a "${name}"? HÃ nh Ä‘á»™ng nÃ y khÃ´ng thá»ƒ hoÃ n tÃ¡c.`, () => {
             ProductDB.delete(id);
-            showToast('Đã xóa sản phẩm thành công!', 'success');
+            showToast('ÄÃ£ xÃ³a sáº£n pháº©m thÃ nh cÃ´ng!', 'success');
             renderProducts();
         });
     };
@@ -269,9 +269,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = document.getElementById('productImage').value;
         const box = document.getElementById('imagePreview');
         if (url) {
-            box.innerHTML = `<img src="${url}" alt="Xem trước" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'><i class=\\'fa-solid fa-image-slash\\'></i>Hình ảnh không hợp lệ</div>'">`;
+            box.innerHTML = `<img src="${url}" alt="Xem trÆ°á»›c" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'><i class=\\'fa-solid fa-image-slash\\'></i>HÃ¬nh áº£nh khÃ´ng há»£p lá»‡</div>'">`;
         } else {
-            box.innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Xem trước hình ảnh</div>';
+            box.innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Xem trÆ°á»›c hÃ¬nh áº£nh</div>';
         }
     }
     document.getElementById('productImage').addEventListener('input', updateImagePreview);
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file) {
                 // Check file size (limit to ~2MB to avoid localStorage quota issues)
                 if (file.size > 2 * 1024 * 1024) {
-                    showToast('Vui lòng chọn ảnh có kích thước dưới 2MB!', 'error');
+                    showToast('Vui lÃ²ng chá»n áº£nh cÃ³ kÃ­ch thÆ°á»›c dÆ°á»›i 2MB!', 'error');
                     this.value = ''; // Reset
                     return;
                 }
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = inputAdditionalImage.value.trim();
         if (val) {
             if (window.currentAdditionalImages.length >= 6) {
-                showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
+                showToast('Chá»‰ Ä‘Æ°á»£c phÃ©p tá»‘i Ä‘a 6 áº£nh Ä‘Ã­nh kÃ¨m!', 'error');
                 return;
             }
             window.currentAdditionalImages.push(val);
@@ -385,12 +385,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const file = e.target.files[0];
             if (file) {
                 if (window.currentAdditionalImages.length >= 6) {
-                    showToast('Chỉ được phép tối đa 6 ảnh đính kèm!', 'error');
+                    showToast('Chá»‰ Ä‘Æ°á»£c phÃ©p tá»‘i Ä‘a 6 áº£nh Ä‘Ã­nh kÃ¨m!', 'error');
                     this.value = '';
                     return;
                 }
                 if (file.size > 2 * 1024 * 1024) {
-                    showToast('Vui lòng chọn ảnh có kích thước dưới 2MB!', 'error');
+                    showToast('Vui lÃ²ng chá»n áº£nh cÃ³ kÃ­ch thÆ°á»›c dÆ°á»›i 2MB!', 'error');
                     this.value = '';
                     return;
                 }
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const priceRaw = document.getElementById('productPrice').value.replace(/\./g, '');
 
         if (!name || !categoryId || !priceRaw) {
-            showToast('Vui lòng nhập đầy đủ thông tin bắt buộc!', 'error');
+            showToast('Vui lÃ²ng nháº­p Ä‘áº§y Ä‘á»§ thÃ´ng tin báº¯t buá»™c!', 'error');
             return;
         }
 
@@ -459,10 +459,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (editId) {
             ProductDB.update(editId, data);
-            showToast('Cập nhật sản phẩm thành công!', 'success');
+            showToast('Cáº­p nháº­t sáº£n pháº©m thÃ nh cÃ´ng!', 'success');
         } else {
             ProductDB.add(data);
-            showToast('Thêm sản phẩm mới thành công!', 'success');
+            showToast('ThÃªm sáº£n pháº©m má»›i thÃ nh cÃ´ng!', 'success');
         }
 
         closeProductModal();
@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!tbody) return;
 
         if (products.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-tags"></i> Chưa có sản phẩm Sale Off 50%</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-tags"></i> ChÆ°a cÃ³ sáº£n pháº©m Sale Off 50%</td></tr>';
             return;
         }
 
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
                             <div>
                                 <div style="font-weight:600; color:var(--admin-text);">${p.name}</div>
-                                <div style="font-size:12px; color:var(--admin-text-dim);">Danh mục: ${ProductDB.getCategoryById(p.categoryId)?.name || 'N/A'}</div>
+                                <div style="font-size:12px; color:var(--admin-text-dim);">Danh má»¥c: ${ProductDB.getCategoryById(p.categoryId)?.name || 'N/A'}</div>
                             </div>
                         </div>
                     </td>
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td style="text-align:center;">
                         <div class="action-buttons">
-                            <button class="btn-action btn-edit" onclick="openProductModal(${p.id})" title="Sửa sản phẩm">
+                            <button class="btn-action btn-edit" onclick="openProductModal(${p.id})" title="Sá»­a sáº£n pháº©m">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </div>

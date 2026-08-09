@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // Check if ProductDB is ready, if not wait for event
     if (localStorage.getItem('gasviet_db_initialized_v9')) {
         initNewsJS();
@@ -21,8 +21,8 @@ function initNewsJS() {
 function formatDate(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);
-    const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-    return `Ngày ${String(date.getDate()).padStart(2, '0')} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+    const months = ['ThÃ¡ng 1', 'ThÃ¡ng 2', 'ThÃ¡ng 3', 'ThÃ¡ng 4', 'ThÃ¡ng 5', 'ThÃ¡ng 6', 'ThÃ¡ng 7', 'ThÃ¡ng 8', 'ThÃ¡ng 9', 'ThÃ¡ng 10', 'ThÃ¡ng 11', 'ThÃ¡ng 12'];
+    return `NgÃ y ${String(date.getDate()).padStart(2, '0')} ${months[date.getMonth()]}, ${date.getFullYear()}`;
 }
 
 function renderNewsList() {
@@ -38,7 +38,7 @@ function renderNewsList() {
             <div class="nb-hero-text">
                 <h2>${heroMain.title}</h2>
                 <p>${(heroMain.content || '').replace(/<[^>]+>/g, '').substring(0, 150)}...</p>
-                <a href="/chi-tiet-tin-tuc/${heroMain.slug}" class="nb-btn-dark">Đọc bài nổi bật</a>
+                <a href="/chi-tiet-tin-tuc/${heroMain.slug}" class="nb-btn-dark">Äá»c bÃ i ná»•i báº­t</a>
             </div>
             <div class="nb-hero-images">
                 <div class="nb-img-large">
@@ -56,9 +56,9 @@ function renderNewsList() {
         document.getElementById('news-hero-container').innerHTML = heroHtml;
     }
 
-    // 2. Chuyên Mục Yêu Thích
+    // 2. ChuyÃªn Má»¥c YÃªu ThÃ­ch
     let filtersHtml = `<div class="nb-tab-indicator" id="nb-tab-indicator"></div>`;
-    filtersHtml += `<a href="javascript:void(0)" class="active" onclick="filterNewsGrid(null, this)"><h3>Tất cả</h3></a>`;
+    filtersHtml += `<a href="javascript:void(0)" class="active" onclick="filterNewsGrid(null, this)"><h3>Táº¥t cáº£</h3></a>`;
     categories.slice(0, 4).forEach(c => {
         filtersHtml += `<a href="javascript:void(0)" onclick="filterNewsGrid(${c.id}, this)"><h3>${c.name}</h3></a>`;
     });
@@ -99,10 +99,10 @@ function renderNewsList() {
         const gridNews = filtered.slice(0, 4);
         let gridHtml = '';
         if (gridNews.length === 0) {
-            gridHtml = '<p style="text-align:center; width:100%; grid-column:1/-1;">Đang cập nhật bài viết cho chuyên mục này.</p>';
+            gridHtml = '<p style="text-align:center; width:100%; grid-column:1/-1;">Äang cáº­p nháº­t bÃ i viáº¿t cho chuyÃªn má»¥c nÃ y.</p>';
         } else {
             gridNews.forEach(n => {
-                const catName = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
+                const catName = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'KhÃ¡c';
                 gridHtml += `
                     <div class="nb-dest-card" onclick="window.location.href='/chi-tiet-tin-tuc/${n.slug}'" style="cursor:pointer;">
                         <img src="${n.image}" alt="${n.title}">
@@ -126,13 +126,13 @@ function renderNewsList() {
         }, 100);
     }
 
-    // 3. Tin Cập Nhật
+    // 3. Tin Cáº­p Nháº­t
     const trendingMain = allNews.find(n => n.position === 'trending_main') || allNews[allNews.length - 1];
     const latestList = allNews.filter(n => n.position === 'default' && n.id !== trendingMain?.id).slice(4, 8);
     
     let latestHtml = '';
     if (trendingMain) {
-        const catName = ProductDB.getNewsCategoryById(trendingMain.categoryId)?.name || 'Khác';
+        const catName = ProductDB.getNewsCategoryById(trendingMain.categoryId)?.name || 'KhÃ¡c';
         latestHtml += `
             <div class="nb-latest-main">
                 <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${trendingMain.slug}'" style="cursor:pointer;">
@@ -147,7 +147,7 @@ function renderNewsList() {
         `;
         
         latestList.forEach(n => {
-            const cat = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
+            const cat = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'KhÃ¡c';
             latestHtml += `
                 <div class="nb-list-item">
                     <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/chi-tiet-tin-tuc/${n.slug}'" style="cursor:pointer;">
@@ -169,7 +169,7 @@ function renderNewsDetail() {
     const urlParams = new URLSearchParams(window.location.search);
     let slug = urlParams.get('slug');
     
-    // Nếu Nginx bẻ link ngầm, trình duyệt sẽ không có ?slug=, cần lấy từ pathname
+    // Náº¿u Nginx báº» link ngáº§m, trÃ¬nh duyá»‡t sáº½ khÃ´ng cÃ³ ?slug=, cáº§n láº¥y tá»« pathname
     if (!slug) {
         const pathSegments = window.location.pathname.split('/').filter(Boolean);
         if (pathSegments.length >= 2 && pathSegments[0] === 'chi-tiet-tin-tuc') {
@@ -188,12 +188,12 @@ function renderNewsDetail() {
     }
     
     if (!newsItem) {
-        document.getElementById('news-detail-container').innerHTML = '<div style="text-align:center; padding: 100px;"><h2>Không tìm thấy bài viết!</h2><br><a href="/tin-tuc.html" class="btn" style="background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:20px;">Quay lại danh sách</a></div>';
+        document.getElementById('news-detail-container').innerHTML = '<div style="text-align:center; padding: 100px;"><h2>KhÃ´ng tÃ¬m tháº¥y bÃ i viáº¿t!</h2><br><a href="/tin-tuc.html" class="btn" style="background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:20px;">Quay láº¡i danh sÃ¡ch</a></div>';
         return;
     }
 
-    const catName = ProductDB.getNewsCategoryById(newsItem.categoryId)?.name || 'Chưa phân loại';
-    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Việt`;
+    const catName = ProductDB.getNewsCategoryById(newsItem.categoryId)?.name || 'ChÆ°a phÃ¢n loáº¡i';
+    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Viá»‡t`;
     
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -230,11 +230,11 @@ function renderNewsDetail() {
                     <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop"
                         alt="Author">
                     <div>
-                        <strong>${newsItem.author || 'Ban Biên Tập'}</strong>
+                        <strong>${newsItem.author || 'Ban BiÃªn Táº­p'}</strong>
                     </div>
                 </div>
                 <div class="nb-date">
-                    <i class="fa-regular fa-clock"></i> <span class="hide-text-mobile">Đăng ngày:</span> ${formatDate(newsItem.createdAt)}
+                    <i class="fa-regular fa-clock"></i> <span class="hide-text-mobile">ÄÄƒng ngÃ y:</span> ${formatDate(newsItem.createdAt)}
                 </div>
             </div>
         </div>
@@ -251,21 +251,21 @@ function renderNewsDetail() {
             <!-- Share and Tags -->
             <div class="nb-detail-footer" style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
                 <div class="nb-tags" style="display: flex; align-items: center;">
-                    <strong>Từ khoá:</strong>
+                    <strong>Tá»« khoÃ¡:</strong>
                     <a href="javascript:void(0)" style="margin-left:8px; padding: 2px 12px; background: #f1f5f9; border-radius: 20px; text-decoration: none; border: 1px solid #64748b; color: #64748b; font-size: 14px; display: inline-block;">${catName}</a>
                 </div>
                 <div class="nb-share" style="display: flex; align-items: center;">
-                    <strong>Chia sẻ:</strong>
+                    <strong>Chia sáº»:</strong>
                     <a href="javascript:void(0)" class="share-btn fb"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="javascript:void(0)" class="share-btn mess"><i class="fa-brands fa-facebook-messenger"></i></a>
-                    <a href="javascript:void(0)" onclick="navigator.clipboard.writeText(window.location.href); alert('Đã copy link bài viết!');" class="share-btn link"><i class="fa-solid fa-link"></i></a>
+                    <a href="javascript:void(0)" onclick="navigator.clipboard.writeText(window.location.href); alert('ÄÃ£ copy link bÃ i viáº¿t!');" class="share-btn link"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
 
             <!-- Related Articles -->
             ${related.length > 0 ? `
             <div class="nb-related" style="margin-top: 20px;">
-                <h3 style="font-size: 24px; margin-bottom: 20px; color: #0f172a;">Bài viết liên quan</h3>
+                <h3 style="font-size: 24px; margin-bottom: 20px; color: #0f172a;">BÃ i viáº¿t liÃªn quan</h3>
                 <div class="nb-archive-grid">
                     ${relatedHtml}
                 </div>

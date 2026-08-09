@@ -1,4 +1,4 @@
-document.addEventListener('ProductDBReady', () => {
+﻿document.addEventListener('ProductDBReady', () => {
     // -------------------------------------------------------------------------
     // Sale Off UI LOGIC
     // -------------------------------------------------------------------------
@@ -13,7 +13,7 @@ document.addEventListener('ProductDBReady', () => {
         const products = ProductDB.getFlashDealProducts();
         
         if (products.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">Chưa có sản phẩm Sale Off nào.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">ChÆ°a cÃ³ sáº£n pháº©m Sale Off nÃ o.</td></tr>`;
             return;
         }
 
@@ -27,15 +27,15 @@ document.addEventListener('ProductDBReady', () => {
                     </div>
                 </td>
                 <td>
-                    <span style="font-weight: 500; color: var(--color-primary);">${p.flashDealPrice ? ProductDB.formatPrice(p.flashDealPrice) : 'Chưa nhập'}</span>
+                    <span style="font-weight: 500; color: var(--color-primary);">${p.flashDealPrice ? ProductDB.formatPrice(p.flashDealPrice) : 'ChÆ°a nháº­p'}</span>
                 </td>
                 <td>
-                    <span style="font-size: 13px;">${p.flashDealDesc || '<em style="color:#aaa">Chưa có mô tả</em>'}</span>
+                    <span style="font-size: 13px;">${p.flashDealDesc || '<em style="color:#aaa">ChÆ°a cÃ³ mÃ´ táº£</em>'}</span>
                 </td>
                 <td style="text-align:center;">
                     <div class="actions-cell" style="justify-content:center;">
-                        <button class="btn-icon warning" title="Chỉnh sửa Deal" onclick="openEditFlashDealModal(${p.id})"><i class="fa-solid fa-pen"></i></button>
-                        <button class="btn-icon danger" title="Bỏ khỏi Sale Off" onclick="toggleFlashDealStatus(${p.id}, false)"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn-icon warning" title="Chá»‰nh sá»­a Deal" onclick="openEditFlashDealModal(${p.id})"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn-icon danger" title="Bá» khá»i Sale Off" onclick="toggleFlashDealStatus(${p.id}, false)"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </td>
             </tr>
@@ -62,19 +62,19 @@ document.addEventListener('ProductDBReady', () => {
         const desc = document.getElementById('editFlashDealDesc').value;
 
         if (ProductDB.updateFlashDealData(id, desc, price)) {
-            showToast('Đã lưu thông tin Sale Off!', 'success');
+            showToast('ÄÃ£ lÆ°u thÃ´ng tin Sale Off!', 'success');
             document.getElementById('editFlashDealModal').classList.remove('active');
             renderFlashDealsTable();
             renderSelectionTable();
         } else {
-            showToast('Có lỗi xảy ra!', 'error');
+            showToast('CÃ³ lá»—i xáº£y ra!', 'error');
         }
     };
 
     // Export functions to global scope for inline event handlers
     window.updateFlashDealData = function(id, desc, price) {
         ProductDB.updateFlashDealData(id, desc, price);
-        showToast('Đã cập nhật dữ liệu deal', 'success');
+        showToast('ÄÃ£ cáº­p nháº­t dá»¯ liá»‡u deal', 'success');
     };
 
     window.toggleFlashDealStatus = function(id, status) {
@@ -82,9 +82,9 @@ document.addEventListener('ProductDBReady', () => {
         renderFlashDealsTable();
         renderFlashDealsSelection();
         if (!status) {
-            showToast('Đã gỡ khỏi Sale Off', 'info');
+            showToast('ÄÃ£ gá»¡ khá»i Sale Off', 'info');
         } else {
-            showToast('Đã thêm vào Sale Off', 'success');
+            showToast('ÄÃ£ thÃªm vÃ o Sale Off', 'success');
         }
     };
 

@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Danh mục sản phẩm Gas Việt - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.">
-    <title>Tất cả sản phẩm | Gas Việt</title>
+        content="Danh má»¥c sáº£n pháº©m Gas Viá»‡t - Tá»•ng há»£p cÃ¡c sáº£n pháº©m gas chÃ­nh hÃ£ng, báº¿p gas, vÃ  phá»¥ kiá»‡n vá»›i giÃ¡ Æ°u Ä‘Ã£i.">
+    <title>Táº¥t cáº£ sáº£n pháº©m | Gas Viá»‡t</title>
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
@@ -29,7 +29,7 @@
 <body>
     <h1
         style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
-        Tất cả sản phẩm</h1>
+        Táº¥t cáº£ sáº£n pháº©m</h1>
 
     <site-header></site-header>
     <script defer src="/components/header.js?v=5"></script>
@@ -42,7 +42,7 @@
             <div class="category-sidebar">
                 <div class="sidebar-title">
                     <i class="fa-solid fa-list-ul"></i>
-                    <strong>Danh mục sản phẩm</strong>
+                    <strong>Danh má»¥c sáº£n pháº©m</strong>
                 </div>
                 <ul class="category-list" id="dynamicCategoryList">
                     <!-- Dynamic categories rendered by JS -->
@@ -52,28 +52,28 @@
             <!-- Product Area -->
             <div class="product-area">
                 <div class="section-header-full header-search-only" style="position: relative;">
-                    <!-- Nút toggle sidebar trên mobile -->
+                    <!-- NÃºt toggle sidebar trÃªn mobile -->
                     <button id="sidebarToggleBtn" class="btn-sidebar-toggle" aria-label="Toggle Sidebar">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <div class="section-search search-flex">
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" placeholder="Tìm kiếm..." class="search-input">
+                        <input type="text" placeholder="TÃ¬m kiáº¿m..." class="search-input">
                         <button class="btn-search">
-                            <span class="btn-search-text">Tìm kiếm</span>
+                            <span class="btn-search-text">TÃ¬m kiáº¿m</span>
                             <i class="fa-solid fa-magnifying-glass btn-search-icon" style="display: none;"></i>
                         </button>
                     </div>
                     <div class="sort-by">
                         <div class="custom-dropdown" id="sortDropdown">
                             <div class="dropdown-selected">
-                                <span>Sắp xếp: Mới nhất</span> <i class="fa-solid fa-chevron-down"></i>
+                                <span>Sáº¯p xáº¿p: Má»›i nháº¥t</span> <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <ul class="dropdown-options">
-                                <li class="active">Mới nhất</li>
-                                <li>Giá: Thấp đến Cao</li>
-                                <li>Giá: Cao đến Thấp</li>
-                                <li>Bán chạy nhất</li>
+                                <li class="active">Má»›i nháº¥t</li>
+                                <li>GiÃ¡: Tháº¥p Ä‘áº¿n Cao</li>
+                                <li>GiÃ¡: Cao Ä‘áº¿n Tháº¥p</li>
+                                <li>BÃ¡n cháº¡y nháº¥t</li>
                             </ul>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
             let currentPage = 1;
             let currentSearch = '';
 
-            // Lấy ID danh mục từ URL nếu có
+            // Láº¥y ID danh má»¥c tá»« URL náº¿u cÃ³
             const urlParams = new URLSearchParams(window.location.search);
             let currentCategory = urlParams.get('category') ? parseInt(urlParams.get('category')) : '';
 
@@ -122,12 +122,12 @@
                     if (metaDesc && category.seoDesc) {
                         metaDesc.setAttribute('content', category.seoDesc);
                     }
-                    document.title = category.name + " | Gas Việt";
+                    document.title = category.name + " | Gas Viá»‡t";
                 } else {
                     if (metaDesc) {
-                        metaDesc.setAttribute('content', "Danh mục sản phẩm Gas Việt - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.");
+                        metaDesc.setAttribute('content', "Danh má»¥c sáº£n pháº©m Gas Viá»‡t - Tá»•ng há»£p cÃ¡c sáº£n pháº©m gas chÃ­nh hÃ£ng, báº¿p gas, vÃ  phá»¥ kiá»‡n vá»›i giÃ¡ Æ°u Ä‘Ã£i.");
                     }
-                    document.title = "Tất cả sản phẩm | Gas Việt";
+                    document.title = "Táº¥t cáº£ sáº£n pháº©m | Gas Viá»‡t";
                 }
             }
 
@@ -153,7 +153,7 @@
                 // Add "All Products" option at top
                 list.insertAdjacentHTML('afterbegin', `
                     <li><a href="/san-pham" data-cat-id="all" ${currentCategory === '' ? 'class="active"' : ''}>
-                        Tất cả sản phẩm
+                        Táº¥t cáº£ sáº£n pháº©m
                         <span class="sidebar-count">${ProductDB.getAll().length}</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a></li>
@@ -238,7 +238,7 @@
                     container.innerHTML = `
                         <div style="text-align:center; padding: 50px 20px;">
                             <i class="fa-solid fa-box-open" style="font-size: 48px; color: var(--color-gray-400); margin-bottom:15px;"></i>
-                            <h3 style="color: var(--color-gray-700)">Không tìm thấy sản phẩm nào!</h3>
+                            <h3 style="color: var(--color-gray-700)">KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m nÃ o!</h3>
                         </div>
                     `;
                     document.getElementById('paginationWrapper').style.display = 'none';
@@ -249,9 +249,9 @@
                     <div class="category-section" style="margin-bottom: 30px;">
                         <div class="category-section-title-wrapper">
                             <h2 class="category-section-title" style="color: var(--color-primary-dark); margin: 0; font-size: 1.5rem;">
-                                ${currentCategory ? ProductDB.getCategoryName(currentCategory) : (currentSearch ? 'Kết quả tìm kiếm' : 'Tất cả sản phẩm')}
+                                ${currentCategory ? ProductDB.getCategoryName(currentCategory) : (currentSearch ? 'Káº¿t quáº£ tÃ¬m kiáº¿m' : 'Táº¥t cáº£ sáº£n pháº©m')}
                             </h2>
-                            <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(${totalItems} sản phẩm)</span>
+                            <span class="category-count" style="color: var(--color-gray-600); font-weight: 500; font-size: 1rem;">(${totalItems} sáº£n pháº©m)</span>
                         </div>
                         <div class="products-grid">
                             ${paginatedProducts.map(p => {
@@ -259,7 +259,7 @@
                     const hasDiscount = p.discount > 0;
                     return `
                                     <div class="product-card">
-                                        ${p.badgeText ? `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>` : (hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : '')))}
+                                        ${p.badgeText ? `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>` : (hasDiscount ? `<div class="product-badge badge-discount">Giáº£m ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Æ¯u Ä‘Ã£i</div>' : (p.featured ? '<div class="product-badge badge-new">Má»›i</div>' : '')))}
                                         <div class="product-img">
                                             <a href="/chi-tiet-san-pham/${p.slug || p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
                                         </div>
@@ -348,12 +348,12 @@
                 opt.addEventListener('click', () => {
                     setTimeout(() => {
                         const val = opt.textContent.trim();
-                        dropdownSelected.textContent = 'Sắp xếp: ' + val;
+                        dropdownSelected.textContent = 'Sáº¯p xáº¿p: ' + val;
 
-                        if (val.includes('Mới nhất')) currentSort = 'newest';
-                        else if (val.includes('Thấp đến Cao')) currentSort = 'price-asc';
-                        else if (val.includes('Cao đến Thấp')) currentSort = 'price-desc';
-                        else if (val.includes('Bán chạy nhất')) currentSort = 'best-selling';
+                        if (val.includes('Má»›i nháº¥t')) currentSort = 'newest';
+                        else if (val.includes('Tháº¥p Ä‘áº¿n Cao')) currentSort = 'price-asc';
+                        else if (val.includes('Cao Ä‘áº¿n Tháº¥p')) currentSort = 'price-desc';
+                        else if (val.includes('BÃ¡n cháº¡y nháº¥t')) currentSort = 'best-selling';
 
                         currentPage = 1;
                         renderProducts();
@@ -380,9 +380,9 @@
             // Parse initial URL for category
             const pathSegments = window.location.pathname.split('/').filter(Boolean);
             if (pathSegments.length >= 1) {
-                // Kiểm tra xem slug có phải là trang HTML hay không
+                // Kiá»ƒm tra xem slug cÃ³ pháº£i lÃ  trang HTML hay khÃ´ng
                 const slug = pathSegments[0].replace('.html', '');
-                // Bỏ qua nếu là các trang chung
+                // Bá» qua náº¿u lÃ  cÃ¡c trang chung
                 if (slug !== 'san-pham' && slug !== 'trang-chu' && slug !== 'lien-he' && slug !== 've-chung-toi' && slug !== 'tin-tuc') {
                     const cat = ProductDB.getCategoryBySlug(slug);
                     if (cat) {

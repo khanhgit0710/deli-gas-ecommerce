@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin news-categories Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!tbody) return;
 
         if (categories.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="table-empty"><i class="fa-solid fa-tags"></i>Chưa có danh mục tin tức nào</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" class="table-empty"><i class="fa-solid fa-tags"></i>ChÆ°a cÃ³ danh má»¥c tin tá»©c nÃ o</td></tr>';
             return;
         }
 
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td style="color:var(--admin-text-dim);font-weight:600;">#${c.id}</td>
                     <td style="font-weight:600;color:var(--admin-text);">${c.name}</td>
                     <td style="font-family:monospace;color:var(--admin-text-muted);">${c.slug}</td>
-                    <td style="font-weight:500;">${count} bài viết</td>
+                    <td style="font-weight:500;">${count} bÃ i viáº¿t</td>
                     <td>
                         <div class="actions-cell">
-                            <button class="btn-icon success" title="Sửa" onclick="editNewsCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-icon danger" title="Xóa" onclick="deleteNewsCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn-icon success" title="Sá»­a" onclick="editNewsCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn-icon danger" title="XÃ³a" onclick="deleteNewsCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -43,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('newsCategoryId').value = '';
 
         if (cat) {
-            title.textContent = 'Sửa danh mục tin tức';
+            title.textContent = 'Sá»­a danh má»¥c tin tá»©c';
             document.getElementById('newsCategoryId').value = cat.id;
             document.getElementById('newsCategoryName').value = cat.name;
             document.getElementById('newsCategorySlug').value = cat.slug || '';
             document.getElementById('newsCategorySeoDesc').value = cat.seoDesc || '';
         } else {
-            title.textContent = 'Thêm danh mục tin tức';
+            title.textContent = 'ThÃªm danh má»¥c tin tá»©c';
         }
         modal.classList.add('active');
     };
@@ -64,20 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteNewsCategory = function(id, name) {
-        showConfirm('Xóa danh mục', `Bạn có chắc muốn xóa danh mục tin tức "${name}"?`, () => {
+        showConfirm('XÃ³a danh má»¥c', `Báº¡n cÃ³ cháº¯c muá»‘n xÃ³a danh má»¥c tin tá»©c "${name}"?`, () => {
             const res = ProductDB.deleteNewsCategory(id);
             if (res.success) {
-                showToast('Đã xóa danh mục tin tức!', 'success');
+                showToast('ÄÃ£ xÃ³a danh má»¥c tin tá»©c!', 'success');
                 renderNewsCategories();
             } else {
-                showToast(res.message || 'Lỗi khi xóa', 'error');
+                showToast(res.message || 'Lá»—i khi xÃ³a', 'error');
             }
         });
     };
 
     document.getElementById('newsCategoryName')?.addEventListener('input', function(e) {
         const slug = e.target.value.toLowerCase()
-            .replace(/đ/g, 'd')
+            .replace(/Ä‘/g, 'd')
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             .replace(/[^a-z0-9]/g, '-')
             .replace(/-+/g, '-')
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnSaveNewsCategory')?.addEventListener('click', () => {
         const name = document.getElementById('newsCategoryName').value.trim();
         if (!name) {
-            showToast('Vui lòng nhập tên danh mục!', 'error');
+            showToast('Vui lÃ²ng nháº­p tÃªn danh má»¥c!', 'error');
             return;
         }
 
@@ -104,11 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (res.success) {
-            showToast(editId ? 'Cập nhật thành công!' : 'Thêm danh mục mới thành công!', 'success');
+            showToast(editId ? 'Cáº­p nháº­t thÃ nh cÃ´ng!' : 'ThÃªm danh má»¥c má»›i thÃ nh cÃ´ng!', 'success');
             closeNewsCategoryModal();
             renderNewsCategories();
         } else {
-            showToast(res.message || 'Lỗi khi lưu danh mục', 'error');
+            showToast(res.message || 'Lá»—i khi lÆ°u danh má»¥c', 'error');
         }
     });
 
