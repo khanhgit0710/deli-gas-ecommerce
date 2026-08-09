@@ -24,24 +24,24 @@ class SiteHeader extends HTMLElement {
     <header class="header">
         <div class="container header-inner">
             <!-- Logo -->
-            <a href="trang-chu.html" class="logo">
-                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
+            <a href="/trang-chu.html" class="logo">
+                <img src="/assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo" class="logo-img">
             </a>
 
             <!-- Main Links -->
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="trang-chu.html" data-path="trang-chu.html">Trang Chủ</a></li>
-                    <li><a href="ve-chung-toi.html" data-path="ve-chung-toi.html">Về Chúng Tôi</a></li>
-                    <li><a href="san-pham.html" data-path="san-pham.html,chi-tiet-san-pham.html">Sản Phẩm</a></li>
-                    <li><a href="tin-tuc.html" data-path="tin-tuc.html,danh-sach-tin-tuc.html,chi-tiet-tin-tuc.html,chuyen-muc-an-toan-gas.html">Tin Tức</a></li>
-                    <li><a href="lien-he.html" data-path="lien-he.html">Liên Hệ</a></li>
+                    <li><a href="/trang-chu.html" data-path="trang-chu.html">Trang Chủ</a></li>
+                    <li><a href="/ve-chung-toi.html" data-path="ve-chung-toi.html">Về Chúng Tôi</a></li>
+                    <li><a href="/san-pham.html" data-path="san-pham.html,chi-tiet-san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="/tin-tuc.html" data-path="tin-tuc.html,danh-sach-tin-tuc.html,chi-tiet-tin-tuc.html,chuyen-muc-an-toan-gas.html">Tin Tức</a></li>
+                    <li><a href="/lien-he.html" data-path="lien-he.html">Liên Hệ</a></li>
                 </ul>
             </nav>
 
             <!-- Actions -->
             <div class="header-actions">
-                <button class="cart-btn-primary" onclick="window.location.href='gio-hang.html'">
+                <button class="cart-btn-primary" onclick="window.location.href='/gio-hang.html'">
                     <i class="fa-solid fa-bag-shopping"></i> Giỏ hàng
                     <span class="cart-badge">0</span>
                 </button>

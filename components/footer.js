@@ -60,7 +60,7 @@ class SiteFooter extends HTMLElement {
                     <!-- Column 1: About -->
                     <div class="footer-col footer-col-about">
                         <div class="footer-logo">
-                            <img src="assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo">
+                            <img src="/assets/logo/logo_primary_gas - Copy.png" alt="Deli-Gas Logo">
                         </div>
                         <p class="footer-desc">
                             Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
@@ -77,10 +77,10 @@ class SiteFooter extends HTMLElement {
                     <div class="footer-col">
                         <div class="footer-col-title">Dịch vụ</div>
                         <ul>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">Sản phẩm</a></li>
-                            <li><a href="#">Tin tức & Blog</a></li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="/ve-chung-toi.html">Về chúng tôi</a></li>
+                            <li><a href="/san-pham.html">Sản phẩm</a></li>
+                            <li><a href="/tin-tuc.html">Tin tức & Blog</a></li>
+                            <li><a href="/lien-he.html">Liên hệ</a></li>
                         </ul>
                     </div>
 
