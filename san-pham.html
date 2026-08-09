@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Danh mục sản phẩm Gas Lê Minh - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.">
-    <title>Tất cả sản phẩm | Gas Lê Minh</title>
+        content="Danh mục sản phẩm Gas Lê Mạnh - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.">
+    <title>Tất cả sản phẩm | Gas Lê Mạnh</title>
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
@@ -25,6 +25,13 @@
     </style>
     <link rel="stylesheet" href="css/responsive.css?v=9999999999999">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
+
+    <!-- Open Graph SEO Tags -->
+    <meta property="og:title" content="Tất cả sản phẩm | Gas Lê Mạnh" />
+    <meta property="og:description" content="Danh mục sản phẩm Gas Lê Mạnh - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi." />
+    <meta property="og:image" content="https://gaslemanh.vn/assets/logo/logo_gas.png" />
+    <meta property="og:url" content="https://gaslemanh.vn/san-pham" />
+    <meta property="og:type" content="website" />
 </head>
 
 <body>
@@ -123,12 +130,12 @@
                     if (metaDesc && category.seoDesc) {
                         metaDesc.setAttribute('content', category.seoDesc);
                     }
-                    document.title = category.name + " | Gas Lê Minh";
+                    document.title = category.name + " | Gas Lê Mạnh";
                 } else {
                     if (metaDesc) {
-                        metaDesc.setAttribute('content', "Danh mục sản phẩm Gas Lê Minh - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.");
+                        metaDesc.setAttribute('content', "Danh mục sản phẩm Gas Lê Mạnh - Tổng hợp các sản phẩm gas chính hãng, bếp gas, và phụ kiện với giá ưu đãi.");
                     }
-                    document.title = "Tất cả sản phẩm | Gas Lê Minh";
+                    document.title = "Tất cả sản phẩm | Gas Lê Mạnh";
                 }
             }
 
@@ -262,16 +269,16 @@
                                     <div class="product-card">
                                         ${p.badgeText ? `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>` : (hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : '')))}
                                         <div class="product-img">
-                                            <a href="/san-pham/${p.slug || p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
+                                            <a href="/${p.slug || p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
                                         </div>
                                         <div class="product-info">
-                                            <h3><a href="/san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                            <h3><a href="/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                                             <div class="product-price">
                                                 <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
                                                 ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
                                             </div>
                                             <div class="product-actions">
-                                                <button class="buy-now-btn" onclick="window.location.href='/san-pham/${p.slug || p.id}'">Mua ngay</button>
+                                                <button class="buy-now-btn" onclick="window.location.href='/${p.slug || p.id}'">Mua ngay</button>
                                                 <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
                                             </div>
                                         </div>
@@ -410,8 +417,8 @@
             <i class="fa-solid fa-phone"></i>
         </a>
         <a href="https://zalo.me/0901234567" target="_blank" class="float-btn float-zalo" title="Chat Zalo">
-            <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo"
-                onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
+            <img src="/assets/images/local/img_18.png" alt="Zalo"
+                onerror="this.src='/assets/images/local/img_19.png'">
         </a>
     </div>
 </body>

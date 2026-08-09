@@ -37,8 +37,8 @@
                     </a>
 
                     <a href="https://zalo.me/0901234567" target="_blank" class="footer-zalo">
-                        <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo Chat"
-                            onerror="this.src='https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png'">
+                        <img src="/assets/images/local/img_18.png" alt="Zalo Chat"
+                            onerror="this.src='/assets/images/local/img_19.png'">
                         <span>Chat Zalo</span>
                     </a>
                 </div>
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="footer-bottom">
-                    <p>&copy; 2026 Gas Lê Minh. Hân hạnh phục vụ quý khách.</p>
+                    <p>&copy; 2026 Gas Lê Mạnh. Hân hạnh phục vụ quý khách.</p>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="top-bar-inner">
                 <div class="top-bar-left">
-                    <span class="top-bar-welcome">Chào mừng đến với Gas Lê Minh! Hân hạnh phục vụ quý khách</span>
+                    <span class="top-bar-welcome">Chào mừng đến với Gas Lê Mạnh! Hân hạnh phục vụ quý khách</span>
                 </div>
                 <div class="top-bar-right">
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
@@ -33,7 +33,7 @@
                     <li><a href="/" data-path="trang-chu">Trang Chủ</a></li>
                     <li><a href="/ve-chung-toi" data-path="ve-chung-toi">Về Chúng Tôi</a></li>
                     <li><a href="/san-pham" data-path="san-pham,chi-tiet-san-pham">Sản Phẩm</a></li>
-                    <li><a href="/tin-tuc" data-path="tin-tuc,danh-sach-tin-tuc,chuyen-muc-an-toan-gas">Tin Tức</a></li>
+                    <li><a href="/tin-tuc" data-path="tin-tuc,tat-ca-bai-viet,chuyen-muc-an-toan-gas">Tin Tức</a></li>
                     <li><a href="/lien-he" data-path="lien-he">Liên Hệ</a></li>
                 </ul>
             </nav>

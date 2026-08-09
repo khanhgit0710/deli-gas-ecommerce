@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Check if ProductDB is ready, if not wait for event
     if (localStorage.getItem('gasviet_db_initialized_v9')) {
         initNewsJS();
@@ -38,7 +38,7 @@ function renderNewsList() {
             <div class="nb-hero-text">
                 <h2>${heroMain.title}</h2>
                 <p>${(heroMain.content || '').replace(/<[^>]+>/g, '').substring(0, 150)}...</p>
-                <a href="/tin-tuc/${heroMain.slug}" class="nb-btn-dark">Đọc bài nổi bật</a>
+                <a href="/${heroMain.slug}" class="nb-btn-dark">Đọc bài nổi bật</a>
             </div>
             <div class="nb-hero-images">
                 <div class="nb-img-large">
@@ -47,7 +47,7 @@ function renderNewsList() {
                 <div class="nb-img-small-stack">
         `;
         heroSubs.forEach(sub => {
-            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href='/tin-tuc/${sub.slug}'" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
+            heroHtml += `<img src="${sub.image}" alt="${sub.title}" onclick="window.location.href='/${sub.slug}'" style="cursor:pointer; transition: transform 0.3s; border-radius: 8px;">`;
         });
         heroHtml += `
                 </div>
@@ -59,7 +59,7 @@ function renderNewsList() {
     // 2. Chuyên Mục Yêu Thích
     let filtersHtml = `<div class="nb-tab-indicator" id="nb-tab-indicator"></div>`;
     filtersHtml += `<a href="javascript:void(0)" class="active" onclick="filterNewsGrid(null, this)"><h3>Tất cả</h3></a>`;
-    categories.slice(0, 4).forEach(c => {
+    categories.forEach(c => {
         filtersHtml += `<a href="javascript:void(0)" onclick="filterNewsGrid(${c.id}, this)"><h3>${c.name}</h3></a>`;
     });
     if(document.getElementById('news-category-filters')) document.getElementById('news-category-filters').innerHTML = filtersHtml;
@@ -96,7 +96,7 @@ function renderNewsList() {
             filtered = defaultNews.filter(n => n.categoryId === categoryId);
         }
         
-        const gridNews = filtered.slice(0, 4);
+        const gridNews = filtered.slice(0, 8);
         let gridHtml = '';
         if (gridNews.length === 0) {
             gridHtml = '<p style="text-align:center; width:100%; grid-column:1/-1;">Đang cập nhật bài viết cho chuyên mục này.</p>';
@@ -104,10 +104,10 @@ function renderNewsList() {
             gridNews.forEach(n => {
                 const catName = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
                 gridHtml += `
-                    <div class="nb-dest-card" onclick="window.location.href='/tin-tuc/${n.slug}'" style="cursor:pointer;">
+                    <div class="nb-dest-card" onclick="window.location.href='/${n.slug}'" style="cursor:pointer;">
                         <img src="${n.image}" alt="${n.title}">
                         <div class="nb-dest-card-info">
-                            <h4><a href="/tin-tuc/${n.slug}">${n.title}</a></h4>
+                            <h4><a href="/${n.slug}">${n.title}</a></h4>
                             <span><a href="javascript:void(0)" style="color:white; text-decoration:none;">${catName}</a></span>
                         </div>
                     </div>
@@ -135,10 +135,10 @@ function renderNewsList() {
         const catName = ProductDB.getNewsCategoryById(trendingMain.categoryId)?.name || 'Khác';
         latestHtml += `
             <div class="nb-latest-main">
-                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href='/tin-tuc/${trendingMain.slug}'" style="cursor:pointer;">
+                <img src="${trendingMain.image}" alt="${trendingMain.title}" onclick="window.location.href='/${trendingMain.slug}'" style="cursor:pointer;">
                 <div class="nb-latest-main-info">
                     <span class="nb-cat">${catName}</span>
-                    <h3><a href="/tin-tuc/${trendingMain.slug}">${trendingMain.title}</a></h3>
+                    <h3><a href="/${trendingMain.slug}">${trendingMain.title}</a></h3>
                     <div class="nb-meta">${formatDate(trendingMain.createdAt)}</div>
                     <p>${(trendingMain.content || '').replace(/<[^>]+>/g, '').substring(0, 150)}...</p>
                 </div>
@@ -150,10 +150,10 @@ function renderNewsList() {
             const cat = ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Khác';
             latestHtml += `
                 <div class="nb-list-item">
-                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/tin-tuc/${n.slug}'" style="cursor:pointer;">
+                    <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/${n.slug}'" style="cursor:pointer;">
                     <div class="nb-list-item-info">
                         <span class="nb-cat">${cat}</span>
-                        <h3><a href="/tin-tuc/${n.slug}">${n.title}</a></h3>
+                        <h3><a href="/${n.slug}">${n.title}</a></h3>
                         <div class="nb-meta">${formatDate(n.createdAt)}</div>
                     </div>
                 </div>
@@ -172,8 +172,12 @@ function renderNewsDetail() {
     // Nếu Nginx bẻ link ngầm, trình duyệt sẽ không có ?slug=, cần lấy từ pathname
     if (!slug) {
         const pathSegments = window.location.pathname.split('/').filter(Boolean);
-        if (pathSegments.length >= 2 && pathSegments[0] === 'tin-tuc') {
-            slug = pathSegments[1].replace('.html', '');
+        if (pathSegments.length > 0) {
+            if (pathSegments.length >= 2 && pathSegments[0] === 'tin-tuc') {
+                slug = pathSegments[1].replace('.html', '');
+            } else {
+                slug = pathSegments[pathSegments.length - 1].replace('.html', '');
+            }
         }
     }
 
@@ -193,7 +197,7 @@ function renderNewsDetail() {
     }
 
     const catName = ProductDB.getNewsCategoryById(newsItem.categoryId)?.name || 'Chưa phân loại';
-    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Lê Minh`;
+    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Lê Mạnh`;
     
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -210,10 +214,10 @@ function renderNewsDetail() {
     related.forEach(n => {
         relatedHtml += `
             <div class="nb-archive-card">
-                <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/tin-tuc/${n.slug}'" style="cursor:pointer">
+                <img src="${n.image}" alt="${n.title}" onclick="window.location.href='/${n.slug}'" style="cursor:pointer">
                 <div class="nb-archive-card-body">
                     <span class="nb-cat">${catName}</span>
-                    <h3><a href="/tin-tuc/${n.slug}">${n.title}</a></h3>
+                    <h3><a href="/${n.slug}">${n.title}</a></h3>
                     <p>${(n.content || '').replace(/<[^>]+>/g, '').substring(0, 80)}...</p>
                     <div class="nb-meta">${formatDate(n.createdAt)}</div>
                 </div>
@@ -227,7 +231,7 @@ function renderNewsDetail() {
             <h1 id="h1-title">${newsItem.title}</h1>
             <div class="nb-detail-meta">
                 <div class="nb-author">
-                    <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop"
+                    <img src="assets/logo/logo_gas.png
                         alt="Author">
                     <div>
                         <strong>${newsItem.author || 'Ban Biên Tập'}</strong>

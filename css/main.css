@@ -1,4 +1,4 @@
-﻿@import url('./base.css');
+@import url('./base.css');
 
 /* ==========================================================================
    TOP BAR
@@ -226,7 +226,7 @@
 .full-width-slider {
   position: relative;
   width: 100%;
-  height: 850px;
+  height: 600px;
   overflow: hidden;
   background-color: #e0f4ff;
   /* A light blue fallback color in case contain leaves space */

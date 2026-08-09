@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin news Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('newsAuthor').value = newsItem.author || '';
             document.getElementById('newsImage').value = newsItem.image || '';
             document.getElementById('newsContent').value = newsItem.content || '';
-            if (quillEditor) quillEditor.root.innerHTML = newsItem.content || '';
+            if (typeof quillEditor !== 'undefined') quillEditor.root.innerHTML = newsItem.content || '';
             
             document.getElementById('newsCategorySelect').value = newsItem.categoryId || '';
             document.getElementById('newsPosition').value = newsItem.position || 'default';
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title.textContent = 'Thêm tin tức mới';
             document.getElementById('newsSlug').value = '';
             document.getElementById('newsContent').value = '';
-            if (quillEditor) quillEditor.root.innerHTML = '';
+            if (typeof quillEditor !== 'undefined') quillEditor.root.innerHTML = '';
             
             document.getElementById('newsCategorySelect').value = '';
             document.getElementById('newsPosition').value = 'default';
@@ -122,6 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.deleteNews = function (id, title) {
         showConfirm('Xóa tin tức', `Bạn có chắc muốn xóa tin tức "${title}"?`, () => {
+            const newsItem = ProductDB.getNewsById(id);
+            if (newsItem && newsItem.image) {
+                fetch('/delete-image.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ paths: [newsItem.image] })
+                }).catch(e => console.error('Error deleting image from host', e));
+            }
             ProductDB.deleteNews(id);
             showToast('Đã xóa tin tức thành công!', 'success');
             renderNews();
@@ -171,7 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.getElementById('btnSaveNews')?.addEventListener('click', () => {
+    document.getElementById('btnSaveNews')?.addEventListener('click', async (e) => {
+        if(e) e.preventDefault();
         const title = document.getElementById('newsTitle').value.trim();
         if (!title) {
             showToast('Vui lòng nhập tiêu đề tin tức!', 'error');
@@ -184,28 +193,65 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const data = {
-            title,
-            slug: document.getElementById('newsSlug').value.trim(),
-            author: document.getElementById('newsAuthor').value.trim(),
-            image: document.getElementById('newsImage').value.trim(),
-            content: document.getElementById('newsContent').value.trim(),
-            categoryId: parseInt(catId),
-            position: document.getElementById('newsPosition').value,
-            active: document.getElementById('newsActive').checked
-        };
+        let mainImage = document.getElementById('newsImage').value.trim();
+        const btnSave = document.getElementById('btnSaveNews');
+        const originalBtnText = btnSave.innerHTML;
 
-        const editId = document.getElementById('newsId').value;
-        if (editId) {
-            ProductDB.updateNews(editId, data);
-            showToast('Cập nhật tin tức thành công!', 'success');
-        } else {
-            ProductDB.addNews(data);
-            showToast('Thêm tin tức mới thành công!', 'success');
+        try {
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang lưu...';
+
+            if (mainImage.startsWith('data:image')) {
+                const res = await fetch('/upload-image.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: mainImage, type: 'news' })
+                });
+                const textResponse = await res.text();
+                try {
+                    const resData = JSON.parse(textResponse);
+                    if (resData.success) {
+                        mainImage = resData.url;
+                    } else {
+                        throw new Error(resData.message);
+                    }
+                } catch (e) {
+                    console.warn('PHP upload failed, falling back to Base64 (Local Environment)');
+                    // Keep mainImage as Base64
+                }
+            }
+
+            const data = {
+                title,
+                slug: document.getElementById('newsSlug').value.trim(),
+                author: document.getElementById('newsAuthor').value.trim(),
+                image: mainImage,
+                content: document.getElementById('newsContent').value.trim(),
+                categoryId: parseInt(catId),
+                position: document.getElementById('newsPosition').value,
+                active: document.getElementById('newsActive').checked
+            };
+
+            const editId = document.getElementById('newsId').value;
+            if (editId) {
+                ProductDB.updateNews(editId, data);
+                showToast('Cập nhật tin tức thành công!', 'success');
+            } else {
+                ProductDB.addNews(data);
+                showToast('Thêm tin tức mới thành công!', 'success');
+            }
+
+            closeNewsModal();
+            renderNews();
+        } catch (error) {
+            console.error(error);
+            showToast('Đã xảy ra lỗi: ' + error.message + ' (Bạn có đang chạy trên môi trường có hỗ trợ PHP không?)', 'error');
+        } finally {
+            if(btnSave) {
+                btnSave.disabled = false;
+                btnSave.innerHTML = originalBtnText;
+            }
         }
-
-        closeNewsModal();
-        renderNews();
     });
 
     document.getElementById('btnAddNews')?.addEventListener('click', () => openNewsModal());

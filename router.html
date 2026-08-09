@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang tải dữ liệu...</title>
+    <!-- Load local storage databases -->
+    <script src="/js/product-db.js"></script>
+    <script src="/js/news.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            let slug = params.get('slug');
+            
+            if (!slug) {
+                slug = window.location.pathname.substring(1).replace('.html', '');
+            }
+
+            if (!slug || typeof ProductDB === 'undefined') {
+                window.location.href = '/trang-chu.html';
+                return;
+            }
+
+            // Check if product, news, or category exists
+            let targetUrl = '/trang-chu.html'; // Fallback
+
+            if (slug === 'tat-ca-bai-viet') {
+                targetUrl = '/tat-ca-bai-viet.html';
+            } else if (ProductDB.getBySlug(slug)) {
+                targetUrl = '/chi-tiet-san-pham.html';
+            } else if (ProductDB.getNewsBySlug && ProductDB.getNewsBySlug(slug)) {
+                targetUrl = '/chi-tiet-tin-tuc.html';
+            } else if (ProductDB.getNews && ProductDB.getNews().find(n => n.slug === slug)) {
+                targetUrl = '/chi-tiet-tin-tuc.html';
+            } else if (ProductDB.getCategoryBySlug && ProductDB.getCategoryBySlug(slug)) {
+                targetUrl = '/san-pham.html';
+            } else if (ProductDB.getNewsCategories && ProductDB.getNewsCategories().find(c => c.slug === slug)) {
+                targetUrl = '/tat-ca-bai-viet.html';
+            }
+
+            try {
+                const response = await fetch(targetUrl);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const html = await response.text();
+                
+                document.open();
+                document.write(html);
+                document.close();
+            } catch (err) {
+                console.error("Router error:", err);
+                window.location.href = '/trang-chu.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; color:#666;">
+        Đang tải trang...
+    </div>
+</body>
+</html>

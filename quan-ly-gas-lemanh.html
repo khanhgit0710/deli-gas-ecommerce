@@ -1,16 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hệ thống quản trị Gas Lê Minh - Đăng nhập quản lý sản phẩm, đơn hàng và tin tức.">
-    <meta name="keywords" content="quản lý Gas Lê Minh, admin Gas Lê Minh, quản trị website">
+    <meta name="description" content="Hệ thống quản trị Gas Lê Mạnh - Đăng nhập quản lý sản phẩm, đơn hàng và tin tức.">
+    <meta name="keywords" content="quản lý Gas Lê Mạnh, admin Gas Lê Mạnh, quản trị website">
     <meta name="robots" content="noindex, nofollow">
-    <title>Quản Lý Gas Lê Minh | Admin Panel</title>
+    <title>Quản Lý Gas Lê Mạnh | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
+
+    <!-- Open Graph SEO Tags -->
+    <meta property="og:title" content="Quản Lý Gas Lê Mạnh | Admin Panel" />
+    <meta property="og:description"
+        content="Hệ thống quản trị Gas Lê Mạnh - Đăng nhập quản lý sản phẩm, đơn hàng và tin tức." />
+    <meta property="og:image" content="https://gaslemanh.vn/assets/logo/logo_gas.png" />
+    <meta property="og:url" content="https://gaslemanh.vn/quan-ly-gas-lemanh" />
+    <meta property="og:type" content="website" />
 </head>
 
 <body>
@@ -67,7 +75,8 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th style="width: 40px; text-align: center;"><i class="fa-solid fa-check-double"></i></th>
+                                <th style="width: 40px; text-align: center;"><i class="fa-solid fa-check-double"></i>
+                                </th>
                                 <th style="width: 40px;">ID</th>
                                 <th>Tên sản phẩm</th>
                             </tr>
@@ -86,24 +95,35 @@
         <div class="modal" style="max-width: 500px;">
             <div class="modal-header">
                 <h3>Chỉnh sửa Sale Off</h3>
-                <span class="modal-close" onclick="document.getElementById('editFlashDealModal').classList.remove('active')"><i class="fa-solid fa-times"></i></span>
+                <span class="modal-close"
+                    onclick="document.getElementById('editFlashDealModal').classList.remove('active')"><i
+                        class="fa-solid fa-times"></i></span>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="editFlashDealId">
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Sản phẩm</label>
-                    <div id="editFlashDealProductName" style="font-weight: 600; font-size: 14px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #e2e8f0;"></div>
+                    <label class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Sản
+                        phẩm</label>
+                    <div id="editFlashDealProductName"
+                        style="font-weight: 600; font-size: 14px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #e2e8f0;">
+                    </div>
                 </div>
                 <div class="form-group" style="margin-bottom: 15px;">
-                    <label for="editFlashDealPrice" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Giá Sale Off (đ)</label>
-                    <input type="text" id="editFlashDealPrice" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px;" placeholder="Ví dụ: 99.000">
+                    <label for="editFlashDealPrice" class="form-label"
+                        style="display: block; margin-bottom: 5px; font-weight: 500;">Giá Sale Off (đ)</label>
+                    <input type="text" id="editFlashDealPrice" class="form-input"
+                        style="width: 100%; box-sizing: border-box; padding: 10px;" placeholder="Ví dụ: 99.000">
                 </div>
                 <div class="form-group" style="margin-bottom: 20px;">
-                    <label for="editFlashDealDesc" class="form-label" style="display: block; margin-bottom: 5px; font-weight: 500;">Mô tả Deal</label>
-                    <textarea id="editFlashDealDesc" class="form-input" style="width: 100%; box-sizing: border-box; padding: 10px; resize: vertical;" rows="3" placeholder="Nhập mô tả deal..."></textarea>
+                    <label for="editFlashDealDesc" class="form-label"
+                        style="display: block; margin-bottom: 5px; font-weight: 500;">Mô tả Deal</label>
+                    <textarea id="editFlashDealDesc" class="form-input"
+                        style="width: 100%; box-sizing: border-box; padding: 10px; resize: vertical;" rows="3"
+                        placeholder="Nhập mô tả deal..."></textarea>
                 </div>
                 <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                    <button class="btn btn-outline" onclick="document.getElementById('editFlashDealModal').classList.remove('active')">Hủy</button>
+                    <button class="btn btn-outline"
+                        onclick="document.getElementById('editFlashDealModal').classList.remove('active')">Hủy</button>
                     <button class="btn btn-primary" onclick="saveFlashDealEdit()">Lưu thay đổi</button>
                 </div>
             </div>
@@ -119,7 +139,7 @@
                 <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo"
                     style="width: 100%; height: 50px; object-fit: center;">
                 <!-- <div class="sidebar-brand">
-                    <span class="sidebar-brand-name">Gas Lê Minh</span>
+                    <span class="sidebar-brand-name">Gas Lê Mạnh</span>
                     <span class="sidebar-brand-sub">Admin Panel</span>
                 </div> -->
             </div>
@@ -136,7 +156,8 @@
                     <li><a href="#" data-section="categories"><i class="fa-solid fa-folder-tree"></i> Danh mục</a></li>
                     <li><a href="#" data-section="products"><i class="fa-solid fa-box-open"></i> Danh sách sản phẩm</a>
                     </li>
-                    <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i> Quản lý Sale Off</a></li>
+                    <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i>
+                            Quản lý Sale Off</a></li>
                 </ul>
 
                 <div class="sidebar-section-title">Tin tức</div>
@@ -604,7 +625,7 @@
                                 </div>
                                 <div>
                                     <label class="form-label" style="font-size: 13px;">Tổng tiền Combo (VNĐ)</label>
-                                    <input type="number" class="form-input" id="comboTotalPriceInput"
+                                    <input type="text" class="form-input" id="comboTotalPriceInput"
                                         placeholder="VD: 620000" min="0">
                                 </div>
                             </div>
@@ -690,7 +711,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Mô tả danh mục tin tức</label>
-                        <textarea class="form-textarea" id="newsCategorySeoDesc" rows="3" placeholder="Nhập mô tả danh mục..."></textarea>
+                        <textarea class="form-textarea" id="newsCategorySeoDesc" rows="3"
+                            placeholder="Nhập mô tả danh mục..."></textarea>
                     </div>
                 </form>
             </div>

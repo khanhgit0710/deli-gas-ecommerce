@@ -282,16 +282,16 @@
             <div class="product-card featured-large-card">
                 ${badgeHtml}
                 <div class="product-img">
-                    <a href="/san-pham/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                    <a href="/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
                 </div>
                 <div class="product-info">
-                    <h3><a href="/san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                    <h3><a href="/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                     <p class="product-desc">${p.description || ''}</p>
                     <div class="product-price">
                         ${priceHtml}
                     </div>
                     <div class="product-actions">
-                        <button class="buy-now-btn" onclick="window.location.href='/san-pham/${p.slug || p.id}'">Mua ngay</button>
+                        <button class="buy-now-btn" onclick="window.location.href='/${p.slug || p.id}'">Mua ngay</button>
                         <button class="add-to-cart-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>
                 </div>
@@ -913,9 +913,9 @@
        ========================================================================== */
     if (!localStorage.getItem('gas_cart_seeded')) {
         const initialCart = [
-            { name: 'Bình Gas Saigon Petro 12kg', price: 360000, image: 'https://iwater.vn/Image/Picture/Sai-gon-petro/Gas-Saigon-Petro-12kg-binh-xanh.jpg', quantity: 4 },
-            { name: 'Van điều áp Namilux', price: 120000, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BSCB0RlaM-2dmmWS1_nf8DCFzNet3deIGB5wFdF_6w&s', quantity: 2 },
-            { name: 'Dây Dẫn Gas Thái Lan', price: 80000, image: 'https://gasleminh.com/wp-content/uploads/2022/10/screenshot_1677840360.png', quantity: 1 }
+            { name: 'Bình Gas Saigon Petro 12kg', price: 360000, image: '/assets/images/local/img_5.jpg', quantity: 4 },
+            { name: 'Van điều áp Namilux', price: 120000, image: '/assets/images/local/img_6.jpg', quantity: 2 },
+            { name: 'Dây Dẫn Gas Thái Lan', price: 80000, image: '/assets/images/local/img_1.png', quantity: 1 }
         ];
         localStorage.setItem('gas_cart', JSON.stringify(initialCart));
         localStorage.setItem('gas_cart_seeded', 'true');

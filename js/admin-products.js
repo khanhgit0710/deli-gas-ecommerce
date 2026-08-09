@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgs = product.images || [];
             window.currentAdditionalImages = [...imgs];
             
-            if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = product.comboTotalPrice || '';
+            if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = product.comboTotalPrice ? product.comboTotalPrice.toLocaleString('vi-VN').replace(/,/g, '.') : '';
             
             updateImagePreview();
             renderAdditionalImages();
@@ -407,7 +407,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Save product
-    document.getElementById('btnSaveProduct').addEventListener('click', () => {
+    document.getElementById('btnSaveProduct').addEventListener('click', async (e) => {
+        if(e) e.preventDefault();
         const name = document.getElementById('productName').value.trim();
         const categoryId = document.getElementById('productCategory').value;
         const priceRaw = document.getElementById('productPrice').value.replace(/\./g, '');
@@ -417,56 +418,116 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const data = {
-            name,
-            categoryId: parseInt(categoryId),
-            price: parseInt(priceRaw),
-            discount: parseInt(document.getElementById('productDiscount').value) || 0,
-            image: document.getElementById('productImage').value.trim(),
-            description: document.getElementById('productDescription').value.trim(),
-            specs: document.getElementById('productSpecs').value.trim(),
-            featured: document.getElementById('productFeatured').checked,
-            onSale: document.getElementById('productOnSale').checked,
-            active: document.getElementById('productActive') ? document.getElementById('productActive').checked : true,
-            badgeText: document.getElementById('productBadgeText') ? document.getElementById('productBadgeText').value.trim() : '',
-            badgeColor: document.getElementById('productBadgeColor') ? document.getElementById('productBadgeColor').value : '#ef4444',
-            images: [...window.currentAdditionalImages],
-            comboProductId: document.getElementById('comboProductId') ? (parseInt(document.getElementById('comboProductId').value) || null) : null,
-            comboDiscountText: document.getElementById('comboDiscountText') ? document.getElementById('comboDiscountText').value.trim() : '',
-            comboTotalPrice: document.getElementById('comboTotalPriceInput') ? parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\D/g, '')) || 0 : 0,
-            recommendedProducts: [
-                document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) || null : null,
-                document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) || null : null,
-                document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) || null : null
-            ].filter(id => id !== null),
-            slug: document.getElementById('productSlug') ? document.getElementById('productSlug').value.trim() : '',
-            seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
-            seoDesc: document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : ''
-        };
-
-        const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;
-        const rec2Val = document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) : null;
-        const rec3Val = document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) : null;
-        data.recommendedProducts = [rec1Val, rec2Val, rec3Val].filter(v => v);
+        let mainImage = document.getElementById('productImage').value.trim();
+        const btnSave = document.getElementById('btnSaveProduct');
+        const originalBtnText = btnSave.innerHTML;
         
-        if (document.getElementById('comboTotalPriceInput') && document.getElementById('comboTotalPriceInput').value) {
-            data.comboTotalPrice = parseInt(document.getElementById('comboTotalPriceInput').value);
-        } else {
-            data.comboTotalPrice = null;
+        try {
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang lưu...';
+
+            if (mainImage.startsWith('data:image')) {
+                const res = await fetch('/upload-image.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: mainImage, type: 'product' })
+                });
+                const textResponse = await res.text();
+                try {
+                    const resData = JSON.parse(textResponse);
+                    if (resData.success) {
+                        mainImage = resData.url;
+                    } else {
+                        throw new Error(resData.message);
+                    }
+                } catch (e) {
+                    console.warn('PHP upload failed, falling back to Base64 (Local Environment)');
+                    // Keep mainImage as Base64
+                }
+            }
+
+            const processedAdditionalImages = [];
+            for (let i = 0; i < window.currentAdditionalImages.length; i++) {
+                let img = window.currentAdditionalImages[i];
+                if (img.startsWith('data:image')) {
+                    const res = await fetch('/upload-image.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ image: img, type: 'product' })
+                    });
+                    const textResponse = await res.text();
+                    try {
+                        const resData = JSON.parse(textResponse);
+                        if (resData.success) {
+                            processedAdditionalImages.push(resData.url);
+                        } else {
+                            throw new Error(resData.message);
+                        }
+                    } catch (e) {
+                        console.warn('PHP upload failed for additional image, falling back to Base64');
+                        processedAdditionalImages.push(img); // Keep as Base64
+                    }
+                } else {
+                    processedAdditionalImages.push(img);
+                }
+            }
+
+            const data = {
+                name,
+                categoryId: parseInt(categoryId),
+                price: parseInt(priceRaw),
+                discount: parseInt(document.getElementById('productDiscount').value) || 0,
+                image: mainImage,
+                description: document.getElementById('productDescription').value.trim(),
+                specs: document.getElementById('productSpecs').value.trim(),
+                featured: document.getElementById('productFeatured').checked,
+                onSale: document.getElementById('productOnSale').checked,
+                active: document.getElementById('productActive') ? document.getElementById('productActive').checked : true,
+                badgeText: document.getElementById('productBadgeText') ? document.getElementById('productBadgeText').value.trim() : '',
+                badgeColor: document.getElementById('productBadgeColor') ? document.getElementById('productBadgeColor').value : '#ef4444',
+                images: processedAdditionalImages,
+                comboProductId: document.getElementById('comboProductId') ? (parseInt(document.getElementById('comboProductId').value) || null) : null,
+                comboDiscountText: document.getElementById('comboDiscountText') ? document.getElementById('comboDiscountText').value.trim() : '',
+                comboTotalPrice: document.getElementById('comboTotalPriceInput') ? parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\D/g, '')) || 0 : 0,
+                recommendedProducts: [
+                    document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) || null : null,
+                    document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) || null : null,
+                    document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) || null : null
+                ].filter(id => id !== null),
+                slug: document.getElementById('productSlug') ? document.getElementById('productSlug').value.trim() : '',
+                seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
+                seoDesc: document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : ''
+            };
+
+            const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;
+            const rec2Val = document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) : null;
+            const rec3Val = document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) : null;
+            data.recommendedProducts = [rec1Val, rec2Val, rec3Val].filter(v => v);
+            
+            if (document.getElementById('comboTotalPriceInput') && document.getElementById('comboTotalPriceInput').value) {
+                data.comboTotalPrice = parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\./g, ''));
+            } else {
+                data.comboTotalPrice = null;
+            }
+
+            const editId = document.getElementById('productId').value;
+
+            if (editId) {
+                ProductDB.update(editId, data);
+                showToast('Cập nhật sản phẩm thành công!', 'success');
+            } else {
+                ProductDB.add(data);
+                showToast('Thêm sản phẩm mới thành công!', 'success');
+            }
+            closeProductModal();
+            renderProducts();
+        } catch (error) {
+            console.error(error);
+            showToast('Đã xảy ra lỗi: ' + error.message + ' (Bạn có đang chạy trên môi trường có hỗ trợ PHP không?)', 'error');
+        } finally {
+            btnSave.disabled = false;
+            btnSave.innerHTML = originalBtnText;
         }
-
-        const editId = document.getElementById('productId').value;
-
-        if (editId) {
-            ProductDB.update(editId, data);
-            showToast('Cập nhật sản phẩm thành công!', 'success');
-        } else {
-            ProductDB.add(data);
-            showToast('Thêm sản phẩm mới thành công!', 'success');
-        }
-
-        closeProductModal();
-        renderProducts();
     });
 
     document.getElementById('btnAddProduct').addEventListener('click', () => openProductModal());

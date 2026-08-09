@@ -140,7 +140,7 @@
 .pd-meta {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 5px !important;
     color: var(--color-gray-600);
     font-size: 18px;
     margin-bottom: 20px;
