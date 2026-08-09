@@ -188,7 +188,7 @@ function renderNewsDetail() {
     }
     
     if (!newsItem) {
-        document.getElementById('news-detail-container').innerHTML = '<div style="text-align:center; padding: 100px;"><h2>Không tìm thấy bài viết!</h2><br><a href="tin-tuc.html" class="btn" style="background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:20px;">Quay lại danh sách</a></div>';
+        document.getElementById('news-detail-container').innerHTML = '<div style="text-align:center; padding: 100px;"><h2>Không tìm thấy bài viết!</h2><br><a href="/tin-tuc.html" class="btn" style="background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:20px;">Quay lại danh sách</a></div>';
         return;
     }
 

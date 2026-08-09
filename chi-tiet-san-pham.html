@@ -25,9 +25,9 @@
         <div class="pd-container">
             <!-- Breadcrumbs -->
             <div class="pd-breadcrumbs">
-                <a href="trang-chu.html">Trang chủ</a> <span>&gt;</span>
-                <a href="san-pham.html">Sản Phẩm</a> <span>&gt;</span>
-                <a href="san-pham.html" id="breadcrumbCategory">Danh mục</a> <span>&gt;</span>
+                <a href="/trang-chu.html">Trang chủ</a> <span>&gt;</span>
+                <a href="/san-pham.html">Sản Phẩm</a> <span>&gt;</span>
+                <a href="/san-pham.html" id="breadcrumbCategory">Danh mục</a> <span>&gt;</span>
                 <span class="current" id="breadcrumbCurrent">Sản phẩm</span>
             </div>
 
@@ -1364,7 +1364,7 @@
                             <i class="fa-solid fa-triangle-exclamation" style="font-size: 64px; color: var(--color-danger); margin-bottom: 20px;"></i>
                             <h2 style="font-size: 24px; color: var(--color-primary-dark); margin-bottom: 10px;">Sản phẩm không tồn tại</h2>
                             <p style="color: var(--color-gray-600); margin-bottom: 30px;">Xin lỗi, sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
-                            <a href="san-pham.html" class="pd-btn pd-btn-primary" style="text-decoration: none; display: inline-block;">Quay lại cửa hàng</a>
+                            <a href="/san-pham.html" class="pd-btn pd-btn-primary" style="text-decoration: none; display: inline-block;">Quay lại cửa hàng</a>
                         </div>
                     `;
                     return;
@@ -1381,7 +1381,7 @@
                     const category = ProductDB.getCategories().find(c => c.id === product.categoryId);
                     if (category) {
                         breadcrumbCategory.textContent = category.name;
-                        breadcrumbCategory.href = `san-pham.html?category=${category.id}`;
+                        breadcrumbCategory.href = `/san-pham.html?category=${category.id}`;
                     }
                 }
 
@@ -1574,10 +1574,10 @@
                         <div class="product-card">
                             ${hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : ''))}
                             <div class="product-img">
-                                <a href="chi-tiet-san-pham.html?id=${p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
+                                <a href="/chi-tiet-san-pham/${p.slug || p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                <h3><a href="/chi-tiet-san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                                 <div class="product-price">
                                     <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
                                     ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
@@ -1714,7 +1714,7 @@
             if (breadcrumbs.length > 2) {
                 if (product.categoryId === 9) {
                     breadcrumbs[2].textContent = 'Combo Khuyến Mãi';
-                    breadcrumbs[2].href = 'san-pham.html';
+                    breadcrumbs[2].href = '/san-pham.html';
                 }
             }
 
