@@ -60,7 +60,7 @@ class SiteFooter extends HTMLElement {
                     <!-- Column 1: About -->
                     <div class="footer-col footer-col-about">
                         <div class="footer-logo">
-                            <img src="/assets/logo/logo_primary_gas.png" alt="Deli-Gas Logo">
+                            <img src="/assets/logo/logo.png" alt="Deli-Gas Logo" onerror="this.src='/assets/logo/logo_gas.png'">
                         </div>
                         <p class="footer-desc">
                             Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
