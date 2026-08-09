@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         ${priceHtml}
                     </div>
                     <div class="product-actions">
-                        <button class="buy-now-btn" onclick="window.location.href=''">Mua ngay</button>
+                        <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham/${p.slug || p.id}'">Mua ngay</button>
                         <button class="add-to-cart-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Add "View All" card
         html += `
-        <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href=''">
+        <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href='/san-pham.html'">
             <div style="text-align: center; color: var(--color-accent); padding: 40px;">
                 <div style="font-size: 3rem; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right"></i></div>
                 <h3 style="font-size: 1.2rem; margin: 0;">Xem tất cả sản phẩm</h3>
@@ -1374,4 +1374,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         countUpElements.forEach(el => observer.observe(el));
     }
+    
+    /* ==========================================================================
+       6. GLOBAL HANDLERS
+       ========================================================================== */
+    // Global event listener for buy-now-btn to go to product details
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('buy-now-btn')) {
+            // Check if it already has onclick attribute
+            if (!e.target.hasAttribute('onclick') || e.target.getAttribute('onclick') === "window.location.href=''") {
+                const card = e.target.closest('.product-card, .deal-horizontal, .deal-horizontal-info');
+                if (card) {
+                    const link = card.querySelector('h3 a, .product-img a');
+                    if (link && link.href) {
+                        window.location.href = link.href;
+                    }
+                }
+            }
+        }
+    });
 });

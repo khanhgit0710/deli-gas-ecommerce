@@ -1283,6 +1283,10 @@ const ProductDB = (() => {
             return _getCategories().find(c => c.id === parseInt(id));
         },
 
+        getCategoryBySlug(slug) {
+            return _getCategories().find(c => c.slug === slug);
+        },
+
         addCategory(category) {
             const cats = _getCategories();
             const newCat = {

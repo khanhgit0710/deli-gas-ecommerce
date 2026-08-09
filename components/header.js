@@ -23,9 +23,8 @@ class SiteHeader extends HTMLElement {
     <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
-            <!-- Logo -->
             <a href="/trang-chu.html" class="logo">
-                <img src="/assets/logo/logo.png" alt="Deli-Gas Logo" class="logo-img" onerror="this.src='/assets/logo/logo_gas.png'">
+                <img src="/assets/logo/logo_primary_gas.png" alt="Deli-Gas Logo" class="logo-img">
             </a>
 
             <!-- Main Links -->

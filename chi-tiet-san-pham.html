@@ -1496,13 +1496,57 @@
                     if (pdVariations) pdVariations.style.display = 'none';
                 }
 
-                // Set Specs Tab
+                // Set Specs Tab & Summary
                 const specsTab = document.querySelector('#specs .pd-tab-pane');
-                if (specsTab && product.specs) {
+                const pdSpecsSummary = document.getElementById('pdSpecsSummary');
+                
+                if (product.specs) {
                     const specLines = product.specs.split('\n').filter(line => line.trim() !== '');
-                    if (specLines.length > 0) {
+                    
+                    // Specs Tab
+                    if (specsTab && specLines.length > 0) {
                         specsTab.innerHTML = '<ul>' + specLines.map(line => `<li>${line}</li>`).join('') + '</ul>';
                     }
+                    
+                    // Specs Summary Grid
+                    if (pdSpecsSummary && specLines.length > 0) {
+                        let gridHtml = '';
+                        // Always include brand if not in specs
+                        if (!product.specs.toLowerCase().includes('thương hiệu')) {
+                             gridHtml += `<div style="color: var(--color-gray-500);">Thương hiệu:</div><div style="font-weight: 500;">${pdBrand ? pdBrand.textContent.replace('Thương hiệu: ', '') : ''}</div>`;
+                        }
+                        
+                        specLines.forEach(line => {
+                            const parts = line.split(':');
+                            if (parts.length >= 2) {
+                                const key = parts[0].trim() + ':';
+                                const value = parts.slice(1).join(':').trim();
+                                gridHtml += `<div style="color: var(--color-gray-500);">${key}</div><div style="font-weight: 500;">${value}</div>`;
+                            } else {
+                                // If no colon, just show as value spanning 2 cols or something, but standard is key: value
+                                gridHtml += `<div style="color: var(--color-gray-500); grid-column: span 2;">${line}</div>`;
+                            }
+                        });
+                        
+                        // Default "Tình trạng" if not exist in specs
+                        if (!product.specs.toLowerCase().includes('tình trạng')) {
+                            gridHtml += `<div style="color: var(--color-gray-500);">Tình trạng:</div><div style="font-weight: 500; color: #10b981;">Còn mới</div>`;
+                        }
+                        
+                        pdSpecsSummary.innerHTML = `
+                            <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">
+                                Thông số kỹ thuật</div>
+                            <div style="display: grid; grid-template-columns: 120px 1fr; gap: 8px; font-size: 14px;">
+                                ${gridHtml}
+                            </div>
+                        `;
+                        pdSpecsSummary.style.display = 'block';
+                    } else if (pdSpecsSummary) {
+                        pdSpecsSummary.style.display = 'none';
+                    }
+                } else {
+                    if (specsTab) specsTab.innerHTML = '<p>Chưa có thông số kỹ thuật.</p>';
+                    if (pdSpecsSummary) pdSpecsSummary.style.display = 'none';
                 }
 
                 // Document Title
@@ -1583,7 +1627,7 @@
                                     ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
                                 </div>
                                 <div class="product-actions">
-                                    <button class="buy-now-btn" onclick="window.location.href=''">Mua ngay</button>
+                                    <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham/${p.slug || p.id}'">Mua ngay</button>
                                     <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> Giỏ hàng</button>
                                 </div>
                             </div>
@@ -1593,7 +1637,7 @@
 
                 // Add "View All" card
                 html += `
-                    <div class="product-card view-all-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center; background-color: var(--color-gray-50); border: 2px dashed var(--color-gray-300);" onclick="window.location.href=''">
+                    <div class="product-card view-all-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center; background-color: var(--color-gray-50); border: 2px dashed var(--color-gray-300);" onclick="window.location.href='/san-pham.html'">
                         <div class="view-all-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: 15px; transition: transform 0.3s ease;">
                             <i class="fa-solid fa-arrow-right-long"></i>
                         </div>
