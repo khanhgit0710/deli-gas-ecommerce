@@ -1,4 +1,4 @@
-class SiteHeader extends HTMLElement {
+﻿class SiteHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <!-- TOP BAR -->
@@ -6,7 +6,7 @@ class SiteHeader extends HTMLElement {
         <div class="container">
             <div class="top-bar-inner">
                 <div class="top-bar-left">
-                    <span class="top-bar-welcome">Chào mừng đến với Gas Việt! Hân hạnh phục vụ quý khách</span>
+                    <span class="top-bar-welcome">Chào mừng đến với Gas Lê Minh! Hân hạnh phục vụ quý khách</span>
                 </div>
                 <div class="top-bar-right">
                     <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,

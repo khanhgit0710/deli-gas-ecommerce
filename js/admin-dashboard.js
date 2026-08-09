@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin dashboard Module
  */
 document.addEventListener('DOMContentLoaded', () => {

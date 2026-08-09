@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin Core Module
  * Handles initialization, auth, navigation, and utilities.
  */

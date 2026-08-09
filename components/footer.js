@@ -1,4 +1,4 @@
-class SiteFooter extends HTMLElement {
+﻿class SiteFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <footer class="site-footer">
@@ -104,7 +104,7 @@ class SiteFooter extends HTMLElement {
                 </div>
 
                 <div class="footer-bottom">
-                    <p>&copy; 2026 Gas Việt. Hân hạnh phục vụ quý khách.</p>
+                    <p>&copy; 2026 Gas Lê Minh. Hân hạnh phục vụ quý khách.</p>
                 </div>
             </div>
         </div>

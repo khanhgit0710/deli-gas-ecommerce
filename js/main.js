@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async () => {
+﻿document.addEventListener('DOMContentLoaded', async () => {
     if (typeof ProductDB !== 'undefined') {
         await ProductDB.initAsync();
         applyGlobalSettings();

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin settings Module
  */
 document.addEventListener('DOMContentLoaded', () => {
