@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -18,16 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($data !== null) {
         // Save to file with pretty print for easier manual editing if needed
-        $result = file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        if ($result !== false) {
-            echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Failed to write data file. Please check folder permissions.']);
-        }
+        file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        echo json_encode(['success' => true]);
     } else {
         http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Invalid JSON payload']);
+        echo json_encode(['success' => false, 'message' => 'Invalid JSON']);
     }
     exit();
 }
@@ -38,12 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $json = file_get_contents($dataFile);
         echo $json;
     } else {
-        // If file doesn't exist yet, return empty standard structure
-        echo json_encode([
-            'products' => [],
-            'categories' => [],
-            'settings' => []
-        ]);
+        // If file doesn't exist, return 404 so frontend knows to use seed data
+        http_response_code(404);
+        echo json_encode(['error' => 'No data']);
     }
     exit();
 }

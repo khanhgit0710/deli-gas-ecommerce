@@ -102,7 +102,10 @@
     <script defer src="components/footer.js"></script>
     <script defer src="js/main.js?v=3"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof ProductDB !== 'undefined') {
+                await ProductDB.initAsync();
+            }
             const ITEMS_PER_PAGE = 12;
             let currentPage = 1;
             let currentSearch = '';
@@ -139,7 +142,7 @@
                     const count = ProductDB.getProductCountByCategory(cat.id);
                     const isActive = currentCategory === cat.id ? 'class="active"' : '';
                     return `
-                        <li><a href="/danh-muc/${cat.slug}" data-cat-id="${cat.id}" ${isActive}>
+                        <li><a href="/${cat.slug}" data-cat-id="${cat.id}" ${isActive}>
                             ${cat.name} 
                             <span class="sidebar-count">${count}</span>
                             <i class="fa-solid fa-chevron-right"></i>
@@ -258,10 +261,10 @@
                                     <div class="product-card">
                                         ${p.badgeText ? `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>` : (hasDiscount ? `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>` : (p.onSale ? '<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>' : (p.featured ? '<div class="product-badge badge-new">Mới</div>' : '')))}
                                         <div class="product-img">
-                                            <a href="/chi-tiet-san-pham.html?id=${p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
+                                            <a href="/chi-tiet-san-pham/${p.slug || p.id}"><img loading="lazy" src="${p.image}" alt="${p.name}"></a>
                                         </div>
                                         <div class="product-info">
-                                            <h3><a href="/chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                            <h3><a href="/chi-tiet-san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                                             <div class="product-price">
                                                 <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
                                                 ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ''}
@@ -376,12 +379,18 @@
             // Init
             // Parse initial URL for category
             const pathSegments = window.location.pathname.split('/').filter(Boolean);
-            if (pathSegments.length >= 2 && pathSegments[0] === 'danh-muc') {
-                const slug = pathSegments[1].replace('.html', '');
-                const cat = ProductDB.getCategoryBySlug(slug);
-                if (cat) {
-                    currentCategory = cat.id;
-                    updateSEO(cat);
+            if (pathSegments.length >= 1) {
+                // Kiểm tra xem slug có phải là trang HTML hay không
+                const slug = pathSegments[0].replace('.html', '');
+                // Bỏ qua nếu là các trang chung
+                if (slug !== 'san-pham' && slug !== 'trang-chu' && slug !== 'lien-he' && slug !== 've-chung-toi' && slug !== 'tin-tuc') {
+                    const cat = ProductDB.getCategoryBySlug(slug);
+                    if (cat) {
+                        currentCategory = cat.id;
+                        updateSEO(cat);
+                    } else {
+                        updateSEO(null);
+                    }
                 } else {
                     updateSEO(null);
                 }

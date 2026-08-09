@@ -213,7 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========== RELOAD DATABASE ==========
     document.getElementById('btnResetDB').addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.reload();
+        if(confirm('Bạn có chắc chắn muốn Khôi phục dữ liệu gốc không? Thao tác này sẽ xóa mọi thay đổi hiện tại.')) { 
+            localStorage.clear(); 
+            window.location.reload(); 
+        }
     });
 
 

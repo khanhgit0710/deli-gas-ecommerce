@@ -10,15 +10,15 @@
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/product-detail.css">
-    <link rel="stylesheet" href="css/responsive.css?v=1784899535880">
-    <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/product-detail.css">
+    <link rel="stylesheet" href="/css/responsive.css?v=1784899535880">
+    <link rel="icon" type="image/png" href="/assets/logo/logo_gas.png">
 </head>
 
 <body>
     <site-header></site-header>
-    <script defer src="components/header.js"></script>
+    <script defer src="/components/header.js"></script>
 
     <!-- PRODUCT DETAIL MAIN WRAPPER -->
     <div class="pd-page-wrapper">
@@ -1323,21 +1323,37 @@
         </div>
     </div>
     <!-- JS -->
-    <script defer src="js/product-db.js"></script>
+    <script defer src="/js/product-db.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Get product ID from URL
+            // Get product ID or Slug from URL
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
+            let productSlug = urlParams.get('slug');
+
+            // Nếu server dùng Nginx/Apache rewrite ẩn, trình duyệt sẽ không có ?slug= trong URL
+            // Nên ta cần bóc tách slug trực tiếp từ đường dẫn (VD: /chi-tiet-san-pham/binh-gas-petro)
+            if (!productSlug) {
+                const pathSegments = window.location.pathname.split('/').filter(Boolean);
+                if (pathSegments.length >= 2 && pathSegments[0] === 'chi-tiet-san-pham') {
+                    productSlug = pathSegments[1].replace('.html', '');
+                }
+            }
+
             let currentProduct = null;
 
-            // If no ID or invalid, redirect to san-pham.html
-            if (!productId) {
-                // For development demo, fallback to ID 1 if none provided
-                // window.location.href = '';
-                loadProductDetails(1);
-            } else {
+            if (productSlug) {
+                const product = ProductDB.getBySlug(productSlug);
+                if (product) {
+                    loadProductDetails(product.id);
+                } else {
+                    loadProductDetails(0); // Not found
+                }
+            } else if (productId) {
                 loadProductDetails(parseInt(productId));
+            } else {
+                // If no ID or valid slug, fallback to demo ID 1
+                loadProductDetails(1);
             }
 
             function loadProductDetails(id) {

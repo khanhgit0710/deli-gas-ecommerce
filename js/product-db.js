@@ -967,7 +967,12 @@ const ProductDB = (() => {
 
     function _getProducts() {
         try {
-            return JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || [];
+            const items = JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || [];
+            return items.map(p => {
+                if (p.slug && p.slug.startsWith('cat-')) p.slug = p.slug.replace(/^cat-/, '');
+                if (!p.slug) p.slug = _generateSlug(p.name);
+                return p;
+            });
         } catch { return []; }
     }
 
@@ -977,7 +982,12 @@ const ProductDB = (() => {
 
     function _getCategories() {
         try {
-            return JSON.parse(localStorage.getItem(CATEGORIES_KEY)) || [];
+            const items = JSON.parse(localStorage.getItem(CATEGORIES_KEY)) || [];
+            return items.map(c => {
+                if (c.slug && c.slug.startsWith('cat-')) c.slug = c.slug.replace(/^cat-/, '');
+                if (!c.slug) c.slug = _generateSlug(c.name);
+                return c;
+            });
         } catch { return []; }
     }
 
@@ -987,7 +997,12 @@ const ProductDB = (() => {
 
     function _getNewsCategories() {
         try {
-            return JSON.parse(localStorage.getItem(NEWS_CATEGORIES_KEY)) || [];
+            const items = JSON.parse(localStorage.getItem(NEWS_CATEGORIES_KEY)) || [];
+            return items.map(c => {
+                if (c.slug && c.slug.startsWith('cat-')) c.slug = c.slug.replace(/^cat-/, '');
+                if (!c.slug) c.slug = _generateSlug(c.name);
+                return c;
+            });
         } catch { return []; }
     }
 
@@ -997,7 +1012,12 @@ const ProductDB = (() => {
 
     function _getNews() {
         try {
-            return JSON.parse(localStorage.getItem(NEWS_KEY)) || [];
+            const items = JSON.parse(localStorage.getItem(NEWS_KEY)) || [];
+            return items.map(n => {
+                if (n.slug && n.slug.startsWith('cat-')) n.slug = n.slug.replace(/^cat-/, '');
+                if (!n.slug) n.slug = _generateSlug(n.title);
+                return n;
+            });
         } catch { return []; }
     }
 
@@ -1012,7 +1032,7 @@ const ProductDB = (() => {
     }
 
     function _generateSlug(name) {
-        return 'cat-' + name
+        return String(name || '')
             .toLowerCase()
             .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
             .replace(/đ/g, 'd').replace(/Đ/g, 'D')
@@ -1179,6 +1199,14 @@ const ProductDB = (() => {
 
         getById(id) {
             return _getProducts().find(p => p.id === parseInt(id));
+        },
+
+        getBySlug(slug) {
+            return _getProducts().find(p => 
+                (p.slug === slug) || 
+                (_generateSlug(p.name) === slug) || 
+                (p.id.toString() === slug)
+            );
         },
 
         getByCategory(categoryId, isAdmin = false) {

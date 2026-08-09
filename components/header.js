@@ -32,7 +32,7 @@ class SiteHeader extends HTMLElement {
             <nav class="main-nav">
                 <ul class="nav-links">
                     <li><a href="trang-chu.html" data-path="trang-chu.html">Trang Chủ</a></li>
-                    <li><a href="index.html" data-path="index.html">Về Chúng Tôi</a></li>
+                    <li><a href="ve-chung-toi.html" data-path="ve-chung-toi.html">Về Chúng Tôi</a></li>
                     <li><a href="san-pham.html" data-path="san-pham.html,chi-tiet-san-pham.html">Sản Phẩm</a></li>
                     <li><a href="tin-tuc.html" data-path="tin-tuc.html,danh-sach-tin-tuc.html,chi-tiet-tin-tuc.html,chuyen-muc-an-toan-gas.html">Tin Tức</a></li>
                     <li><a href="lien-he.html" data-path="lien-he.html">Liên Hệ</a></li>

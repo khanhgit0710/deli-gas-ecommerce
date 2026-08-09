@@ -282,10 +282,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="product-card featured-large-card">
                 ${badgeHtml}
                 <div class="product-img">
-                    <a href="/chi-tiet-san-pham.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                    <a href="/chi-tiet-san-pham/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
                 </div>
                 <div class="product-info">
-                    <h3><a href="/chi-tiet-san-pham.html?id=${p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                    <h3><a href="/chi-tiet-san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                     <p class="product-desc">${p.description || ''}</p>
                     <div class="product-price">
                         ${priceHtml}

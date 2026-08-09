@@ -491,5 +491,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>
                         <div class="product-cell">
                             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
-
+                            <div>
+                                <div style="font-weight:600; color:var(--admin-text);">${p.name}</div>
+                                <div style="font-size:12px; color:var(--admin-text-dim);">Danh mục: ${ProductDB.getCategoryById(p.categoryId)?.name || 'N/A'}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="text-align:right;">
+                        <span style="text-decoration:line-through; color:var(--admin-text-dim); font-size:12px; display:block;">
+                            ${ProductDB.formatPrice(p.price)}
+                        </span>
+                        <strong style="color:var(--color-danger);">${ProductDB.formatPrice(discountedPrice)}</strong>
+                    </td>
+                    <td style="text-align:center;">
+                        <span class="status-badge" style="background:#fff0f0; color:var(--color-danger); border:1px solid #ffd0d0;">Sale Off 50%</span>
+                    </td>
+                    <td style="text-align:center;">
+                        <div class="action-buttons">
+                            <button class="btn-action btn-edit" onclick="openProductModal(${p.id})" title="Sửa sản phẩm">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    };
+    if (document.getElementById('saleOffTableBody')) {
+        renderSaleOff();
+    }
 });
