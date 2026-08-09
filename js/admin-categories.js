@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin categories Module
  */
 document.addEventListener('DOMContentLoaded', () => {

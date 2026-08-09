@@ -1,4 +1,4 @@
-document.addEventListener('ProductDBReady', () => {
+﻿document.addEventListener('ProductDBReady', () => {
     // -------------------------------------------------------------------------
     // Sale Off UI LOGIC
     // -------------------------------------------------------------------------

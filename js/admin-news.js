@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin news Module
  */
 document.addEventListener('DOMContentLoaded', () => {

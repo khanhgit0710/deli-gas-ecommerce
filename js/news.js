@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // Check if ProductDB is ready, if not wait for event
     if (localStorage.getItem('gasviet_db_initialized_v9')) {
         initNewsJS();
@@ -193,7 +193,7 @@ function renderNewsDetail() {
     }
 
     const catName = ProductDB.getNewsCategoryById(newsItem.categoryId)?.name || 'Chưa phân loại';
-    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Việt`;
+    document.title = newsItem.seoTitle || `${newsItem.title} | Gas Lê Minh`;
     
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]');

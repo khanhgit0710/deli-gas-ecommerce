@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Admin products Module
  */
 document.addEventListener('DOMContentLoaded', () => {
