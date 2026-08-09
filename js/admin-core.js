@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const user = document.getElementById('loginUsername').value;
             const pass = document.getElementById('loginPassword').value;
 
-            if (user === 'admin' && pass === 'admin') {
+            if (user === 'gasleminh33' && pass === 'Gasleminh@123') {
                 sessionStorage.setItem('adminLoggedIn', 'true');
                 loginOverlay.style.display = 'none';
                 adminLayout.style.display = 'flex';

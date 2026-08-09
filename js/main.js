@@ -282,16 +282,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="product-card featured-large-card">
                 ${badgeHtml}
                 <div class="product-img">
-                    <a href="/chi-tiet-san-pham/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                    <a href="/san-pham/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
                 </div>
                 <div class="product-info">
-                    <h3><a href="/chi-tiet-san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                    <h3><a href="/san-pham/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
                     <p class="product-desc">${p.description || ''}</p>
                     <div class="product-price">
                         ${priceHtml}
                     </div>
                     <div class="product-actions">
-                        <button class="buy-now-btn" onclick="window.location.href='/chi-tiet-san-pham/${p.slug || p.id}'">Mua ngay</button>
+                        <button class="buy-now-btn" onclick="window.location.href='/san-pham/${p.slug || p.id}'">Mua ngay</button>
                         <button class="add-to-cart-btn" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Add "View All" card
         html += `
-        <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href='/san-pham.html'">
+        <div class="product-card featured-large-card" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed var(--color-accent); cursor: pointer;" onclick="window.location.href='/san-pham'">
             <div style="text-align: center; color: var(--color-accent); padding: 40px;">
                 <div style="font-size: 3rem; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right"></i></div>
                 <h3 style="font-size: 1.2rem; margin: 0;">Xem tất cả sản phẩm</h3>
@@ -968,7 +968,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const cartBtns = document.querySelectorAll('.cart-btn-primary');
     cartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            window.location.href = 'gio-hang.html';
+            window.location.href = '/gio-hang';
         });
     });
 
@@ -1057,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             cartTableBody.innerHTML = '';
 
             if (cart.length === 0) {
-                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="trang-chu.html" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
+                cartTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#666;">Giỏ hàng của bạn đang trống.<br><br><a href="/" class="btn-green" style="text-decoration:none; display:inline-block; margin-top:10px;">Tiếp tục mua sắm</a></td></tr>';
                 updateCartTotals(0, 0);
 
                 const cartActions = document.querySelector('.cart-actions');
