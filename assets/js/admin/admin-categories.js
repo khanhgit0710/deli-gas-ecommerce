@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin categories Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const count = ProductDB.getProductCountByCategory(c.id);
             return `
                 <tr>
-                    <td style="color:var(--admin-text-dim);font-weight:600">#${c.id}</td>
+                    <td style="color:var(--admin-text-dim);font-weight:600;font-family:monospace;">${c.skuPrefix || c.id}</td>
                     <td><strong>${c.name}</strong></td>
                     <td style="color:var(--admin-text-dim);font-family:monospace;font-size:12px">${c.slug}</td>
                     <td style="text-align: center;"><span class="cat-product-count">${count}</span></td>
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('categoryId').value = '';
         document.getElementById('categoryName').value = '';
+        if (document.getElementById('categorySkuPrefix')) document.getElementById('categorySkuPrefix').value = '';
         document.getElementById('categorySlug').value = '';
         document.getElementById('categorySeoDesc').value = '';
 
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title.textContent = 'Sửa danh mục';
             document.getElementById('categoryId').value = category.id;
             document.getElementById('categoryName').value = category.name;
+            if (document.getElementById('categorySkuPrefix')) document.getElementById('categorySkuPrefix').value = category.skuPrefix || '';
             document.getElementById('categorySlug').value = category.slug;
             document.getElementById('categorySeoDesc').value = category.seoDesc || '';
         } else {
@@ -97,13 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const slug = document.getElementById('categorySlug').value.trim();
         const seoDesc = document.getElementById('categorySeoDesc').value.trim();
+        const skuPrefix = document.getElementById('categorySkuPrefix') ? document.getElementById('categorySkuPrefix').value.trim() : '';
         const editId = document.getElementById('categoryId').value;
 
         if (editId) {
-            ProductDB.updateCategory(editId, { name, slug, seoDesc });
+            ProductDB.updateCategory(editId, { name, skuPrefix, slug, seoDesc });
             showToast('Cập nhật danh mục thành công!', 'success');
         } else {
-            ProductDB.addCategory({ name, slug, seoDesc });
+            ProductDB.addCategory({ name, skuPrefix, slug, seoDesc });
             showToast('Thêm danh mục mới thành công!', 'success');
         }
 

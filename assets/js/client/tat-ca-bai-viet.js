@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     let allNews = [];
     let currentCategoryId = null;
+    let currentSearchTerm = '';
 
     // Lấy ID danh mục từ URL (slug)
     const currentSlug = window.location.pathname.substring(1).replace('.html', '');
@@ -91,6 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredNews = allNews.filter(n => n.categoryId === currentCategoryId);
         }
         
+        // Lọc theo từ khóa tìm kiếm
+        if (currentSearchTerm) {
+            filteredNews = filteredNews.filter(n => {
+                const titleMatch = n.title && n.title.toLowerCase().includes(currentSearchTerm);
+                const contentMatch = n.content && n.content.toLowerCase().includes(currentSearchTerm);
+                return titleMatch || contentMatch;
+            });
+        }
+        
         const totalPages = Math.ceil(filteredNews.length / itemsPerPage) || 1;
         
         const start = (page - 1) * itemsPerPage;
@@ -149,6 +159,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
+        });
+    }
+
+    const searchInput = document.querySelector('.nb-search-box input');
+    const searchBtn = document.querySelector('.nb-search-box button');
+    
+    if (searchInput && searchBtn) {
+        const handleSearch = () => {
+            currentSearchTerm = searchInput.value.trim().toLowerCase();
+            renderPage(1);
+        };
+        
+        searchBtn.addEventListener('click', handleSearch);
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        
+        searchInput.addEventListener('input', () => {
+            currentSearchTerm = searchInput.value.trim().toLowerCase();
+            renderPage(1);
         });
     }
 

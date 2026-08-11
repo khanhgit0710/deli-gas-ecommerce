@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return `
                 <tr>
-                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">#${n.id}</td>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;white-space:nowrap;">${n.newsCode || '#' + n.id}</td>
                     <td>
                         <div class="product-cell">
                             <img src="${n.image}" alt="${n.title}" onerror="this.src='https://via.placeholder.com/44?text=No+Img'">
@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newsItem) {
             title.textContent = 'Sửa tin tức';
             document.getElementById('newsId').value = newsItem.id;
+            if (document.getElementById('newsCode')) document.getElementById('newsCode').value = newsItem.newsCode || '';
             document.getElementById('newsTitle').value = newsItem.title;
             document.getElementById('newsSlug').value = newsItem.slug || '';
             document.getElementById('newsAuthor').value = newsItem.author || '';
@@ -98,6 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNewsImagePreview();
         } else {
             title.textContent = 'Thêm tin tức mới';
+            let nextNewsNumber = 1;
+            ProductDB.getNews(true).forEach(n => {
+                if (n.newsCode && n.newsCode.startsWith('TT-')) {
+                    const num = parseInt(n.newsCode.replace('TT-', ''), 10);
+                    if (!isNaN(num) && num >= nextNewsNumber) {
+                        nextNewsNumber = num + 1;
+                    }
+                }
+            });
+            if (document.getElementById('newsCode')) document.getElementById('newsCode').value = 'TT-' + nextNewsNumber.toString().padStart(3, '0');
             document.getElementById('newsSlug').value = '';
             document.getElementById('newsContent').value = '';
             if (typeof quillEditor !== 'undefined') quillEditor.root.innerHTML = '';
@@ -222,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = {
+                newsCode: document.getElementById('newsCode') ? document.getElementById('newsCode').value.trim() : `TT-${Date.now().toString().slice(-4)}`,
                 title,
                 slug: document.getElementById('newsSlug').value.trim(),
                 author: document.getElementById('newsAuthor').value.trim(),

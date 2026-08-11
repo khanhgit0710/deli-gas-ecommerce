@@ -24,7 +24,7 @@
     <header class="header">
         <div class="container header-inner">
             <a href="/" class="logo">
-                <img src="/assets/logo/logo_primary_gas.png" alt="Deli-Gas Logo" class="logo-img">
+                <img src="/assets/logo/logo_gas.png" alt="Deli-Gas Logo" class="logo-img">
             </a>
 
             <!-- Main Links -->

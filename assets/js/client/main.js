@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     if (typeof ProductDB !== 'undefined') {
         await ProductDB.initAsync();
         applyGlobalSettings();
@@ -1392,5 +1392,173 @@
                 }
             }
         }
+    });
+});
+
+
+document.addEventListener("ProductDBReady", () => {
+    if (typeof ProductDB === "undefined") return;
+    const settings = ProductDB.getSettings();
+    const promoSection = document.getElementById("uu-dai-thang");
+    if (promoSection) {
+        if (settings.showComboSection === false) {
+            promoSection.style.display = "none";
+        } else {
+            promoSection.style.display = "block";
+            const comboSlider = document.getElementById("comboSlider");
+            if (comboSlider) {
+                const allProducts = ProductDB.getAll();
+                const combos = allProducts.filter(p => p.categoryId === 9 && p.active !== false);
+                if (combos.length > 0) {
+                    let html = "";
+                    combos.forEach(p => {
+                        const discountedPrice = ProductDB.getDiscountedPrice(p);
+                        const hasDiscount = p.discount > 0;
+                        let badgeHtml = '';
+                        if (p.badgeText) {
+                            badgeHtml = `<div class="product-badge" style="background-color: ${p.badgeColor || '#ef4444'}; color: white;">${p.badgeText}</div>`;
+                        } else if (hasDiscount) {
+                            badgeHtml = `<div class="product-badge badge-discount">Giảm ${p.discount}%</div>`;
+                        } else if (p.onSale) {
+                            badgeHtml = `<div class="product-badge badge-discount" style="background-color: var(--color-accent); color: white;">Ưu đãi</div>`;
+                        } else if (p.featured) {
+                            badgeHtml = `<div class="product-badge badge-new">Mới</div>`;
+                        }
+                        
+                        html += `
+                            <div class="product-card combo-card">
+                                ${badgeHtml}
+                                <div class="product-img">
+                                    <a href="/${p.slug || p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                </div>
+                                <div class="product-info">
+                                    <h3><a href="/${p.slug || p.id}" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
+                                    <div class="product-price">
+                                        <span class="price-current">${ProductDB.formatPrice(discountedPrice)}</span>
+                                        ${hasDiscount ? `<span class="price-old">${ProductDB.formatPrice(p.price)}</span>` : ""}
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="buy-now-btn" onclick="window.location.href='/${p.slug || p.id}'">Mua ngay</button>
+                                        <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `
+                    <div class="product-card view-all-card"
+                        style="display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; text-align: center; background-color: var(--color-gray-50); border: 2px dashed var(--color-gray-300);"
+                        onclick="window.location.href='/combo-khuyen-mai'">
+                        <div class="view-all-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: 15px;">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; color: var(--color-gray-900); font-weight: 600; margin-bottom: 10px;">Xem tất cả</h3>
+                        <p style="color: var(--color-gray-600); font-size: 0.9rem; padding: 0 15px;">Khám phá thêm hàng trăm sản phẩm khác</p>
+                    </div>
+                    `;
+                    comboSlider.innerHTML = html;
+                }
+            }
+        }
+    }
+    // Handle Contact Form (.custom-contact-form)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameVal = document.getElementById('contactName').value.trim();
+            const phoneVal = document.getElementById('contactPhone').value.trim();
+            const messageVal = document.getElementById('contactMessage').value.trim();
+            const phoneError = document.getElementById('phoneError');
+
+            const phoneRegex = /^0[0-9]{8,9}$/;
+            if (!phoneRegex.test(phoneVal)) {
+                if(phoneError) phoneError.style.display = 'block';
+                return;
+            }
+            if(phoneError) phoneError.style.display = 'none';
+
+            if (typeof ProductDB !== 'undefined' && typeof ProductDB.addContact === 'function') {
+                const success = ProductDB.addContact({
+                    name: nameVal,
+                    phone: phoneVal,
+                    source: 'Trang Liên Hệ',
+                    message: messageVal
+                });
+                if (success) {
+                    const btn = contactForm.querySelector('button[type="submit"]');
+                    const btnText = btn.querySelector('.text');
+                    
+                    if (btnText) {
+                        const originalText = btnText.textContent;
+                        btn.classList.add('success');
+                        btnText.textContent = 'Thành công!';
+                        
+                        setTimeout(() => {
+                            contactForm.reset();
+                            btn.classList.remove('success');
+                            btnText.textContent = originalText;
+                        }, 3000);
+                    } else {
+                        // Fallback in case HTML structure changes
+                        const originalHTML = btn.innerHTML;
+                        btn.innerHTML = '<span class="text">Thành công!</span>';
+                        btn.style.backgroundColor = '#10b981';
+                        
+                        setTimeout(() => {
+                            contactForm.reset();
+                            btn.innerHTML = originalHTML;
+                            btn.style.backgroundColor = '';
+                        }, 3000);
+                    }
+                }
+            }
+        });
+    }
+
+    // Handle Consultation Forms (.consultation-form)
+    const consultationForms = document.querySelectorAll('.consultation-form');
+    consultationForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = form.querySelector('input[type="tel"]');
+            if (input && input.value) {
+                const phoneVal = input.value.trim();
+                const phoneRegex = /^0[0-9]{8,9}$/;
+                
+                if (!phoneRegex.test(phoneVal)) {
+                    alert('Số điện thoại không hợp lệ. Vui lòng nhập số hợp lệ bắt đầu bằng 0.');
+                    input.style.borderColor = 'red';
+                    return;
+                }
+                
+                input.style.borderColor = '';
+                
+                if (typeof ProductDB !== 'undefined' && typeof ProductDB.addContact === 'function') {
+                    const success = ProductDB.addContact({
+                        name: 'Khách tư vấn',
+                        phone: phoneVal,
+                        source: 'Tư vấn nhanh',
+                        message: 'Yêu cầu tư vấn nhanh qua số điện thoại'
+                    });
+                    if (success) {
+                        const btn = form.querySelector('button');
+                        if (btn) {
+                            const originalText = btn.textContent;
+                            btn.textContent = 'Thành công!';
+                            btn.style.backgroundColor = '#10b981';
+                            
+                            setTimeout(() => {
+                                form.reset();
+                                btn.textContent = originalText;
+                                btn.style.backgroundColor = '';
+                            }, 3000);
+                        } else {
+                            form.reset();
+                        }
+                    }
+                }
+            }
+        });
     });
 });

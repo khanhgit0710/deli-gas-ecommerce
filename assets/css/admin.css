@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    ADMIN PANEL — Gas Lê Mạnh | Dark Mode Premium Design
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -1060,14 +1060,14 @@ body {
 .toast {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
+    gap: 16px;
+    padding: 20px 24px;
     border-radius: var(--admin-radius-sm);
     background: var(--admin-surface);
     border: 1px solid var(--admin-border);
-    box-shadow: var(--admin-shadow);
-    min-width: 300px;
-    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    min-width: 350px;
+    max-width: 450px;
     animation: toastIn 0.4s ease forwards;
 }
 
@@ -1076,7 +1076,7 @@ body {
 }
 
 .toast-icon {
-    font-size: 18px;
+    font-size: 28px;
     flex-shrink: 0;
 }
 
@@ -1087,7 +1087,7 @@ body {
 
 .toast-message {
     flex: 1;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
 }
 

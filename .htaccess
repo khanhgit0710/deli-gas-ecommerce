@@ -5,7 +5,14 @@ RewriteRule ^chi-tiet-san-pham/([^/]+)$ chi-tiet-san-pham.html?slug=$1 [L,QSA]
 RewriteRule ^chi-tiet-tin-tuc/([^/]+)$ chi-tiet-tin-tuc.html?slug=$1 [L,QSA]
 # Bắt các danh mục bằng danh sách cụ thể (tránh lỗi 404 nhầm lẫn)
 RewriteRule ^(gas-saigon-petro|gas-petrolimex|gas-gia-dinh|gas-thu-duc|gas-elf|bep-hong-ngoai|bep-gas-am|phu-kien-van-day|combo-khuyen-mai)$ san-pham.html [L,QSA]
+RewriteRule ^admin/?$ admin.html [L]
+RewriteRule ^quan-tri/?$ admin.html [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
+
+# Fallback cho các đường dẫn động (chi tiết sản phẩm, tin tức)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/\.]+)$ router.html?slug=$1 [L,QSA]

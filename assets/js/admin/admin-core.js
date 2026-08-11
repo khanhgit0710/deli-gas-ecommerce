@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin Core Module
  * Handles initialization, auth, navigation, and utilities.
  */
@@ -6,6 +6,11 @@
 let pageTitle, sectionsList, sidebarLinks;
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Hide .html extension from URL if present
+    if (window.history.replaceState && window.location.pathname.endsWith('admin.html')) {
+        window.history.replaceState({}, document.title, '/admin');
+    }
+
     await ProductDB.initAsync();
     
     // Apply logo to admin screen if exists
@@ -78,10 +83,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         'categories': 'Quản lý danh mục',
         news: 'Quản lý tin tức',
         'news-categories': 'Danh mục tin tức',
-        settings: 'Cấu hình chung'
+        settings: 'Cấu hình chung',
+        contacts: 'Khách hàng liên hệ',
+        reviews: 'Quản lý Đánh giá'
     };
 
     window.switchSection = function(sectionId) {
+        sessionStorage.setItem('adminCurrentSection', sectionId);
+        if (window.history.replaceState) {
+            window.history.replaceState({}, document.title, '/admin');
+        }
         sectionsList.forEach(s => s.classList.remove('active'));
         sidebarLinks.forEach(l => l.classList.remove('active'));
         const target = document.getElementById('section-' + sectionId);
@@ -97,6 +108,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (sectionId === 'news') renderNews();
         if (sectionId === 'news-categories') renderNewsCategories();
         if (sectionId === 'settings') renderSettings();
+        if (sectionId === 'contacts') {
+            if (typeof renderContacts === 'function') {
+                renderContacts();
+            } else {
+                console.warn('renderContacts is not defined');
+            }
+        }
+        if (sectionId === 'reviews') {
+            if (typeof renderReviews === 'function') {
+                renderReviews();
+            }
+        }
     }
 
     sidebarLinks.forEach(link => {
@@ -198,7 +221,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (sessionStorage.getItem('adminLoggedIn') === 'true') {
             if (typeof window.switchSection === 'function') {
-                window.switchSection('dashboard');
+                let savedSection = sessionStorage.getItem('adminCurrentSection') || 'dashboard';
+                // Remove hash if exists on load
+                if (window.location.hash && window.history.replaceState) {
+                    window.history.replaceState({}, document.title, '/admin');
+                }
+                window.switchSection(savedSection);
             }
         }
     }, 100);

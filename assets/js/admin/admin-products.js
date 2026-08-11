@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin products Module
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,6 +44,31 @@ document.addEventListener('DOMContentLoaded', () => {
             products = ProductDB.getAll(true);
         }
 
+        const priceFilter = document.getElementById('priceFilter');
+        if (priceFilter && priceFilter.value) {
+            const pv = priceFilter.value;
+            products = products.filter(p => {
+                const finalPrice = ProductDB.getDiscountedPrice(p);
+                if (pv === 'under_500') return finalPrice < 500000;
+                if (pv === '500_1000') return finalPrice >= 500000 && finalPrice <= 1000000;
+                if (pv === '1000_3000') return finalPrice >= 1000000 && finalPrice <= 3000000;
+                if (pv === 'above_3000') return finalPrice > 3000000;
+                return true;
+            });
+        }
+
+        const sortFilter = document.getElementById('sortFilter');
+        if (sortFilter && sortFilter.value) {
+            const sv = sortFilter.value;
+            if (sv === 'price_asc') {
+                products.sort((a, b) => ProductDB.getDiscountedPrice(a) - ProductDB.getDiscountedPrice(b));
+            } else if (sv === 'price_desc') {
+                products.sort((a, b) => ProductDB.getDiscountedPrice(b) - ProductDB.getDiscountedPrice(a));
+            } else if (sv === 'newest') {
+                products.sort((a, b) => b.id - a.id); // Higher ID means newer
+            }
+        }
+
         const tbody = document.getElementById('productsTableBody');
         const countText = document.getElementById('productCountText');
         const pagination = document.getElementById('productPagination');
@@ -82,13 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const serialNumber = startIndex + index + 1;
             return `
                 <tr>
-                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;">${serialNumber}</td>
+                    <td style="color:var(--admin-text-dim);font-weight:600;text-align:left;font-size:14px;">${p.sku || '<span style="font-weight:normal;font-style:italic">Đang cập nhật</span>'}</td>
                     <td>
                         <div class="product-cell">
                             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
                             <div class="product-cell-info">
-                                <span class="product-cell-name">${p.name}</span>
-                                <span class="product-cell-cat">${ProductDB.getCategoryName(p.categoryId)}</span>
+                                <a href="/${p.slug || ''}" target="_blank" class="product-cell-name" style="text-decoration:none;">${p.name}</a>
+                                <span class="product-cell-cat">${ProductDB.getCategoryName(p.categoryId)} &bull; ID: ${p.id}</span>
                             </div>
                         </div>
                     </td>
@@ -114,6 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search & filter events
     document.getElementById('productSearch').addEventListener('input', () => renderProducts(true));
     document.getElementById('categoryFilter').addEventListener('change', () => renderProducts(true));
+    if (document.getElementById('priceFilter')) {
+        document.getElementById('priceFilter').addEventListener('change', () => renderProducts(true));
+    }
+    if (document.getElementById('sortFilter')) {
+        document.getElementById('sortFilter').addEventListener('change', () => renderProducts(true));
+    }
 
     // Format Currency Input
     function formatCurrencyInput(e) {
@@ -126,6 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('productPrice').addEventListener('input', formatCurrencyInput);
     document.getElementById('productFinalPrice').addEventListener('input', formatCurrencyInput);
+    if (document.getElementById('comboTotalPriceInput')) {
+        document.getElementById('comboTotalPriceInput').addEventListener('input', formatCurrencyInput);
+    }
 
     // Auto-calculate discount
     function calculateDiscount() {
@@ -155,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.reset();
         document.getElementById('productId').value = '';
+        if (document.getElementById('productSku')) document.getElementById('productSku').value = '';
         document.getElementById('productDiscount').value = '0';
         document.getElementById('productFinalPrice').value = '';
         if (document.getElementById('productBadgeText')) document.getElementById('productBadgeText').value = '';
@@ -187,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (product) {
             title.textContent = 'Sửa sản phẩm';
             document.getElementById('productId').value = product.id;
+            if (document.getElementById('productSku')) document.getElementById('productSku').value = product.sku || '';
             document.getElementById('productName').value = product.name;
             document.getElementById('productCategory').value = product.categoryId;
             document.getElementById('productPrice').value = product.price.toLocaleString('vi-VN').replace(/,/g, '.');
@@ -222,6 +258,19 @@ document.addEventListener('DOMContentLoaded', () => {
             renderAdditionalImages();
         } else {
             title.textContent = 'Thêm sản phẩm mới';
+            let nextSkuNumber = 1;
+            ProductDB.getAll().forEach(p => {
+                if (p.sku && p.sku.startsWith('SP-')) {
+                    const num = parseInt(p.sku.replace('SP-', ''), 10);
+                    if (!isNaN(num) && num >= nextSkuNumber) {
+                        nextSkuNumber = num + 1;
+                    }
+                }
+            });
+            if (document.getElementById('productSku')) {
+                document.getElementById('productSku').value = 'SP-' + nextSkuNumber.toString().padStart(3, '0');
+            }
+            
             document.getElementById('productFeatured').checked = true; // Auto "Mới" tag
             document.getElementById('productOnSale').checked = false;
             if (document.getElementById('productActive')) document.getElementById('productActive').checked = true;
@@ -474,6 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = {
                 name,
+                sku: document.getElementById('productSku') ? document.getElementById('productSku').value.trim() : '',
                 categoryId: parseInt(categoryId),
                 price: parseInt(priceRaw),
                 discount: parseInt(document.getElementById('productDiscount').value) || 0,
@@ -553,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="product-cell">
                             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/44?text=Khong+co+anh'">
                             <div>
-                                <div style="font-weight:600; color:var(--admin-text);">${p.name}</div>
+                                <a href="/${p.slug || ''}" target="_blank" style="font-weight:600; color:var(--admin-text); text-decoration:none; display:block;">${p.name}</a>
                                 <div style="font-size:12px; color:var(--admin-text-dim);">Danh mục: ${ProductDB.getCategoryById(p.categoryId)?.name || 'N/A'}</div>
                             </div>
                         </div>

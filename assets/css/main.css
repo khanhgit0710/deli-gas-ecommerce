@@ -1,4 +1,4 @@
-@import url('./base.css');
+﻿@import url('./base.css');
 
 /* ==========================================================================
    TOP BAR
@@ -253,15 +253,15 @@
 
 /* Banner images for slides */
 .slide:nth-child(1) {
-  background: url('../assets/banner_trangchu_1.jpg') center/cover no-repeat;
+  background: url('../banner_trangchu_1.jpg') center/cover no-repeat;
 }
 
 .slide:nth-child(2) {
-  background: url('../assets/banner_trangchu_2.jpg') center/cover no-repeat;
+  background: url('../banner_trangchu_2.jpg') center/cover no-repeat;
 }
 
 .slide:nth-child(3) {
-  background: url('../assets/banner_trangchu_3.jpg') center/cover no-repeat;
+  background: url('../banner_trangchu_3.jpg') center/cover no-repeat;
 }
 
 .slide-content {

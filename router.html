@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đang tải dữ liệu...</title>
     <!-- Load local storage databases -->
-    <script src="/js/product-db.js"></script>
-    <script src="/js/news.js"></script>
+    <script src="/assets/js/client/product-db.js"></script>
+    <script src="/assets/js/client/news.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const params = new URLSearchParams(window.location.search);
             let slug = params.get('slug');
-            
+
             if (!slug) {
                 slug = window.location.pathname.substring(1).replace('.html', '');
             }
 
+            if (typeof ProductDB !== 'undefined' && typeof ProductDB.initAsync === 'function') { await ProductDB.initAsync(); }
             if (!slug || typeof ProductDB === 'undefined') {
-                window.location.href = '/trang-chu.html';
+                document.body.innerHTML = 'Router Error 1: ' + (typeof ProductDB === 'undefined' ? 'ProductDB is undefined' : 'Missing slug');
                 return;
             }
 
             // Check if product, news, or category exists
-            let targetUrl = '/trang-chu.html'; // Fallback
+            let targetUrl = '/index.html'; // Fallback
 
             if (slug === 'tat-ca-bai-viet') {
                 targetUrl = '/tat-ca-bai-viet.html';
+            } else if (slug === 'admin' || slug === 'quan-tri') {
+                targetUrl = '/admin.html';
             } else if (ProductDB.getBySlug(slug)) {
                 targetUrl = '/chi-tiet-san-pham.html';
             } else if (ProductDB.getNewsBySlug && ProductDB.getNewsBySlug(slug)) {
@@ -42,20 +46,23 @@
                 const response = await fetch(targetUrl);
                 if (!response.ok) throw new Error('Network response was not ok');
                 const html = await response.text();
-                
+
                 document.open();
                 document.write(html);
                 document.close();
             } catch (err) {
                 console.error("Router error:", err);
-                window.location.href = '/trang-chu.html';
+                document.body.innerHTML = 'Router Error 2: ' + err.message + ' (targetUrl: ' + targetUrl + ')';
             }
         });
     </script>
 </head>
+
 <body>
-    <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; color:#666;">
+    <div
+        style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; color:#666;">
         Đang tải trang...
     </div>
 </body>
+
 </html>

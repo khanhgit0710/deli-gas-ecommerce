@@ -2,25 +2,27 @@
  * ProductDB — localStorage Database Layer for Gas Lê Mạnh
  * Manages products, categories with full CRUD operations
  */
-const ProductDB = (() => {
+const ProductDB = window.ProductDB = (() => {
     const PRODUCTS_KEY = 'gasviet_products';
     const CATEGORIES_KEY = 'gasviet_categories';
     const SETTINGS_KEY = 'gasviet_settings';
     const NEWS_KEY = 'gasviet_news';
     const NEWS_CATEGORIES_KEY = 'gasviet_news_categories';
-    const INIT_KEY = 'gasviet_db_initialized_v9';
+    const CONTACTS_KEY = 'gasviet_contacts';
+    const REVIEWS_KEY = 'gasviet_reviews';
+    const INIT_KEY = 'gasviet_db_initialized_v11';
 
     // ========== SEED DATA ==========
     const seedCategories = [
-        { id: 1, name: 'Gas Saigon Petro', slug: 'gas-saigon-petro', seoDesc: 'Đại lý phân phối Gas Saigon Petro chính hãng. Các loại bình gas xám, đỏ, xanh 12kg an toàn, chất lượng cao, giá tốt nhất thị trường.' },
-        { id: 2, name: 'Gas Petrolimex', slug: 'gas-petrolimex', seoDesc: 'Đổi bình Gas Petrolimex chính hãng 12kg, 48kg, van chụp, van ngang an toàn tuyệt đối. Giá gas Petrolimex cập nhật mới nhất.' },
-        { id: 3, name: 'Gas Gia Đình', slug: 'gas-gia-dinh', seoDesc: 'Phân phối Gas Gia Đình chính hãng, ngọn lửa xanh mượt tiết kiệm gas. Giao gas nhanh chóng, an toàn, có bảo hiểm cháy nổ.' },
-        { id: 4, name: 'Gas Thủ Đức', slug: 'gas-thu-duc', seoDesc: 'Cung cấp bình Gas Thủ Đức 12kg, 45kg chính hãng, van an toàn. Dịch vụ đổi gas Thủ Đức tận nhà nhanh chóng, uy tín.' },
-        { id: 5, name: 'Gas Elf', slug: 'gas-elf', seoDesc: 'Bình Gas Elf Pháp đỏ 12kg, 6kg, 45kg an toàn, chất lượng Châu Âu. Giao gas Elf chính hãng tận nhà với nhiều ưu đãi.' },
-        { id: 6, name: 'Bếp Hồng Ngoại', slug: 'bep-hong-ngoai', seoDesc: 'Mua bếp điện hồng ngoại đơn, đôi chính hãng Sunhouse, Kangaroo, Bosch. Bếp hồng ngoại cao cấp, đun nấu nhanh, không kén nồi.' },
-        { id: 7, name: 'Bếp Gas Âm', slug: 'bep-gas-am', seoDesc: 'Các dòng bếp gas âm cao cấp Rinnai, Paloma, Electrolux, Sunhouse. Thiết kế sang trọng, tiết kiệm gas, an toàn tuyệt đối.' },
-        { id: 8, name: 'Phụ Kiện (Van, Dây)', slug: 'phu-kien-van-day', seoDesc: 'Phụ kiện gas chính hãng: van ngắt gas tự động, dây dẫn gas bọc inox chống chuột, van Namilux, Katsura cao cấp.' },
-        { id: 9, name: 'Combo Khuyến Mãi', slug: 'combo-khuyen-mai', seoDesc: 'Tổng hợp các bộ combo bình gas, bếp gas, van dây giá siêu tiết kiệm. Mua trọn bộ để nhận ưu đãi lớn và quà tặng hấp dẫn.' }
+        { id: 1, name: 'Gas Saigon Petro', slug: 'gas-saigon-petro', skuPrefix: 'SGP', seoDesc: 'Đại lý phân phối Gas Saigon Petro chính hãng. Các loại bình gas xám, đỏ, xanh 12kg an toàn, chất lượng cao, giá tốt nhất thị trường.' },
+        { id: 2, name: 'Gas Petrolimex', slug: 'gas-petrolimex', skuPrefix: 'PLX', seoDesc: 'Đổi bình Gas Petrolimex chính hãng 12kg, 48kg, van chụp, van ngang an toàn tuyệt đối. Giá gas Petrolimex cập nhật mới nhất.' },
+        { id: 3, name: 'Gas Gia Đình', slug: 'gas-gia-dinh', skuPrefix: 'GGD', seoDesc: 'Phân phối Gas Gia Đình chính hãng, ngọn lửa xanh mượt tiết kiệm gas. Giao gas nhanh chóng, an toàn, có bảo hiểm cháy nổ.' },
+        { id: 4, name: 'Gas Thủ Đức', slug: 'gas-thu-duc', skuPrefix: 'GTD', seoDesc: 'Cung cấp bình Gas Thủ Đức 12kg, 45kg chính hãng, van an toàn. Dịch vụ đổi gas Thủ Đức tận nhà nhanh chóng, uy tín.' },
+        { id: 5, name: 'Gas Elf', slug: 'gas-elf', skuPrefix: 'ELF', seoDesc: 'Bình Gas Elf Pháp đỏ 12kg, 6kg, 45kg an toàn, chất lượng Châu Âu. Giao gas Elf chính hãng tận nhà với nhiều ưu đãi.' },
+        { id: 6, name: 'Bếp Hồng Ngoại', slug: 'bep-hong-ngoai', skuPrefix: 'BHN', seoDesc: 'Mua bếp điện hồng ngoại đơn, đôi chính hãng Sunhouse, Kangaroo, Bosch. Bếp hồng ngoại cao cấp, đun nấu nhanh, không kén nồi.' },
+        { id: 7, name: 'Bếp Gas Âm', slug: 'bep-gas-am', skuPrefix: 'BGA', seoDesc: 'Các dòng bếp gas âm cao cấp Rinnai, Paloma, Electrolux, Sunhouse. Thiết kế sang trọng, tiết kiệm gas, an toàn tuyệt đối.' },
+        { id: 8, name: 'Phụ Kiện (Van, Dây)', slug: 'phu-kien-van-day', skuPrefix: 'PK', seoDesc: 'Phụ kiện gas chính hãng: van ngắt gas tự động, dây dẫn gas bọc inox chống chuột, van Namilux, Katsura cao cấp.' },
+        { id: 9, name: 'Combo Khuyến Mãi', slug: 'combo-khuyen-mai', skuPrefix: 'CB', seoDesc: 'Tổng hợp các bộ combo bình gas, bếp gas, van dây giá siêu tiết kiệm. Mua trọn bộ để nhận ưu đãi lớn và quà tặng hấp dẫn.' }
     ];
 
     const seedNewsCategories = [
@@ -30,6 +32,53 @@ const ProductDB = (() => {
         { id: 4, name: 'Sản phẩm mới', slug: 'san-pham-moi', seoDesc: 'Giới thiệu các dòng sản phẩm gas và bếp gas mới' },
         { id: 5, name: 'Ẩm thực', slug: 'am-thuc', seoDesc: 'Khám phá ẩm thực và các món ngon mỗi ngày' },
         { id: 6, name: 'Kỹ thuật', slug: 'ky-thuat', seoDesc: 'Chia sẻ kiến thức kỹ thuật về gas và thiết bị bếp' }
+    ];
+
+    const seedReviews = [
+        {
+            id: 1,
+            productId: 1,
+            rating: 5,
+            name: 'Nguyễn Văn An',
+            phone: '0901234567',
+            content: 'Gas sử dụng rất tốt, lửa xanh đều. Giao hàng cực kỳ nhanh chóng.',
+            images: ['/assets/images/local/img_4.png'],
+            status: 'approved',
+            createdAt: new Date().getTime() - 86400000 * 2
+        },
+        {
+            id: 2,
+            productId: 1,
+            rating: 4,
+            name: 'Trần Thị Bình',
+            phone: '0912345678',
+            content: 'Sản phẩm chính hãng, nhân viên lắp đặt nhiệt tình cẩn thận.',
+            images: ['/assets/images/local/img_5.jpg'],
+            status: 'approved',
+            createdAt: new Date().getTime() - 86400000 * 5
+        },
+        {
+            id: 3,
+            productId: 2,
+            rating: 5,
+            name: 'Lê Hoàng Phong',
+            phone: '0987654321',
+            content: 'Giá cả hợp lý, bình gas mới, sạch sẽ.',
+            images: ['/assets/images/local/img_6.jpg'],
+            status: 'approved',
+            createdAt: new Date().getTime() - 86400000 * 10
+        },
+        {
+            id: 4,
+            productId: 2,
+            rating: 5,
+            name: 'Phạm Minh Tú',
+            phone: '0977112233',
+            content: 'Đã dùng gas của đại lý này 3 năm nay, rất an tâm.',
+            images: ['/assets/images/local/img_1.png', '/assets/images/local/img_7.png'],
+            status: 'approved',
+            createdAt: new Date().getTime() - 86400000 * 15
+        }
     ];
 
     const seedNews = [
@@ -102,7 +151,7 @@ const ProductDB = (() => {
             id: 6,
             title: 'Nấu ăn ngon với ngọn lửa xanh',
             slug: 'nau-an-ngon-voi-lua-xanh',
-            image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop',
+            image: '/assets/images/products/prod_12.jpg',
             content: '<h2>Ngọn lửa xanh - Dấu hiệu của bếp gas tốt</h2><p>Lửa xanh cho thấy khí gas được đốt cháy hoàn toàn, sinh ra nhiệt lượng tối đa và không tạo muội đen dưới đáy nồi. Nếu bếp nhà bạn xuất hiện ngọn lửa đỏ, đó có thể là dấu hiệu cần vệ sinh mâm chia lửa hoặc điều chỉnh lại hệ thống gió.</p>',
             seoTitle: 'Nấu ăn ngon với ngọn lửa xanh | Bí quyết nhà bếp',
             seoDesc: 'Tại sao bếp gas nên có ngọn lửa xanh? Cách khắc phục tình trạng bếp gas bị lửa đỏ làm đen đáy nồi dễ dàng nhất.',
@@ -141,7 +190,7 @@ const ProductDB = (() => {
             id: 9,
             title: 'Cảnh giác với các chiêu trò lừa đảo đổi gas giả mạo',
             slug: 'canh-giac-voi-cac-chieu-tro-lua-dao',
-            image: 'https://motthegioi.vn/wp-content/uploads/2026/04/bep-gas-chay-bang-nuoc.jpg.webp',
+            image: '/assets/images/products/prod_13.jpg',
             content: '<h2>Nhận diện kẻ gian giả danh nhân viên gas</h2><p>Thời gian gần đây, xuất hiện nhiều đối tượng tự xưng là nhân viên công ty gas tới nhà kiểm tra bếp miễn phí. Thực chất, chúng lợi dụng sơ hở để phá hỏng linh kiện hoặc bán van, dây với giá "cắt cổ".</p><p>Hãy cảnh giác và từ chối các dịch vụ "từ trên trời rơi xuống". Chỉ gọi gas tại đại lý uy tín có thông tin rõ ràng.</p>',
             seoTitle: 'Cảnh giác chiêu trò lừa đảo đổi gas, bảo dưỡng bếp gas mạo danh',
             seoDesc: 'Cảnh báo thủ đoạn lừa đảo giả danh nhân viên kiểm tra gas để trục lợi. Hướng dẫn cách phòng tránh và chọn đại lý gas uy tín.',
@@ -197,7 +246,7 @@ const ProductDB = (() => {
             id: 1,
             name: 'Gas Saigon Petro Xám 12kg',
             categoryId: 1,
-            image: 'https://giaogasnhanh.vn/upload/product/images-(24)-9485_480x480.jpg',
+            image: '/assets/images/products/prod_1.jpg',
             price: 510000,
             discount: 10,
             description: 'Bình Gas Saigon Petro xám 12kg sở hữu vỏ bình thép chịu lực cao, sơn tĩnh điện chống gỉ sét. Khí gas hóa lỏng tinh khiết cho ngọn lửa xanh đều, không tạo muội làm đen đáy nồi, giúp tiết kiệm nhiên liệu tối đa.',
@@ -834,130 +883,120 @@ const ProductDB = (() => {
             createdAt: '2026-07-08T00:05:00'
         },
         // ===== 9. Combo Khuyến Mãi (9 SP) =====
+        
         {
             id: 101,
             name: 'Combo Bếp Gas Đôi + Bộ Van Dây Nhật Bản',
             categoryId: 9,
-            image: '/assets/images/products/prod_56.jpg',
-            price: 690000,
-            discount: 22,
+            image: '/assets/images/products/prod_4.jpg',
+            price: 1350000,
+            discount: 26.6,
             description: 'Combo hoàn hảo cho gia đình bắt đầu làm bếp mới. Bao gồm bếp gas đôi mặt kính cường lực chịu nhiệt cao, đi kèm bộ van ngắt gas tự động Katsura công nghệ Nhật Bản và dây dẫn gas chống chuột 3 lớp, đảm bảo an toàn tuyệt đối chống rò rỉ.',
-            specs: 'Trọn bộ gồm: 01 Bếp gas đôi mặt kính + 01 Van ngắt tự động Katsura + 01 Dây gas bọc inox 1.5m\nMặt bếp: Kính cường lực vát cạnh 7mm\nHệ thống đánh lửa: Magneto',
+            specs: 'Trọn bộ gồm: 01 Bếp gas đôi mặt kính + 01 Van ngắt tự động Katsura + 01 Dây gas bọc inox 1.5m | Mặt bếp: Kính cường lực vát cạnh 7mm | Hệ thống đánh lửa: Magneto thế hệ mới siêu nhạy | Bảo hành: 24 tháng chính hãng',
             featured: true,
             onSale: true,
+            badgeText: 'Tặng Van Dây',
             createdAt: '2026-07-29T00:01:00'
         },
         {
             id: 102,
-            name: 'Combo Bếp Gas Đơn Inox + Bình Gas 12kg',
+            name: 'Combo Bếp Hồng Ngoại Tặng Bộ Nồi Inox 3 Đáy',
             categoryId: 9,
-            image: '/assets/images/products/prod_57.jpg',
-            price: 490000,
-            discount: 25,
-            description: 'Đổi bình gas chính hãng Petrolimex/Saigon Petro 12kg nhận ngay bộ van dây an toàn. Đặc biệt phù hợp cho khách hàng có nhu cầu thay thế bộ van dây đã quá hạn sử dụng (trên 2 năm) để phòng chống cháy nổ.',
-            specs: 'Trọn bộ gồm: 01 Bình gas 12kg (Đổi khí) + 01 Bộ van dây tự động Namilux\nChứng nhận an toàn: Có bảo hiểm trách nhiệm 2 tỷ đồng\nThời hạn sử dụng khuyên dùng cho van dây: 24 tháng',
+            image: '/assets/images/products/prod_5.jpg',
+            price: 2100000,
+            discount: 26,
+            description: 'Giải pháp nấu nướng tiện lợi và an toàn. Combo bếp gas hồng ngoại giúp đốt cháy 100% lượng gas tiêu thụ, không đen đáy nồi, không sợ gió thổi tắt lửa, kết hợp bộ nồi inox cao cấp 3 đáy giữ nhiệt tốt.',
+            specs: 'Trọn bộ gồm: 01 Bếp gas hồng ngoại đôi + 01 Bộ 3 nồi Inox 430 | Đầu đốt: Gốm Ceramic hồng ngoại tiết kiệm 30% gas | Mặt kính: Cường lực chịu nhiệt 700 độ C | Tình trạng: Còn mới',
             featured: true,
             onSale: true,
+            badgeText: 'Tiết kiệm 30%',
             createdAt: '2026-07-29T00:02:00'
         },
         {
             id: 103,
-            name: 'Combo Bếp Điện Từ Hồng Ngoại + Chảo Chống Dính',
+            name: 'Combo Đổi Bình Gas Petro + Van Namilux',
             categoryId: 9,
-            image: '/assets/images/products/prod_58.jpg',
-            price: 350000,
-            discount: 22,
-            description: 'Tiện lợi tối đa cho những chuyến dã ngoại, sinh viên ở trọ hoặc ăn lẩu tại nhà. Bếp gas mini Namilux với van an toàn Inline-Cut ngắt gas trực tiếp từ bên trong, kèm theo 5 lon gas mini Maxsun chính hãng.',
-            specs: 'Trọn bộ gồm: 01 Bếp gas mini Namilux + 05 Lon gas mini Maxsun 250g\nCông suất: 2.4 kW (2,050 kcal/h)\nTính năng an toàn: Van ngắt gas Inline-Cut (chống nổ lon gas)\nChất liệu bếp: Thép sơn tĩnh điện chống gỉ',
+            image: '/assets/images/products/prod_1.jpg',
+            price: 750000,
+            discount: 22.6,
+            description: 'Đổi bình gas Petro chính hãng an toàn tuyệt đối, trọng lượng chuẩn 12kg (cân tại nhà). Đi kèm van điều áp Namilux chính hãng, tự động ngắt gas khi có sự cố, mang lại sự yên tâm tối đa cho gia đình.',
+            specs: 'Trọn bộ gồm: 01 Bình gas xám 12kg + 01 Van ngắt tự động Namilux | Ruột gas: 12kg (±0.1kg) | Hạn kiểm định bình: 2028 | Bảo hiểm cháy nổ: 1 tỷ đồng',
             featured: true,
             onSale: true,
+            badgeText: 'Giảm sốc',
             createdAt: '2026-07-29T00:03:00'
         },
         {
             id: 104,
-            name: 'Combo Bình ga Bếp Gas Đôi Van Dây Tự Động',
+            name: 'Combo Dây Gas Inox Chống Chuột + Cổ Dê',
             categoryId: 9,
-            image: '/assets/images/products/prod_59.png',
-            price: 790000,
-            discount: 20,
-            description: 'Giải pháp toàn diện và cực kỳ tiết kiệm cho sinh viên, công nhân hoặc gia đình 1-2 người. Mua 1 lần có ngay trọn bộ bếp và gas để nấu nướng ngay lập tức mà không phát sinh thêm chi phí.',
-            specs: 'Trọn bộ gồm: 01 Bếp gas đơn mặt inox + 01 Bình gas 12kg + 01 Bộ van dây an toàn\nChất liệu mặt bếp: Inox 304 không gỉ dễ lau chùi\nLoại bình gas: Tùy chọn Saigon Petro / Gia Đình / Pacific',
+            image: '/assets/images/products/prod_3.png',
+            price: 250000,
+            discount: 28,
+            description: 'Bộ nâng cấp bếp gas toàn diện. Bao gồm dây dẫn gas inox 3 lớp lõi thép siêu bền, chống chuột cắn, chịu áp suất cao và cổ dê siết ống nhập khẩu Đài Loan chống rỉ sét.',
+            specs: 'Trọn bộ gồm: 01 Dây gas bọc inox 1.5m + 02 Cổ dê inox | Chất liệu dây: 3 lớp lõi thép, vỏ bọc inox xoắn | Áp suất phá hủy: >100 kg/cm2 | Độ bền: 5-7 năm',
             featured: true,
             onSale: true,
+            badgeText: 'Siêu Bền',
             createdAt: '2026-07-29T00:04:00'
         },
         {
             id: 105,
-            name: 'Combo Bếp Gas Âm + Bộ Dao Thớt Cao Cấp',
+            name: 'Combo Bình Gas Công Nghiệp + Tặng 2 Dây Lõi Thép',
             categoryId: 9,
-            image: '/assets/images/products/prod_60.jpg',
-            price: 890000,
-            discount: 25,
-            description: 'Ứng dụng công nghệ đầu đốt hồng ngoại bằng gốm Ceramic, đốt cháy 100% lượng gas tiêu thụ, không đen đáy nồi, không sợ gió thổi tắt lửa. Tặng kèm bộ 3 nồi Inox cao cấp.',
-            specs: 'Trọn bộ gồm: 01 Bếp gas hồng ngoại đôi + 01 Bộ 3 nồi Inox 430\nĐầu đốt: Gốm Ceramic hồng ngoại tiết kiệm 30% gas\nMặt kính: Cường lực chịu nhiệt 700 độ C',
+            image: '/assets/images/products/prod_7.png',
+            price: 1650000,
+            discount: 12.1,
+            description: 'Gói ưu đãi dành riêng cho các chủ quán ăn, nhà hàng và xưởng chế biến. Mua bình gas công nghiệp 45kg Petrolimex/Gia Đình Gas nhận ngay 2 dây dẫn gas lõi thép chịu áp lực cao chuyên dụng.',
+            specs: 'Trọn bộ gồm: 01 Bình gas công nghiệp 45kg + 02 Dây dẫn gas lõi thép Hàn Quốc | Trọng lượng ruột: 45kg ± 200g | Áp suất thử vỏ bình: 34kg/cm² | Đối tượng sử dụng: Nhà hàng, quán ăn, hệ thống bếp trung tâm',
             featured: true,
             onSale: true,
+            badgeText: 'Quà 200k',
             createdAt: '2026-07-29T00:05:00'
         },
         {
             id: 106,
             name: 'Combo Đổi Bình Gas 12kg + Thay Dây Van Mới',
             categoryId: 9,
-            image: '/assets/images/products/prod_61.jpg',
-            price: 1050000,
-            discount: 22,
-            description: 'Giải pháp xào nấu lửa lớn dành cho quán ăn, nhà hàng Á. Bếp khè công nghiệp cán trung/cán dài cho ngọn lửa xanh cực mạnh, đi kèm van gas cao áp và dây dẫn chịu lực chống cháy nổ.',
-            specs: 'Trọn bộ gồm: 01 Bếp khè công nghiệp + 01 Van gas cao áp + 01 Dây gas công nghiệp\nHệ thống đánh lửa: Magneto đập cực nhạy\nCụm đầu đốt: Gang đúc nguyên khối chịu nhiệt cao\nNhiên liệu: Gas LPG áp cao',
+            image: '/assets/images/products/prod_9.jpg',
+            price: 680000,
+            discount: 14.7,
+            description: 'Gói bảo dưỡng an toàn định kỳ cho căn bếp gia đình. Đổi 01 bình gas 12kg tinh khiết kèm dịch vụ kỹ thuật viên hỗ trợ tháo lắp, kiểm tra đo xà phòng rò rỉ và thay mới trọn bộ van dây ngắt tự động tại nhà.',
+            specs: 'Trọn bộ gồm: 01 Bình gas 12kg + 01 Van ngắt tự động Namilux + 01 Dây bọc inox | Dịch vụ đi kèm: Kiểm tra đo rò rỉ khí gas miễn phí bằng máy chuyên dụng | Bảo hiểm: Bảo hiểm trách nhiệm cháy nổ lên đến 10 tỷ đồng',
             featured: true,
             onSale: true,
+            badgeText: 'Freeship',
             createdAt: '2026-07-29T00:06:00'
         },
         {
             id: 107,
             name: 'Combo Bếp Hồng Ngoại + Nồi Lẩu Mini',
             categoryId: 9,
-            image: '/assets/images/products/prod_62.jpg',
-            price: 650000,
-            discount: 23,
-            description: 'Giải pháp thay thế an toàn cho bếp gas sinh viên. Bếp từ đơn công suất lớn đun sôi nước chỉ trong 3 phút, mặt kính pha lê dễ lau chùi. Tặng kèm chảo chống dính đáy từ tiện dụng.',
-            specs: 'Trọn bộ gồm: 01 Bếp điện từ đơn + 01 Chảo chống dính 24cm\nCông suất: 2000W\nBảng điều khiển: Cảm ứng chạm (Touch Control) với 8 chế độ nấu\nTính năng: Hẹn giờ, khóa trẻ em, tự ngắt khi quá nhiệt',
+            image: '/assets/images/products/prod_10.jpg',
+            price: 850000,
+            discount: 23.5,
+            description: 'Combo chân ái cho các buổi tiệc lẩu, nướng tại gia. Bếp hồng ngoại đơn công suất 2000W mặt kính Ceramic đen tuyền, đi kèm nồi lẩu inox nắp kính chịu nhiệt 26cm tiện dụng.',
+            specs: 'Trọn bộ gồm: 01 Bếp hồng ngoại đơn 2000W + 01 Nồi lẩu inox nắp kính 26cm | Điều khiển: Bảng cảm ứng Tiếng Việt + Màn hình LED | Chế độ nấu: Lẩu, xào, nướng, hầm, giữ ấm | Loại nồi sử dụng: Không kén nồi (Inox, gang, đất, thủy tinh...)',
             featured: true,
             onSale: true,
+            badgeText: 'Độc Quyền',
             createdAt: '2026-07-29T00:07:00'
-        },
-        {
-            id: 108,
-            name: 'Combo Bếp Từ Đôi + Tặng Bộ Nồi Inox 5 Món',
-            categoryId: 9,
-            image: '/assets/images/products/prod_63.jpg',
-            price: 5490000,
-            discount: 20,
-            description: 'Bếp từ đôi cao cấp công nghệ Inverter tiết kiệm 35% điện năng. Thiết kế bo viền nhôm chống va đập góc kính. Tặng trọn bộ nồi Inox 3 đáy đun từ 5 món cao cấp đáp ứng mọi nhu cầu nấu nướng.',
-            specs: 'Trọn bộ gồm: 01 Bếp từ đôi + 01 Bộ nồi Inox 304 (5 món)\nCông suất: 4200W (Dual Booster)\nMặt kính: Schott Ceran (Đức) bo viền kim loại\nCông nghệ: Inverter thông minh duy trì nhiệt liu riu',
-            featured: true,
-            onSale: true,
-            createdAt: '2026-07-29T00:08:00'
-        },
-        {
-            id: 109,
-            name: 'Combo Bếp Khè Công Nghiệp + Van Cao Áp',
-            categoryId: 9,
-            image: '/assets/images/products/prod_64.jpg',
-            price: 3990000,
-            discount: 23,
-            description: 'Bộ đôi không thể thiếu cho không gian bếp hiện đại. Bếp gas âm 2 lò nấu mặt kính sang trọng kết hợp máy hút mùi kính cong công suất hút lớn, đánh bay mọi mùi dầu mỡ.',
-            specs: 'Trọn bộ gồm: 01 Bếp gas âm (Pép đồng thau) + 01 Máy hút mùi kính cong 70cm\nCông suất hút mùi: 1000 m3/h\nKích thước khoét đá bếp âm: 680 x 380 mm\nĐộng cơ hút mùi: Tuabin đôi lõi đồng 100%',
-            featured: true,
-            onSale: true,
-            createdAt: '2026-07-29T00:09:00'
         }
+
     ];
 
     const defaultSettings = {
         hotline: '1900.123.123',
         zalo: '0901.111.222',
         address: '123 Thủ Đức, Hồ Chí Minh',
-        logo: 'assets/logo/logo_primary_gas - Copy.png'
+        logo: 'assets/logo/logo_primary_gas - Copy.png',
+        showComboSection: true,
+        banners: {
+            slider1: 'assets/images/banner_trangchu_1.jpg',
+            slider2: 'assets/images/banner_trangchu_2.jpg',
+            slider3: 'assets/images/banner_trangchu_3.jpg',
+            pageBanner: 'assets/images/banner_page.jpg'
+        }
     };
 
     // ========== HELPERS ==========
@@ -974,9 +1013,15 @@ const ProductDB = (() => {
     function _getProducts() {
         try {
             const items = JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || [];
+            const categories = _getCategories();
             return items.map(p => {
                 if (p.slug && p.slug.startsWith('cat-')) p.slug = p.slug.replace(/^cat-/, '');
                 if (!p.slug) p.slug = _generateSlug(p.name);
+                if (!p.sku) {
+                    const cat = categories.find(c => c.id === p.categoryId);
+                    const prefix = cat && cat.skuPrefix ? cat.skuPrefix : 'SKU';
+                    p.sku = `${prefix}-${p.id.toString().padStart(4, '0')}`;
+                }
                 return p;
             });
         } catch { return []; }
@@ -992,6 +1037,9 @@ const ProductDB = (() => {
             return items.map(c => {
                 if (c.slug && c.slug.startsWith('cat-')) c.slug = c.slug.replace(/^cat-/, '');
                 if (!c.slug) c.slug = _generateSlug(c.name);
+                if (!c.skuPrefix) {
+                    c.skuPrefix = c.name.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 3);
+                }
                 return c;
             });
         } catch { return []; }
@@ -1030,6 +1078,9 @@ const ProductDB = (() => {
     function _saveNews(newsList) {
         localStorage.setItem(NEWS_KEY, JSON.stringify(newsList));
     }
+
+    function _getReviews() { return JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]'); }
+    function _saveReviews(r) { localStorage.setItem(REVIEWS_KEY, JSON.stringify(r)); }
 
     function _nextNewsId() {
         const news = _getNews();
@@ -1077,6 +1128,43 @@ const ProductDB = (() => {
         return shuffled;
     }
 
+    // ========== CONTACTS ==========
+    function _getContacts() {
+        try {
+            const raw = localStorage.getItem(CONTACTS_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function _saveContacts(contacts) {
+        try {
+            localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts));
+        } catch (e) {
+            console.error('Error saving contacts:', e);
+        }
+    }
+
+    function _addContact(contactData) {
+        const contacts = _getContacts();
+        const newContact = {
+            id: Date.now(),
+            name: contactData.name || 'Khách hàng',
+            phone: contactData.phone || '',
+            message: contactData.message || '',
+            source: contactData.source || 'Website',
+            status: 'new', // new, read
+            createdAt: new Date().toISOString()
+        };
+        contacts.unshift(newContact); // Add to beginning
+        _saveContacts(contacts);
+        
+        // Dispatch custom event for cross-tab or real-time admin updates
+        window.dispatchEvent(new CustomEvent('gasviet_contact_added', { detail: newContact }));
+        return newContact;
+    }
+
     // ========== PUBLIC API ==========
     return {
         /**
@@ -1110,6 +1198,7 @@ const ProductDB = (() => {
                 _saveSettings(defaultSettings);
                 _saveNews(seedNews);
                 _saveNewsCategories(seedNewsCategories);
+                _saveReviews(seedReviews);
                 localStorage.setItem(INIT_KEY, 'true');
                 console.log('[ProductDB] Initialized with seed data.');
                 // Push initial seed data to API so it creates the data.json
@@ -1137,6 +1226,10 @@ const ProductDB = (() => {
                 }
                 if (_getNews().length === 0) {
                     _saveNews(seedNews);
+                }
+                
+                if (_getReviews().length === 0) {
+                    _saveReviews(seedReviews);
                 }
 
                 // MIGRATION: Ensure seed flash deals are set for existing DB
@@ -1174,7 +1267,8 @@ const ProductDB = (() => {
                         categories: _getCategories(),
                         settings: _getSettings(),
                         news: _getNews(),
-                        newsCategories: _getNewsCategories()
+                        newsCategories: _getNewsCategories(),
+                        reviews: _getReviews()
                     })
                 });
                 console.log('[ProductDB] Synced to API.');
@@ -1187,12 +1281,17 @@ const ProductDB = (() => {
          * Force re-seed (useful for reset)
          */
         reset() {
-            localStorage.removeItem(INIT_KEY);
-            localStorage.removeItem(PRODUCTS_KEY);
-            localStorage.removeItem(CATEGORIES_KEY);
+            if (!localStorage.getItem(CONTACTS_KEY)) {
+                localStorage.setItem(CONTACTS_KEY, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(REVIEWS_KEY)) {
+                localStorage.setItem(REVIEWS_KEY, JSON.stringify(seedReviews));
+            }
+            localStorage.setItem(INIT_KEY, 'true');
             localStorage.removeItem(SETTINGS_KEY);
             localStorage.removeItem(NEWS_KEY);
             localStorage.removeItem(NEWS_CATEGORIES_KEY);
+            localStorage.removeItem(REVIEWS_KEY);
             this.initAsync();
         },
 
@@ -1236,6 +1335,11 @@ const ProductDB = (() => {
                 seoTitle: product.seoTitle || '',
                 seoDesc: product.seoDesc || '',
                 slug: product.slug || '',
+                sku: product.sku || (() => {
+                    const cat = _getCategories().find(c => c.id === parseInt(product.categoryId));
+                    const prefix = cat && cat.skuPrefix ? cat.skuPrefix : 'SKU';
+                    return `${prefix}-${_nextProductId().toString().padStart(4, '0')}`;
+                })(),
                 createdAt: new Date().toISOString()
             };
             products.push(newProduct);
@@ -1264,7 +1368,8 @@ const ProductDB = (() => {
                 active: data.active !== false,
                 seoTitle: data.seoTitle !== undefined ? data.seoTitle : (products[index].seoTitle || ''),
                 seoDesc: data.seoDesc !== undefined ? data.seoDesc : (products[index].seoDesc || ''),
-                slug: data.slug !== undefined ? data.slug : (products[index].slug || '')
+                slug: data.slug !== undefined ? data.slug : (products[index].slug || ''),
+                sku: data.sku !== undefined ? data.sku : (products[index].sku || '')
             };
             _saveProducts(products);
             this.syncToApi();
@@ -1299,6 +1404,7 @@ const ProductDB = (() => {
                 id: _nextCategoryId(),
                 name: category.name,
                 slug: category.slug || _generateSlug(category.name),
+                skuPrefix: category.skuPrefix || category.name.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 3),
                 seoDesc: category.seoDesc || ''
             };
             cats.push(newCat);
@@ -1315,6 +1421,7 @@ const ProductDB = (() => {
                 ...cats[index],
                 name: data.name || cats[index].name,
                 slug: data.slug || _generateSlug(data.name || cats[index].name),
+                skuPrefix: data.skuPrefix !== undefined ? data.skuPrefix : (cats[index].skuPrefix || ''),
                 seoDesc: data.seoDesc !== undefined ? data.seoDesc : (cats[index].seoDesc || '')
             };
             _saveCategories(cats);
@@ -1424,7 +1531,8 @@ const ProductDB = (() => {
             }
             return products.filter(p => {
                 const name = p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                return name.includes(kw);
+                const sku = (p.sku || '').toLowerCase();
+                return name.includes(kw) || sku.includes(kw.toLowerCase());
             });
         },
 
@@ -1566,6 +1674,97 @@ const ProductDB = (() => {
             _saveNewsCategories(filtered);
             this.syncToApi();
             return { success: true };
+        },
+
+        // ===== CONTACTS CRUD =====
+        getContacts() {
+            return _getContacts();
+        },
+        addContact(data) {
+            return _addContact(data);
+        },
+        markContactAsRead(id) {
+            const contacts = _getContacts();
+            const index = contacts.findIndex(c => c.id == id);
+            if(index !== -1) {
+                contacts[index].status = 'read';
+                _saveContacts(contacts);
+                return true;
+            }
+            return false;
+        },
+        deleteContact(id) {
+            const contacts = _getContacts();
+            const newContacts = contacts.filter(c => c.id != id);
+            _saveContacts(newContacts);
+            return true;
+        },
+        getUnreadContactCount() {
+            return _getContacts().filter(c => c.status === 'new').length;
+        },
+        
+        // ===== REVIEWS CRUD =====
+        getReviews(isAdmin = false) {
+            const reviews = _getReviews();
+            if (isAdmin) return reviews;
+            return reviews.filter(r => r.status === 'approved');
+        },
+        
+        getReviewsByProductId(productId, isAdmin = false) {
+            return this.getReviews(isAdmin).filter(r => r.productId === parseInt(productId));
+        },
+        
+        getPendingReviewCount() {
+            return _getReviews().filter(r => r.status === 'pending').length;
+        },
+        
+        addReview(data) {
+            const reviews = _getReviews();
+            const id = reviews.length > 0 ? Math.max(...reviews.map(r => r.id)) + 1 : 1;
+            const newReview = {
+                id,
+                productId: parseInt(data.productId),
+                rating: parseInt(data.rating) || 5,
+                name: data.name || 'Khách hàng',
+                phone: data.phone || '',
+                content: data.content || '',
+                images: data.images || [],
+                status: 'pending', // pending, approved, rejected
+                createdAt: new Date().getTime()
+            };
+            reviews.push(newReview);
+            _saveReviews(reviews);
+            this.syncToApi();
+            
+            // Dispatch event for real-time notification
+            if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('gasviet_review_added', { detail: newReview }));
+            }
+            
+            return newReview;
+        },
+        
+        updateReviewStatus(id, status) {
+            const reviews = _getReviews();
+            const index = reviews.findIndex(r => r.id === parseInt(id));
+            if (index !== -1) {
+                reviews[index].status = status;
+                _saveReviews(reviews);
+                this.syncToApi();
+                return true;
+            }
+            return false;
+        },
+        
+        deleteReview(id) {
+            const reviews = _getReviews();
+            const filtered = reviews.filter(r => r.id !== parseInt(id));
+            if (filtered.length !== reviews.length) {
+                _saveReviews(filtered);
+                this.syncToApi();
+                return true;
+            }
+            return false;
         }
     };
 })();

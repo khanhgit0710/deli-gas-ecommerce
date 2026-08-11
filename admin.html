@@ -9,7 +9,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Quản Lý Gas Lê Mạnh | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 
     <!-- Open Graph SEO Tags -->
@@ -27,19 +27,19 @@
         <div class="admin-login-box">
             <!-- login-logo removed -->
             <h2>Đăng Nhập Quản Trị</h2>
-            <p>Vui lòng đăng nhập để truy cập Hệ thống Quản trị GasViet</p>
+            <p>Vui lòng đăng nhập để truy cập Hệ thống Quản trị Gas Lê Mạnh</p>
             <form id="adminLoginForm">
                 <div class="form-group" style="margin-bottom: 15px;">
                     <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Tài
                         khoản</label>
                     <input type="text" id="loginUsername" class="admin-input" required
-                        placeholder="Tài khoản (demo: admin)">
+                        placeholder="Tài khoản">
                 </div>
                 <div class="form-group" style="margin-bottom: 15px;">
                     <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Mật
                         khẩu</label>
                     <input type="password" id="loginPassword" class="admin-input" required
-                        placeholder="Mật khẩu (demo: admin)">
+                        placeholder="Mật khẩu">
                 </div>
                 <div id="loginError"
                     style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">
@@ -48,7 +48,7 @@
                     style="width: 100%; padding: 12px; font-size: 16px; justify-content: center;">Đăng Nhập</button>
             </form>
             <div style="text-align: center; margin-top: 20px;">
-                <a href="trang-chu.html"
+                <a href="/"
                     style="color: var(--admin-text-muted); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: var(--admin-transition);">
                     <i class="fa-solid fa-arrow-left"></i> Quay lại website
                 </a>
@@ -158,6 +158,7 @@
                     </li>
                     <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i>
                             Quản lý Sale Off</a></li>
+                    <li><a href="#" data-section="reviews"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Đánh giá <span id="reviewBadge" class="badge" style="background: var(--color-warning); color: white; display: none; margin-left: auto; padding: 2px 6px; border-radius: 10px; font-size: 12px;"></span></a></li>
                 </ul>
 
                 <div class="sidebar-section-title">Tin tức</div>
@@ -169,12 +170,13 @@
 
                 <div class="sidebar-section-title">Hệ thống</div>
                 <ul class="sidebar-menu">
+                    <li><a href="#" data-section="contacts"><i class="fa-solid fa-address-book"></i> Khách hàng liên hệ <span id="contactBadge" class="badge" style="background: red; color: white; display: none; margin-left: auto; padding: 2px 6px; border-radius: 10px; font-size: 12px;"></span></a></li>
                     <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cấu hình chung</a></li>
                 </ul>
             </nav>
 
             <div class="sidebar-footer">
-                <a href="trang-chu.html"><i class="fa-solid fa-arrow-left"></i> Xem website</a>
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Xem website</a>
                 <a href="#" id="btnResetDB"><i class="fa-solid fa-rotate-left"></i> Tải lại dữ liệu</a>
             </div>
         </aside>
@@ -187,13 +189,69 @@
                     <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
                     <h2 id="pageTitle">Bảng điều khiển</h2>
                 </div>
-                <div class="topbar-right">
+                <div class="topbar-right" style="display: flex; align-items: center; gap: 20px;">
+                    <div style="position: relative; color: var(--admin-text); font-size: 20px; display: flex; align-items: center; cursor: pointer;" id="bellNotificationToggle">
+                        <i class="fa-regular fa-bell" style="color: var(--color-accent);"></i>
+                        <span id="bellBadge" style="display: none; position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; font-size: 11px; font-weight: bold; width: 18px; height: 18px; text-align: center; line-height: 18px; box-shadow: 0 0 0 2px var(--admin-bg);">0</span>
+                        
+                        <div id="notificationDropdown" style="display: none; position: absolute; top: 40px; right: -10px; width: 320px; background: white; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 1px solid var(--admin-border); z-index: 1000; overflow: hidden; cursor: default; text-align: left;">
+                            <div style="padding: 12px 15px; border-bottom: 1px solid var(--admin-border); font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--admin-text);">
+                                Thông báo
+                                <a href="#" id="markAllReadBtn" style="font-size: 12px; color: var(--admin-primary); text-decoration: none; font-weight: normal; display: none;">Đánh dấu đã đọc</a>
+                            </div>
+                            <div id="notificationList" style="max-height: 350px; overflow-y: auto;">
+                                <!-- Rendered by JS -->
+                            </div>
+                            <div style="padding: 10px; text-align: center; border-top: 1px solid var(--admin-border); background: #f8f9fa;">
+                                <a href="#" onclick="document.getElementById('notificationDropdown').style.display='none'; switchSection('contacts'); return false;" style="font-size: 13px; color: var(--admin-text); text-decoration: none; font-weight: 500; display: block;">Xem tất cả liên hệ</a>
+                            </div>
+                        </div>
+                    </div>
                     <span style="font-size:16px;color:var(--color-accent)">Xin chào, <strong
                             style="color:var(--color-accent)">Admin</strong></span>
                 </div>
             </div>
 
             <div class="admin-content">
+                <!-- ===== CONTACTS SECTION ===== -->
+                <section class="admin-section" id="section-contacts">
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Khách hàng liên hệ</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Tìm kiếm liên hệ..." id="contactsSearch">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:40px">ID</th>
+                                        <th>Khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Nguồn liên hệ</th>
+                                        <th>Tin nhắn</th>
+                                        <th>Trạng thái</th>
+                                        <th style="width:120px; white-space: nowrap;">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contactsTableBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="contactCountText">0 liên hệ</span>
+                            <div id="contactPagination" class="pagination" style="display: flex; gap: 5px;"></div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- ===== DASHBOARD SECTION ===== -->
                 <section class="admin-section active" id="section-dashboard">
                     <div class="stats-grid" id="statsGrid">
@@ -232,10 +290,15 @@
                             <div class="table-header-right">
                                 <div class="search-box">
                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Tìm kiếm sản phẩm..." id="productSearch">
+                                    <input type="text" placeholder="Tìm kiếm theo tên, SKU..." id="productSearch">
                                 </div>
                                 <select class="filter-select" id="categoryFilter">
                                     <option value="">Tất cả danh mục</option>
+                                </select>
+                                <select class="filter-select" id="sortFilter">
+                                    <option value="newest">Mới nhất</option>
+                                    <option value="price_asc">Giá thấp đến cao</option>
+                                    <option value="price_desc">Giá cao đến thấp</option>
                                 </select>
                                 <button class="btn btn-primary" id="btnAddProduct">
                                     <i class="fa-solid fa-plus"></i> Thêm mới
@@ -246,7 +309,7 @@
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th style="width:40px">ID</th>
+                                        <th style="width:120px">Mã SKU</th>
                                         <th>Sản phẩm</th>
                                         <th>Giá</th>
                                         <th class="hide-mobile">Giảm giá</th>
@@ -424,41 +487,215 @@
                     </div>
 
                     <div class="table-wrapper" style="max-width: 800px;">
-                        <div class="table-header">
-                            <div class="table-header-left">
-                                <h3>Cấu hình chung</h3>
+                        <div class="table-header" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 0;">
+                            <div class="settings-tabs" style="display: flex; gap: 20px;">
+                                <div class="tab-item active" id="tab-setting-general" onclick="switchSettingTab('general')" style="cursor: pointer; padding: 10px 5px; border-bottom: 2px solid var(--admin-primary); font-weight: bold; color: var(--admin-primary);">
+                                    <h3>Thông tin chung</h3>
+                                </div>
+                                <div class="tab-item" id="tab-setting-banner" onclick="switchSettingTab('banner')" style="cursor: pointer; padding: 10px 5px; color: var(--admin-text-dim);">
+                                    <h3>Hình ảnh & Banner</h3>
+                                </div>
                             </div>
                         </div>
                         <div style="padding: 20px;">
-                            <form id="settingsForm">
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label class="form-label">Hotline</label>
-                                    <input type="text" class="form-input" id="settingHotline"
-                                        placeholder="Nhập số điện thoại hotline">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label class="form-label">Zalo</label>
-                                    <input type="text" class="form-input" id="settingZalo"
-                                        placeholder="Nhập số điện thoại Zalo">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-input" id="settingAddress"
-                                        placeholder="Nhập địa chỉ cửa hàng">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 20px;">
-                                    <label class="form-label">Logo URL</label>
-                                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                        <input type="text" class="form-input" id="settingLogo"
-                                            placeholder="Nhập URL logo">
+                            <div id="setting-content-general">
+                                <form id="settingsForm">
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label class="form-label">Hotline</label>
+                                        <input type="text" class="form-input" id="settingHotline"
+                                            placeholder="Nhập số điện thoại hotline">
                                     </div>
-                                    <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;">
-                                        <div class="placeholder">Xem trước Logo</div>
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label class="form-label">Zalo</label>
+                                        <input type="text" class="form-input" id="settingZalo"
+                                            placeholder="Nhập số điện thoại Zalo">
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-input" id="settingAddress"
+                                            placeholder="Nhập địa chỉ cửa hàng">
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="form-label" style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="checkbox" id="settingShowComboSection" style="margin-right: 10px;">
+                                            Hiển thị danh mục Combo Ưu Đãi Của Tháng trên Trang Chủ
+                                        </label>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="btnSaveSettings"><i
+                                            class="fa-solid fa-save"></i> Lưu cấu hình</button>
+                                </form>
+                            </div>
+                            <div id="setting-content-banner" style="display: none;">
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Logo & Favicon</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                        <div>
+                                            <label class="form-label">Logo URL</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingLogo" placeholder="Nhập URL logo...">
+                                                <input type="file" id="settingLogoUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingLogoUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Favicon URL</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingFavicon" placeholder="Nhập URL favicon...">
+                                                <input type="file" id="settingFaviconUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingFaviconUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingFaviconPreview" style="height: 100px;"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" id="btnSaveSettings"><i
-                                        class="fa-solid fa-save"></i> Lưu cấu hình</button>
-                            </form>
+
+                                <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
+                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner Trang Chủ</label>
+                                    <div id="sliderListContainer" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                                    <button type="button" class="btn btn-outline" id="btnAddSlider" style="margin-top: 15px;"><i class="fa-solid fa-plus"></i> Thêm Banner</button>
+                                </div>
+                                
+                                <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
+                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner Các Trang Phụ</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+                                        <div>
+                                            <label class="form-label">Trang Tin tức</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingBannerNews" placeholder="URL banner...">
+                                                <input type="file" id="settingBannerNewsUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerNewsUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingBannerNewsPreview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Trang Giới thiệu</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingBannerAbout" placeholder="URL banner...">
+                                                <input type="file" id="settingBannerAboutUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerAboutUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingBannerAboutPreview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Trang Liên hệ</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingBannerContact" placeholder="URL banner...">
+                                                <input type="file" id="settingBannerContactUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerContactUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingBannerContactPreview" style="height: 80px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
+                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Hình ảnh khác (Trang Giới Thiệu)</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                        <div>
+                                            <label class="form-label">Ảnh Cam Kết 1</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgMissionMain" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgMissionMainUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgMissionMainUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgMissionMainPreview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Ảnh Cam Kết 2</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgMissionSub" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgMissionSubUpload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgMissionSubUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgMissionSubPreview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Ảnh Lưới 1</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgGrid1" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid1Upload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid1Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgGrid1Preview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Ảnh Lưới 2</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgGrid2" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid2Upload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid2Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgGrid2Preview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Ảnh Lưới 3</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgGrid3" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid3Upload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid3Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgGrid3Preview" style="height: 80px;"></div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Ảnh Lưới 4</label>
+                                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                                <input type="text" class="form-input" id="settingImgGrid4" placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid4Upload" accept="image/*" style="display: none;">
+                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid4Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                            </div>
+                                            <div class="image-preview-box" id="settingImgGrid4Preview" style="height: 80px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="btnSaveBannerSettings"><i class="fa-solid fa-save"></i> Lưu cài đặt Banner</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- ===== REVIEWS SECTION ===== -->
+                <section class="admin-section" id="section-reviews" style="display: none;">
+                    <div class="table-wrapper">
+                        <div class="table-header">
+                            <div class="table-header-left">
+                                <h3>Đánh giá sản phẩm</h3>
+                            </div>
+                            <div class="table-header-right">
+                                <select class="admin-input" id="reviewFilterStatus" style="padding: 8px; border-radius: 6px; border: 1px solid var(--admin-border);">
+                                    <option value="all">Tất cả trạng thái</option>
+                                    <option value="pending">Chờ duyệt</option>
+                                    <option value="approved">Đã duyệt</option>
+                                    <option value="rejected">Bị từ chối</option>
+                                </select>
+                                <div class="search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Tìm kiếm đánh giá..." id="reviewsSearch">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px">ID</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Người đánh giá</th>
+                                        <th>Số sao</th>
+                                        <th>Nội dung</th>
+                                        <th>Trạng thái</th>
+                                        <th style="width:150px; text-align: center;">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reviewsTableBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="reviewCountText">0 đánh giá</span>
+                            <div id="reviewPagination" class="pagination" style="display: flex; gap: 5px;"></div>
                         </div>
                     </div>
                 </section>
@@ -741,6 +978,11 @@
                                 placeholder="Nhập tiêu đề tin tức...">
                         </div>
                         <div class="form-group full">
+                            <label class="form-label">Mã tin tức</label>
+                            <input type="text" class="form-input" id="newsCode"
+                                placeholder="Nhập mã tin tức (VD: TT-001)...">
+                        </div>
+                        <div class="form-group full">
                             <label class="form-label">Đường dẫn tĩnh (Tự sinh)</label>
                             <input type="text" class="form-input" id="newsSlug" readonly
                                 style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;"
@@ -835,17 +1077,19 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script defer src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-    <script defer src="/js/product-db.js?v=5"></script>
+    <script defer src="/assets/js/client/product-db.js?v=5"></script>
 
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    <script defer src="js/admin-core.js"></script>
-    <script defer src="js/admin-dashboard.js"></script>
-    <script defer src="js/admin-categories.js"></script>
-    <script defer src="js/admin-products.js"></script>
-    <script defer src="js/admin-news-categories.js"></script>
-    <script src="js/admin-flash-deals.js"></script>
-    <script src="js/admin-news.js"></script>
-    <script defer src="js/admin-settings.js"></script>
+    <script defer src="/assets/js/admin/admin-core.js"></script>
+    <script defer src="/assets/js/admin/admin-dashboard.js"></script>
+    <script defer src="/assets/js/admin/admin-categories.js"></script>
+    <script defer src="/assets/js/admin/admin-products.js"></script>
+    <script defer src="/assets/js/admin/admin-news-categories.js"></script>
+    <script src="/assets/js/admin/admin-flash-deals.js"></script>
+    <script src="/assets/js/admin/admin-news.js"></script>
+    <script src="/assets/js/admin/admin-contacts.js"></script>
+    <script src="/assets/js/admin/admin-reviews.js"></script>
+    <script defer src="/assets/js/admin/admin-settings.js"></script>
 
 </body>
 

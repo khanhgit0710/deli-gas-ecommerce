@@ -25,10 +25,10 @@ $type = $data['type']; // 'product' or 'news'
 // Xác định thư mục lưu dựa trên type
 $uploadDir = '';
 if ($type === 'product') {
-    $uploadDir = __DIR__ . '/assets/images/products/';
+    $uploadDir = __DIR__ . '/../assets/images/products/';
     $prefix = 'prod_';
 } elseif ($type === 'news') {
-    $uploadDir = __DIR__ . '/assets/images/news/';
+    $uploadDir = __DIR__ . '/../assets/images/news/';
     $prefix = 'news_';
 } else {
     http_response_code(400);

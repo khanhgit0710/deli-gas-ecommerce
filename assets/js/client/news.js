@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Check if ProductDB is ready, if not wait for event
-    if (localStorage.getItem('gasviet_db_initialized_v9')) {
+    if (localStorage.getItem('gasviet_db_initialized_v10')) {
         initNewsJS();
     } else {
         document.addEventListener('ProductDBReady', initNewsJS);
@@ -231,8 +231,7 @@ function renderNewsDetail() {
             <h1 id="h1-title">${newsItem.title}</h1>
             <div class="nb-detail-meta">
                 <div class="nb-author">
-                    <img src="assets/logo/logo_gas.png
-                        alt="Author">
+                    <img src="/assets/logo/logo_gas.png" alt="Author">
                     <div>
                         <strong>${newsItem.author || 'Ban Biên Tập'}</strong>
                     </div>

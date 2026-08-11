@@ -11,9 +11,9 @@
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/product-detail.css">
-    <link rel="stylesheet" href="/css/responsive.css?v=1784899535880">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/product-detail.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css?v=6">
     <link rel="icon" type="image/png" href="/assets/logo/logo_gas.png">
 
     <!-- Open Graph SEO Tags -->
@@ -22,11 +22,15 @@
     <meta property="og:image" content="https://gaslemanh.vn/assets/logo/logo_gas.png" />
     <meta property="og:url" content="https://gaslemanh.vn/chi-tiet-san-pham" />
     <meta property="og:type" content="website" />
+    <style>
+        .pd-page-wrapper { opacity: 0; visibility: hidden; }
+        body.loaded .pd-page-wrapper { opacity: 1; visibility: visible; transition: opacity 0.3s ease-in; }
+    </style>
 </head>
 
 <body>
     <site-header></site-header>
-    <script defer src="/components/header.js?v=5"></script>
+    <script defer src="/assets/components/header.js?v=6"></script>
 
     <!-- PRODUCT DETAIL MAIN WRAPPER -->
     <div class="pd-page-wrapper">
@@ -107,7 +111,7 @@
                     </div>
 
                     <div class="pd-meta">
-                        <span id="pdBrand">Thương hiệu: Petrolimex</span>
+                        <span id="pdBrand">Mã SKU: </span>
                         <span class="pd-meta-divider" id="pdWeightDivider">|</span>
                         <span id="pdWeight">Trọng lượng: 12kg</span>
                         <span class="pd-meta-divider">|</span>
@@ -159,8 +163,8 @@
                             style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">
                             Thông số kỹ thuật</div>
                         <div style="display: grid; grid-template-columns: 100px 1fr; gap: 8px; font-size: 14px;">
-                            <div style="color: var(--color-gray-500);">Thương hiệu:</div>
-                            <div style="font-weight: 500;">Petrolimex</div>
+                            <div style="color: var(--color-gray-500);">Mã SKU:</div>
+                            <div style="font-weight: 500;" id="placeholderSkuSummary">Đang cập nhật</div>
                             <div style="color: var(--color-gray-500);">Trọng lượng:</div>
                             <div style="font-weight: 500;">12kg</div>
                             <div style="color: var(--color-gray-500);">Chất liệu vỏ:</div>
@@ -489,6 +493,16 @@
                             </div>
                             <textarea id="reviewText" placeholder="Đánh giá của bạn về sản phẩm... *" required rows="4"
                                 style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
+                            <div style="margin-bottom: 15px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                                    <label for="reviewImages" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 15px; border: 1px dashed var(--color-primary); border-radius: 8px; background: rgba(0, 104, 255, 0.05); color: var(--color-primary); font-weight: 500; cursor: pointer; transition: all 0.2s ease;">
+                                        <i class="fa-solid fa-camera"></i> Đính kèm hình ảnh
+                                    </label>
+                                    <span style="font-size: 13px; color: var(--color-gray-500);">(Có thể chọn nhiều ảnh)</span>
+                                </div>
+                                <input type="file" id="reviewImages" accept="image/*" multiple style="display: none;">
+                                <div id="reviewImagePreviewContainer" style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto; padding-bottom: 5px;"></div>
+                            </div>
                             <button type="submit"
                                 style="background-color: var(--color-primary); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600;">Gửi
                                 đánh giá</button>
@@ -496,229 +510,19 @@
                     </div>
                 </div>
 
-                <div class="pd-ugc-section"
-                    style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200);">
-                    <div
+                <div class="pd-ugc-section" id="ugcSection"
+                    style="background: var(--color-gray-50); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--color-gray-200); display: none;">
+                    <div id="ugcTitle"
                         style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);">
                         <i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình
-                        ảnh & Video thực tế từ người mua (6)</div>
-                    <div class="ugc-gallery">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_4.png"
-                            alt="Khách hàng 1" onclick="openLightboxForUGC(this.src)">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_5.jpg"
-                            alt="Khách hàng 2" onclick="openLightboxForUGC(this.src)">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_6.jpg"
-                            alt="Khách hàng 3" onclick="openLightboxForUGC(this.src)">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_1.png"
-                            alt="Khách hàng 4" onclick="openLightboxForUGC(this.src)">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_7.png"
-                            alt="Khách hàng 5" onclick="openLightboxForUGC(this.src)">
-                        <img loading="lazy"
-                            src="/assets/images/local/img_8.jpg"
-                            alt="Khách hàng 6" onclick="openLightboxForUGC(this.src)">
+                        ảnh thực tế từ người mua (0)</div>
+                    <div class="ugc-gallery" id="ugcGallery">
+                        <!-- Rendered dynamically -->
                     </div>
                 </div>
 
-                <div class="pd-review-list">
-                    <!-- Review 1 -->
-                    <div class="pd-review-item">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar">H</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Hoàng Anh</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">15/07/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Gas chất lượng tốt, lửa xanh đều. Nhân viên giao hàng rất nhanh và nhiệt tình, thay van
-                                và kiểm tra cẩn thận trước khi về. Sẽ tiếp tục ủng hộ Gas Lê Mạnh.</p>
-                            <div class="pd-review-images">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_4.png"
-                                    alt="Review Image">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_5.jpg"
-                                    alt="Review Image">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_6.jpg"
-                                    alt="Review Image">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Review 2 -->
-                    <div class="pd-review-item">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar">T</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Trần Minh Tâm</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">10/07/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Bình gas chính hãng, có dán tem mác đầy đủ nên rất yên tâm. Giá cả hợp lý so với mặt bằng
-                                chung.</p>
-                            <div class="pd-review-images">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_1.png"
-                                    alt="Review Image">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Review 3 -->
-                    <div class="pd-review-item">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar"
-                                    style="background-color: var(--color-primary); color: white;">L</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Lê Thị Hoa</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">02/07/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Dịch vụ tuyệt vời. Gọi cái là 15 phút sau có mặt ngay, đúng lúc đang nấu dở bữa cơm. Cảm
-                                ơn các bạn nhé!</p>
-                            <div class="pd-review-images">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_7.png"
-                                    alt="Review Image">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_8.jpg"
-                                    alt="Review Image">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Review 4 -->
-                    <div class="pd-review-item">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar"
-                                    style="background-color: var(--color-accent); color: white;">N</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Nguyễn Văn Nam</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">01/07/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Sản phẩm ổn, giao hàng hơi chậm một chút nhưng vẫn chấp nhận được.</p>
-                        </div>
-                    </div>
-
-                    <!-- Review 5 -->
-                    <div class="pd-review-item">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar"
-                                    style="background-color: var(--color-gray-500); color: white;">P</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Phạm Thanh</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">28/06/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Gas xài bình thường, nhưng nhân viên chưa nhiệt tình lắm khi lắp đặt.</p>
-                        </div>
-                    </div>
-                    <!-- Extra Reviews (Hidden initially) -->
-                    <!-- Review 4 -->
-                    <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1s ease-in-out;">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar"
-                                    style="background-color: var(--color-gray-600); color: white;">P</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Phạm Văn Dũng</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">28/06/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Sản phẩm rất tốt, an toàn. Tôi đã sử dụng gas Petrolimex nhiều năm và luôn hài lòng với
-                                chất lượng.</p>
-                        </div>
-                    </div>
-
-                    <!-- Review 5 -->
-                    <div class="pd-review-item extra-review" style="display: none; animation: fadeIn 1.5s ease-in-out;">
-                        <div class="pd-review-header">
-                            <div class="pd-reviewer-info">
-                                <div class="pd-reviewer-avatar"
-                                    style="background-color: var(--color-accent); color: white;">N</div>
-                                <div>
-                                    <div class="pd-reviewer-name">Nguyễn Thị Mai</div>
-                                    <div class="pd-reviewer-stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-review-date">20/06/2026</div>
-                        </div>
-                        <div class="pd-review-content">
-                            <p>Giao hàng rất nhanh, giá cả phải chăng. Nhân viên lắp đặt rất nhiệt tình hướng dẫn cách
-                                sử dụng an toàn.</p>
-                        </div>
-                    </div>
+                <div class="pd-review-list" id="reviewListContainer">
+                    <!-- Dynamic reviews will be rendered here -->
                 </div>
 
                 <!-- Load More Button -->
@@ -1023,8 +827,8 @@
     <site-footer></site-footer>
 
     <!-- JS -->
-    <script defer src="/components/footer.js?v=5"></script>
-    <script defer src="/js/main.js?v=5"></script>
+    <script defer src="/assets/components/footer.js?v=6"></script>
+    <script defer src="/assets/js/client/main.js?v=6"></script>
     <style>
         @keyframes fadeIn {
             from {
@@ -1331,7 +1135,7 @@
         </div>
     </div>
     <!-- JS -->
-    <script defer src="/js/product-db.js?v=5"></script>
+    <script defer src="/assets/js/client/product-db.js?v=6"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Get product ID or Slug from URL
@@ -1412,6 +1216,9 @@
                     }
                 }
 
+                // Render dynamic reviews
+                renderReviews(product.id);
+
                 // Set Images
                 const mainImg = document.getElementById('pdMainImage');
                 if (mainImg) mainImg.src = product.image;
@@ -1425,8 +1232,9 @@
                     window.imageLightboxImages = [product.image];
                     let thumbsHTML = `<img loading="lazy" src="${product.image}" class="pd-thumb-img active" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
 
-                    if (product.images && product.images.length > 0) {
-                        const additionalImgs = product.images.slice(0, 6);
+                    const imgs = product.images || product.thumbnails;
+                    if (imgs && imgs.length > 0) {
+                        const additionalImgs = imgs.slice(0, 6);
                         window.imageLightboxImages = [...window.imageLightboxImages, ...additionalImgs];
 
                         additionalImgs.forEach((img, idx) => {
@@ -1478,34 +1286,14 @@
                 // Set Description
                 const desc = document.querySelector('.pd-desc-short');
                 if (desc) desc.textContent = product.description || 'Sản phẩm chính hãng chất lượng cao.';
+                
+                const fullDesc = document.querySelector('#description .pd-tab-pane');
+                if (fullDesc) fullDesc.innerHTML = '<p>' + (product.description || 'Sản phẩm chính hãng chất lượng cao.') + '</p>';
 
                 // Set Meta Data
                 const pdBrand = document.getElementById('pdBrand');
                 if (pdBrand) {
-                    let brandName = 'Gas Lê Mạnh'; // default
-
-                    if (product.categoryId <= 5) {
-                        // For gas cylinders, brand is usually the category name
-                        brandName = ProductDB.getCategoryName(product.categoryId);
-                    } else {
-                        // For stoves and accessories, try to match known brands in the name
-                        const knownBrands = ['Namilux', 'Bosch', 'Rinnai', 'Sunhouse', 'Kogas', 'Bluestar', 'Junger', 'Katsura', 'Paloma', 'Sakura', 'Teka', 'Electrolux', 'Malloca'];
-
-                        const lowerName = product.name.toLowerCase();
-                        for (let b of knownBrands) {
-                            if (lowerName.includes(b.toLowerCase())) {
-                                brandName = b;
-                                break;
-                            }
-                        }
-
-                        // If no known brand found, fallback to something generic or keep default
-                        if (brandName === 'Gas Lê Mạnh') {
-                            brandName = 'Chính hãng';
-                        }
-                    }
-
-                    pdBrand.textContent = `Thương hiệu: ${brandName}`;
+                    pdBrand.textContent = `Mã SKU: ${product.sku || 'Đang cập nhật'}`;
                 }
 
                 const pdWeight = document.getElementById('pdWeight');
@@ -1553,9 +1341,9 @@
                     // Specs Summary Grid
                     if (pdSpecsSummary && specLines.length > 0) {
                         let gridHtml = '';
-                        // Always include brand if not in specs
-                        if (!product.specs.toLowerCase().includes('thương hiệu')) {
-                             gridHtml += `<div style="color: var(--color-gray-500);">Thương hiệu:</div><div style="font-weight: 500;">${pdBrand ? pdBrand.textContent.replace('Thương hiệu: ', '') : ''}</div>`;
+                        // Always include SKU if not in specs
+                        if (!product.specs.toLowerCase().includes('sku')) {
+                             gridHtml += `<div style="color: var(--color-gray-500);">Mã SKU:</div><div style="font-weight: 500;">${product.sku || 'Đang cập nhật'}</div>`;
                         }
                         
                         specLines.forEach(line => {
@@ -1578,7 +1366,7 @@
                         pdSpecsSummary.innerHTML = `
                             <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">
                                 Thông số kỹ thuật</div>
-                            <div style="display: grid; grid-template-columns: 120px 1fr; gap: 8px; font-size: 14px;">
+                            <div style="display: grid; grid-template-columns: 120px 1fr; gap: 8px; font-size: 15px;">
                                 ${gridHtml}
                             </div>
                         `;
@@ -1715,6 +1503,10 @@
                 `;
 
                 slider.innerHTML = html;
+
+                setTimeout(() => {
+                    document.body.classList.add('loaded');
+                }, 50);
             }
         });
 
@@ -1756,43 +1548,82 @@
                 else alert('Vui lòng chọn số sao đánh giá!');
                 return;
             }
-
-            // Hide the form
-            const formContainer = document.getElementById('reviewFormContainer');
-            if (formContainer) {
-                formContainer.classList.remove('review-form-visible');
-                formContainer.classList.add('review-form-hidden');
+            
+            const nameInput = document.getElementById('reviewName');
+            const phoneInput = document.getElementById('reviewPhone');
+            const contentInput = document.getElementById('reviewText');
+            const imagesInput = document.getElementById('reviewImages');
+            
+            // Collect images as Data URLs
+            const imagePromises = [];
+            if (imagesInput && imagesInput.files.length > 0) {
+                for (let i = 0; i < imagesInput.files.length; i++) {
+                    const file = imagesInput.files[i];
+                    imagePromises.push(new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    }));
+                }
             }
+            
+            Promise.all(imagePromises).then(imagesBase64 => {
+                if (typeof currentProduct !== 'undefined' && currentProduct) {
+                    ProductDB.addReview({
+                        productId: currentProduct.id,
+                        rating: parseInt(ratingInput.value),
+                        name: nameInput ? nameInput.value.trim() : 'Khách hàng',
+                        phone: phoneInput ? phoneInput.value.trim() : '',
+                        content: contentInput ? contentInput.value.trim() : '',
+                        images: imagesBase64
+                    });
+                }
 
-            // Show the write button again
-            const writeBtn = document.getElementById('writeReviewBtn');
-            if (writeBtn) {
-                writeBtn.style.display = 'inline-block';
-                setTimeout(() => writeBtn.style.opacity = '1', 50);
-            }
+                // Hide the form
+                const formContainer = document.getElementById('reviewFormContainer');
+                if (formContainer) {
+                    formContainer.classList.remove('review-form-visible');
+                    formContainer.classList.add('review-form-hidden');
+                }
 
-            // Create and show success popup
-            const popup = document.createElement('div');
-            popup.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;" id="successOverlay">
-                    <div style="background: white; padding: 30px 20px; border-radius: 16px; text-align: center; max-width: 400px; width: 90%; transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 15px 30px rgba(0,0,0,0.1);" id="successModal">
-                        <div style="width: 70px; height: 70px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);">
-                            <i class="fa-solid fa-check"></i>
+                // Reset form
+                document.getElementById('reviewForm').reset();
+                resetRating();
+                setRating(0);
+                if (document.getElementById('reviewImagePreviewContainer')) {
+                    document.getElementById('reviewImagePreviewContainer').innerHTML = '';
+                }
+
+                // Show the write button again
+                const writeBtn = document.getElementById('writeReviewBtn');
+                if (writeBtn) {
+                    writeBtn.style.display = 'inline-block';
+                    setTimeout(() => writeBtn.style.opacity = '1', 50);
+                }
+
+                // Create and show success popup
+                const popup = document.createElement('div');
+                popup.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;" id="successOverlay">
+                        <div style="background: white; padding: 30px 20px; border-radius: 16px; text-align: center; max-width: 400px; width: 90%; transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 15px 30px rgba(0,0,0,0.1);" id="successModal">
+                            <div style="width: 70px; height: 70px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <h3 style="margin-bottom: 12px; font-size: 24px; color: var(--color-primary-dark); font-weight: 700;">Gửi thành công!</h3>
+                            <p style="color: var(--color-gray-600); margin-bottom: 25px; line-height: 1.5; font-size: 15px;">Cảm ơn bạn đã đánh giá sản phẩm. Đánh giá của bạn sẽ được hiển thị sau khi kiểm duyệt.</p>
+                            <button class="pd-btn pd-btn-primary" style="padding: 12px 30px; border-radius: 10px; font-weight: 600; width: 100%;" onclick="closeSuccessPopup()">Hoàn tất</button>
                         </div>
-                        <h3 style="margin-bottom: 12px; font-size: 24px; color: var(--color-primary-dark); font-weight: 700;">Gửi thành công!</h3>
-                        <p style="color: var(--color-gray-600); margin-bottom: 25px; line-height: 1.5; font-size: 15px;">Cảm ơn bạn đã đánh giá sản phẩm. Đánh giá của bạn sẽ được hiển thị sau khi kiểm duyệt.</p>
-                        <button class="pd-btn pd-btn-primary" style="padding: 12px 30px; border-radius: 10px; font-weight: 600; width: 100%;" onclick="closeSuccessPopup()">Hoàn tất</button>
                     </div>
-                </div>
-            `;
-            document.body.appendChild(popup);
+                `;
+                document.body.appendChild(popup);
 
-            // Animate in
-            setTimeout(() => {
-                document.getElementById('successOverlay').style.opacity = '1';
-                const modal = document.getElementById('successModal');
-                if (modal) modal.style.transform = 'translateY(0) scale(1)';
-            }, 50);
+                // Animate in
+                setTimeout(() => {
+                    document.getElementById('successOverlay').style.opacity = '1';
+                    const modal = document.getElementById('successModal');
+                    if (modal) modal.style.transform = 'translateY(0) scale(1)';
+                }, 50);
+            });
         }
 
         window.closeSuccessPopup = function () {
@@ -1806,6 +1637,115 @@
                 }, 300);
             }
         }
+        
+        function renderReviews(productId) {
+            let reviews = ProductDB.getReviewsByProductId(productId);
+            reviews = reviews.filter(r => r.status === 'approved');
+            
+            const reviewList = document.getElementById('reviewListContainer') || document.querySelector('.pd-review-list');
+            const ugcSection = document.getElementById('ugcSection');
+            const ugcTitle = document.getElementById('ugcTitle');
+            const ugcGallery = document.getElementById('ugcGallery');
+            
+            if (!reviewList) return;
+            
+            let allImages = [];
+            reviews.forEach(r => {
+                if (r.images && r.images.length > 0) {
+                    allImages = allImages.concat(r.images);
+                }
+            });
+            
+            if (ugcSection && ugcTitle && ugcGallery) {
+                if (allImages.length > 0) {
+                    ugcTitle.innerHTML = `<i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh thực tế từ người mua (${allImages.length})`;
+                    ugcGallery.innerHTML = allImages.map((img, idx) => `
+                        <img loading="lazy" src="${img}" alt="Khách hàng ${idx+1}" onclick="openLightboxForUGC(this.src)">
+                    `).join('');
+                    ugcSection.style.display = 'block';
+                } else {
+                    ugcSection.style.display = 'none';
+                    ugcGallery.innerHTML = '';
+                }
+            }
+            
+            if (reviews.length === 0) {
+                reviewList.innerHTML = '<p style="text-align: center; color: var(--color-gray-500); margin: 20px 0;">Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!</p>';
+                return;
+            }
+            
+            let html = '';
+            reviews.forEach(r => {
+                const avatarChar = r.name.charAt(0).toUpperCase();
+                const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
+                const bgColor = colors[r.name.charCodeAt(0) % colors.length];
+                const date = new Date(r.createdAt).toLocaleDateString('vi-VN');
+                
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= r.rating) starsHtml += '<i class="fa-solid fa-star"></i>';
+                    else starsHtml += '<i class="fa-regular fa-star"></i>';
+                }
+                
+                let imagesHtml = '';
+                if (r.images && r.images.length > 0) {
+                    imagesHtml = '<div class="pd-review-images" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">';
+                    r.images.forEach(img => {
+                        imagesHtml += `<img loading="lazy" src="${img}" alt="Review Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid var(--color-gray-200);" onclick="openLightboxForUGC(this.src)">`;
+                    });
+                    imagesHtml += '</div>';
+                }
+                
+                html += `
+                    <div class="pd-review-item">
+                        <div class="pd-review-header">
+                            <div class="pd-reviewer-info">
+                                <div class="pd-reviewer-avatar" style="background-color: ${bgColor}; color: white;">${avatarChar}</div>
+                                <div>
+                                    <div class="pd-reviewer-name">${r.name}</div>
+                                    <div class="pd-reviewer-stars">${starsHtml}</div>
+                                </div>
+                            </div>
+                            <div class="pd-review-date">${date}</div>
+                        </div>
+                        <div class="pd-review-content">
+                            <p>${r.content}</p>
+                            ${imagesHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            reviewList.innerHTML = html;
+        }
+
+        // Image preview logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewImagesInput = document.getElementById('reviewImages');
+            const previewContainer = document.getElementById('reviewImagePreviewContainer');
+            
+            if (reviewImagesInput && previewContainer) {
+                reviewImagesInput.addEventListener('change', function() {
+                    previewContainer.innerHTML = '';
+                    if (this.files && this.files.length > 0) {
+                        Array.from(this.files).forEach(file => {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.style.width = '60px';
+                                img.style.height = '60px';
+                                img.style.objectFit = 'cover';
+                                img.style.borderRadius = '6px';
+                                img.style.border = '1px solid #ddd';
+                                previewContainer.appendChild(img);
+                            }
+                            reader.readAsDataURL(file);
+                        });
+                    }
+                });
+            }
+        });
+
         // === DYNAMIC PRODUCT LOADING ===
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof ProductDB === 'undefined') return;
@@ -1837,7 +1777,7 @@
             // Update Brand/Weight if combo
             if (product.categoryId === 9) {
                 const brandEl = document.getElementById('pdBrand');
-                if (brandEl) brandEl.textContent = 'Thương hiệu: Gas Lê Mạnh';
+                if (brandEl) brandEl.textContent = `Mã SKU: ${product.sku || 'Đang cập nhật'}`;
                 const weightEl = document.getElementById('pdWeight');
                 if (weightEl) weightEl.style.display = 'none';
                 const weightDivider = document.getElementById('pdWeightDivider');
@@ -1857,8 +1797,9 @@
                     window.imageLightboxImages = [product.image];
                     let thumbsHTML = `<img loading="lazy" src="${product.image}" class="pd-thumb-img active" onclick="document.getElementById('pdMainImage').src=this.src; document.querySelectorAll('.pd-thumb-img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`;
 
-                    if (product.images && product.images.length > 0) {
-                        const additionalImgs = product.images.slice(0, 6);
+                    const imgs = product.images || product.thumbnails;
+                    if (imgs && imgs.length > 0) {
+                        const additionalImgs = imgs.slice(0, 6);
                         window.imageLightboxImages = [...window.imageLightboxImages, ...additionalImgs];
 
                         additionalImgs.forEach((img, idx) => {
@@ -2122,7 +2063,7 @@
             }
         }
     </script>
-    <script defer src="/js/product-db.js?v=5"></script>
+    <script defer src="/assets/js/client/product-db.js?v=6"></script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">
