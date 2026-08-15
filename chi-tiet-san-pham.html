@@ -455,7 +455,7 @@
                     <div id="reviewFormContainer" class="review-form-hidden"
                         style="background: var(--color-gray-50); border-radius: var(--border-radius-md); border: 1px solid var(--color-gray-200);">
                         <div style="margin-bottom: 15px; font-size: 18px; font-weight: 600;">Viết đánh giá của bạn</div>
-                        <form id="reviewForm" onsubmit="event.preventDefault(); submitReview();">
+                        <form id="reviewForm" onsubmit="event.preventDefault(); submitReview(); return false;">
                             <div id="starRatingContainer"
                                 style="margin-bottom: 15px; color: var(--color-accent); font-size: 24px; cursor: pointer;">
                                 <i class="fa-regular fa-star" data-rating="1" onclick="setRating(1)"
@@ -846,7 +846,7 @@
         // Load More Reviews Handler
         function loadMoreReviews() {
             const btn = document.getElementById('loadMoreBtn');
-            const extraReviews = document.querySelectorAll('.extra-review');
+            const hiddenReviews = document.querySelectorAll('.review-hidden');
 
             // Show loading state
             btn.innerHTML = 'Đang tải <i class="fa-solid fa-spinner fa-spin" style="margin-left: 5px;"></i>';
@@ -854,8 +854,9 @@
 
             // Simulate delay
             setTimeout(() => {
-                extraReviews.forEach(review => {
+                hiddenReviews.forEach(review => {
                     review.style.display = 'block';
+                    review.classList.remove('review-hidden');
                 });
                 btn.style.display = 'none'; // Hide button after loading
             }, 800); // 800ms delay
@@ -1157,7 +1158,7 @@
                 }
             }
 
-            let currentProduct = null;
+            window.currentProduct = null;
 
             if (productSlug) {
                 const product = ProductDB.getBySlug(productSlug);
@@ -1187,7 +1188,7 @@
                     return;
                 }
 
-                currentProduct = product;
+                window.currentProduct = product;
 
                 // Set Breadcrumb
                 const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
@@ -1513,21 +1514,21 @@
         let currentRating = 0;
         const ratingTexts = ['', 'Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
 
-        function setRating(rating) {
+        window.setRating = function(rating) {
             currentRating = rating;
             document.getElementById('reviewRating').value = rating;
             updateStars(rating);
         }
 
-        function hoverRating(rating) {
+        window.hoverRating = function(rating) {
             updateStars(rating);
         }
 
-        function resetRating() {
+        window.resetRating = function() {
             updateStars(currentRating);
         }
 
-        function updateStars(rating) {
+        window.updateStars = function(rating) {
             const stars = document.querySelectorAll('#starRatingContainer i');
             stars.forEach((star, index) => {
                 if (index < rating) {
@@ -1541,7 +1542,7 @@
             if (textEl) textEl.textContent = text;
         }
 
-        function submitReview() {
+        window.submitReview = function() {
             const ratingInput = document.getElementById('reviewRating');
             if (ratingInput && parseInt(ratingInput.value) === 0) {
                 if (typeof showToast === 'function') showToast('Vui lòng chọn số sao đánh giá!', 'error');
@@ -1568,9 +1569,9 @@
             }
             
             Promise.all(imagePromises).then(imagesBase64 => {
-                if (typeof currentProduct !== 'undefined' && currentProduct) {
+                if (window.currentProduct) {
                     ProductDB.addReview({
-                        productId: currentProduct.id,
+                        productId: window.currentProduct.id,
                         rating: parseInt(ratingInput.value),
                         name: nameInput ? nameInput.value.trim() : 'Khách hàng',
                         phone: phoneInput ? phoneInput.value.trim() : '',
@@ -1610,7 +1611,7 @@
                                 <i class="fa-solid fa-check"></i>
                             </div>
                             <h3 style="margin-bottom: 12px; font-size: 24px; color: var(--color-primary-dark); font-weight: 700;">Gửi thành công!</h3>
-                            <p style="color: var(--color-gray-600); margin-bottom: 25px; line-height: 1.5; font-size: 15px;">Cảm ơn bạn đã đánh giá sản phẩm. Đánh giá của bạn sẽ được hiển thị sau khi kiểm duyệt.</p>
+                            <p style="color: var(--color-gray-600); margin-bottom: 25px; line-height: 1.5; font-size: 15px;">Cảm ơn quý khách đã đánh giá trải nghiệm</p>
                             <button class="pd-btn pd-btn-primary" style="padding: 12px 30px; border-radius: 10px; font-weight: 600; width: 100%;" onclick="closeSuccessPopup()">Hoàn tất</button>
                         </div>
                     </div>
@@ -1647,7 +1648,52 @@
             const ugcTitle = document.getElementById('ugcTitle');
             const ugcGallery = document.getElementById('ugcGallery');
             
-            if (!reviewList) return;
+            let avgRating = 0;
+            let ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+            if (reviews.length > 0) {
+                const sum = reviews.reduce((acc, r) => {
+                    let rate = parseInt(r.rating || 5);
+                    if(rate > 5) rate = 5; if(rate < 1) rate = 1;
+                    ratingCounts[rate] = (ratingCounts[rate] || 0) + 1;
+                    return acc + rate;
+                }, 0);
+                avgRating = (sum / reviews.length).toFixed(1);
+            } else {
+                avgRating = '0';
+            }
+            
+            const totalReviewCountEl = document.getElementById('totalReviewCount');
+            const headerReviewCountEl = document.getElementById('headerReviewCount');
+            const headerRatingTextEl = document.getElementById('headerRatingText');
+            const headerRatingStarsHtml = document.getElementById('headerRatingStarsHtml');
+            const averageRatingTextEl = document.getElementById('averageRatingText');
+            const averageRatingStarsHtml = document.getElementById('averageRatingStars');
+            
+            if (totalReviewCountEl) totalReviewCountEl.textContent = reviews.length;
+            if (headerReviewCountEl) headerReviewCountEl.textContent = reviews.length;
+            if (headerRatingTextEl) headerRatingTextEl.textContent = avgRating;
+            if (averageRatingTextEl) averageRatingTextEl.textContent = avgRating;
+            
+            let starsHtml = '';
+            const numAvg = parseFloat(avgRating);
+            const fullStars = Math.floor(numAvg);
+            const hasHalfStar = (numAvg - fullStars) >= 0.5;
+            for (let i = 0; i < fullStars; i++) starsHtml += '<i class="fa-solid fa-star"></i>';
+            if (hasHalfStar) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) starsHtml += '<i class="fa-regular fa-star"></i>';
+            
+            if (headerRatingStarsHtml) headerRatingStarsHtml.innerHTML = starsHtml;
+            if (averageRatingStarsHtml) averageRatingStarsHtml.innerHTML = starsHtml;
+            
+            for (let i = 1; i <= 5; i++) {
+                const count = ratingCounts[i];
+                const pct = reviews.length > 0 ? Math.round((count / reviews.length) * 100) : 0;
+                const barEl = document.getElementById(`bar-${i}`);
+                const pctEl = document.getElementById(`percent-${i}`);
+                if (barEl) barEl.style.width = `${pct}%`;
+                if (pctEl) pctEl.textContent = `${pct}%`;
+            }
             
             let allImages = [];
             reviews.forEach(r => {
@@ -1675,7 +1721,7 @@
             }
             
             let html = '';
-            reviews.forEach(r => {
+            reviews.forEach((r, index) => {
                 const avatarChar = r.name.charAt(0).toUpperCase();
                 const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
                 const bgColor = colors[r.name.charCodeAt(0) % colors.length];
@@ -1696,8 +1742,11 @@
                     imagesHtml += '</div>';
                 }
                 
+                const hiddenStyle = index >= 5 ? 'display: none;' : '';
+                const hiddenClass = index >= 5 ? 'review-hidden' : '';
+                
                 html += `
-                    <div class="pd-review-item">
+                    <div class="pd-review-item ${hiddenClass}" style="${hiddenStyle}">
                         <div class="pd-review-header">
                             <div class="pd-reviewer-info">
                                 <div class="pd-reviewer-avatar" style="background-color: ${bgColor}; color: white;">${avatarChar}</div>
@@ -1716,7 +1765,28 @@
                 `;
             });
             reviewList.innerHTML = html;
+            
+            const loadMoreWrapper = document.querySelector('.pd-load-more-reviews');
+            if (loadMoreWrapper) {
+                if (reviews.length <= 5) {
+                    loadMoreWrapper.style.display = 'none';
+                } else {
+                    loadMoreWrapper.style.display = 'block';
+                }
+            }
         }
+        
+        window.loadMoreReviews = function() {
+            const hiddenReviews = document.querySelectorAll('.pd-review-item.review-hidden');
+            hiddenReviews.forEach(el => {
+                el.style.display = '';
+                el.classList.remove('review-hidden');
+            });
+            const loadMoreWrapper = document.querySelector('.pd-load-more-reviews');
+            if (loadMoreWrapper) {
+                loadMoreWrapper.style.display = 'none';
+            }
+        };
 
         // Image preview logic
         document.addEventListener('DOMContentLoaded', () => {

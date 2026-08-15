@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const countText = document.getElementById('reviewCountText');
         if (!tbody) return;
 
-        let reviews = ProductDB.getReviews() || [];
+        let reviews = ProductDB.getReviews(true) || [];
         
         // Filter by Status
         const statusFilter = reviewFilterStatus ? reviewFilterStatus.value : 'all';
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Sort: newest first
-        reviews.sort((a, b) => b.createdAt - a.createdAt);
+        reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         if (countText) {
             countText.textContent = `${reviews.length} đánh giá`;
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updateReviewStatus = function(id, status) {
         if (ProductDB.updateReviewStatus(id, status)) {
             renderReviews();
+            if (typeof updateContactBadge === 'function') updateContactBadge();
             if (typeof showToast === 'function') {
                 if (status === 'approved') showToast('Đã duyệt đánh giá', 'success');
                 else if (status === 'rejected') showToast('Đã từ chối đánh giá', 'warning');
@@ -123,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.showConfirm('Xóa đánh giá', 'Bạn có chắc chắn muốn xóa đánh giá này không?', () => {
                 if (ProductDB.deleteReview(id)) {
                     renderReviews();
+                    if (typeof updateContactBadge === 'function') updateContactBadge();
                     showToast('Đã xóa đánh giá', 'success');
                 }
             });
@@ -130,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm('Bạn có chắc chắn muốn xóa đánh giá này không?')) {
                 if (ProductDB.deleteReview(id)) {
                     renderReviews();
+                    if (typeof updateContactBadge === 'function') updateContactBadge();
                     if (typeof showToast === 'function') showToast('Đã xóa đánh giá', 'success');
                 }
             }

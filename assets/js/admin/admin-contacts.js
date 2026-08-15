@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (badge) {
             if (unreadContacts > 0) {
                 badge.textContent = unreadContacts > 99 ? '99+' : unreadContacts;
-                badge.style.display = 'inline-block';
+                badge.style.display = 'inline-flex';
             } else {
                 badge.style.display = 'none';
             }
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (revBadge) {
             if (pendingReviews > 0) {
                 revBadge.textContent = pendingReviews > 99 ? '99+' : pendingReviews;
-                revBadge.style.display = 'inline-block';
+                revBadge.style.display = 'inline-flex';
             } else {
                 revBadge.style.display = 'none';
             }
@@ -252,10 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('gasviet_review_added', () => {
         updateContactBadge();
         if (notificationDropdown && notificationDropdown.style.display === 'block') {
-            renderNotifications();
+            if(typeof window.renderNotifications === 'function') window.renderNotifications();
         }
         if (document.getElementById('section-reviews') && document.getElementById('section-reviews').classList.contains('active')) {
-            if(typeof renderReviews === 'function') renderReviews();
+            if(typeof window.renderReviews === 'function') window.renderReviews();
+        }
+        if (document.getElementById('section-dashboard') && document.getElementById('section-dashboard').classList.contains('active')) {
+            if(typeof window.renderDashboard === 'function') window.renderDashboard();
         }
     });
 
@@ -319,10 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(typeof renderNotifications === 'function') renderNotifications();
             }
             if (e.key === 'gasviet_contacts' && document.getElementById('section-contacts') && document.getElementById('section-contacts').classList.contains('active')) {
-                renderContacts();
+                if(typeof window.renderContacts === 'function') window.renderContacts();
             }
             if (e.key === 'gasviet_reviews' && document.getElementById('section-reviews') && document.getElementById('section-reviews').classList.contains('active')) {
-                if(typeof renderReviews === 'function') renderReviews();
+                if(typeof window.renderReviews === 'function') window.renderReviews();
+            }
+            if (document.getElementById('section-dashboard') && document.getElementById('section-dashboard').classList.contains('active')) {
+                if(typeof window.renderDashboard === 'function') window.renderDashboard();
             }
         }
     });
