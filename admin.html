@@ -16,7 +16,16 @@
     <meta property="og:title" content="Quản Lý Gas Lê Mạnh | Admin Panel" />
     <meta property="og:description"
         content="Hệ thống quản trị Gas Lê Mạnh - Đăng nhập quản lý sản phẩm, đơn hàng và tin tức." />
-    <meta property="og:image" content="https://gaslemanh.vn/assets/logo/logo_gas.png" />
+    <!-- Ảnh hiển thị khi chia sẻ link (Facebook, Zalo...) -->
+    <meta property="og:image" content="https://gaslemanh.vn/assets/images/banner-share-lemanh.jpg" />
+
+    <!-- Kích thước khuyến nghị chuẩn đẹp: 1200 x 630 px -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Thêm cho chuẩn Twitter/X nếu cần -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://gaslemanh.vn/assets/images/banner-share-lemanh.jpg" />
     <meta property="og:url" content="https://gaslemanh.vn/quan-ly-gas-lemanh" />
     <meta property="og:type" content="website" />
 </head>
@@ -995,6 +1004,20 @@
                             <label class="form-label">Tác giả (Nguồn)</label>
                             <input type="text" class="form-input" id="newsAuthor"
                                 placeholder="Nhập tên tác giả hoặc nguồn bài viết...">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Ảnh đại diện Tác giả (Avatar)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" class="form-input" id="newsAuthorAvatar"
+                                    placeholder="Nhập URL ảnh đại diện tác giả (mặc định là logo)...">
+                                <input type="file" id="newsAuthorAvatarUpload" accept="image/*" style="display: none;">
+                                <button type="button" class="btn"
+                                    style="background: var(--admin-border); color: var(--admin-text); padding: 0 15px;"
+                                    onclick="document.getElementById('newsAuthorAvatarUpload').click()"
+                                    title="Tải ảnh từ máy tính">
+                                    <i class="fa-solid fa-upload"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="form-group full">
                             <label class="form-label">Hình ảnh đại diện</label>

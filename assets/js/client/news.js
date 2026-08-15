@@ -208,6 +208,18 @@ function renderNewsDetail() {
     }
     metaDesc.content = newsItem.seoDesc || newsItem.content.replace(/<[^>]+>/g, '').substring(0, 160);
 
+    // Update Open Graph Image
+    let ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+        let fullImageUrl = newsItem.image.startsWith('http') ? newsItem.image : window.location.origin + newsItem.image;
+        ogImage.setAttribute("content", fullImageUrl);
+    }
+    let twImage = document.querySelector('meta[name="twitter:image"]');
+    if (twImage) {
+        let fullImageUrl = newsItem.image.startsWith('http') ? newsItem.image : window.location.origin + newsItem.image;
+        twImage.setAttribute("content", fullImageUrl);
+    }
+
     // Related
     const related = allNews.filter(n => n.categoryId === newsItem.categoryId && n.id !== newsItem.id).slice(0, 3);
     let relatedHtml = '';
@@ -231,7 +243,7 @@ function renderNewsDetail() {
             <h1 id="h1-title">${newsItem.title}</h1>
             <div class="nb-detail-meta">
                 <div class="nb-author">
-                    <img src="/assets/logo/logo_gas.png" alt="Author">
+                    <img src="${newsItem.authorAvatar || '/assets/logo/logo_gas.png'}" alt="Author">
                     <div>
                         <strong>${newsItem.author || 'Ban Biên Tập'}</strong>
                     </div>

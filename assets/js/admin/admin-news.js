@@ -30,30 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const catName = n.categoryId ? (ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Chưa phân loại') : 'Chưa phân loại';
             
             let posBadge = '';
-        const searchVal = window.removeVietnameseTones(searchValRaw);
-        const tbody = document.getElementById('newsTableBody');
-
-        if (!tbody) return;
-
-        let filteredNews = news;
-        if (searchVal) {
-            filteredNews = news.filter(n => 
-                window.removeVietnameseTones(n.title).includes(searchVal) || 
-                (n.slug && n.slug.toLowerCase().includes(searchVal))
-            );
-        }
-
-        if (filteredNews.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="table-empty"><i class="fa-solid fa-newspaper"></i>Chưa có tin tức nào</td></tr>';
-            return;
-        }
-
-        tbody.innerHTML = filteredNews.map(n => {
-            const dateStr = n.createdAt ? new Date(n.createdAt).toLocaleDateString('vi-VN') : '—';
-            
-            const catName = n.categoryId ? (ProductDB.getNewsCategoryById(n.categoryId)?.name || 'Chưa phân loại') : 'Chưa phân loại';
-            
-            let posBadge = '';
             if (n.position === 'hero_main') posBadge = '<span class="badge" style="background:#e8f4fd;color:#0369a1;padding:4px 8px;border-radius:4px;font-size:12px;">Bài nổi bật (Chính)</span>';
             else if (n.position === 'hero_sub') posBadge = '<span class="badge" style="background:#f0f9ff;color:#0284c7;padding:4px 8px;border-radius:4px;font-size:12px;">Bài nổi bật (Phụ)</span>';
             else if (n.position === 'trending_main') posBadge = '<span class="badge" style="background:#fff7ed;color:#c2410c;padding:4px 8px;border-radius:4px;font-size:12px;">Tin cập nhật (Chính)</span>';
@@ -107,9 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (newsItem) {
             title.textContent = 'Sửa tin tức';
+            document.getElementById('newsId').value = newsItem.id;
             document.getElementById('newsTitle').value = newsItem.title || '';
             document.getElementById('newsSlug').value = newsItem.slug || '';
             document.getElementById('newsAuthor').value = newsItem.author || '';
+            document.getElementById('newsAuthorAvatar').value = newsItem.authorAvatar || '';
             document.getElementById('newsImage').value = newsItem.image || '';
             document.getElementById('newsContent').value = newsItem.content || '';
             if (typeof quillEditor !== 'undefined') quillEditor.root.innerHTML = newsItem.content || '';
@@ -122,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             title.textContent = 'Thêm tin tức mới';
             document.getElementById('newsSlug').value = '';
+            document.getElementById('newsAuthorAvatar').value = '';
             document.getElementById('newsContent').value = '';
             if (typeof quillEditor !== 'undefined') quillEditor.root.innerHTML = '';
             
@@ -201,6 +180,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const newsAuthorAvatarUpload = document.getElementById('newsAuthorAvatarUpload');
+    if (newsAuthorAvatarUpload) {
+        newsAuthorAvatarUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 1024 * 1024) {
+                    showToast('Vui lòng chọn ảnh có kích thước dưới 1MB!', 'error');
+                    this.value = '';
+                    return;
+                }
+                window.compressImage(file, 400, function(dataUrl) {
+                    if (dataUrl) {
+                        document.getElementById('newsAuthorAvatar').value = dataUrl;
+                    }
+                });
+            }
+        });
+    }
+
     document.getElementById('btnSaveNews')?.addEventListener('click', async (e) => {
         if(e) e.preventDefault();
         const title = document.getElementById('newsTitle').value.trim();
@@ -253,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: document.getElementById('newsTitle').value.trim(),
                 slug: document.getElementById('newsSlug').value.trim(),
                 author: document.getElementById('newsAuthor').value.trim(),
+                authorAvatar: document.getElementById('newsAuthorAvatar').value.trim(),
                 image: mainImage,
                 content: document.getElementById('newsContent').value.trim(),
                 categoryId: parseInt(catId),

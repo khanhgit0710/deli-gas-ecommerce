@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -18,13 +18,31 @@
 
     <!-- Open Graph SEO Tags -->
     <meta property="og:title" content="Bình gas Petrolimex 12kg | Gas Lê Mạnh" />
-    <meta property="og:description" content="Bình Gas Petrolimex 12kg chính hãng, an toàn, tiết kiệm. Giao gas nhanh chóng tận nhà với nhiều ưu đãi hấp dẫn từ Gas Lê Mạnh." />
-    <meta property="og:image" content="https://gaslemanh.vn/assets/logo/logo_gas.png" />
+    <meta property="og:description"
+        content="Bình Gas Petrolimex 12kg chính hãng, an toàn, tiết kiệm. Giao gas nhanh chóng tận nhà với nhiều ưu đãi hấp dẫn từ Gas Lê Mạnh." />
+    <!-- Ảnh hiển thị khi chia sẻ link (Facebook, Zalo...) -->
+    <meta property="og:image" content="https://gaslemanh.vn/assets/images/banner-share-lemanh.jpg" />
+
+    <!-- Kích thước khuyến nghị chuẩn đẹp: 1200 x 630 px -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Thêm cho chuẩn Twitter/X nếu cần -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://gaslemanh.vn/assets/images/banner-share-lemanh.jpg" />
     <meta property="og:url" content="https://gaslemanh.vn/chi-tiet-san-pham" />
     <meta property="og:type" content="website" />
     <style>
-        .pd-page-wrapper { opacity: 0; visibility: hidden; }
-        body.loaded .pd-page-wrapper { opacity: 1; visibility: visible; transition: opacity 0.3s ease-in; }
+        .pd-page-wrapper {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        body.loaded .pd-page-wrapper {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease-in;
+        }
     </style>
 </head>
 
@@ -48,8 +66,7 @@
                 <!-- Left: Gallery -->
                 <div class="pd-gallery">
                     <div class="pd-main-image">
-                        <img loading="lazy" id="pdMainImage"
-                            src="/assets/images/local/img_1.png"
+                        <img loading="lazy" id="pdMainImage" src="/assets/images/local/img_1.png"
                             alt="Bình Gas Petrolimex 12kg" onclick="openImageLightbox(0)" style="cursor: pointer;">
                     </div>
 
@@ -283,9 +300,7 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-1">
                             <label for="combo-1">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_1.png"
-                                    alt="Bình Gas 12kg">
+                                <img loading="lazy" src="/assets/images/local/img_1.png" alt="Bình Gas 12kg">
                                 <span>Bình Gas 12kg</span>
                                 <div class="combo-item-price">420.000đ</div>
                             </label>
@@ -294,9 +309,7 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-2">
                             <label for="combo-2">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_2.jpg"
-                                    alt="Van ngắt tự động">
+                                <img loading="lazy" src="/assets/images/local/img_2.jpg" alt="Van ngắt tự động">
                                 <span>Van Ngắt Katsura</span>
                                 <div class="combo-item-price">120.000đ</div>
                             </label>
@@ -305,9 +318,7 @@
                         <div class="combo-item">
                             <input type="checkbox" checked class="combo-check" id="combo-3">
                             <label for="combo-3">
-                                <img loading="lazy"
-                                    src="/assets/images/local/img_3.jpg"
-                                    alt="Dây gas lõi thép">
+                                <img loading="lazy" src="/assets/images/local/img_3.jpg" alt="Dây gas lõi thép">
                                 <span>Dây Gas Lõi Thép</span>
                                 <div class="combo-item-price">80.000đ</div>
                             </label>
@@ -374,7 +385,8 @@
                             <div
                                 style="font-size: 3rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; margin-bottom: 5px;">
                                 <a href="/chi-tiet-san-pham" style="color: inherit; text-decoration: none;"
-                                    id="averageRatingText">4.8</a></div>
+                                    id="averageRatingText">4.8</a>
+                            </div>
                             <div class="stars" id="averageRatingStars">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
@@ -479,6 +491,7 @@
                                     gap: 15px;
                                     margin-bottom: 15px;
                                 }
+
                                 @media (max-width: 480px) {
                                     .review-inputs-row {
                                         flex-direction: column;
@@ -495,13 +508,17 @@
                                 style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--color-gray-300); border-radius: var(--border-radius-sm); margin-bottom: 15px; resize: vertical; outline: none; font-family: inherit;"></textarea>
                             <div style="margin-bottom: 15px;">
                                 <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-                                    <label for="reviewImages" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 15px; border: 1px dashed var(--color-primary); border-radius: 8px; background: rgba(0, 104, 255, 0.05); color: var(--color-primary); font-weight: 500; cursor: pointer; transition: all 0.2s ease;">
+                                    <label for="reviewImages"
+                                        style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 15px; border: 1px dashed var(--color-primary); border-radius: 8px; background: rgba(0, 104, 255, 0.05); color: var(--color-primary); font-weight: 500; cursor: pointer; transition: all 0.2s ease;">
                                         <i class="fa-solid fa-camera"></i> Đính kèm hình ảnh
                                     </label>
-                                    <span style="font-size: 13px; color: var(--color-gray-500);">(Có thể chọn nhiều ảnh)</span>
+                                    <span style="font-size: 13px; color: var(--color-gray-500);">(Có thể chọn nhiều
+                                        ảnh)</span>
                                 </div>
                                 <input type="file" id="reviewImages" accept="image/*" multiple style="display: none;">
-                                <div id="reviewImagePreviewContainer" style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto; padding-bottom: 5px;"></div>
+                                <div id="reviewImagePreviewContainer"
+                                    style="display: flex; gap: 10px; margin-top: 10px; overflow-x: auto; padding-bottom: 5px;">
+                                </div>
                             </div>
                             <button type="submit"
                                 style="background-color: var(--color-primary); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600;">Gửi
@@ -515,7 +532,8 @@
                     <div id="ugcTitle"
                         style="margin-bottom: 15px; font-size: 16px; font-weight: 600; color: var(--color-primary-dark);">
                         <i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình
-                        ảnh thực tế từ người mua (0)</div>
+                        ảnh thực tế từ người mua (0)
+                    </div>
                     <div class="ugc-gallery" id="ugcGallery">
                         <!-- Rendered dynamically -->
                     </div>
@@ -557,7 +575,8 @@
                 <div class="faq-item">
                     <div class="faq-question">Gas Lê Mạnh có hỗ trợ thu đổi vỏ bình của hãng khác không? <i
                             class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Có, Gas Lê Mạnh hoàn toàn hỗ trợ khách hàng thu đổi vỏ bình gas từ các thương
+                    <div class="faq-answer">Có, Gas Lê Mạnh hoàn toàn hỗ trợ khách hàng thu đổi vỏ bình gas từ các
+                        thương
                         hiệu khác sang bình gas Petrolimex chính hãng. Chúng tôi chấp nhận vỏ bình của hầu hết các
                         thương hiệu uy tín trên thị trường miễn là vỏ bình còn nguyên vẹn, không bị biến dạng nghiêm
                         trọng hay rỉ sét quá mức. Mức phí bù chênh lệch (nếu có) sẽ được tính toán cực kỳ hợp lý và minh
@@ -567,7 +586,8 @@
                 <div class="faq-item">
                     <div class="faq-question">Phí giao hàng và lắp đặt tại nhà tính như thế nào? <i
                             class="fa-solid fa-plus"></i></div>
-                    <div class="faq-answer">Dịch vụ giao hàng và lắp đặt tại Gas Lê Mạnh là hoàn toàn MIỄN PHÍ đối với khu
+                    <div class="faq-answer">Dịch vụ giao hàng và lắp đặt tại Gas Lê Mạnh là hoàn toàn MIỄN PHÍ đối với
+                        khu
                         vực nội thành. Khi bạn đặt hàng, đội ngũ nhân viên kỹ thuật giàu kinh nghiệm của chúng tôi sẽ
                         giao gas đến tận bếp nhà bạn trong thời gian nhanh nhất (thường chỉ từ 15-30 phút). Không chỉ
                         giao hàng, nhân viên sẽ tiến hành tháo lắp đúng kỹ thuật, thay mới ron an toàn (miễn phí) và sử
@@ -582,7 +602,8 @@
                         ra bất kỳ tia lửa nào (kể cả bật lửa hay diêm). Ngay lập tức, hãy khóa chặt van bình gas lại.
                         Sau đó, mở toang tất cả các cửa chính và cửa sổ để khí gas thoát ra ngoài, làm thông thoáng khu
                         vực bếp. Cuối cùng, hãy di chuyển ra khu vực an toàn và gọi ngay cho Hotline hỗ trợ khẩn cấp của
-                        Gas Lê Mạnh. Kỹ thuật viên của chúng tôi sẽ nhanh chóng có mặt để kiểm tra và xử lý triệt để sự cố,
+                        Gas Lê Mạnh. Kỹ thuật viên của chúng tôi sẽ nhanh chóng có mặt để kiểm tra và xử lý triệt để sự
+                        cố,
                         đảm bảo an toàn cho gia đình bạn.</div>
                 </div>
             </div>
@@ -605,8 +626,7 @@
                         <div class="product-card">
                             <div class="product-badge badge-discount">Giảm 10%</div>
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_9.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_9.jpg"
                                         alt="Gas Công Nghiệp"></a>
                             </div>
                             <div class="product-info">
@@ -626,8 +646,7 @@
                         <!-- Product 2 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_10.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_10.jpg"
                                         alt="Dây van"></a>
                             </div>
                             <div class="product-info">
@@ -648,8 +667,7 @@
                         <div class="product-card">
                             <div class="product-badge badge-new">Mới</div>
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_11.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_11.jpg"
                                         alt="Bếp Gas"></a>
                             </div>
                             <div class="product-info">
@@ -669,8 +687,7 @@
                         <!-- Product 4 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_12.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_12.jpg"
                                         alt="Cân"></a>
                             </div>
                             <div class="product-info">
@@ -691,8 +708,7 @@
                         <div class="product-card">
                             <div class="product-badge badge-discount">Giảm 5%</div>
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_1.png"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_1.png"
                                         alt="Gas Gia Đình"></a>
                             </div>
                             <div class="product-info">
@@ -712,8 +728,7 @@
                         <!-- Product 6 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_13.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_13.jpg"
                                         alt="Dây dẫn Gas"></a>
                             </div>
                             <div class="product-info">
@@ -733,8 +748,7 @@
                         <!-- Product 7 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_14.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_14.jpg"
                                         alt="Bếp Gas Âm"></a>
                             </div>
                             <div class="product-info">
@@ -754,8 +768,7 @@
                         <!-- Product 8 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_15.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_15.jpg"
                                         alt="Gas Elf"></a>
                             </div>
                             <div class="product-info">
@@ -776,8 +789,7 @@
                         <div class="product-card">
                             <div class="product-badge badge-hot">HOT</div>
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_16.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_16.jpg"
                                         alt="Van Katsura"></a>
                             </div>
                             <div class="product-info">
@@ -797,13 +809,12 @@
                         <!-- Product 10 -->
                         <div class="product-card">
                             <div class="product-img">
-                                <a href="/chi-tiet-san-pham"><img loading="lazy"
-                                        src="/assets/images/local/img_17.jpg"
+                                <a href="/chi-tiet-san-pham"><img loading="lazy" src="/assets/images/local/img_17.jpg"
                                         alt="Bảo hiểm"></a>
                             </div>
                             <div class="product-info">
-                                <h3><a href="/chi-tiet-san-pham"
-                                        style="color: inherit; text-decoration: none;">Thiết Bị Cảnh Báo Rò Rỉ Gas</a>
+                                <h3><a href="/chi-tiet-san-pham" style="color: inherit; text-decoration: none;">Thiết Bị
+                                        Cảnh Báo Rò Rỉ Gas</a>
                                 </h3>
                                 <div class="product-price">
                                     <span class="price-current">280.000đ</span>
@@ -1287,7 +1298,7 @@
                 // Set Description
                 const desc = document.querySelector('.pd-desc-short');
                 if (desc) desc.textContent = product.description || 'Sản phẩm chính hãng chất lượng cao.';
-                
+
                 const fullDesc = document.querySelector('#description .pd-tab-pane');
                 if (fullDesc) fullDesc.innerHTML = '<p>' + (product.description || 'Sản phẩm chính hãng chất lượng cao.') + '</p>';
 
@@ -1330,23 +1341,23 @@
                 // Set Specs Tab & Summary
                 const specsTab = document.querySelector('#specs .pd-tab-pane');
                 const pdSpecsSummary = document.getElementById('pdSpecsSummary');
-                
+
                 if (product.specs) {
                     const specLines = product.specs.split('\n').filter(line => line.trim() !== '');
-                    
+
                     // Specs Tab
                     if (specsTab && specLines.length > 0) {
                         specsTab.innerHTML = '<ul>' + specLines.map(line => `<li>${line}</li>`).join('') + '</ul>';
                     }
-                    
+
                     // Specs Summary Grid
                     if (pdSpecsSummary && specLines.length > 0) {
                         let gridHtml = '';
                         // Always include SKU if not in specs
                         if (!product.specs.toLowerCase().includes('sku')) {
-                             gridHtml += `<div style="color: var(--color-gray-500);">Mã SKU:</div><div style="font-weight: 500;">${product.sku || 'Đang cập nhật'}</div>`;
+                            gridHtml += `<div style="color: var(--color-gray-500);">Mã SKU:</div><div style="font-weight: 500;">${product.sku || 'Đang cập nhật'}</div>`;
                         }
-                        
+
                         specLines.forEach(line => {
                             const parts = line.split(':');
                             if (parts.length >= 2) {
@@ -1358,12 +1369,12 @@
                                 gridHtml += `<div style="color: var(--color-gray-500); grid-column: span 2;">${line}</div>`;
                             }
                         });
-                        
+
                         // Default "Tình trạng" if not exist in specs
                         if (!product.specs.toLowerCase().includes('tình trạng')) {
                             gridHtml += `<div style="color: var(--color-gray-500);">Tình trạng:</div><div style="font-weight: 500; color: #10b981;">Còn mới</div>`;
                         }
-                        
+
                         pdSpecsSummary.innerHTML = `
                             <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px; color: var(--color-gray-800);">
                                 Thông số kỹ thuật</div>
@@ -1514,21 +1525,21 @@
         let currentRating = 0;
         const ratingTexts = ['', 'Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
 
-        window.setRating = function(rating) {
+        window.setRating = function (rating) {
             currentRating = rating;
             document.getElementById('reviewRating').value = rating;
             updateStars(rating);
         }
 
-        window.hoverRating = function(rating) {
+        window.hoverRating = function (rating) {
             updateStars(rating);
         }
 
-        window.resetRating = function() {
+        window.resetRating = function () {
             updateStars(currentRating);
         }
 
-        window.updateStars = function(rating) {
+        window.updateStars = function (rating) {
             const stars = document.querySelectorAll('#starRatingContainer i');
             stars.forEach((star, index) => {
                 if (index < rating) {
@@ -1542,19 +1553,19 @@
             if (textEl) textEl.textContent = text;
         }
 
-        window.submitReview = function() {
+        window.submitReview = function () {
             const ratingInput = document.getElementById('reviewRating');
             if (ratingInput && parseInt(ratingInput.value) === 0) {
                 if (typeof showToast === 'function') showToast('Vui lòng chọn số sao đánh giá!', 'error');
                 else alert('Vui lòng chọn số sao đánh giá!');
                 return;
             }
-            
+
             const nameInput = document.getElementById('reviewName');
             const phoneInput = document.getElementById('reviewPhone');
             const contentInput = document.getElementById('reviewText');
             const imagesInput = document.getElementById('reviewImages');
-            
+
             // Collect images as Data URLs
             const imagePromises = [];
             if (imagesInput && imagesInput.files.length > 0) {
@@ -1567,7 +1578,7 @@
                     }));
                 }
             }
-            
+
             Promise.all(imagePromises).then(imagesBase64 => {
                 if (window.currentProduct) {
                     ProductDB.addReview({
@@ -1638,22 +1649,22 @@
                 }, 300);
             }
         }
-        
+
         function renderReviews(productId) {
             let reviews = ProductDB.getReviewsByProductId(productId);
             reviews = reviews.filter(r => r.status === 'approved');
-            
+
             const reviewList = document.getElementById('reviewListContainer') || document.querySelector('.pd-review-list');
             const ugcSection = document.getElementById('ugcSection');
             const ugcTitle = document.getElementById('ugcTitle');
             const ugcGallery = document.getElementById('ugcGallery');
-            
+
             let avgRating = 0;
             let ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
             if (reviews.length > 0) {
                 const sum = reviews.reduce((acc, r) => {
                     let rate = parseInt(r.rating || 5);
-                    if(rate > 5) rate = 5; if(rate < 1) rate = 1;
+                    if (rate > 5) rate = 5; if (rate < 1) rate = 1;
                     ratingCounts[rate] = (ratingCounts[rate] || 0) + 1;
                     return acc + rate;
                 }, 0);
@@ -1661,19 +1672,19 @@
             } else {
                 avgRating = '0';
             }
-            
+
             const totalReviewCountEl = document.getElementById('totalReviewCount');
             const headerReviewCountEl = document.getElementById('headerReviewCount');
             const headerRatingTextEl = document.getElementById('headerRatingText');
             const headerRatingStarsHtml = document.getElementById('headerRatingStarsHtml');
             const averageRatingTextEl = document.getElementById('averageRatingText');
             const averageRatingStarsHtml = document.getElementById('averageRatingStars');
-            
+
             if (totalReviewCountEl) totalReviewCountEl.textContent = reviews.length;
             if (headerReviewCountEl) headerReviewCountEl.textContent = reviews.length;
             if (headerRatingTextEl) headerRatingTextEl.textContent = avgRating;
             if (averageRatingTextEl) averageRatingTextEl.textContent = avgRating;
-            
+
             let starsHtml = '';
             const numAvg = parseFloat(avgRating);
             const fullStars = Math.floor(numAvg);
@@ -1682,10 +1693,10 @@
             if (hasHalfStar) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
             for (let i = 0; i < emptyStars; i++) starsHtml += '<i class="fa-regular fa-star"></i>';
-            
+
             if (headerRatingStarsHtml) headerRatingStarsHtml.innerHTML = starsHtml;
             if (averageRatingStarsHtml) averageRatingStarsHtml.innerHTML = starsHtml;
-            
+
             for (let i = 1; i <= 5; i++) {
                 const count = ratingCounts[i];
                 const pct = reviews.length > 0 ? Math.round((count / reviews.length) * 100) : 0;
@@ -1694,19 +1705,19 @@
                 if (barEl) barEl.style.width = `${pct}%`;
                 if (pctEl) pctEl.textContent = `${pct}%`;
             }
-            
+
             let allImages = [];
             reviews.forEach(r => {
                 if (r.images && r.images.length > 0) {
                     allImages = allImages.concat(r.images);
                 }
             });
-            
+
             if (ugcSection && ugcTitle && ugcGallery) {
                 if (allImages.length > 0) {
                     ugcTitle.innerHTML = `<i class="fa-solid fa-camera" style="margin-right: 8px; color: var(--color-accent);"></i> Hình ảnh thực tế từ người mua (${allImages.length})`;
                     ugcGallery.innerHTML = allImages.map((img, idx) => `
-                        <img loading="lazy" src="${img}" alt="Khách hàng ${idx+1}" onclick="openLightboxForUGC(this.src)">
+                        <img loading="lazy" src="${img}" alt="Khách hàng ${idx + 1}" onclick="openLightboxForUGC(this.src)">
                     `).join('');
                     ugcSection.style.display = 'block';
                 } else {
@@ -1714,30 +1725,30 @@
                     ugcGallery.innerHTML = '';
                 }
             }
-            
+
             const loadMoreWrapper = document.querySelector('.pd-load-more-reviews');
             if (loadMoreWrapper) {
                 loadMoreWrapper.style.display = reviews.length <= 5 ? 'none' : 'block';
             }
-            
+
             if (reviews.length === 0) {
                 reviewList.innerHTML = '<p style="text-align: center; color: var(--color-gray-500); margin: 20px 0;">Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!</p>';
                 return;
             }
-            
+
             let html = '';
             reviews.forEach((r, index) => {
                 const avatarChar = r.name.charAt(0).toUpperCase();
                 const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
                 const bgColor = colors[r.name.charCodeAt(0) % colors.length];
                 const date = new Date(r.createdAt).toLocaleDateString('vi-VN');
-                
+
                 let starsHtml = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= r.rating) starsHtml += '<i class="fa-solid fa-star"></i>';
                     else starsHtml += '<i class="fa-regular fa-star"></i>';
                 }
-                
+
                 let imagesHtml = '';
                 if (r.images && r.images.length > 0) {
                     imagesHtml = '<div class="pd-review-images" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">';
@@ -1746,10 +1757,10 @@
                     });
                     imagesHtml += '</div>';
                 }
-                
+
                 const hiddenStyle = index >= 5 ? 'display: none;' : '';
                 const hiddenClass = index >= 5 ? 'review-hidden' : '';
-                
+
                 html += `
                     <div class="pd-review-item ${hiddenClass}" style="${hiddenStyle}">
                         <div class="pd-review-header">
@@ -1770,11 +1781,11 @@
                 `;
             });
             reviewList.innerHTML = html;
-            
+
 
         }
-        
-        window.loadMoreReviews = function() {
+
+        window.loadMoreReviews = function () {
             const hiddenReviews = document.querySelectorAll('.pd-review-item.review-hidden');
             hiddenReviews.forEach(el => {
                 el.style.display = '';
@@ -1790,14 +1801,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const reviewImagesInput = document.getElementById('reviewImages');
             const previewContainer = document.getElementById('reviewImagePreviewContainer');
-            
+
             if (reviewImagesInput && previewContainer) {
-                reviewImagesInput.addEventListener('change', function() {
+                reviewImagesInput.addEventListener('change', function () {
                     previewContainer.innerHTML = '';
                     if (this.files && this.files.length > 0) {
                         Array.from(this.files).forEach(file => {
                             const reader = new FileReader();
-                            reader.onload = function(e) {
+                            reader.onload = function (e) {
                                 const img = document.createElement('img');
                                 img.src = e.target.result;
                                 img.style.width = '60px';
@@ -2138,8 +2149,7 @@
             <i class="fa-solid fa-phone"></i>
         </a>
         <a href="https://zalo.me/0901234567" target="_blank" class="float-btn float-zalo" title="Chat Zalo">
-            <img src="/assets/images/local/img_18.png" alt="Zalo"
-                onerror="this.src='/assets/images/local/img_19.png'">
+            <img src="/assets/images/local/img_18.png" alt="Zalo" onerror="this.src='/assets/images/local/img_19.png'">
         </a>
     </div>
 

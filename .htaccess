@@ -15,4 +15,4 @@ RewriteRule ^(.*)$ $1.html [L]
 # Fallback cho các đường dẫn động (chi tiết sản phẩm, tin tức)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/\.]+)$ router.html?slug=$1 [L,QSA]
+RewriteRule ^([^/\.]+)$ router.php?slug=$1 [L,QSA]
