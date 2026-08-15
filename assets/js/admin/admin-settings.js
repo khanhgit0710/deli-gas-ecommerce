@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const settings = ProductDB.getSettings();
         document.getElementById('settingHotline').value = settings.hotline || '';
         document.getElementById('settingZalo').value = settings.zalo || '';
+        document.getElementById('settingEmail').value = settings.email || '';
         document.getElementById('settingAddress').value = settings.address || '';
         document.getElementById('settingLogo').value = settings.logo || '';
         if(document.getElementById('settingFavicon')) document.getElementById('settingFavicon').value = settings.favicon || '';
@@ -106,12 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const idx = parseInt(this.id.split('_')[1]);
                 const file = e.target.files[0];
                 if (!file) return;
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    currentSliders[idx].url = event.target.result;
-                    renderDynamicSliders(); // re-render to show preview and update input
-                };
-                reader.readAsDataURL(file);
+                window.compressImage(file, 1200, function(dataUrl) {
+                    if (dataUrl) {
+                        currentSliders[idx].url = dataUrl;
+                        renderDynamicSliders(); // re-render to show preview and update input
+                    }
+                });
             });
         });
 
@@ -206,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const file = e.target.files[0];
                 if (!file) return;
                 
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    input.value = event.target.result;
-                    updateBannerPreview(id, id + 'Preview');
-                };
-                reader.readAsDataURL(file);
+                window.compressImage(file, 1200, function(dataUrl) {
+                    if (dataUrl) {
+                        input.value = dataUrl;
+                        updateBannerPreview(id, id + 'Preview');
+                    }
+                });
             });
         }
     });
@@ -244,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSettings = {
             hotline: document.getElementById('settingHotline').value.trim(),
             zalo: document.getElementById('settingZalo').value.trim(),
+            email: document.getElementById('settingEmail').value.trim(),
             address: document.getElementById('settingAddress').value.trim(),
             logo: document.getElementById('settingLogo').value.trim(),
             favicon: document.getElementById('settingFavicon') ? document.getElementById('settingFavicon').value.trim() : '',

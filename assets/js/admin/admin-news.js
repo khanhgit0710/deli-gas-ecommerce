@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========== NEWS ==========
     window.renderNews = function() {
         const news = ProductDB.getNews(true); // true means isAdmin (returns all including inactive)
-        const searchVal = document.getElementById('newsSearch') ? document.getElementById('newsSearch').value.trim().toLowerCase() : '';
+        const searchValRaw = document.getElementById('newsSearch') ? document.getElementById('newsSearch').value.trim() : '';
+        const searchVal = window.removeVietnameseTones(searchValRaw);
         const tbody = document.getElementById('newsTableBody');
 
         if (!tbody) return;
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let filteredNews = news;
         if (searchVal) {
             filteredNews = news.filter(n => 
-                n.title.toLowerCase().includes(searchVal) || 
+                window.removeVietnameseTones(n.title).includes(searchVal) || 
                 (n.slug && n.slug.toLowerCase().includes(searchVal))
             );
         }
@@ -179,13 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.value = '';
                     return;
                 }
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const base64Str = evt.target.result;
-                    document.getElementById('newsImage').value = base64Str;
-                    updateNewsImagePreview();
-                };
-                reader.readAsDataURL(file);
+                window.compressImage(file, 800, function(dataUrl) {
+                    if (dataUrl) {
+                        document.getElementById('newsImage').value = dataUrl;
+                        updateNewsImagePreview();
+                    }
+                });
             }
         });
     }
@@ -232,7 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const data = {
+            
+        let autoSeoDesc = document.getElementById('newsSeoDesc') ? document.getElementById('newsSeoDesc').value.trim() : '';
+        if (!autoSeoDesc && window.newsQuill) {
+            let cleanText = window.newsQuill.getText().trim();
+            autoSeoDesc = cleanText.substring(0, 150) + (cleanText.length > 150 ? '...' : '');
+        }
+
+        const data = {
                 newsCode: document.getElementById('newsCode') ? document.getElementById('newsCode').value.trim() : `TT-${Date.now().toString().slice(-4)}`,
                 title,
                 slug: document.getElementById('newsSlug').value.trim(),

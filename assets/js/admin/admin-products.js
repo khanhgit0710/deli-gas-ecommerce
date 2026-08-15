@@ -137,6 +137,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Search & filter events
+    
+    const btnTrashProducts = document.getElementById('btnTrashProducts');
+    if (btnTrashProducts) {
+        btnTrashProducts.addEventListener('click', () => {
+            showingTrash = !showingTrash;
+            if (showingTrash) {
+                btnTrashProducts.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại';
+                btnTrashProducts.style.background = '#64748b';
+                document.querySelector('#section-products .table-header-left h3').innerText = 'Thùng rác sản phẩm';
+            } else {
+                btnTrashProducts.innerHTML = '<i class="fa-solid fa-trash"></i> Thùng rác';
+                btnTrashProducts.style.background = '#ef4444';
+                document.querySelector('#section-products .table-header-left h3').innerText = 'Danh sách sản phẩm';
+            }
+            renderProducts(true);
+        });
+    }
+
+    window.restoreProduct = function(id) {
+        if(confirm('Bạn có chắc chắn muốn khôi phục sản phẩm này?')) {
+            if(window.ProductDB.restore(id)) {
+                showToast('Khôi phục thành công', 'success');
+                renderProducts();
+            }
+        }
+    };
+
+    window.permanentDeleteProduct = function(id, name) {
+        if(confirm('Bạn có chắc chắn muốn xóa VĨNH VIỄN sản phẩm "' + name + '"? Hành động này không thể hoàn tác!')) {
+            if(window.ProductDB.permanentDelete(id)) {
+                showToast('Đã xóa vĩnh viễn', 'success');
+                renderProducts();
+            }
+        }
+    };
+
     document.getElementById('productSearch').addEventListener('input', () => renderProducts(true));
     document.getElementById('categoryFilter').addEventListener('change', () => renderProducts(true));
     if (document.getElementById('priceFilter')) {
@@ -336,13 +372,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.value = ''; // Reset
                     return;
                 }
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const base64Str = evt.target.result;
-                    document.getElementById('productImage').value = base64Str;
-                    updateImagePreview();
-                };
-                reader.readAsDataURL(file);
+                window.compressImage(file, 800, function(dataUrl) {
+                    if (dataUrl) {
+                        document.getElementById('productImage').value = dataUrl;
+                        updateImagePreview();
+                    }
+                });
             }
         });
     }
@@ -443,14 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.value = '';
                     return;
                 }
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const base64Str = evt.target.result;
-                    window.currentAdditionalImages.push(base64Str);
-                    renderAdditionalImages();
-                };
-                reader.readAsDataURL(file);
-                this.value = ''; // Reset for next selection
+                window.compressImage(file, 800, function(dataUrl) {
+                    if (dataUrl) {
+                        window.currentAdditionalImages.push(dataUrl);
+                        renderAdditionalImages();
+                    }
+                    additionalImageUpload.value = ''; // Reset for next selection
+                });
             }
         });
     }
@@ -521,12 +555,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            let savePrice = parseInt(priceRaw);
+            let saveDiscount = parseInt(document.getElementById('productDiscount').value) || 0;
+            const inputFinalPrice = document.getElementById('productFinalPrice').value ? parseInt(document.getElementById('productFinalPrice').value.replace(/\./g, '')) : 0;
+            
+            if (inputFinalPrice > savePrice) {
+                savePrice = inputFinalPrice;
+                saveDiscount = 0;
+            } else if (inputFinalPrice === savePrice) {
+                saveDiscount = 0;
+            }
+
+            
+            let autoSeoDesc = document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : '';
+            if (!autoSeoDesc) {
+                let temp = document.createElement('div');
+                temp.innerHTML = document.getElementById('productDescription').value.trim();
+                let cleanText = temp.textContent || temp.innerText || "";
+                autoSeoDesc = cleanText.substring(0, 150) + (cleanText.length > 150 ? '...' : '');
+            }
+
             const data = {
                 name,
                 sku: document.getElementById('productSku') ? document.getElementById('productSku').value.trim() : '',
                 categoryId: parseInt(categoryId),
-                price: parseInt(priceRaw),
-                discount: parseInt(document.getElementById('productDiscount').value) || 0,
+                price: savePrice,
+                discount: saveDiscount,
                 image: mainImage,
                 description: document.getElementById('productDescription').value.trim(),
                 specs: document.getElementById('productSpecs').value.trim(),
@@ -546,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ].filter(id => id !== null),
                 slug: document.getElementById('productSlug') ? document.getElementById('productSlug').value.trim() : '',
                 seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
-                seoDesc: document.getElementById('productSeoDesc') ? document.getElementById('productSeoDesc').value.trim() : ''
+                seoDesc: autoSeoDesc
             };
 
             const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;

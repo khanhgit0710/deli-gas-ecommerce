@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td>${starsHtml}</td>
                     <td style="max-width: 250px;">
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${r.content}">${r.content}</div>
+                        <div style="max-height: 80px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; line-height: 1.5; color: var(--admin-text); padding-right: 5px;" title="${r.content}">${r.content}</div>
                         ${imagesHtml}
                     </td>
                     <td style="text-align: center;">${statusBadge}</td>

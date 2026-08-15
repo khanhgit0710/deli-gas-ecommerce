@@ -18,6 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 img.src = settings.logo;
             });
         }
+        
+        // Apply Favicon
+        if (settings.favicon) {
+            let faviconLink = document.querySelector('link[rel="icon"]');
+            if (!faviconLink) {
+                faviconLink = document.createElement('link');
+                faviconLink.rel = 'icon';
+                document.head.appendChild(faviconLink);
+            }
+            faviconLink.href = settings.favicon;
+        }
 
         // Apply Hotline
         if (settings.hotline) {
@@ -77,18 +88,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Replace hardcoded hotline in the DOM
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             let node;
+            const phonePatterns = ['090 123 4567', '1900.123.123', '1900 123 123', '0909 123 456', '0901234567', '1900123123', '0909123456'];
             while (node = walker.nextNode()) {
                 let text = node.nodeValue;
-                if (text.includes('090 123 4567')) {
-                    text = text.split('090 123 4567').join(settings.hotline);
-                }
-                if (text.includes('1900.123.123')) {
-                    text = text.split('1900.123.123').join(settings.hotline);
-                }
-                if (text.includes('1900 123 123')) {
-                    text = text.split('1900 123 123').join(settings.hotline);
-                }
-                node.nodeValue = text;
+                let changed = false;
+                phonePatterns.forEach(pattern => {
+                    if (text.includes(pattern)) {
+                        text = text.split(pattern).join(settings.hotline);
+                        changed = true;
+                    }
+                });
+                if (changed) node.nodeValue = text;
             }
         }
 
@@ -98,6 +108,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.footer-zalo, .float-zalo, a[href^="https://zalo.me/"]').forEach(a => {
                 a.href = `https://zalo.me/${zaloClean}`;
             });
+        }
+
+        // Apply Email
+        if (settings.email) {
+            const emailWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let eNode;
+            while (eNode = emailWalker.nextNode()) {
+                if (eNode.nodeValue.includes('hotro@giaogas.vn')) {
+                    eNode.nodeValue = eNode.nodeValue.split('hotro@giaogas.vn').join(settings.email);
+                }
+            }
         }
 
         // Apply Address
@@ -125,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             // Replace hardcoded addresses
-            document.querySelectorAll('.contact-info-list li, .info-block p, .info-block').forEach(el => {
+            document.querySelectorAll('.contact-info-list li, .info-block p, .info-block, .footer-contact li').forEach(el => {
                 if (el.innerHTML.includes('475A')) {
                     if (el.tagName.toLowerCase() === 'li') {
                         el.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${settings.address}`;
@@ -139,6 +160,67 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('iframe[src*="google.com/maps"]').forEach(iframe => {
                 iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(settings.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
             });
+        }
+        // Apply Banners
+        if (settings.banners) {
+            // Apply Homepage Sliders
+            if (settings.banners.sliders && settings.banners.sliders.length > 0) {
+                const sliderContainer = document.getElementById('bannerSlider');
+                const dotsContainer = document.getElementById('sliderDots');
+                if (sliderContainer && dotsContainer) {
+                    // Remove existing
+                    sliderContainer.querySelectorAll('.slide').forEach(el => el.remove());
+                    dotsContainer.innerHTML = '';
+
+                    settings.banners.sliders.forEach((slider, index) => {
+                        // Create slide
+                        const slide = document.createElement('div');
+                        slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                        slide.style.backgroundImage = `url('${slider.url}')`;
+                        sliderContainer.insertBefore(slide, dotsContainer);
+
+                        // Create dot
+                        const dot = document.createElement('div');
+                        dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                        dot.setAttribute('data-index', index);
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+            }
+
+            // Apply Page Banners
+            if (settings.banners.bannerAbout) {
+                document.querySelectorAll('.page-header').forEach(el => {
+                    if(window.location.pathname.includes('ve-chung-toi')) el.style.backgroundImage = `url('${settings.banners.bannerAbout}')`;
+                });
+            }
+            if (settings.banners.bannerContact) {
+                document.querySelectorAll('.page-header').forEach(el => {
+                    if(window.location.pathname.includes('lien-he')) el.style.backgroundImage = `url('${settings.banners.bannerContact}')`;
+                });
+            }
+            if (settings.banners.bannerNews) {
+                document.querySelectorAll('.page-header').forEach(el => {
+                    if(window.location.pathname.includes('tin-tuc') || window.location.pathname.includes('tat-ca-bai-viet')) el.style.backgroundImage = `url('${settings.banners.bannerNews}')`;
+                });
+            }
+
+            // Apply Mission / Grid Images on About Us page
+            if (window.location.pathname.includes('ve-chung-toi')) {
+                const missionMain = document.querySelector('.mission-image img');
+                const missionSub = document.querySelector('.mission-image-small');
+                const gridImgs = document.querySelectorAll('.image-grid img');
+                
+                if (missionMain && settings.banners.imgMissionMain) missionMain.src = settings.banners.imgMissionMain;
+                if (missionSub && settings.banners.imgMissionSub) missionSub.src = settings.banners.imgMissionSub;
+                
+                if (gridImgs.length >= 4) {
+                    if (settings.banners.imgGrid1) gridImgs[0].src = settings.banners.imgGrid1;
+                    if (settings.banners.imgGrid2) gridImgs[1].src = settings.banners.imgGrid2;
+                    if (settings.banners.imgGrid3) gridImgs[2].src = settings.banners.imgGrid3;
+                    if (settings.banners.imgGrid4) gridImgs[3].src = settings.banners.imgGrid4;
+                }
+            }
         }
     }
 

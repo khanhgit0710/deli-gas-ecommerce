@@ -139,6 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderContacts = function() {
         const contacts = ProductDB.getContacts();
         const tbody = document.getElementById('contactsTableBody');
+        const countText = document.getElementById('contactCountText');
+        
+        if (countText) {
+            countText.textContent = `${contacts.length} liên hệ`;
+        }
 
         if (!tbody) return;
 

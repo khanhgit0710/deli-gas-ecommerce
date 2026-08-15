@@ -231,4 +231,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }, 100);
 
+    // ========== UTILITIES ==========
+    window.compressImage = function(file, maxWidth, callback) {
+        if (!file.type.match(/image.*/)) {
+            callback(null);
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(readerEvent) {
+            const img = new Image();
+            img.onload = function() {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxWidth) {
+                    height = Math.round(height * (maxWidth / width));
+                    width = maxWidth;
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const dataUrl = canvas.toDataURL('image/webp', 0.8);
+                callback(dataUrl);
+            };
+            img.onerror = function() {
+                callback(null);
+            };
+            img.src = readerEvent.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
 });

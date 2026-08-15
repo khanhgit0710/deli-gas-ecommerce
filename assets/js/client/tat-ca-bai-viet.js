@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Lọc theo từ khóa tìm kiếm
         if (currentSearchTerm) {
             filteredNews = filteredNews.filter(n => {
-                const titleMatch = n.title && n.title.toLowerCase().includes(currentSearchTerm);
-                const contentMatch = n.content && n.content.toLowerCase().includes(currentSearchTerm);
+                const titleMatch = n.title && window.removeVietnameseTones(n.title).includes(currentSearchTerm);
+                const contentMatch = n.content && window.removeVietnameseTones(n.content).includes(currentSearchTerm);
                 return titleMatch || contentMatch;
             });
         }
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (searchInput && searchBtn) {
         const handleSearch = () => {
-            currentSearchTerm = searchInput.value.trim().toLowerCase();
+            currentSearchTerm = window.removeVietnameseTones(searchInput.value.trim());
             renderPage(1);
         };
         

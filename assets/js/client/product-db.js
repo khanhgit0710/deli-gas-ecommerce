@@ -988,6 +988,7 @@ const ProductDB = window.ProductDB = (() => {
     const defaultSettings = {
         hotline: '1900.123.123',
         zalo: '0901.111.222',
+        email: 'hotro@giaogas.vn',
         address: '123 Thủ Đức, Hồ Chí Minh',
         logo: 'assets/logo/logo_primary_gas - Copy.png',
         showComboSection: true,
@@ -1223,6 +1224,20 @@ const ProductDB = window.ProductDB = (() => {
                         _saveNewsCategories(nc);
                         this.syncToApi();
                     }
+                }
+                
+                // Sanitize products discount (Round up)
+                const products = _getProducts();
+                let productsUpdated = false;
+                products.forEach(p => {
+                    if (p.discount > 0 && p.discount !== Math.ceil(p.discount)) {
+                        p.discount = Math.ceil(p.discount);
+                        productsUpdated = true;
+                    }
+                });
+                if (productsUpdated) {
+                    _saveProducts(products);
+                    this.syncToApi();
                 }
                 if (_getNews().length === 0) {
                     _saveNews(seedNews);
@@ -1524,15 +1539,15 @@ const ProductDB = window.ProductDB = (() => {
         },
 
         search(keyword, isAdmin = false) {
-            const kw = keyword.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            let products = _getProducts();
+            const kw = window.removeVietnameseTones(keyword);
+            let products = _getProducts().filter(p => p.isDeleted !== true);
             if (!isAdmin) {
                 products = products.filter(p => p.active !== false);
             }
             return products.filter(p => {
-                const name = p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const name = window.removeVietnameseTones(p.name);
                 const sku = (p.sku || '').toLowerCase();
-                return name.includes(kw) || sku.includes(kw.toLowerCase());
+                return name.includes(kw) || sku.includes(kw);
             });
         },
 
@@ -1771,3 +1786,26 @@ const ProductDB = window.ProductDB = (() => {
 
 // Removed auto-init, will be initialized by main.js and admin.js
 // ProductDB.init();
+
+window.removeVietnameseTones = function(str) {
+    if (!str) return '';
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str = str.replace(/đ/g,"d");
+    str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+    str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+    str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+    str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+    str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+    str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+    str = str.replace(/Đ/g, "D");
+    str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+    str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+    str = str.replace(/ + /g," ");
+    str = str.trim();
+    return str.toLowerCase();
+};
