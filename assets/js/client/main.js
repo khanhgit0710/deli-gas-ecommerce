@@ -1560,7 +1560,11 @@ document.addEventListener("ProductDBReady", () => {
             }
             if(phoneError) phoneError.style.display = 'none';
 
+            const btn = contactForm.querySelector('button[type="submit"]');
+            if (btn && btn.disabled) return;
+
             if (typeof ProductDB !== 'undefined' && typeof ProductDB.addContact === 'function') {
+                if (btn) btn.disabled = true;
                 const success = ProductDB.addContact({
                     name: nameVal,
                     phone: phoneVal,
@@ -1568,31 +1572,35 @@ document.addEventListener("ProductDBReady", () => {
                     message: messageVal
                 });
                 if (success) {
-                    const btn = contactForm.querySelector('button[type="submit"]');
-                    const btnText = btn.querySelector('.text');
-                    
-                    if (btnText) {
-                        const originalText = btnText.textContent;
-                        btn.classList.add('success');
-                        btnText.textContent = 'Thành công!';
-                        
-                        setTimeout(() => {
-                            contactForm.reset();
-                            btn.classList.remove('success');
-                            btnText.textContent = originalText;
-                        }, 3000);
-                    } else {
-                        // Fallback in case HTML structure changes
-                        const originalHTML = btn.innerHTML;
-                        btn.innerHTML = '<span class="text">Thành công!</span>';
-                        btn.style.backgroundColor = '#10b981';
-                        
-                        setTimeout(() => {
-                            contactForm.reset();
-                            btn.innerHTML = originalHTML;
-                            btn.style.backgroundColor = '';
-                        }, 3000);
+                    if (btn) {
+                        const btnText = btn.querySelector('.text');
+                        if (btnText) {
+                            const originalText = btnText.textContent;
+                            btn.classList.add('success');
+                            btnText.textContent = 'Thành công!';
+                            
+                            setTimeout(() => {
+                                contactForm.reset();
+                                btn.classList.remove('success');
+                                btnText.textContent = originalText;
+                                btn.disabled = false;
+                            }, 3000);
+                        } else {
+                            // Fallback in case HTML structure changes
+                            const originalHTML = btn.innerHTML;
+                            btn.innerHTML = '<span class="text">Thành công!</span>';
+                            btn.style.backgroundColor = '#10b981';
+                            
+                            setTimeout(() => {
+                                contactForm.reset();
+                                btn.innerHTML = originalHTML;
+                                btn.style.backgroundColor = '';
+                                btn.disabled = false;
+                            }, 3000);
+                        }
                     }
+                } else {
+                    if (btn) btn.disabled = false;
                 }
             }
         });
@@ -1603,6 +1611,9 @@ document.addEventListener("ProductDBReady", () => {
     consultationForms.forEach(form => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+            if (btn && btn.disabled) return;
+
             const input = form.querySelector('input[type="tel"]');
             if (input && input.value) {
                 const phoneVal = input.value.trim();
@@ -1617,6 +1628,7 @@ document.addEventListener("ProductDBReady", () => {
                 input.style.borderColor = '';
                 
                 if (typeof ProductDB !== 'undefined' && typeof ProductDB.addContact === 'function') {
+                    if (btn) btn.disabled = true;
                     const success = ProductDB.addContact({
                         name: 'Khách tư vấn',
                         phone: phoneVal,
@@ -1624,7 +1636,6 @@ document.addEventListener("ProductDBReady", () => {
                         message: 'Yêu cầu tư vấn nhanh qua số điện thoại'
                     });
                     if (success) {
-                        const btn = form.querySelector('button');
                         if (btn) {
                             const originalText = btn.textContent;
                             btn.textContent = 'Thành công!';
@@ -1634,10 +1645,13 @@ document.addEventListener("ProductDBReady", () => {
                                 form.reset();
                                 btn.textContent = originalText;
                                 btn.style.backgroundColor = '';
+                                btn.disabled = false;
                             }, 3000);
                         } else {
                             form.reset();
                         }
+                    } else {
+                        if (btn) btn.disabled = false;
                     }
                 }
             }

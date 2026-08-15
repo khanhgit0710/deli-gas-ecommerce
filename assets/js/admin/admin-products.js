@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ========== PRODUCTS ==========
     let currentProductPage = 1;
+    window.showingTrash = false;
     const productsPerPage = 20;
 
     window.changeProductPage = function(page) {
@@ -36,12 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const catFilter = document.getElementById('categoryFilter').value;
 
         let products;
-        if (searchVal) {
-            products = ProductDB.search(searchVal, true);
-        } else if (catFilter) {
-            products = ProductDB.getByCategory(catFilter, true);
+        if (window.showingTrash) {
+            products = ProductDB.getDeleted();
         } else {
-            products = ProductDB.getAll(true);
+            if (searchVal) {
+                products = ProductDB.search(searchVal, true);
+            } else if (catFilter) {
+                products = ProductDB.getByCategory(catFilter, true);
+            } else {
+                products = ProductDB.getAll(true);
+            }
         }
 
         const priceFilter = document.getElementById('priceFilter');
@@ -127,8 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="hide-mobile" style="text-align: left;">${p.active !== false ? '<span class="badge badge-success" style="background:#d4edda;color:#155724;padding:4px 8px;border-radius:4px;font-size:14px">Đang hiện</span>' : '<span class="badge badge-danger" style="background:#f8d7da;color:#721c24;padding:4px 8px;border-radius:4px;font-size:14px">Đang ẩn</span>'}</td>
                     <td style="text-align: left;">
                         <div class="actions-cell" style="justify-content: flex-start;">
-                            <button class="btn-icon success" title="Sửa" onclick="editProduct(${p.id})"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn-icon danger" title="Xóa" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
+                            ${window.showingTrash 
+                            ? `<button class="btn-icon success" title="Khôi phục" onclick="restoreProduct(${p.id})"><i class="fa-solid fa-rotate-left"></i></button>
+                               <button class="btn-icon danger" title="Xóa vĩnh viễn" onclick="permanentDeleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>`
+                            : `<button class="btn-icon success" title="Sửa" onclick="editProduct(${p.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                               <button class="btn-icon danger" title="Xóa" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>`}
                         </div>
                     </td>
                 </tr>
@@ -141,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnTrashProducts = document.getElementById('btnTrashProducts');
     if (btnTrashProducts) {
         btnTrashProducts.addEventListener('click', () => {
-            showingTrash = !showingTrash;
-            if (showingTrash) {
+            window.showingTrash = !window.showingTrash;
+            if (window.showingTrash) {
                 btnTrashProducts.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại';
                 btnTrashProducts.style.background = '#64748b';
                 document.querySelector('#section-products .table-header-left h3').innerText = 'Thùng rác sản phẩm';

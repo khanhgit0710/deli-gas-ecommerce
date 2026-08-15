@@ -1312,20 +1312,25 @@ const ProductDB = window.ProductDB = (() => {
 
         // ===== PRODUCT CRUD =====
         getAll(isAdmin = false) {
-            const products = _getProducts();
+            let products = _getProducts().filter(p => !p.isDeleted);
             if (isAdmin) return products;
             return products.filter(p => p.active !== false);
         },
 
+        getDeleted() {
+            return _getProducts().filter(p => p.isDeleted === true);
+        },
+
         getById(id) {
-            return _getProducts().find(p => p.id === parseInt(id));
+            return _getProducts().find(p => p.id === parseInt(id) && !p.isDeleted);
         },
 
         getBySlug(slug) {
             return _getProducts().find(p => 
-                (p.slug === slug) || 
+                !p.isDeleted &&
+                ((p.slug === slug) || 
                 (_generateSlug(p.name) === slug) || 
-                (p.id.toString() === slug)
+                (p.id.toString() === slug))
             );
         },
 
@@ -1392,6 +1397,26 @@ const ProductDB = window.ProductDB = (() => {
         },
 
         delete(id) {
+            const products = _getProducts();
+            const index = products.findIndex(p => p.id === parseInt(id));
+            if (index === -1) return false;
+            products[index].isDeleted = true;
+            _saveProducts(products);
+            this.syncToApi();
+            return true;
+        },
+
+        restore(id) {
+            const products = _getProducts();
+            const index = products.findIndex(p => p.id === parseInt(id));
+            if (index === -1) return false;
+            products[index].isDeleted = false;
+            _saveProducts(products);
+            this.syncToApi();
+            return true;
+        },
+
+        permanentDelete(id) {
             const products = _getProducts();
             const filtered = products.filter(p => p.id !== parseInt(id));
             if (filtered.length === products.length) return false;

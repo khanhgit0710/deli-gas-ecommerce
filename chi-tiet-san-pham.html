@@ -1715,6 +1715,11 @@
                 }
             }
             
+            const loadMoreWrapper = document.querySelector('.pd-load-more-reviews');
+            if (loadMoreWrapper) {
+                loadMoreWrapper.style.display = reviews.length <= 5 ? 'none' : 'block';
+            }
+            
             if (reviews.length === 0) {
                 reviewList.innerHTML = '<p style="text-align: center; color: var(--color-gray-500); margin: 20px 0;">Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!</p>';
                 return;
@@ -1766,14 +1771,7 @@
             });
             reviewList.innerHTML = html;
             
-            const loadMoreWrapper = document.querySelector('.pd-load-more-reviews');
-            if (loadMoreWrapper) {
-                if (reviews.length <= 5) {
-                    loadMoreWrapper.style.display = 'none';
-                } else {
-                    loadMoreWrapper.style.display = 'block';
-                }
-            }
+
         }
         
         window.loadMoreReviews = function() {

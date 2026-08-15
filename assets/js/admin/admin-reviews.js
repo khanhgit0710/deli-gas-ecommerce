@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const date = new Date(r.createdAt).toLocaleDateString('vi-VN');
             
             let statusBadge = '';
-            if (r.status === 'pending') statusBadge = '<span class="status-badge" style="background: var(--color-warning); color: white;">Chờ duyệt</span>';
-            else if (r.status === 'approved') statusBadge = '<span class="status-badge" style="background: var(--color-success); color: white;">Đã duyệt</span>';
-            else if (r.status === 'rejected') statusBadge = '<span class="status-badge" style="background: var(--color-danger); color: white;">Bị từ chối</span>';
+            if (r.status === 'pending') statusBadge = '<span class="status-badge" style="background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 500;">Chờ duyệt</span>';
+            else if (r.status === 'approved') statusBadge = '<span class="status-badge" style="background: #22c55e; color: white; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 500;">Đã duyệt</span>';
+            else if (r.status === 'rejected') statusBadge = '<span class="status-badge" style="background: #6b7280; color: white; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 500;">Bị từ chối</span>';
 
             let starsHtml = '';
             for (let i = 1; i <= 5; i++) {
