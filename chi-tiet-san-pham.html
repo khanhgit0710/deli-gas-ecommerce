@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -13,7 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/product-detail.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css?v=6">
+    <link rel="stylesheet" href="/assets/css/responsive.css?v=7">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
 
     <!-- Open Graph SEO Tags -->
@@ -48,7 +48,7 @@
 
 <body>
     <site-header></site-header>
-    <script defer src="/assets/components/header.js?v=6"></script>
+    <script defer src="/assets/components/header.js?v=7"></script>
 
     <!-- PRODUCT DETAIL MAIN WRAPPER -->
     <div class="pd-page-wrapper">
@@ -204,11 +204,9 @@
                     </div>
 
                     <!-- New Variations Section -->
-                    <div class="pd-variations" id="pdVariations">
-                        <label class="pd-label">Tùy chọn Trọng lượng:</label>
-                        <div class="variation-options">
-                            <button type="button" class="var-btn active">12kg</button>
-                            <button type="button" class="var-btn">45kg</button>
+                    <div class="pd-variations" id="pdVariations" style="display: none;">
+                        <label class="pd-label">Tùy chọn Phân loại:</label>
+                        <div class="variation-options" id="variationOptionsContainer">
                         </div>
                     </div>
 
@@ -292,53 +290,8 @@
                 </div>
             </div>
 
-            <!-- Khối Gợi Ý Mua Combo -->
-            <div class="pd-combo-section">
-                <h2 class="section-title">Sản Phẩm Mua Kèm Khuyên Dùng</h2>
-                <div class="combo-box">
-                    <div class="combo-items">
-                        <div class="combo-item">
-                            <input type="checkbox" checked class="combo-check" id="combo-1">
-                            <label for="combo-1">
-                                <img loading="lazy" src="/assets/images/local/img_1.png" alt="Bình Gas 12kg">
-                                <span>Bình Gas 12kg</span>
-                                <div class="combo-item-price">420.000đ</div>
-                            </label>
-                        </div>
-                        <div class="combo-plus"><i class="fa-solid fa-plus"></i></div>
-                        <div class="combo-item">
-                            <input type="checkbox" checked class="combo-check" id="combo-2">
-                            <label for="combo-2">
-                                <img loading="lazy" src="/assets/images/local/img_2.jpg" alt="Van ngắt tự động">
-                                <span>Van Ngắt Katsura</span>
-                                <div class="combo-item-price">120.000đ</div>
-                            </label>
-                        </div>
-                        <div class="combo-plus"><i class="fa-solid fa-plus"></i></div>
-                        <div class="combo-item">
-                            <input type="checkbox" checked class="combo-check" id="combo-3">
-                            <label for="combo-3">
-                                <img loading="lazy" src="/assets/images/local/img_3.jpg" alt="Dây gas lõi thép">
-                                <span>Dây Gas Lõi Thép</span>
-                                <div class="combo-item-price">80.000đ</div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="combo-action">
-                        <div class="combo-badge">🔥 HOT COMBO - TIẾT KIỆM NHẤT</div>
-                        <div class="combo-price-wrap">
-                            <div class="combo-total">620.000đ</div>
-                            <div class="combo-save">(Tiết kiệm 80.000đ)</div>
-                        </div>
-                        <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <a href="tel:0909123456" class="pd-btn pd-btn-contact" style="flex: 1;"><i
-                                    class="fa-solid fa-phone-volume icon-shake"></i> 0909 123 456</a>
-                            <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ
-                                Combo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Khối Gợi Ý Mua Combo (Dynamically populated by JS) -->
+            <div class="pd-combo-section" style="display: none;"></div>
 
             <!-- Cam Kết Quy Trình Giao Gas & Lắp Đặt An Toàn -->
             <div class="pd-process-section">
@@ -838,8 +791,8 @@
     <site-footer></site-footer>
 
     <!-- JS -->
-    <script defer src="/assets/components/footer.js?v=6"></script>
-    <script defer src="/assets/js/client/main.js?v=6"></script>
+    <script defer src="/assets/components/footer.js?v=7"></script>
+    <script defer src="/assets/js/client/main.js?v=10"></script>
     <style>
         @keyframes fadeIn {
             from {
@@ -1147,7 +1100,7 @@
         </div>
     </div>
     <!-- JS -->
-    <script defer src="/assets/js/client/product-db.js?v=6"></script>
+    <script defer src="/assets/js/client/product-db.js?v=7"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Get product ID or Slug from URL
@@ -1220,8 +1173,30 @@
 
                 const badge = document.querySelector('.pd-badge');
                 if (badge) {
-                    if (product.discount > 0) {
-                        badge.textContent = `Giảm ${product.discount}%`;
+                    if (product.badgeText) {
+                        badge.textContent = product.badgeText;
+                        badge.style.backgroundColor = product.badgeColor || '#ef4444';
+                        badge.style.color = 'white';
+                        badge.style.display = 'inline-block';
+                    } else if (product.onSale && product.discount > 0) {
+                        badge.textContent = `-${product.discount}%`;
+                        badge.style.backgroundColor = '#e11d48';
+                        badge.style.color = 'white';
+                        badge.style.display = 'inline-block';
+                    } else if (product.featured) {
+                        badge.textContent = 'BÁN CHẠY';
+                        badge.style.backgroundColor = '#f59e0b';
+                        badge.style.color = 'white';
+                        badge.style.display = 'inline-block';
+                    } else if (product.discount > 0) {
+                        badge.textContent = `-${product.discount}%`;
+                        badge.style.backgroundColor = '#e11d48';
+                        badge.style.color = 'white';
+                        badge.style.display = 'inline-block';
+                    } else if (product.onSale) {
+                        badge.textContent = 'Ưu đãi';
+                        badge.style.backgroundColor = 'var(--color-accent)';
+                        badge.style.color = 'white';
                         badge.style.display = 'inline-block';
                     } else {
                         badge.style.display = 'none';
@@ -1312,31 +1287,36 @@
                 const pdWeightDivider = document.getElementById('pdWeightDivider');
                 const pdVariations = document.getElementById('pdVariations');
 
-                // Check if the product is a Gas cylinder (Categories 1-5 usually represent Gas Cylinders)
-                if (product.categoryId <= 5) {
-                    // It's a gas cylinder, show weight and variations
-                    // Extract weight from product name if possible, else default 12kg
-                    const weightMatch = product.name.match(/\b(12|12\.5|45)kg\b/i);
-                    const weightText = weightMatch ? weightMatch[0] : '12kg';
 
-                    if (pdWeight) {
-                        pdWeight.style.display = 'inline-block';
-                        pdWeight.textContent = `Trọng lượng: ${weightText}`;
-                    }
-                    if (pdWeightDivider) pdWeightDivider.style.display = 'inline-block';
-                    if (pdVariations) {
+                // Fix for linked variants
+                if (pdVariations) {
+                    const varOptionsContainer = document.getElementById('variationOptionsContainer');
+                    if (product.variants && product.variants.length > 0) {
                         pdVariations.style.display = 'block';
-                        const varOptions = pdVariations.querySelector('.variation-options');
-                        if (varOptions) {
-                            varOptions.innerHTML = `<button type="button" class="var-btn active">${weightText}</button>`;
-                        }
+                        
+                        // Extract current product weight from name to create self-button
+                        const weightMatch = product.name.match(/\b(6|12|12\.5|45)kg\b/i);
+                        const selfLabel = weightMatch ? weightMatch[0] : 'Đang xem';
+                        
+                        let html = `<button type="button" class="var-btn active">${selfLabel}</button>`;
+                        
+                        // Add linked buttons
+                        product.variants.forEach(v => {
+                            if (v.productId) {
+                                const linkedProduct = ProductDB.getById(v.productId);
+                                if (linkedProduct) {
+                                    const slug = linkedProduct.slug || linkedProduct.id;
+                                    html += `<button type="button" class="var-btn" onclick="window.location.href='/${slug}.html'">${v.name}</button>`;
+                                }
+                            }
+                        });
+                        
+                        varOptionsContainer.innerHTML = html;
+                    } else {
+                        pdVariations.style.display = 'none';
                     }
-                } else {
-                    // Not a gas cylinder, hide weight and variations
-                    if (pdWeight) pdWeight.style.display = 'none';
-                    if (pdWeightDivider) pdWeightDivider.style.display = 'none';
-                    if (pdVariations) pdVariations.style.display = 'none';
                 }
+
 
                 // Set Specs Tab & Summary
                 const specsTab = document.querySelector('#specs .pd-tab-pane');
@@ -1397,7 +1377,7 @@
                 // ===== FLASH DEAL =====
                 const flashDealEl = document.querySelector('.pd-flash-deal');
                 if (flashDealEl) {
-                    if (product.onSale || product.discount > 0) {
+                    if (product.isSaleOff50) {
                         flashDealEl.style.display = 'flex';
 
                         let unit = 'sản phẩm';
@@ -1422,12 +1402,14 @@
 
                 // ===== COMBO DEAL =====
                 const giftBox = document.querySelector('.pd-gift-box');
-                if (giftBox) {
-                    if (product.comboProductId) {
-                        const comboProduct = ProductDB.getById(product.comboProductId);
-                        if (comboProduct) {
-                            const comboText = product.comboDiscountText || `Tặng kèm ${comboProduct.name} hoặc giảm giá đặc biệt`;
-                            const comboPriceHtml = product.comboTotalPrice ? `<div style="font-weight: bold; color: var(--color-accent); margin-top: 5px;">Giá ưu đãi chung: ${ProductDB.formatPrice(product.comboTotalPrice)}</div>` : '';
+                const comboSection = document.querySelector('.pd-combo-section');
+                
+                // 1. Gift Box (Ưu Đãi Mua Kèm)
+                if (product.comboProductId) {
+                    const comboProduct = ProductDB.getById(product.comboProductId);
+                    if (comboProduct) {
+                        const comboText = product.comboDiscountText || `Tặng kèm ${comboProduct.name} hoặc giảm giá đặc biệt`;
+                        if (giftBox) {
                             giftBox.innerHTML = `
                                 <div class="gift-header">
                                     <i class="fa-solid fa-gift"></i> Ưu Đãi Mua Kèm (SL có hạn)
@@ -1436,17 +1418,167 @@
                                     <img loading="lazy" src="${comboProduct.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${comboProduct.name}">
                                     <div class="gift-info">
                                         <p>${comboText}</p>
-                                        ${comboPriceHtml}
                                     </div>
-                                    <input type="checkbox" checked>
+                                    <input type="checkbox" id="giftCheckbox" checked data-name="${comboProduct.name}" data-price="${ProductDB.getDiscountedPrice(comboProduct)}" data-image="${comboProduct.image}">
                                 </div>
                             `;
                             giftBox.style.display = 'block';
-                        } else {
-                            giftBox.style.display = 'none';
                         }
                     } else {
-                        giftBox.style.display = 'none';
+                        if (giftBox) giftBox.style.display = 'none';
+                    }
+                } else {
+                    if (giftBox) giftBox.style.display = 'none';
+                }
+
+                // 2. Combo Section (Sản Phẩm Mua Kèm Khuyên Dùng)
+                if (comboSection) {
+                    if (product.recommendedProducts && product.recommendedProducts.length > 0) {
+                        const p1Price = ProductDB.getDiscountedPrice(product);
+                        let sumIndividualPrices = p1Price;
+                        let comboItemsHtml = `
+                            <div class="combo-item">
+                                <input type="checkbox" checked class="combo-check" id="combo-main">
+                                <label for="combo-main">
+                                    <img loading="lazy" src="${product.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${product.name}">
+                                    <span>Sản phẩm chính</span>
+                                    <div class="combo-item-price">${ProductDB.formatPrice(p1Price)}</div>
+                                </label>
+                            </div>
+                        `;
+
+                        let comboIndex = 1;
+                        product.recommendedProducts.slice(0, 2).forEach(recId => {
+                            const recProd = ProductDB.getById(recId);
+                            if (recProd) {
+                                const recPrice = ProductDB.getDiscountedPrice(recProd);
+                                sumIndividualPrices += recPrice;
+                                comboItemsHtml += `
+                                    <div class="combo-plus"><i class="fa-solid fa-plus"></i></div>
+                                    <div class="combo-item">
+                                        <input type="checkbox" checked class="combo-check" id="combo-rec-${comboIndex}">
+                                        <label for="combo-rec-${comboIndex}">
+                                            <img loading="lazy" src="${recProd.image}" onerror="this.src='https://via.placeholder.com/80'" alt="${recProd.name}">
+                                            <span>${recProd.name}</span>
+                                            <div class="combo-item-price">${ProductDB.formatPrice(recPrice)}</div>
+                                        </label>
+                                    </div>
+                                `;
+                                comboIndex++;
+                            }
+                        });
+
+                        const parsedComboTotal = parseInt(product.comboTotalPrice) || 0;
+                        const comboTotalPrice = parsedComboTotal > 0 ? parsedComboTotal : sumIndividualPrices;
+                        const saveAmount = sumIndividualPrices - comboTotalPrice;
+
+                        comboSection.innerHTML = `
+                            <h2 class="section-title">Sản Phẩm Mua Kèm Khuyên Dùng</h2>
+                            <div class="combo-box">
+                                <div class="combo-items">
+                                    ${comboItemsHtml}
+                                </div>
+                                <div class="combo-action">
+                                    <div class="combo-badge">🔥 HOT COMBO - TIẾT KIỆM NHẤT</div>
+                                    <div class="combo-price-wrap">
+                                        <div class="combo-total" data-combo-base-price="${comboTotalPrice}">${ProductDB.formatPrice(comboTotalPrice)}</div>
+                                        ${saveAmount > 0 ? `<div class="combo-save">(Tiết kiệm ${ProductDB.formatPrice(saveAmount)})</div>` : ''}
+                                    </div>
+                                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                        <a href="tel:0909123456" class="pd-btn pd-btn-contact" style="flex: 1;"><i class="fa-solid fa-phone-volume icon-shake"></i> 0909 123 456</a>
+                                        <button class="pd-btn pd-btn-primary combo-btn" style="flex: 1; margin-top: 0;">Mua Cả Bộ Combo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        comboSection.style.display = 'block';
+
+                        // Attach event listeners for dynamic checkboxes
+                        const comboChecks = comboSection.querySelectorAll('.combo-check');
+                        const comboTotalEl = comboSection.querySelector('.combo-total');
+                        const saveEl = comboSection.querySelector('.combo-save');
+
+                        comboChecks.forEach(check => {
+                            check.addEventListener('change', () => {
+                                let total = 0;
+                                let checkedCount = 0;
+                                comboChecks.forEach(c => {
+                                    if (c.checked) {
+                                        const priceText = c.closest('.combo-item').querySelector('.combo-item-price').textContent;
+                                        total += parseInt(priceText.replace(/[^0-9]/g, ''));
+                                        checkedCount++;
+                                    }
+                                });
+
+                                if (checkedCount === comboChecks.length && parsedComboTotal > 0) {
+                                    comboTotalEl.textContent = ProductDB.formatPrice(parsedComboTotal);
+                                    if (saveEl) saveEl.style.display = 'block';
+                                } else {
+                                    comboTotalEl.textContent = ProductDB.formatPrice(total);
+                                    if (saveEl) saveEl.style.display = 'none';
+                                }
+                            });
+                        });
+
+                        // Attach event listener for Combo Add to Cart
+                        const comboBtn = comboSection.querySelector('.combo-btn');
+                        if (comboBtn) {
+                            comboBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                e.stopImmediatePropagation();
+                                if (!window.getCart || !window.saveCart || !window.showToast) {
+                                    alert("Hệ thống giỏ hàng chưa sẵn sàng.");
+                                    return;
+                                }
+                                
+                                const cart = window.getCart();
+                                const items = Array.from(comboChecks).map(check => {
+                                    const itemEl = check.closest('.combo-item');
+                                    return {
+                                        name: itemEl.querySelector('span').textContent.trim(),
+                                        price: parseInt(itemEl.querySelector('.combo-item-price').textContent.replace(/[^0-9]/g, '')),
+                                        image: itemEl.querySelector('img').src,
+                                        checked: check.checked
+                                    };
+                                });
+                                
+                                if (items.length === 0) return;
+                                
+                                const mainItem = items[0];
+                                if (!mainItem.checked) {
+                                    window.showToast('Vui lòng chọn sản phẩm chính!', 'error');
+                                    return;
+                                }
+
+                                const addons = items.slice(1).map(addon => ({
+                                    name: addon.name,
+                                    price: addon.price,
+                                    image: addon.image,
+                                    checked: addon.checked
+                                }));
+
+                                const existingItem = cart.find(i => i.name === mainItem.name && i.isCombo === true);
+                                if (existingItem) {
+                                    existingItem.quantity += 1;
+                                    existingItem.addons = addons;
+                                } else {
+                                    cart.push({
+                                        name: mainItem.name,
+                                        price: product.comboTotalPrice > 0 && items.every(i => i.checked) ? product.comboTotalPrice - items.slice(1).reduce((sum, item) => sum + item.price, 0) : mainItem.price,
+                                        image: mainItem.image,
+                                        quantity: 1,
+                                        isCombo: true,
+                                        addons: addons
+                                    });
+                                }
+
+                                window.saveCart(cart);
+                                window.showToast('Đã thêm Combo vào giỏ hàng!', 'success');
+                            });
+                        }
+                    } else {
+                        comboSection.style.display = 'none';
                     }
                 }
 
@@ -1912,15 +2044,17 @@
             const oldPriceEl = document.querySelector('.pd-price-old');
             const saveBadge = document.querySelector('.pd-save-badge');
 
-            if (priceEl) priceEl.textContent = product.price.toLocaleString('vi-VN') + 'đ';
-            if (product.oldPrice || product.discount) {
-                const oldPrice = product.oldPrice || Math.round(product.price / (1 - product.discount / 100));
+            const discountedPrice = ProductDB.getDiscountedPrice(product);
+
+            if (priceEl) priceEl.textContent = ProductDB.formatPrice(discountedPrice);
+
+            if (product.discount > 0 || (product.finalPrice && product.finalPrice < product.price)) {
                 if (oldPriceEl) {
-                    oldPriceEl.textContent = oldPrice.toLocaleString('vi-VN') + 'đ';
+                    oldPriceEl.textContent = ProductDB.formatPrice(product.price);
                     oldPriceEl.style.display = 'inline-block';
                 }
                 if (saveBadge) {
-                    saveBadge.textContent = '(Tiết kiệm ' + (oldPrice - product.price).toLocaleString('vi-VN') + 'đ)';
+                    saveBadge.textContent = '(Tiết kiệm ' + ProductDB.formatPrice(product.price - discountedPrice) + ')';
                     saveBadge.style.display = 'inline-block';
                 }
             } else {
@@ -2142,7 +2276,7 @@
             }
         }
     </script>
-    <script defer src="/assets/js/client/product-db.js?v=6"></script>
+    <script defer src="/assets/js/client/product-db.js?v=7"></script>
     <!-- Floating Contact Widgets -->
     <div class="floating-contact-wrapper">
         <a href="tel:0901234567" class="float-btn float-hotline" title="Gọi Ngay">

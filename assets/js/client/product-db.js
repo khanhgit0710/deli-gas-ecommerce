@@ -992,6 +992,7 @@ const ProductDB = window.ProductDB = (() => {
         address: '123 Thủ Đức, Hồ Chí Minh',
         logo: 'assets/logo/logo_primary_gas - Copy.png',
         showComboSection: true,
+        globalSaleOffPercent: 50,
         banners: {
             slider1: 'assets/images/banner_trangchu_1.jpg',
             slider2: 'assets/images/banner_trangchu_2.jpg',
@@ -1174,7 +1175,7 @@ const ProductDB = window.ProductDB = (() => {
         async initAsync() {
             try {
                 // Try to load from API
-                const response = await fetch('api.php');
+                const response = await fetch('/api/api.php');
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.products) {
@@ -1274,7 +1275,7 @@ const ProductDB = window.ProductDB = (() => {
          */
         async syncToApi() {
             try {
-                await fetch('api.php', {
+                await fetch('/api/api.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1347,6 +1348,7 @@ const ProductDB = window.ProductDB = (() => {
                 id: _nextProductId(),
                 price: parseInt(product.price) || 0,
                 discount: parseInt(product.discount) || 0,
+                finalPrice: product.finalPrice !== undefined ? product.finalPrice : null,
                 categoryId: parseInt(product.categoryId),
                 featured: !!product.featured,
                 onSale: !!product.onSale,
@@ -1378,6 +1380,7 @@ const ProductDB = window.ProductDB = (() => {
                 id: parseInt(id),
                 price: parseInt(data.price) || products[index].price,
                 discount: parseInt(data.discount) || 0,
+                finalPrice: data.finalPrice !== undefined ? data.finalPrice : products[index].finalPrice,
                 categoryId: parseInt(data.categoryId) || products[index].categoryId,
                 featured: !!data.featured,
                 onSale: !!data.onSale,
@@ -1427,7 +1430,7 @@ const ProductDB = window.ProductDB = (() => {
 
         // ===== CATEGORY CRUD =====
         getCategories() {
-            return _getCategories();
+            return _getCategories().sort((a, b) => (a.order || 0) - (b.order || 0));
         },
 
         getCategoryById(id) {
@@ -1445,7 +1448,8 @@ const ProductDB = window.ProductDB = (() => {
                 name: category.name,
                 slug: category.slug || _generateSlug(category.name),
                 skuPrefix: category.skuPrefix || category.name.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 3),
-                seoDesc: category.seoDesc || ''
+                seoDesc: category.seoDesc || '',
+                order: parseInt(category.order) || 0
             };
             cats.push(newCat);
             _saveCategories(cats);
@@ -1462,7 +1466,8 @@ const ProductDB = window.ProductDB = (() => {
                 name: data.name || cats[index].name,
                 slug: data.slug || _generateSlug(data.name || cats[index].name),
                 skuPrefix: data.skuPrefix !== undefined ? data.skuPrefix : (cats[index].skuPrefix || ''),
-                seoDesc: data.seoDesc !== undefined ? data.seoDesc : (cats[index].seoDesc || '')
+                seoDesc: data.seoDesc !== undefined ? data.seoDesc : (cats[index].seoDesc || ''),
+                order: data.order !== undefined ? parseInt(data.order) : (cats[index].order || 0)
             };
             _saveCategories(cats);
             this.syncToApi();
@@ -1479,6 +1484,27 @@ const ProductDB = window.ProductDB = (() => {
             _saveCategories(filtered);
             this.syncToApi();
             return { success: true };
+        },
+
+        moveCategory(id, direction) {
+            const cats = this.getCategories(); // Already sorted
+            const index = cats.findIndex(c => c.id === parseInt(id));
+            if (index === -1) return false;
+            
+            let targetIndex = direction === 'up' ? index - 1 : index + 1;
+            if (targetIndex < 0 || targetIndex >= cats.length) return false;
+            
+            // Normalize orders to be strictly sequential
+            cats.forEach((c, i) => { c.order = i + 1; });
+            
+            // Swap
+            const temp = cats[index].order;
+            cats[index].order = cats[targetIndex].order;
+            cats[targetIndex].order = temp;
+            
+            _saveCategories(cats);
+            this.syncToApi();
+            return true;
         },
 
         toggleFlashDeal(id, isFlashDeal) {
@@ -1580,8 +1606,19 @@ const ProductDB = window.ProductDB = (() => {
         formatPrice: _formatPrice,
 
         getDiscountedPrice(product) {
+            // Flash Deal has highest priority
             if (product.isFlashDeal && product.flashDealPrice) return parseInt(product.flashDealPrice);
-            if (product.isSaleOff50) return Math.round(product.price * 0.5);
+            
+            // Then finalPrice
+            if (product.finalPrice > 0) return product.finalPrice;
+            
+            // Then global sale 50%
+            if (product.isSaleOff50) {
+                const percent = _getSettings().globalSaleOffPercent || 50;
+                return Math.round(product.price * (1 - percent / 100));
+            }
+            
+            // Finally, regular discount percentage
             if (!product.discount || product.discount <= 0) return product.price;
             return Math.round(product.price * (1 - product.discount / 100));
         },

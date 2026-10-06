@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('settingLogo').value = settings.logo || '';
         if(document.getElementById('settingFavicon')) document.getElementById('settingFavicon').value = settings.favicon || '';
         document.getElementById('settingShowComboSection').checked = settings.showComboSection !== false; // Default true
+        if (document.getElementById('settingGlobalSaleOffPercent')) document.getElementById('settingGlobalSaleOffPercent').value = settings.globalSaleOffPercent || 50;
         
         const banners = settings.banners || {};
         
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: document.getElementById('settingLogo').value.trim(),
             favicon: document.getElementById('settingFavicon') ? document.getElementById('settingFavicon').value.trim() : '',
             showComboSection: document.getElementById('settingShowComboSection').checked,
+            globalSaleOffPercent: document.getElementById('settingGlobalSaleOffPercent') ? parseInt(document.getElementById('settingGlobalSaleOffPercent').value) || 50 : 50,
             banners: {
                 sliders: currentSliders.filter(s => s.url.trim() !== ''), // filter out empty URLs
                 bannerAbout: document.getElementById('settingBannerAbout') ? document.getElementById('settingBannerAbout').value.trim() : '',

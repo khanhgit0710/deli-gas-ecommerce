@@ -1,4 +1,4 @@
-﻿@import url('./base.css');
+@import url('./base.css');
 
 /* ==========================================================================
    TOP BAR
@@ -457,16 +457,16 @@
 
 /* Reduce height for featured cards */
 .products-flex .product-img {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 11 / 10;
 }
 
 .products-flex .product-info {
-  padding: 15px;
+  padding: 10px 12px;
 }
 
 .products-flex .product-info h3 {
   font-size: 18px;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .product-desc {
@@ -5770,8 +5770,20 @@
 }
 
 .featured-large-card .product-img {
-  height: 240px;
-  /* Taller image */
+  aspect-ratio: 11 / 10;
+}
+
+.featured-large-card .product-info {
+  padding: 10px;
+}
+
+.featured-large-card .product-desc {
+  margin: 3px 0;
+}
+
+.featured-large-card .product-price {
+  margin-top: 3px;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 992px) {

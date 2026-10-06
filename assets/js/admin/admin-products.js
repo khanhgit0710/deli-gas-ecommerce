@@ -207,22 +207,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-calculate discount
     function calculateDiscount() {
-        const rawPrice = document.getElementById('productPrice').value.replace(/\./g, '');
-        const rawFinalPrice = document.getElementById('productFinalPrice').value.replace(/\./g, '');
+        const rawPrice = document.getElementById('productPrice').value.replace(/\D/g, '');
+        const rawFinalPrice = document.getElementById('productFinalPrice').value.replace(/\D/g, '');
         
         const price = parseFloat(rawPrice) || 0;
         const finalPrice = parseFloat(rawFinalPrice) || 0;
         const discountInput = document.getElementById('productDiscount');
         
-        if (price > 0 && finalPrice > 0 && finalPrice < price) {
-            const percentage = ((price - finalPrice) / price) * 100;
-            discountInput.value = Math.ceil(percentage); // Luôn làm tròn lên
-        } else if (finalPrice === price || finalPrice > price || finalPrice === 0) {
+        if (price > 0 && finalPrice > 0) {
+            if (finalPrice < price) {
+                const percentage = ((price - finalPrice) / price) * 100;
+                discountInput.value = Math.ceil(percentage); // Luôn làm tròn lên
+            } else {
+                discountInput.value = 0;
+            }
+        } else {
             discountInput.value = 0;
         }
     }
     document.getElementById('productPrice').addEventListener('input', calculateDiscount);
     document.getElementById('productFinalPrice').addEventListener('input', calculateDiscount);
+
+    // Auto-calculate final price from discount
+    function calculateFinalPrice() {
+        const rawPrice = document.getElementById('productPrice').value.replace(/\D/g, '');
+        const price = parseFloat(rawPrice) || 0;
+        const discountInput = document.getElementById('productDiscount');
+        const discountVal = parseFloat(discountInput.value) || 0;
+        const finalPriceInput = document.getElementById('productFinalPrice');
+        
+        if (price > 0 && discountVal >= 0 && discountVal <= 100) {
+            const finalPrice = price - (price * discountVal / 100);
+            finalPriceInput.value = Math.round(finalPrice).toLocaleString('vi-VN').replace(/,/g, '.');
+        } else if (discountVal === 0 && price > 0) {
+            finalPriceInput.value = price.toLocaleString('vi-VN').replace(/,/g, '.');
+        }
+    }
+    
+    if (document.getElementById('productDiscount')) {
+        document.getElementById('productDiscount').addEventListener('input', calculateFinalPrice);
+    }
 
     // ========== PRODUCT MODAL ==========
     window.openProductModal = function (product = null) {
@@ -239,14 +263,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('productBadgeText')) document.getElementById('productBadgeText').value = '';
         if (document.getElementById('productBadgeColor')) document.getElementById('productBadgeColor').value = '#ef4444';
         
-        // Populate combo select and recommended products
         const comboSelect = document.getElementById('comboProductId');
         const rec1 = document.getElementById('recProduct1');
         const rec2 = document.getElementById('recProduct2');
-        const rec3 = document.getElementById('recProduct3');
         
         let comboHTML = '<option value="">Không có ưu đãi</option>';
-        let recHTML = '<option value="">-- Chọn sản phẩm --</option>';
+        let recHTML = '<option value="">-- Chọn sản phẩm phụ --</option>';
         
         ProductDB.getAll().forEach(p => {
             if (!product || p.id !== product.id) {
@@ -259,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (comboSelect) comboSelect.innerHTML = comboHTML;
         if (rec1) rec1.innerHTML = recHTML;
         if (rec2) rec2.innerHTML = recHTML;
-        if (rec3) rec3.innerHTML = recHTML;
 
         updateImagePreview();
 
@@ -271,14 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('productCategory').value = product.categoryId;
             document.getElementById('productPrice').value = product.price.toLocaleString('vi-VN').replace(/,/g, '.');
             document.getElementById('productDiscount').value = product.discount || 0;
-            const finalPrice = product.price - (product.price * (product.discount || 0) / 100);
-            const displayFinalPrice = product.discount ? Math.round(finalPrice) : product.price;
+            const finalPrice = product.finalPrice ? product.finalPrice : (product.price - (product.price * (product.discount || 0) / 100));
+            const displayFinalPrice = (product.finalPrice || product.discount > 0) ? Math.round(finalPrice) : product.price;
             document.getElementById('productFinalPrice').value = displayFinalPrice.toLocaleString('vi-VN').replace(/,/g, '.');
             document.getElementById('productImage').value = product.image || '';
             document.getElementById('productDescription').value = product.description || '';
             document.getElementById('productSpecs').value = product.specs || '';
             document.getElementById('productFeatured').checked = product.featured;
             document.getElementById('productOnSale').checked = product.onSale;
+            if (document.getElementById('productIsSaleOff50')) document.getElementById('productIsSaleOff50').checked = product.isSaleOff50 || false;
             if (document.getElementById('productActive')) document.getElementById('productActive').checked = product.active !== false;
             if (document.getElementById('productSlug')) document.getElementById('productSlug').value = product.slug || '';
             if (document.getElementById('productSeoTitle')) document.getElementById('productSeoTitle').value = product.seoTitle || '';
@@ -291,13 +313,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const recs = product.recommendedProducts || [];
             if (document.getElementById('recProduct1')) document.getElementById('recProduct1').value = recs[0] || '';
             if (document.getElementById('recProduct2')) document.getElementById('recProduct2').value = recs[1] || '';
-            if (document.getElementById('recProduct3')) document.getElementById('recProduct3').value = recs[2] || '';
             
             const imgs = product.images || [];
             window.currentAdditionalImages = [...imgs];
             
             if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = product.comboTotalPrice ? product.comboTotalPrice.toLocaleString('vi-VN').replace(/,/g, '.') : '';
             
+            // Populate variants
+            const varContainer = document.getElementById('productVariantsContainer');
+            if (varContainer) {
+                varContainer.innerHTML = '';
+                if (product.variants && product.variants.length > 0) {
+                    product.variants.forEach(v => window.renderVariantRow(v.name, v.productId));
+                }
+            }
+
             updateImagePreview();
             renderAdditionalImages();
         } else {
@@ -317,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.getElementById('productFeatured').checked = true; // Auto "Mới" tag
             document.getElementById('productOnSale').checked = false;
+            if (document.getElementById('productIsSaleOff50')) document.getElementById('productIsSaleOff50').checked = false;
             if (document.getElementById('productActive')) document.getElementById('productActive').checked = true;
             if (document.getElementById('productSlug')) document.getElementById('productSlug').value = '';
             if (document.getElementById('productSeoTitle')) document.getElementById('productSeoTitle').value = '';
@@ -335,6 +366,9 @@ document.addEventListener('DOMContentLoaded', () => {
             renderAdditionalImages();
             
             if (document.getElementById('comboTotalPriceInput')) document.getElementById('comboTotalPriceInput').value = '';
+
+            const varContainer = document.getElementById('productVariantsContainer');
+            if (varContainer) varContainer.innerHTML = '';
         }
 
         modal.classList.add('active');
@@ -441,6 +475,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Variants logic
+    window.renderVariantRow = function(name = '', pid = '') {
+        const container = document.getElementById('productVariantsContainer');
+        if (!container) return;
+        
+        const row = document.createElement('div');
+        row.className = 'variant-row';
+        row.style.display = 'flex';
+        row.style.gap = '10px';
+        row.style.alignItems = 'center';
+        row.style.marginBottom = '8px';
+        
+        let productOptions = '<option value="">-- Chọn sản phẩm liên kết --</option>';
+        ProductDB.getAll().forEach(p => {
+            const selected = (p.id == pid) ? 'selected' : '';
+            productOptions += `<option value="${p.id}" ${selected}>${p.name}</option>`;
+        });
+        
+        const html = `
+            <input type="text" class="form-input var-name" placeholder="Nhãn hiển thị (VD: 12kg Đỏ)" style="width: 250px" value="${name}">
+            <select class="form-select var-pid" style="flex: 1">
+                ${productOptions}
+            </select>
+            <button type="button" class="btn btn-outline" onclick="this.parentElement.remove()" style="padding: 8px 12px; color: #ef4444; border-color: #fca5a5; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-trash"></i></button>
+        `;
+        row.innerHTML = html;
+        container.appendChild(row);
+    };
+
+    const btnAddVariantRow = document.getElementById('btnAddVariantRow');
+    if (btnAddVariantRow) {
+        btnAddVariantRow.addEventListener('click', () => {
+            window.renderVariantRow();
+        });
+    }
+
     const btnAddAdditionalImage = document.getElementById('btnAddAdditionalImage');
     const inputAdditionalImage = document.getElementById('additionalImageInput');
 
@@ -502,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e) e.preventDefault();
         const name = document.getElementById('productName').value.trim();
         const categoryId = document.getElementById('productCategory').value;
-        const priceRaw = document.getElementById('productPrice').value.replace(/\./g, '');
+        const priceRaw = document.getElementById('productPrice').value.replace(/\D/g, '');
 
         if (!name || !categoryId || !priceRaw) {
             showToast('Vui lòng nhập đầy đủ thông tin bắt buộc!', 'error');
@@ -518,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSave.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang lưu...';
 
             if (mainImage.startsWith('data:image')) {
-                const res = await fetch('/upload-image.php', {
+                const res = await fetch('/api/upload-image.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ image: mainImage, type: 'product' })
@@ -541,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < window.currentAdditionalImages.length; i++) {
                 let img = window.currentAdditionalImages[i];
                 if (img.startsWith('data:image')) {
-                    const res = await fetch('/upload-image.php', {
+                    const res = await fetch('/api/upload-image.php', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ image: img, type: 'product' })
@@ -565,12 +635,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let savePrice = parseInt(priceRaw);
             let saveDiscount = parseInt(document.getElementById('productDiscount').value) || 0;
-            const inputFinalPrice = document.getElementById('productFinalPrice').value ? parseInt(document.getElementById('productFinalPrice').value.replace(/\./g, '')) : 0;
+            const inputFinalPrice = document.getElementById('productFinalPrice').value ? parseInt(document.getElementById('productFinalPrice').value.replace(/\D/g, '')) : 0;
             
-            if (inputFinalPrice > savePrice) {
-                savePrice = inputFinalPrice;
-                saveDiscount = 0;
-            } else if (inputFinalPrice === savePrice) {
+            let finalPriceToSave = null;
+            if (inputFinalPrice > 0) {
+                finalPriceToSave = inputFinalPrice;
+            }
+
+            if (inputFinalPrice >= savePrice && inputFinalPrice > 0) {
                 saveDiscount = 0;
             }
 
@@ -589,11 +661,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 categoryId: parseInt(categoryId),
                 price: savePrice,
                 discount: saveDiscount,
+                finalPrice: finalPriceToSave,
                 image: mainImage,
                 description: document.getElementById('productDescription').value.trim(),
                 specs: document.getElementById('productSpecs').value.trim(),
                 featured: document.getElementById('productFeatured').checked,
                 onSale: document.getElementById('productOnSale').checked,
+                isSaleOff50: document.getElementById('productIsSaleOff50') ? document.getElementById('productIsSaleOff50').checked : false,
                 active: document.getElementById('productActive') ? document.getElementById('productActive').checked : true,
                 badgeText: document.getElementById('productBadgeText') ? document.getElementById('productBadgeText').value.trim() : '',
                 badgeColor: document.getElementById('productBadgeColor') ? document.getElementById('productBadgeColor').value : '#ef4444',
@@ -603,13 +677,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 comboTotalPrice: document.getElementById('comboTotalPriceInput') ? parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\D/g, '')) || 0 : 0,
                 recommendedProducts: [
                     document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) || null : null,
-                    document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) || null : null,
-                    document.getElementById('recProduct3') ? parseInt(document.getElementById('recProduct3').value) || null : null
+                    document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) || null : null
                 ].filter(id => id !== null),
                 slug: document.getElementById('productSlug') ? document.getElementById('productSlug').value.trim() : '',
                 seoTitle: document.getElementById('productSeoTitle') ? document.getElementById('productSeoTitle').value.trim() : '',
                 seoDesc: autoSeoDesc
             };
+
+            const variantRows = document.querySelectorAll('#productVariantsContainer .variant-row');
+            if (variantRows.length > 0) {
+                const variants = [];
+                variantRows.forEach(row => {
+                    const vName = row.querySelector('.var-name').value.trim();
+                    const vPid = parseInt(row.querySelector('.var-pid').value) || 0;
+                    if (vName && vPid) {
+                        variants.push({ name: vName, productId: vPid });
+                    }
+                });
+                data.variants = variants;
+            } else {
+                data.variants = [];
+            }
 
             const rec1Val = document.getElementById('recProduct1') ? parseInt(document.getElementById('recProduct1').value) : null;
             const rec2Val = document.getElementById('recProduct2') ? parseInt(document.getElementById('recProduct2').value) : null;
@@ -617,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.recommendedProducts = [rec1Val, rec2Val, rec3Val].filter(v => v);
             
             if (document.getElementById('comboTotalPriceInput') && document.getElementById('comboTotalPriceInput').value) {
-                data.comboTotalPrice = parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\./g, ''));
+                data.comboTotalPrice = parseInt(document.getElementById('comboTotalPriceInput').value.replace(/\D/g, ''));
             } else {
                 data.comboTotalPrice = null;
             }
@@ -652,7 +740,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!tbody) return;
 
         if (products.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-tags"></i> Chưa có sản phẩm Sale Off 50%</td></tr>';
+            const currentPercent = ProductDB.getSettings().globalSaleOffPercent || 50;
+            tbody.innerHTML = `<tr><td colspan="5" class="table-empty"><i class="fa-solid fa-tags"></i> Chưa có sản phẩm Sale Off ${currentPercent}%</td></tr>`;
             return;
         }
 
@@ -677,7 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <strong style="color:var(--color-danger);">${ProductDB.formatPrice(discountedPrice)}</strong>
                     </td>
                     <td style="text-align:center;">
-                        <span class="status-badge" style="background:#fff0f0; color:var(--color-danger); border:1px solid #ffd0d0;">Sale Off 50%</span>
+                        <span class="status-badge" style="background:#fff0f0; color:var(--color-danger); border:1px solid #ffd0d0;">Sale Off ${ProductDB.getSettings().globalSaleOffPercent || 50}%</span>
                     </td>
                     <td style="text-align:center;">
                         <div class="action-buttons">

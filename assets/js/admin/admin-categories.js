@@ -12,8 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        tbody.innerHTML = categories.map(c => {
+        tbody.innerHTML = categories.map((c, index) => {
             const count = ProductDB.getProductCountByCategory(c.id);
+            const isFirst = index === 0;
+            const isLast = index === categories.length - 1;
             return `
                 <tr>
                     <td style="color:var(--admin-text-dim);font-weight:600;font-family:monospace;">${c.skuPrefix || c.id}</td>
@@ -22,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td style="text-align: center;"><span class="cat-product-count">${count}</span></td>
                     <td style="text-align: center;">
                         <div class="actions-cell" style="justify-content: center;">
+                            <button class="btn-icon" title="Lên" onclick="moveCategoryItem(${c.id}, 'up')" ${isFirst ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}><i class="fa-solid fa-arrow-up"></i></button>
+                            <button class="btn-icon" title="Xuống" onclick="moveCategoryItem(${c.id}, 'down')" ${isLast ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}><i class="fa-solid fa-arrow-down"></i></button>
                             <button class="btn-icon success" title="Sửa" onclick="editCategory(${c.id})"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn-icon danger" title="Xóa" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
@@ -42,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('categoryId').value = '';
         document.getElementById('categoryName').value = '';
         if (document.getElementById('categorySkuPrefix')) document.getElementById('categorySkuPrefix').value = '';
+        if (document.getElementById('categoryOrder')) document.getElementById('categoryOrder').value = 0;
         document.getElementById('categorySlug').value = '';
         document.getElementById('categorySeoDesc').value = '';
 
@@ -50,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('categoryId').value = category.id;
             document.getElementById('categoryName').value = category.name;
             if (document.getElementById('categorySkuPrefix')) document.getElementById('categorySkuPrefix').value = category.skuPrefix || '';
+            if (document.getElementById('categoryOrder')) document.getElementById('categoryOrder').value = category.order || 0;
             document.getElementById('categorySlug').value = category.slug;
             document.getElementById('categorySeoDesc').value = category.seoDesc || '';
         } else {
@@ -90,6 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    window.moveCategoryItem = function (id, direction) {
+        if (ProductDB.moveCategory(id, direction)) {
+            renderCategories();
+        }
+    };
+
     document.getElementById('btnSaveCategory').addEventListener('click', () => {
         const name = document.getElementById('categoryName').value.trim();
         if (!name) {
@@ -100,13 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const slug = document.getElementById('categorySlug').value.trim();
         const seoDesc = document.getElementById('categorySeoDesc').value.trim();
         const skuPrefix = document.getElementById('categorySkuPrefix') ? document.getElementById('categorySkuPrefix').value.trim() : '';
+        const order = document.getElementById('categoryOrder') ? parseInt(document.getElementById('categoryOrder').value) || 0 : 0;
         const editId = document.getElementById('categoryId').value;
 
         if (editId) {
-            ProductDB.updateCategory(editId, { name, skuPrefix, slug, seoDesc });
+            ProductDB.updateCategory(editId, { name, skuPrefix, slug, seoDesc, order });
             showToast('Cập nhật danh mục thành công!', 'success');
         } else {
-            ProductDB.addCategory({ name, skuPrefix, slug, seoDesc });
+            ProductDB.addCategory({ name, skuPrefix, slug, seoDesc, order });
             showToast('Thêm danh mục mới thành công!', 'success');
         }
 

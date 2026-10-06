@@ -11,8 +11,8 @@
     <!-- FontAwesome cho Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/main.css?v=6">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=6">
+    <link rel="stylesheet" href="assets/css/main.css?v=7">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=7">
     <link rel="icon" type="image/png" href="assets/logo/logo_gas.png">
     <style>
         @media screen and (max-width: 768px) {
@@ -206,7 +206,7 @@
                             <div class="product-badge" style="background-color: #f59e0b;">BÁN CHẠY</div>
                             <div class="product-img">
                                 <a href="/bep-gas-am-rinnai-rvb-2gib"><img
-                                        src="https://bizweb.dktcdn.net/100/367/351/products/bep-ga-am-rinnai-rvb-2gi-b.png?v=6"
+                                        src="https://bizweb.dktcdn.net/100/367/351/products/bep-ga-am-rinnai-rvb-2gi-b.png?v=7"
                                         alt="Bếp Rinnai"></a>
                             </div>
                             <div class="product-info">
@@ -424,7 +424,7 @@
                     <div class="deal-divider"></div>
                     <div class="deal-sale-text">
                         <span class="sale-up-to">UP TO</span>
-                        <div class="sale-percent">50% OFF</div>
+                        <div class="sale-percent" id="flashDealPercentLabel">50% OFF</div>
                     </div>
 
                     <a href="tel:0901234567" class="deal-shop-btn"
@@ -609,8 +609,8 @@
 
 
     <!-- JS -->
-    <script defer src="/assets/js/client/product-db.js?v=6"></script>
-    <script defer src="/assets/js/client/main.js?v=6"></script>
+    <script defer src="/assets/js/client/product-db.js?v=9"></script>
+    <script defer src="/assets/js/client/main.js?v=7"></script>
 
     <!-- Bento Carousel Logic -->
     <script>
@@ -846,16 +846,24 @@
             }
 
             function renderFlashDeals() {
+                const percentLabel = document.getElementById('flashDealPercentLabel');
+                if (percentLabel) {
+                    const percent = ProductDB.getSettings().globalSaleOffPercent || 50;
+                    percentLabel.textContent = percent + '% OFF';
+                }
+
                 const slider = document.getElementById('flashDealSlider');
                 if (!slider) return;
 
                 let dealProducts = ProductDB.getFlashDealProducts();
+                const section = document.querySelector('.flash-deal-section');
                 
-                // Fallback if none exist yet
+                // Hide section if no flash deals exist
                 if (dealProducts.length === 0) {
-                    slider.innerHTML = '<p style="padding: 20px;">Đang cập nhật Sale Off...</p>';
+                    if (section) section.style.display = 'none';
                     return;
                 }
+                if (section) section.style.display = '';
 
                 slider.innerHTML = dealProducts.map(p => {
                     return `

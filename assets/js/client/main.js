@@ -355,8 +355,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 badgeHtml = `<div class="product-badge" style="background-color: #f59e0b;">BÁN CHẠY</div>`;
             }
             
-            let priceHtml = `<span class="price-current">${formatPrice(p.price - (p.price * p.discount / 100))}</span>`;
-            if (p.discount > 0) {
+            let priceHtml = `<span class="price-current">${formatPrice(ProductDB.getDiscountedPrice(p))}</span>`;
+            if (p.discount > 0 || (p.finalPrice && p.finalPrice < p.price)) {
                 priceHtml += `\n<span class="price-old">${formatPrice(p.price)}</span>`;
             }
             
@@ -1046,6 +1046,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             setTimeout(() => toast.remove(), 300);
         }, 2500);
     }
+    window.showToast = showToast; // Expose globally
 
     const cartBtns = document.querySelectorAll('.cart-btn-primary');
     cartBtns.forEach(btn => {
@@ -1057,11 +1058,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     function getCart() {
         return JSON.parse(localStorage.getItem('gas_cart')) || [];
     }
+    window.getCart = getCart; // Expose globally
 
     function saveCart(cart) {
         localStorage.setItem('gas_cart', JSON.stringify(cart));
         updateCartBadge();
     }
+    window.saveCart = saveCart; // Expose globally
 
     function updateCartBadge() {
         const cart = getCart();
@@ -1070,6 +1073,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const badges = document.querySelectorAll('.cart-badge');
         badges.forEach(b => b.textContent = totalItems);
     }
+    window.updateCartBadge = updateCartBadge; // Expose globally
 
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', function (e) {
@@ -1115,17 +1119,42 @@ document.addEventListener('DOMContentLoaded', async () => {
             const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
 
             const cart = getCart();
-            const existingItem = cart.find(i => i.name === name);
-            if (existingItem) {
-                existingItem.quantity += quantity;
+            let itemToAdd = cart.find(i => i.name === name);
+            
+            if (itemToAdd) {
+                itemToAdd.quantity += quantity;
             } else {
-                cart.push({
+                itemToAdd = {
                     name: name,
                     price: price,
                     image: imgSrc,
                     quantity: quantity
-                });
+                };
+                cart.push(itemToAdd);
             }
+
+            // Check if combo/gift box is checked
+            const giftCheckbox = document.getElementById('giftCheckbox');
+            if (giftCheckbox && giftCheckbox.checked) {
+                const giftName = giftCheckbox.getAttribute('data-name');
+                const giftPrice = parseInt(giftCheckbox.getAttribute('data-price') || 0);
+                const giftImage = giftCheckbox.getAttribute('data-image');
+                
+                itemToAdd.isCombo = true;
+                if (!itemToAdd.addons) itemToAdd.addons = [];
+                
+                // Add addon if not already in the list
+                const existingAddon = itemToAdd.addons.find(a => a.name === giftName);
+                if (!existingAddon) {
+                    itemToAdd.addons.push({
+                        name: giftName,
+                        price: giftPrice,
+                        image: giftImage,
+                        checked: true
+                    });
+                }
+            }
+
             saveCart(cart);
 
             showToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
@@ -1334,92 +1363,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateCartBadge();
     /* ==========================================================================
        COMBO PRICE CALCULATION
+       (Moved to dynamic logic in chi-tiet-san-pham.html to support DB price)
        ========================================================================== */
-    const comboChecks = document.querySelectorAll('.combo-check');
-    const comboTotalEl = document.querySelector('.combo-total');
 
-    if (comboChecks.length > 0 && comboTotalEl) {
-        function updateComboPrice() {
-            let total = 0;
-            let checkedCount = 0;
-            comboChecks.forEach(check => {
-                if (check.checked) {
-                    const priceText = check.closest('.combo-item').querySelector('.combo-item-price').textContent;
-                    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
-                    total += price;
-                    checkedCount++;
-                }
-            });
 
-            const saveEl = document.querySelector('.combo-save');
-            if (checkedCount === comboChecks.length) {
-                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
-                if (saveEl) saveEl.style.display = 'block';
-            } else {
-                comboTotalEl.textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
-                if (saveEl) saveEl.style.display = 'none';
-            }
-        }
-
-        comboChecks.forEach(check => {
-            check.addEventListener('change', updateComboPrice);
-        });
-
-        // Initialize
-        updateComboPrice();
-
-        const comboBtn = document.querySelector('.combo-btn');
-        if (comboBtn) {
-            comboBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const cart = getCart();
-                
-                const items = Array.from(comboChecks).map(check => {
-                    const itemEl = check.closest('.combo-item');
-                    return {
-                        name: itemEl.querySelector('span').textContent.trim(),
-                        price: parseInt(itemEl.querySelector('.combo-item-price').textContent.replace(/[^0-9]/g, '')),
-                        image: itemEl.querySelector('img').src,
-                        checked: check.checked
-                    };
-                });
-                
-                if (items.length === 0) return;
-                
-                const mainItem = items[0];
-                if (!mainItem.checked) {
-                    showToast('Vui lòng chọn sản phẩm chính!', 'error');
-                    return;
-                }
-
-                const addons = items.slice(1).map(addon => ({
-                    name: addon.name,
-                    price: addon.price,
-                    image: addon.image,
-                    checked: addon.checked
-                }));
-
-                // Try to find exact same combo
-                const existingItem = cart.find(i => i.name === mainItem.name && i.isCombo === true);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                    existingItem.addons = addons; // update addons to latest selection
-                } else {
-                    cart.push({
-                        name: mainItem.name,
-                        price: mainItem.price,
-                        image: mainItem.image,
-                        quantity: 1,
-                        isCombo: true,
-                        addons: addons
-                    });
-                }
-
-                saveCart(cart);
-                showToast('Đã thêm Combo vào giỏ hàng!', 'success');
-            });
-        }
-    }
 
     /* ==========================================================================
        COUNT-UP ANIMATION FOR STATS

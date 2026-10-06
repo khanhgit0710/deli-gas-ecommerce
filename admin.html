@@ -537,6 +537,13 @@
                                             Hiển thị danh mục Combo Ưu Đãi Của Tháng trên Trang Chủ
                                         </label>
                                     </div>
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="form-label">Phần trăm Sale Off (Flash Deal)</label>
+                                        <div style="display: flex; align-items: center; gap: 10px; max-width: 200px;">
+                                            <input type="number" class="form-input" id="settingGlobalSaleOffPercent" placeholder="VD: 50" min="1" max="99" style="text-align: right;">
+                                            <span style="font-weight: bold; color: var(--admin-text-dim);">%</span>
+                                        </div>
+                                    </div>
                                     <button type="button" class="btn btn-primary" id="btnSaveSettings"><i
                                             class="fa-solid fa-save"></i> Lưu cấu hình</button>
                                 </form>
@@ -829,6 +836,13 @@
                             </div>
                             <div class="toggle-group" style="margin-top:10px">
                                 <label class="toggle-switch">
+                                    <input type="checkbox" id="productIsSaleOff50">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label" style="color: var(--color-danger); font-weight: 600;"><i class="fa-solid fa-bolt"></i> Flash Deal</span>
+                            </div>
+                            <div class="toggle-group" style="margin-top:10px">
+                                <label class="toggle-switch">
                                     <input type="checkbox" id="productActive" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
@@ -853,6 +867,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group full"
+                            style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 20px;">
+                            <label class="form-label" style="color: var(--admin-primary); display: flex; justify-content: space-between; align-items: center;">
+                                <span><i class="fa-solid fa-layer-group"></i> Phân loại sản phẩm (Biến thể)</span>
+                                <button type="button" class="btn btn-sm" style="background: var(--admin-primary); color: white; padding: 8px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;" id="btnAddVariantRow"><i class="fa-solid fa-plus"></i> Thêm phân loại</button>
+                            </label>
+                            <p style="font-size: 13px; color: #64748b; margin-top: 5px; margin-bottom: 15px;">Thêm các lựa chọn như Trọng lượng (6kg, 45kg) hoặc Màu sắc (Xanh, Đỏ). Liên kết với sản phẩm khác để khách hàng dễ dàng chuyển đổi.</p>
+                            <div id="productVariantsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                                <!-- Variants will be added here -->
+                            </div>
+                        </div>
+
                         <div class="form-group full"
                             style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border);">
                             <label class="form-label" style="color: var(--admin-primary);"><i

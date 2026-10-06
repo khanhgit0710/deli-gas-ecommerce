@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showConfirm('Xóa tin tức', `Bạn có chắc muốn xóa tin tức "${title}"?`, () => {
             const newsItem = ProductDB.getNewsById(id);
             if (newsItem && newsItem.image) {
-                fetch('/delete-image.php', {
+                fetch('/api/delete-image.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ paths: [newsItem.image] })
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSave.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Đang lưu...';
 
             if (mainImage.startsWith('data:image')) {
-                const res = await fetch('/upload-image.php', {
+                const res = await fetch('/api/upload-image.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ image: mainImage, type: 'news' })
