@@ -176,7 +176,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         // Create slide
                         const slide = document.createElement('div');
                         slide.className = `slide ${index === 0 ? 'active' : ''}`;
-                        slide.style.backgroundImage = `url('${slider.url}')`;
+                        let bgUrl = slider.url;
+                        if(bgUrl.includes('assets/images/banner_')) {
+                            bgUrl = bgUrl.replace('assets/images/', 'assets/');
+                        }
+                        slide.style.backgroundImage = `url('${bgUrl}')`;
                         sliderContainer.insertBefore(slide, dotsContainer);
 
                         // Create dot

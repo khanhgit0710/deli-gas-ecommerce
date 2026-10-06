@@ -994,10 +994,10 @@ const ProductDB = window.ProductDB = (() => {
         showComboSection: true,
         globalSaleOffPercent: 50,
         banners: {
-            slider1: 'assets/images/banner_trangchu_1.jpg',
-            slider2: 'assets/images/banner_trangchu_2.jpg',
-            slider3: 'assets/images/banner_trangchu_3.jpg',
-            pageBanner: 'assets/images/banner_page.jpg'
+            slider1: 'assets/banner_trangchu_1.jpg',
+            slider2: 'assets/banner_trangchu_2.jpg',
+            slider3: 'assets/banner_trangchu_3.jpg',
+            pageBanner: 'assets/banner_page.jpg'
         }
     };
 
