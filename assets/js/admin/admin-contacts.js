@@ -191,12 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteContact = function(id) {
-        window.showConfirmDialog('Xóa liên hệ này?', 'Hành động này không thể hoàn tác.', () => {
+        if(confirm('Xóa liên hệ này?\nHành động này không thể hoàn tác.')) {
             if(ProductDB.deleteContact(id)) {
                 renderContacts();
                 showToast('Đã xóa liên hệ');
             }
-        });
+        }
     };
 
     window.updateContactBadge = function() {

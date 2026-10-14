@@ -1,4 +1,4 @@
-﻿class SiteFooter extends HTMLElement {
+class SiteFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <footer class="site-footer">
@@ -26,17 +26,17 @@
                 </div>
 
                 <div class="footer-contact-actions">
-                    <a href="tel:0901234567" class="footer-hotline">
+                    <a href="tel:0932008179" class="footer-hotline">
                         <div class="icon-ring">
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="hotline-text">
                             <span>Hỗ trợ tận tâm</span>
-                            <strong>090 123 4567</strong>
+                            <strong>0932 008 179</strong>
                         </div>
                     </a>
 
-                    <a href="https://zalo.me/0901234567" target="_blank" class="footer-zalo">
+                    <a href="https://zalo.me/0932008179" target="_blank" class="footer-zalo">
                         <img src="/assets/images/local/img_18.png" alt="Zalo Chat"
                             onerror="this.src='/assets/images/local/img_19.png'">
                         <span>Chat Zalo</span>
@@ -60,7 +60,7 @@
                     <!-- Column 1: About -->
                     <div class="footer-col footer-col-about">
                         <div class="footer-logo">
-                            <img src="/assets/logo/logo_gas.png" alt="Deli-Gas Logo">
+                            <img src="/assets/logo/logo_gaslemanh.png" alt="Gas Lê Mạnh Logo">
                         </div>
                         <p class="footer-desc">
                             Hệ thống phân phối Gas và thiết bị bếp chính hãng, an toàn, uy tín. Phục vụ nhanh chóng tận
@@ -88,9 +88,9 @@
                     <div class="footer-col">
                         <div class="footer-col-title">Liên Hệ</div>
                         <ul class="contact-info-list">
-                            <li><i class="fa-solid fa-location-dot"></i> 475A Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP.HCM</li>
-                            <li><i class="fa-solid fa-phone"></i> 090 123 4567</li>
-                            <li><i class="fa-solid fa-envelope"></i> hotro@giaogas.vn</li>
+                            <li><i class="fa-solid fa-location-dot"></i> 266 Bùi Hữu Nghĩa, P. Gia Định, TP.HCM</li>
+                            <li><i class="fa-solid fa-phone"></i> 0932 008 179</li>
+                            <li><i class="fa-solid fa-envelope"></i> cuahanggaslemanh@gmail.com</li>
                         </ul>
                     </div>
 
@@ -98,7 +98,7 @@
                     <div class="footer-col">
                         <img src="/assets/logo/bocongthuong_logo.png" alt="Bộ Công Thương" style="max-width: 180px; margin-bottom: 15px; display: block;">
                         <div class="footer-map" style="border-radius: 8px; overflow: hidden; height: 200px; width: 100%;">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1256743939634!2d106.7118949!3d10.8016869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2618956976214!2d106.6961448!3d10.7912444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b7fa999999%3A0x1!2zMjY2IELDuWkgSOG7r3UgTmdoxKlhLCBQaMaw4budbmcgMiwgQsOsbmggVGjhuqFuaCwgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

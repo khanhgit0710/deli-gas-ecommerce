@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Responsive Styles
    Nguyên tắc: Các breakpoint được tách biệt hoàn toàn (không trùng lặp).
    Màn hình PC (trên 1024px) sẽ không bị ảnh hưởng và giữ nguyên thiết kế gốc.
@@ -3026,4 +3026,67 @@
         transform: scale(1);
     }
 
+}
+
+/* ==========================================================================
+   FULL BANNER SECTION RESPONSIVE
+   ========================================================================== */
+.full-banner-section {
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.full-banner-section .full-width-slider {
+    width: 100% !important;
+    aspect-ratio: 2119 / 742 !important;
+    height: auto !important;
+    max-height: 650px !important;
+    overflow: hidden !important;
+}
+
+.full-banner-section .slide {
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+@media (max-width: 768px) {
+    .full-banner-section .slider-dots {
+        bottom: 8px !important;
+        gap: 6px !important;
+    }
+
+    .full-banner-section .dot {
+        width: 7px !important;
+        height: 7px !important;
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+        border: none !important;
+    }
+
+    .full-banner-section .dot.active {
+        width: 20px !important;
+        border-radius: 4px !important;
+        transform: none !important;
+        background-color: var(--color-primary, #ff5722) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .full-banner-section .slider-dots {
+        bottom: 6px !important;
+        gap: 5px !important;
+    }
+
+    .full-banner-section .dot {
+        width: 6px !important;
+        height: 6px !important;
+    }
+
+    .full-banner-section .dot.active {
+        width: 16px !important;
+    }
 }

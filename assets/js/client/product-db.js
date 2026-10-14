@@ -34,52 +34,7 @@ const ProductDB = window.ProductDB = (() => {
         { id: 6, name: 'Kỹ thuật', slug: 'ky-thuat', seoDesc: 'Chia sẻ kiến thức kỹ thuật về gas và thiết bị bếp' }
     ];
 
-    const seedReviews = [
-        {
-            id: 1,
-            productId: 1,
-            rating: 5,
-            name: 'Nguyễn Văn An',
-            phone: '0901234567',
-            content: 'Gas sử dụng rất tốt, lửa xanh đều. Giao hàng cực kỳ nhanh chóng.',
-            images: ['/assets/images/local/img_4.png'],
-            status: 'approved',
-            createdAt: new Date().getTime() - 86400000 * 2
-        },
-        {
-            id: 2,
-            productId: 1,
-            rating: 4,
-            name: 'Trần Thị Bình',
-            phone: '0912345678',
-            content: 'Sản phẩm chính hãng, nhân viên lắp đặt nhiệt tình cẩn thận.',
-            images: ['/assets/images/local/img_5.jpg'],
-            status: 'approved',
-            createdAt: new Date().getTime() - 86400000 * 5
-        },
-        {
-            id: 3,
-            productId: 2,
-            rating: 5,
-            name: 'Lê Hoàng Phong',
-            phone: '0987654321',
-            content: 'Giá cả hợp lý, bình gas mới, sạch sẽ.',
-            images: ['/assets/images/local/img_6.jpg'],
-            status: 'approved',
-            createdAt: new Date().getTime() - 86400000 * 10
-        },
-        {
-            id: 4,
-            productId: 2,
-            rating: 5,
-            name: 'Phạm Minh Tú',
-            phone: '0977112233',
-            content: 'Đã dùng gas của đại lý này 3 năm nay, rất an tâm.',
-            images: ['/assets/images/local/img_1.png', '/assets/images/local/img_7.png'],
-            status: 'approved',
-            createdAt: new Date().getTime() - 86400000 * 15
-        }
-    ];
+    const seedReviews = [];
 
     const seedNews = [
         {
@@ -735,6 +690,7 @@ const ProductDB = window.ProductDB = (() => {
             specs: 'Số lò nấu: 2 lò\nĐầu đốt: Đồng thau đúc nguyên khối\nĐánh lửa: Pin IC 1.5V\nNgắt gas tự động: Có',
             featured: true,
             onSale: false,
+            slug: 'bep-gas-am-rinnai-rvb-2gib',
             createdAt: '2026-07-07T00:00:00'
         },
         {
@@ -986,29 +942,45 @@ const ProductDB = window.ProductDB = (() => {
     ];
 
     const defaultSettings = {
-        hotline: '1900.123.123',
-        zalo: '0901.111.222',
-        email: 'hotro@giaogas.vn',
-        address: '123 Thủ Đức, Hồ Chí Minh',
-        logo: 'assets/logo/logo_primary_gas - Copy.png',
+        hotline: '0932008179',
+        zalo: '0932008179',
+        email: 'cuahanggaslemanh@gmail.com',
+        address: '266 Bùi Hữu Nghĩa, P. Gia Định, TP HCM',
+        logo: 'assets/logo/logo_gaslemanh.png',
+        favicon: 'assets/logo/logo_gaslemanh_favicon.png',
         showComboSection: true,
         globalSaleOffPercent: 50,
+        marketingCode: '',
         banners: {
-            slider1: 'assets/banner_trangchu_1.jpg',
-            slider2: 'assets/banner_trangchu_2.jpg',
-            slider3: 'assets/banner_trangchu_3.jpg',
-            pageBanner: 'assets/banner_page.jpg'
+            sliders: [
+                { url: 'assets/banner_trangchu1.jpg' },
+                { url: 'assets/banner_trangchu2.jpg' },
+                { url: 'assets/banner_trangchu3.jpg' }
+            ],
+            pageBanner: 'assets/banner_page.jpg',
+            bannerAbout: 'assets/item_banner_about.png',
+            imgMissionMain: 'assets/item1_banner_about.png'
         }
     };
 
     // ========== HELPERS ==========
     function _getSettings() {
         try {
-            return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || defaultSettings;
+            const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || defaultSettings;
+            if (!settings.email || settings.email.includes('giaogas.vn') || settings.email === 'gaslemanh@gmail.com') {
+                settings.email = 'cuahanggaslemanh@gmail.com';
+            }
+            if (settings.address && settings.address.includes('Điện Biên Phủ')) {
+                settings.address = '266 Bùi Hữu Nghĩa, P. Gia Định, TP HCM';
+            }
+            return settings;
         } catch { return defaultSettings; }
     }
 
     function _saveSettings(settings) {
+        if (!settings.email || settings.email.includes('giaogas.vn')) {
+            settings.email = 'cuahanggaslemanh@gmail.com';
+        }
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     }
 
@@ -1173,27 +1145,33 @@ const ProductDB = window.ProductDB = (() => {
          * Initialize database asynchronously with API
          */
         async initAsync() {
+            let apiLoadedSuccessfully = false;
             try {
-                // Try to load from API
+                // Try to load from API (Server is the Single Source of Truth)
                 const response = await fetch('/api/api.php');
                 if (response.ok) {
                     const data = await response.json();
-                    if (data && data.products) {
+                    if (data && data.products && Array.isArray(data.products) && data.products.length > 0) {
                         _saveProducts(data.products);
-                        _saveCategories(data.categories || []);
+                        if (data.categories && Array.isArray(data.categories)) _saveCategories(data.categories);
                         if (data.settings) _saveSettings(data.settings);
-                        if (data.news) _saveNews(data.news);
-                        if (data.newsCategories) _saveNewsCategories(data.newsCategories);
-                        console.log('[ProductDB] Loaded from API.');
+                        if (data.news && Array.isArray(data.news)) _saveNews(data.news);
+                        if (data.newsCategories && Array.isArray(data.newsCategories)) _saveNewsCategories(data.newsCategories);
+                        if (data.reviews && Array.isArray(data.reviews)) _saveReviews(data.reviews);
+                        
+                        localStorage.setItem(INIT_KEY, 'true');
+                        apiLoadedSuccessfully = true;
+                        console.log('[ProductDB] Loaded successfully from API (' + data.products.length + ' products).');
                         document.dispatchEvent(new Event('ProductDBReady'));
                         return;
                     }
                 }
             } catch (e) {
-                console.log('[ProductDB] API fetch failed, using local/seed data.', e);
+                console.warn('[ProductDB] API fetch failed or network offline, using local cache.', e);
             }
 
-            // Fallback: Use LocalStorage or Seed data if API fails
+            // Fallback: If API did not return data (e.g. offline / first run / local dev)
+            // TUYỆT ĐỐI KHÔNG syncToApi() ở đây để tránh ghi đè dữ liệu trên VPS!
             if (!localStorage.getItem(INIT_KEY)) {
                 _saveCategories(seedCategories);
                 _saveProducts(seedProducts);
@@ -1202,84 +1180,43 @@ const ProductDB = window.ProductDB = (() => {
                 _saveNewsCategories(seedNewsCategories);
                 _saveReviews(seedReviews);
                 localStorage.setItem(INIT_KEY, 'true');
-                console.log('[ProductDB] Initialized with seed data.');
-                // Push initial seed data to API so it creates the data.json
-                this.syncToApi();
+                console.log('[ProductDB] Initialized local cache with seed data (read-only mode).');
+                
+                // CHỈ push seed data lên API nếu đây là trang admin và server chưa có data.json (404)
+                if (window.location.pathname.includes('admin')) {
+                    this.syncToApi(true);
+                }
             } else {
-                let nc = _getNewsCategories();
-                if (nc.length === 0) {
-                    _saveNewsCategories(seedNewsCategories);
-                } else {
-                    let updated = false;
-                    nc = nc.map(c => {
-                        if (!c.seoDesc) {
-                            const seed = seedNewsCategories.find(s => s.id === c.id);
-                            if (seed) {
-                                c.seoDesc = seed.seoDesc;
-                                updated = true;
-                            }
-                        }
-                        return c;
-                    });
-                    if (updated) {
-                        _saveNewsCategories(nc);
-                        this.syncToApi();
-                    }
-                }
-                
-                // Sanitize products discount (Round up)
-                const products = _getProducts();
-                let productsUpdated = false;
-                products.forEach(p => {
-                    if (p.discount > 0 && p.discount !== Math.ceil(p.discount)) {
-                        p.discount = Math.ceil(p.discount);
-                        productsUpdated = true;
-                    }
-                });
-                if (productsUpdated) {
-                    _saveProducts(products);
-                    this.syncToApi();
-                }
-                if (_getNews().length === 0) {
-                    _saveNews(seedNews);
-                }
-                
-                if (_getReviews().length === 0) {
-                    _saveReviews(seedReviews);
-                }
-
-                // MIGRATION: Ensure seed flash deals are set for existing DB
-                let prods = _getProducts();
-                let pUpdated = false;
-                if (!prods.some(p => p.isFlashDeal)) {
-                    prods = prods.map(p => {
-                        const seed = seedProducts.find(s => s.id === p.id);
-                        if (seed && seed.isFlashDeal) {
-                            p.isFlashDeal = true;
-                            p.flashDealDesc = seed.flashDealDesc;
-                            pUpdated = true;
-                        }
-                        return p;
-                    });
-                    if (pUpdated) {
-                        _saveProducts(prods);
-                        this.syncToApi();
-                    }
-                }
+                console.log('[ProductDB] Loaded from LocalStorage cache.');
             }
             document.dispatchEvent(new Event('ProductDBReady'));
         },
 
         /**
-         * Sync local data to API
+         * Sync local data to API - Chỉ cho phép thực thi từ trang Admin
          */
-        async syncToApi() {
+        async syncToApi(force = false) {
+            const isAdmin = window.location.pathname.includes('admin') || window.location.pathname.includes('quantri');
+            if (!isAdmin && !force) {
+                console.warn('[ProductDB] syncToApi: Bị chặn. Chỉ trang Admin mới được phép ghi đè dữ liệu lên server.');
+                return;
+            }
+
+            const currentProducts = _getProducts();
+            if (!currentProducts || currentProducts.length === 0) {
+                console.error('[ProductDB] syncToApi: Bị chặn do danh sách sản phẩm rỗng (ngăn chặn mất dữ liệu).');
+                return;
+            }
+
             try {
-                await fetch('/api/api.php', {
+                const res = await fetch('/api/api.php', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Admin-Action': '1'
+                    },
                     body: JSON.stringify({
-                        products: _getProducts(),
+                        products: currentProducts,
                         categories: _getCategories(),
                         settings: _getSettings(),
                         news: _getNews(),
@@ -1287,9 +1224,14 @@ const ProductDB = window.ProductDB = (() => {
                         reviews: _getReviews()
                     })
                 });
-                console.log('[ProductDB] Synced to API.');
+                const resJson = await res.json();
+                if (resJson.success) {
+                    console.log('[ProductDB] Đã đồng bộ an toàn lên Server thành công.');
+                } else {
+                    console.warn('[ProductDB] Server từ chối lưu:', resJson.message);
+                }
             } catch (e) {
-                console.error('[ProductDB] Failed to sync to API', e);
+                console.error('[ProductDB] Lỗi khi đồng bộ lên API:', e);
             }
         },
 

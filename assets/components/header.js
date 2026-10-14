@@ -1,4 +1,4 @@
-﻿class SiteHeader extends HTMLElement {
+class SiteHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <!-- TOP BAR -->
@@ -9,11 +9,10 @@
                     <span class="top-bar-welcome">Chào mừng đến với Gas Lê Mạnh! Hân hạnh phục vụ quý khách</span>
                 </div>
                 <div class="top-bar-right">
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 123 Thủ Đức,
-                        Hồ Chí Minh</a>
+                    <a href="/lien-he" class="top-bar-link"><i class="fa-solid fa-location-dot text-accent"></i> 266 Bùi Hữu Nghĩa, P. Gia Định, TP.HCM</a>
                     <span class="top-bar-divider"></span>
-                    <a href="#" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
-                        1900.123.123</a>
+                    <a href="tel:0932008179" class="top-bar-link"><i class="fa-solid fa-phone text-accent icon-ring"></i>
+                        0932.008.179</a>
                     <span class="top-bar-divider"></span>
                 </div>
             </div>
@@ -24,7 +23,7 @@
     <header class="header">
         <div class="container header-inner">
             <a href="/" class="logo">
-                <img src="/assets/logo/logo_gas.png" alt="Deli-Gas Logo" class="logo-img">
+                <img src="/assets/logo/logo_gaslemanh.png" alt="Gas Lê Mạnh Logo" class="logo-img">
             </a>
 
             <!-- Main Links -->

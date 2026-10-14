@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     if (typeof ProductDB !== 'undefined') {
+        applyGlobalSettings(); // Apply cached settings immediately to prevent flicker
         await ProductDB.initAsync();
-        applyGlobalSettings();
+        applyGlobalSettings(); // Re-apply if API returned new settings
     }
     
     function applyGlobalSettings() {
@@ -28,6 +29,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.head.appendChild(faviconLink);
             }
             faviconLink.href = settings.favicon;
+        }
+
+        // Inject Marketing Code (Google Analytics, Pixel, Search Console, GTM...)
+        if (settings.marketingCode && !window._marketingCodeInjected) {
+            try {
+                window._marketingCodeInjected = true;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = settings.marketingCode;
+
+                // Thực thi an toàn từng thẻ script (hỗ trợ cả inline script và external script src)
+                const scripts = tempDiv.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+                    if (oldScript.innerHTML) {
+                        newScript.text = oldScript.innerHTML;
+                    }
+                    document.head.appendChild(newScript);
+                    oldScript.remove();
+                });
+
+                // Chèn các thẻ còn lại (như <meta>, <link>, <noscript>) vào head
+                while (tempDiv.firstChild) {
+                    document.head.appendChild(tempDiv.firstChild);
+                }
+                console.log('[Marketing] Header script injected successfully.');
+            } catch (err) {
+                console.error("[Marketing] Error injecting marketing code:", err);
+            }
         }
 
         // Apply Hotline
@@ -111,13 +143,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Apply Email
-        if (settings.email) {
-            const emailWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-            let eNode;
-            while (eNode = emailWalker.nextNode()) {
-                if (eNode.nodeValue.includes('hotro@giaogas.vn')) {
-                    eNode.nodeValue = eNode.nodeValue.split('hotro@giaogas.vn').join(settings.email);
-                }
+        const targetEmail = (settings.email && !settings.email.includes('giaogas.vn')) ? settings.email : 'cuahanggaslemanh@gmail.com';
+        const emailWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        let eNode;
+        while (eNode = emailWalker.nextNode()) {
+            if (eNode.nodeValue.includes('giaogas.vn') || eNode.nodeValue.includes('gaslemanh@gmail.com')) {
+                eNode.nodeValue = eNode.nodeValue
+                    .replace(/(cuahang)+gaslemanh@gmail\.com/g, targetEmail)
+                    .replace(/(?<!cuahang)gaslemanh@gmail\.com/g, targetEmail)
+                    .replace(/cuahanghotro@giaogas\.vn|hotro@giaogas\.vn/g, targetEmail);
             }
         }
 
@@ -231,53 +265,104 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* ==========================================================================
        1. SLIDER LOGIC
        ========================================================================== */
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
-    const slideIntervalTime = 5000; // 5 seconds
-    let slideTimer;
+    const sliderContainer = document.getElementById('bannerSlider');
+    if (sliderContainer) {
+        let currentSlide = 0;
+        const slideIntervalTime = 5000; // 5 seconds
+        let slideTimer;
 
-    function goToSlide(index) {
-        // Remove active class from current
-        slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
+        function goToSlide(index) {
+            const currentSlides = sliderContainer.querySelectorAll('.slide');
+            const currentDots = document.querySelectorAll('.dot');
+            if (currentSlides.length === 0) return;
 
-        // Update index
-        currentSlide = index;
+            // Remove active class from all
+            currentSlides.forEach(s => s.classList.remove('active'));
+            currentDots.forEach(d => d.classList.remove('active'));
 
-        // Add active class to new
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
-    }
+            // Safe bound
+            currentSlide = (index >= 0 && index < currentSlides.length) ? index : 0;
 
-    function nextSlide() {
-        let newIndex = currentSlide + 1;
-        if (newIndex >= slides.length) {
-            newIndex = 0;
+            // Add active class to new
+            if (currentSlides[currentSlide]) currentSlides[currentSlide].classList.add('active');
+            if (currentDots[currentSlide]) currentDots[currentSlide].classList.add('active');
         }
-        goToSlide(newIndex);
-    }
 
-    function startSlider() {
-        slideTimer = setInterval(nextSlide, slideIntervalTime);
-    }
+        function nextSlide() {
+            const currentSlides = sliderContainer.querySelectorAll('.slide');
+            if (currentSlides.length <= 1) return;
+            let newIndex = currentSlide + 1;
+            if (newIndex >= currentSlides.length) {
+                newIndex = 0;
+            }
+            goToSlide(newIndex);
+        }
 
-    function resetSlider() {
-        clearInterval(slideTimer);
+        function prevSlide() {
+            const currentSlides = sliderContainer.querySelectorAll('.slide');
+            if (currentSlides.length <= 1) return;
+            let newIndex = currentSlide - 1;
+            if (newIndex < 0) {
+                newIndex = currentSlides.length - 1;
+            }
+            goToSlide(newIndex);
+        }
+
+        function startSlider() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(nextSlide, slideIntervalTime);
+        }
+
+        function resetSlider() {
+            clearInterval(slideTimer);
+            startSlider();
+        }
+
+        // Delegate dot click events
+        document.addEventListener('click', function (e) {
+            const dot = e.target.closest('.dot');
+            if (dot && dot.hasAttribute('data-index')) {
+                const index = parseInt(dot.getAttribute('data-index'));
+                goToSlide(index);
+                resetSlider();
+            }
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        sliderContainer.addEventListener('touchstart', function (e) {
+            if (!e.changedTouches || e.changedTouches.length === 0) return;
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        sliderContainer.addEventListener('touchend', function (e) {
+            if (!e.changedTouches || e.changedTouches.length === 0) return;
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                if (diffX < 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                resetSlider();
+            }
+        }
+
+        // Start auto slide
         startSlider();
     }
-
-    // Dot click events
-    dots.forEach(dot => {
-        dot.addEventListener('click', function () {
-            const index = parseInt(this.getAttribute('data-index'));
-            goToSlide(index);
-            resetSlider(); // Reset timer on manual click
-        });
-    });
-
-    // Start auto slide
-    startSlider();
 
 
     /* ==========================================================================
@@ -1607,5 +1692,33 @@ document.addEventListener("ProductDBReady", () => {
                 }
             }
         });
+    });
+
+    // Smooth scroll to anchor on load or click (e.g. /#uu-dai-thang)
+    function handleHashScroll() {
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+    }
+    handleHashScroll();
+    window.addEventListener('load', handleHashScroll);
+
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href*="#uu-dai-thang"]');
+        if (link) {
+            const target = document.getElementById('uu-dai-thang');
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (window.history.pushState) {
+                    window.history.pushState(null, null, '#uu-dai-thang');
+                }
+            }
+        }
     });
 });

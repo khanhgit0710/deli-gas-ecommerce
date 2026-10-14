@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(document.getElementById('settingFavicon')) document.getElementById('settingFavicon').value = settings.favicon || '';
         document.getElementById('settingShowComboSection').checked = settings.showComboSection !== false; // Default true
         if (document.getElementById('settingGlobalSaleOffPercent')) document.getElementById('settingGlobalSaleOffPercent').value = settings.globalSaleOffPercent || 50;
+        if (document.getElementById('settingMarketingCode')) document.getElementById('settingMarketingCode').value = settings.marketingCode || '';
         
         const banners = settings.banners || {};
         
@@ -252,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
             favicon: document.getElementById('settingFavicon') ? document.getElementById('settingFavicon').value.trim() : '',
             showComboSection: document.getElementById('settingShowComboSection').checked,
             globalSaleOffPercent: document.getElementById('settingGlobalSaleOffPercent') ? parseInt(document.getElementById('settingGlobalSaleOffPercent').value) || 50 : 50,
+            marketingCode: document.getElementById('settingMarketingCode') ? document.getElementById('settingMarketingCode').value.trim() : '',
             banners: {
                 sliders: currentSliders.filter(s => s.url.trim() !== ''), // filter out empty URLs
                 bannerAbout: document.getElementById('settingBannerAbout') ? document.getElementById('settingBannerAbout').value.trim() : '',
@@ -279,55 +281,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnExportData = document.getElementById('btnExportData');
     if (btnExportData) {
         btnExportData.addEventListener('click', () => {
-            if (typeof XLSX === 'undefined') {
-                showToast('Thư viện Excel đang tải, vui lòng thử lại sau giây lát!', 'warning');
-                return;
-            }
             try {
-                const wb = XLSX.utils.book_new();
-                
                 const getParsedData = (key) => {
                     try {
                         const raw = localStorage.getItem(key);
-                        return raw ? JSON.parse(raw) : [];
-                    } catch (e) { return []; }
+                        return raw ? JSON.parse(raw) : null;
+                    } catch (e) { return null; }
                 };
                 
-                const products = getParsedData('gasviet_products').map(p => ({
-                    'ID': p.id,
-                    'SKU': p.sku || '',
-                    'Tên Sản Phẩm': p.name || '',
-                    'Giá Gốc': p.price || 0,
-                    'Giảm Giá (%)': p.discount || 0,
-                    'Tồn Kho': p.stock || 0,
-                    'Mô Tả SEO': p.seoDesc || '',
-                    'Trạng Thái': p.active !== false ? 'Hiển thị' : 'Ẩn'
-                }));
-                const wsProducts = XLSX.utils.json_to_sheet(products);
-                XLSX.utils.book_append_sheet(wb, wsProducts, "Sản Phẩm");
+                const backupData = {
+                    products: getParsedData('gasviet_products'),
+                    categories: getParsedData('gasviet_categories'),
+                    settings: getParsedData('gasviet_settings'),
+                    news: getParsedData('gasviet_news'),
+                    newsCategories: getParsedData('gasviet_news_categories')
+                };
                 
-                const categories = getParsedData('gasviet_categories');
-                const wsCategories = XLSX.utils.json_to_sheet(categories);
-                XLSX.utils.book_append_sheet(wb, wsCategories, "Danh Mục");
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+                const downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href", dataStr);
+                downloadAnchorNode.setAttribute("download", `gasviet_backup_${new Date().toISOString().slice(0, 10)}.json`);
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
                 
-                const rawSettings = localStorage.getItem('gasviet_settings');
-                const settings = rawSettings ? [JSON.parse(rawSettings)] : [];
-                const wsSettings = XLSX.utils.json_to_sheet(settings);
-                XLSX.utils.book_append_sheet(wb, wsSettings, "Cấu Hình");
-                
-                const news = getParsedData('gasviet_news');
-                const wsNews = XLSX.utils.json_to_sheet(news);
-                XLSX.utils.book_append_sheet(wb, wsNews, "Tin Tức");
-                
-                const newsCategories = getParsedData('gasviet_news_categories');
-                const wsNewsCategories = XLSX.utils.json_to_sheet(newsCategories);
-                XLSX.utils.book_append_sheet(wb, wsNewsCategories, "Danh Mục Tin Tức");
-                
-                XLSX.writeFile(wb, `gasviet_backup_${new Date().toISOString().slice(0, 10)}.xlsx`);
-                showToast('Đã tải xuống file Excel sao lưu!', 'success');
+                showToast('Đã tải xuống file sao lưu!', 'success');
             } catch (err) {
                 console.error(err);
-                showToast('Lỗi khi xuất file Excel!', 'error');
+                showToast('Lỗi khi xuất file sao lưu!', 'error');
             }
         });
     }
@@ -337,45 +318,31 @@ document.addEventListener('DOMContentLoaded', () => {
         importDataInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
-            if (typeof XLSX === 'undefined') {
-                showToast('Thư viện Excel đang tải, vui lòng thử lại sau giây lát!', 'warning');
-                return;
-            }
             
             const reader = new FileReader();
             reader.onload = (event) => {
                 try {
-                    const data = new Uint8Array(event.target.result);
-                    const wb = XLSX.read(data, {type: 'array'});
+                    const data = JSON.parse(event.target.result);
                     
-                    const getSheetJSON = (sheetName) => {
-                        const ws = wb.Sheets[sheetName];
-                        return ws ? XLSX.utils.sheet_to_json(ws) : null;
-                    };
+                    if (data.products) localStorage.setItem('gasviet_products', JSON.stringify(data.products));
+                    if (data.categories) localStorage.setItem('gasviet_categories', JSON.stringify(data.categories));
+                    if (data.settings) localStorage.setItem('gasviet_settings', JSON.stringify(data.settings));
+                    if (data.news) localStorage.setItem('gasviet_news', JSON.stringify(data.news));
+                    if (data.newsCategories) localStorage.setItem('gasviet_news_categories', JSON.stringify(data.newsCategories));
                     
-                    const products = getSheetJSON("Sản Phẩm");
-                    if (products) localStorage.setItem('gasviet_products', JSON.stringify(products));
-                    
-                    const categories = getSheetJSON("Danh Mục");
-                    if (categories) localStorage.setItem('gasviet_categories', JSON.stringify(categories));
-                    
-                    const settings = getSheetJSON("Cấu Hình");
-                    if (settings && settings.length > 0) localStorage.setItem('gasviet_settings', JSON.stringify(settings[0]));
-                    
-                    const news = getSheetJSON("Tin Tức");
-                    if (news) localStorage.setItem('gasviet_news', JSON.stringify(news));
-                    
-                    const newsCategories = getSheetJSON("Danh Mục Tin Tức");
-                    if (newsCategories) localStorage.setItem('gasviet_news_categories', JSON.stringify(newsCategories));
+                    // Sync to API to make sure it persists on the server
+                    if (typeof ProductDB !== 'undefined' && ProductDB.syncToApi) {
+                        ProductDB.syncToApi();
+                    }
                     
                     showToast('Phục hồi dữ liệu thành công! Đang tải lại trang...', 'success');
                     setTimeout(() => window.location.reload(), 1500);
                 } catch (error) {
                     console.error(error);
-                    showToast('File Excel không hợp lệ hoặc bị lỗi!', 'error');
+                    showToast('File JSON không hợp lệ hoặc bị lỗi!', 'error');
                 }
             };
-            reader.readAsArrayBuffer(file);
+            reader.readAsText(file);
         });
     }
 });

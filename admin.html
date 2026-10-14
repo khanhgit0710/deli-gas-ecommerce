@@ -41,14 +41,12 @@
                 <div class="form-group" style="margin-bottom: 15px;">
                     <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Tài
                         khoản</label>
-                    <input type="text" id="loginUsername" class="admin-input" required
-                        placeholder="Tài khoản">
+                    <input type="text" id="loginUsername" class="admin-input" required placeholder="Tài khoản">
                 </div>
                 <div class="form-group" style="margin-bottom: 15px;">
                     <label style="display: block; margin-bottom: 5px; color: var(--admin-text); font-weight: 500;">Mật
                         khẩu</label>
-                    <input type="password" id="loginPassword" class="admin-input" required
-                        placeholder="Mật khẩu">
+                    <input type="password" id="loginPassword" class="admin-input" required placeholder="Mật khẩu">
                 </div>
                 <div id="loginError"
                     style="display: none; color: var(--admin-danger); font-size: 13px; margin-bottom: 15px; text-align: center; padding: 10px; background: var(--admin-danger-bg); border-radius: 6px;">
@@ -145,8 +143,8 @@
         <!-- SIDEBAR -->
         <aside class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
-                <img src="assets/logo/logo_primary_gas - Copy.png" alt="Logo"
-                    style="width: 100%; height: 50px; object-fit: center;">
+                <img src="assets/logo/logo_gaslemanh.png" alt="Logo"
+                    style="width: 100%; height: 50px; object-fit: contain;">
                 <!-- <div class="sidebar-brand">
                     <span class="sidebar-brand-name">Gas Lê Mạnh</span>
                     <span class="sidebar-brand-sub">Admin Panel</span>
@@ -167,7 +165,10 @@
                     </li>
                     <li><a href="#" data-section="flash-deals"><i class="fa-solid fa-tags" style="color: #ef4444;"></i>
                             Quản lý Sale Off</a></li>
-                    <li><a href="#" data-section="reviews"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Đánh giá <span id="reviewBadge" class="badge" style="background: #ef4444; color: white; display: none; margin-left: auto; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 600; justify-content: center; align-items: center;"></span></a></li>
+                    <li><a href="#" data-section="reviews"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Đánh
+                            giá <span id="reviewBadge" class="badge"
+                                style="background: #ef4444; color: white; display: none; margin-left: auto; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 600; justify-content: center; align-items: center;"></span></a>
+                    </li>
                 </ul>
 
                 <div class="sidebar-section-title">Tin tức</div>
@@ -179,7 +180,10 @@
 
                 <div class="sidebar-section-title">Hệ thống</div>
                 <ul class="sidebar-menu">
-                    <li><a href="#" data-section="contacts"><i class="fa-solid fa-address-book"></i> Khách hàng liên hệ <span id="contactBadge" class="badge" style="background: #ef4444; color: white; display: none; margin-left: auto; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 600; justify-content: center; align-items: center;"></span></a></li>
+                    <li><a href="#" data-section="contacts"><i class="fa-solid fa-address-book"></i> Khách hàng liên hệ
+                            <span id="contactBadge" class="badge"
+                                style="background: #ef4444; color: white; display: none; margin-left: auto; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 600; justify-content: center; align-items: center;"></span></a>
+                    </li>
                     <li><a href="#" data-section="settings"><i class="fa-solid fa-gear"></i> Cấu hình chung</a></li>
                 </ul>
             </nav>
@@ -199,20 +203,30 @@
                     <h2 id="pageTitle">Bảng điều khiển</h2>
                 </div>
                 <div class="topbar-right" style="display: flex; align-items: center; gap: 20px;">
-                    <div style="position: relative; color: var(--admin-text); font-size: 20px; display: flex; align-items: center; cursor: pointer;" id="bellNotificationToggle">
+                    <div style="position: relative; color: var(--admin-text); font-size: 20px; display: flex; align-items: center; cursor: pointer;"
+                        id="bellNotificationToggle">
                         <i class="fa-regular fa-bell" style="color: var(--color-accent);"></i>
-                        <span id="bellBadge" style="display: none; position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; font-size: 11px; font-weight: bold; width: 18px; height: 18px; text-align: center; line-height: 18px; box-shadow: 0 0 0 2px var(--admin-bg);">0</span>
-                        
-                        <div id="notificationDropdown" style="display: none; position: absolute; top: 40px; right: -10px; width: 320px; background: white; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 1px solid var(--admin-border); z-index: 1000; overflow: hidden; cursor: default; text-align: left;">
-                            <div style="padding: 12px 15px; border-bottom: 1px solid var(--admin-border); font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--admin-text);">
+                        <span id="bellBadge"
+                            style="display: none; position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; font-size: 11px; font-weight: bold; width: 18px; height: 18px; text-align: center; line-height: 18px; box-shadow: 0 0 0 2px var(--admin-bg);">0</span>
+
+                        <div id="notificationDropdown"
+                            style="display: none; position: absolute; top: 40px; right: -10px; width: 320px; background: white; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 1px solid var(--admin-border); z-index: 1000; overflow: hidden; cursor: default; text-align: left;">
+                            <div
+                                style="padding: 12px 15px; border-bottom: 1px solid var(--admin-border); font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--admin-text);">
                                 Thông báo
-                                <a href="#" id="markAllReadBtn" style="font-size: 12px; color: var(--admin-primary); text-decoration: none; font-weight: normal; display: none;">Đánh dấu đã đọc</a>
+                                <a href="#" id="markAllReadBtn"
+                                    style="font-size: 12px; color: var(--admin-primary); text-decoration: none; font-weight: normal; display: none;">Đánh
+                                    dấu đã đọc</a>
                             </div>
                             <div id="notificationList" style="max-height: 350px; overflow-y: auto;">
                                 <!-- Rendered by JS -->
                             </div>
-                            <div style="padding: 10px; text-align: center; border-top: 1px solid var(--admin-border); background: #f8f9fa;">
-                                <a href="#" onclick="document.getElementById('notificationDropdown').style.display='none'; switchSection('contacts'); return false;" style="font-size: 13px; color: var(--admin-text); text-decoration: none; font-weight: 500; display: block;">Xem tất cả liên hệ</a>
+                            <div
+                                style="padding: 10px; text-align: center; border-top: 1px solid var(--admin-border); background: #f8f9fa;">
+                                <a href="#"
+                                    onclick="document.getElementById('notificationDropdown').style.display='none'; switchSection('contacts'); return false;"
+                                    style="font-size: 13px; color: var(--admin-text); text-decoration: none; font-weight: 500; display: block;">Xem
+                                    tất cả liên hệ</a>
                             </div>
                         </div>
                     </div>
@@ -254,7 +268,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="table-footer"
+                            style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="contactCountText">0 liên hệ</span>
                             <div id="contactPagination" class="pagination" style="display: flex; gap: 5px;"></div>
                         </div>
@@ -309,7 +324,9 @@
                                     <option value="price_asc">Giá thấp đến cao</option>
                                     <option value="price_desc">Giá cao đến thấp</option>
                                 </select>
-                                <button class="btn btn-secondary" id="btnTrashProducts" style="background: #ef4444; color: white; border: none;" title="Xem sản phẩm đã xóa">
+                                <button class="btn btn-secondary" id="btnTrashProducts"
+                                    style="background: #ef4444; color: white; border: none;"
+                                    title="Xem sản phẩm đã xóa">
                                     <i class="fa-solid fa-trash"></i> Thùng rác
                                 </button>
                                 <button class="btn btn-primary" id="btnAddProduct">
@@ -486,11 +503,10 @@
                             <div style="display: flex; gap: 10px;">
                                 <button id="btnExportData" class="btn btn-primary"
                                     style="background-color: #10b981; border: none;"><i
-                                        class="fa-solid fa-download"></i> Export Dữ Liệu (.xlsx)</button>
+                                        class="fa-solid fa-download"></i> Backup Dữ Liệu (.json)</button>
                                 <label class="btn btn-outline" style="cursor: pointer;">
-                                    <i class="fa-solid fa-upload"></i> Import Dữ Liệu
-                                    <input type="file" id="importDataInput"
-                                        accept=".xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    <i class="fa-solid fa-upload"></i> Khôi phục (Import .json)
+                                    <input type="file" id="importDataInput" accept=".json, application/json"
                                         style="display: none;">
                                 </label>
                             </div>
@@ -498,12 +514,16 @@
                     </div>
 
                     <div class="table-wrapper" style="max-width: 800px;">
-                        <div class="table-header" style="border-bottom: 1px solid var(--admin-border); padding-bottom: 0;">
+                        <div class="table-header"
+                            style="border-bottom: 1px solid var(--admin-border); padding-bottom: 0;">
                             <div class="settings-tabs" style="display: flex; gap: 20px;">
-                                <div class="tab-item active" id="tab-setting-general" onclick="switchSettingTab('general')" style="cursor: pointer; padding: 10px 5px; border-bottom: 2px solid var(--admin-primary); font-weight: bold; color: var(--admin-primary);">
+                                <div class="tab-item active" id="tab-setting-general"
+                                    onclick="switchSettingTab('general')"
+                                    style="cursor: pointer; padding: 10px 5px; border-bottom: 2px solid var(--admin-primary); font-weight: bold; color: var(--admin-primary);">
                                     <h3>Thông tin chung</h3>
                                 </div>
-                                <div class="tab-item" id="tab-setting-banner" onclick="switchSettingTab('banner')" style="cursor: pointer; padding: 10px 5px; color: var(--admin-text-dim);">
+                                <div class="tab-item" id="tab-setting-banner" onclick="switchSettingTab('banner')"
+                                    style="cursor: pointer; padding: 10px 5px; color: var(--admin-text-dim);">
                                     <h3>Hình ảnh & Banner</h3>
                                 </div>
                             </div>
@@ -532,17 +552,32 @@
                                             placeholder="Nhập địa chỉ cửa hàng">
                                     </div>
                                     <div class="form-group" style="margin-bottom: 20px;">
-                                        <label class="form-label" style="display: flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="settingShowComboSection" style="margin-right: 10px;">
+                                        <label class="form-label"
+                                            style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="checkbox" id="settingShowComboSection"
+                                                style="margin-right: 10px;">
                                             Hiển thị danh mục Combo Ưu Đãi Của Tháng trên Trang Chủ
                                         </label>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 20px;">
                                         <label class="form-label">Phần trăm Sale Off (Flash Deal)</label>
                                         <div style="display: flex; align-items: center; gap: 10px; max-width: 200px;">
-                                            <input type="number" class="form-input" id="settingGlobalSaleOffPercent" placeholder="VD: 50" min="1" max="99" style="text-align: right;">
+                                            <input type="number" class="form-input" id="settingGlobalSaleOffPercent"
+                                                placeholder="VD: 50" min="1" max="99" style="text-align: right;">
                                             <span style="font-weight: bold; color: var(--admin-text-dim);">%</span>
                                         </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="form-label"
+                                            style="display: flex; justify-content: space-between;">
+                                            <span>Mã Marketing (Header Script)</span>
+                                            <span
+                                                style="font-size: 12px; font-weight: normal; color: var(--admin-text-dim);">Google
+                                                Analytics, Facebook Pixel...</span>
+                                        </label>
+                                        <textarea class="form-textarea" id="settingMarketingCode" rows="4"
+                                            placeholder="Dán đoạn mã (script) của bạn vào đây. Dữ liệu sẽ tự động chèn vào thẻ <head> của toàn bộ website."
+                                            style="font-family: monospace; font-size: 13px;"></textarea>
                                     </div>
                                     <button type="button" class="btn btn-primary" id="btnSaveSettings"><i
                                             class="fa-solid fa-save"></i> Lưu cấu hình</button>
@@ -550,134 +585,200 @@
                             </div>
                             <div id="setting-content-banner" style="display: none;">
                                 <div class="form-group" style="margin-bottom: 15px;">
-                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Logo & Favicon</label>
+                                    <label class="form-label"
+                                        style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Logo
+                                        & Favicon</label>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                         <div>
                                             <label class="form-label">Logo URL</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingLogo" placeholder="Nhập URL logo...">
-                                                <input type="file" id="settingLogoUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingLogoUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingLogo"
+                                                    placeholder="Nhập URL logo...">
+                                                <input type="file" id="settingLogoUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingLogoUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingLogoPreview" style="height: 100px;"></div>
+                                            <div class="image-preview-box" id="settingLogoPreview"
+                                                style="height: 100px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Favicon URL</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingFavicon" placeholder="Nhập URL favicon...">
-                                                <input type="file" id="settingFaviconUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingFaviconUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingFavicon"
+                                                    placeholder="Nhập URL favicon...">
+                                                <input type="file" id="settingFaviconUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingFaviconUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingFaviconPreview" style="height: 100px;"></div>
+                                            <div class="image-preview-box" id="settingFaviconPreview"
+                                                style="height: 100px;"></div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
-                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner Trang Chủ</label>
-                                    <div id="sliderListContainer" style="display: flex; flex-direction: column; gap: 15px;"></div>
-                                    <button type="button" class="btn btn-outline" id="btnAddSlider" style="margin-top: 15px;"><i class="fa-solid fa-plus"></i> Thêm Banner</button>
+                                    <label class="form-label"
+                                        style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner
+                                        Trang Chủ</label>
+                                    <div id="sliderListContainer"
+                                        style="display: flex; flex-direction: column; gap: 15px;"></div>
+                                    <button type="button" class="btn btn-outline" id="btnAddSlider"
+                                        style="margin-top: 15px;"><i class="fa-solid fa-plus"></i> Thêm Banner</button>
                                 </div>
-                                
+
                                 <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
-                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner Các Trang Phụ</label>
+                                    <label class="form-label"
+                                        style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Banner
+                                        Các Trang Phụ</label>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 
                                         <div>
                                             <label class="form-label">Trang Tin tức</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingBannerNews" placeholder="URL banner...">
-                                                <input type="file" id="settingBannerNewsUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerNewsUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingBannerNews"
+                                                    placeholder="URL banner...">
+                                                <input type="file" id="settingBannerNewsUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingBannerNewsUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingBannerNewsPreview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingBannerNewsPreview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Trang Giới thiệu</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingBannerAbout" placeholder="URL banner...">
-                                                <input type="file" id="settingBannerAboutUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerAboutUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingBannerAbout"
+                                                    placeholder="URL banner...">
+                                                <input type="file" id="settingBannerAboutUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingBannerAboutUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingBannerAboutPreview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingBannerAboutPreview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Trang Liên hệ</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingBannerContact" placeholder="URL banner...">
-                                                <input type="file" id="settingBannerContactUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingBannerContactUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingBannerContact"
+                                                    placeholder="URL banner...">
+                                                <input type="file" id="settingBannerContactUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingBannerContactUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingBannerContactPreview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingBannerContactPreview"
+                                                style="height: 80px;"></div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group" style="margin-bottom: 15px; margin-top: 30px;">
-                                    <label class="form-label" style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Hình ảnh khác (Trang Giới Thiệu)</label>
+                                    <label class="form-label"
+                                        style="font-weight: 600; color: var(--admin-primary); font-size: 16px; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--admin-border); padding-bottom: 8px;">Hình
+                                        ảnh khác (Trang Giới Thiệu)</label>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                         <div>
                                             <label class="form-label">Ảnh Cam Kết 1</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgMissionMain" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgMissionMainUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgMissionMainUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgMissionMain"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgMissionMainUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgMissionMainUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgMissionMainPreview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgMissionMainPreview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Ảnh Cam Kết 2</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgMissionSub" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgMissionSubUpload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgMissionSubUpload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgMissionSub"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgMissionSubUpload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgMissionSubUpload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgMissionSubPreview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgMissionSubPreview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Ảnh Lưới 1</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgGrid1" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgGrid1Upload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid1Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgGrid1"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid1Upload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgGrid1Upload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgGrid1Preview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgGrid1Preview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Ảnh Lưới 2</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgGrid2" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgGrid2Upload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid2Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgGrid2"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid2Upload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgGrid2Upload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgGrid2Preview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgGrid2Preview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Ảnh Lưới 3</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgGrid3" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgGrid3Upload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid3Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgGrid3"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid3Upload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgGrid3Upload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgGrid3Preview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgGrid3Preview"
+                                                style="height: 80px;"></div>
                                         </div>
                                         <div>
                                             <label class="form-label">Ảnh Lưới 4</label>
                                             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                                <input type="text" class="form-input" id="settingImgGrid4" placeholder="URL ảnh...">
-                                                <input type="file" id="settingImgGrid4Upload" accept="image/*" style="display: none;">
-                                                <button type="button" class="btn btn-outline" onclick="document.getElementById('settingImgGrid4Upload').click()"><i class="fa-solid fa-upload"></i></button>
+                                                <input type="text" class="form-input" id="settingImgGrid4"
+                                                    placeholder="URL ảnh...">
+                                                <input type="file" id="settingImgGrid4Upload" accept="image/*"
+                                                    style="display: none;">
+                                                <button type="button" class="btn btn-outline"
+                                                    onclick="document.getElementById('settingImgGrid4Upload').click()"><i
+                                                        class="fa-solid fa-upload"></i></button>
                                             </div>
-                                            <div class="image-preview-box" id="settingImgGrid4Preview" style="height: 80px;"></div>
+                                            <div class="image-preview-box" id="settingImgGrid4Preview"
+                                                style="height: 80px;"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" id="btnSaveBannerSettings"><i class="fa-solid fa-save"></i> Lưu cài đặt Banner</button>
+                                <button type="button" class="btn btn-primary" id="btnSaveBannerSettings"><i
+                                        class="fa-solid fa-save"></i> Lưu cài đặt Banner</button>
                             </div>
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- ===== REVIEWS SECTION ===== -->
                 <section class="admin-section" id="section-reviews">
                     <div class="table-wrapper">
@@ -686,7 +787,8 @@
                                 <h3>Đánh giá của khách hàng</h3>
                             </div>
                             <div class="table-header-right">
-                                <select class="admin-input" id="reviewFilterStatus" style="padding: 8px; border-radius: 6px; border: 1px solid var(--admin-border);">
+                                <select class="admin-input" id="reviewFilterStatus"
+                                    style="padding: 8px; border-radius: 6px; border: 1px solid var(--admin-border);">
                                     <option value="all">Tất cả trạng thái</option>
                                     <option value="pending">Chờ duyệt</option>
                                     <option value="approved">Đã duyệt</option>
@@ -716,7 +818,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="table-footer"
+                            style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="reviewCountText">0 đánh giá</span>
                             <div id="reviewPagination" class="pagination" style="display: flex; gap: 5px;"></div>
                         </div>
@@ -839,7 +942,8 @@
                                     <input type="checkbox" id="productIsSaleOff50">
                                     <span class="toggle-slider"></span>
                                 </label>
-                                <span class="toggle-label" style="color: var(--color-danger); font-weight: 600;"><i class="fa-solid fa-bolt"></i> Flash Deal</span>
+                                <span class="toggle-label" style="color: var(--color-danger); font-weight: 600;"><i
+                                        class="fa-solid fa-bolt"></i> Flash Deal</span>
                             </div>
                             <div class="toggle-group" style="margin-top:10px">
                                 <label class="toggle-switch">
@@ -869,12 +973,18 @@
                         </div>
                         <div class="form-group full"
                             style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 20px;">
-                            <label class="form-label" style="color: var(--admin-primary); display: flex; justify-content: space-between; align-items: center;">
+                            <label class="form-label"
+                                style="color: var(--admin-primary); display: flex; justify-content: space-between; align-items: center;">
                                 <span><i class="fa-solid fa-layer-group"></i> Phân loại sản phẩm (Biến thể)</span>
-                                <button type="button" class="btn btn-sm" style="background: var(--admin-primary); color: white; padding: 8px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;" id="btnAddVariantRow"><i class="fa-solid fa-plus"></i> Thêm phân loại</button>
+                                <button type="button" class="btn btn-sm"
+                                    style="background: var(--admin-primary); color: white; padding: 8px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;"
+                                    id="btnAddVariantRow"><i class="fa-solid fa-plus"></i> Thêm phân loại</button>
                             </label>
-                            <p style="font-size: 13px; color: #64748b; margin-top: 5px; margin-bottom: 15px;">Thêm các lựa chọn như Trọng lượng (6kg, 45kg) hoặc Màu sắc (Xanh, Đỏ). Liên kết với sản phẩm khác để khách hàng dễ dàng chuyển đổi.</p>
-                            <div id="productVariantsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                            <p style="font-size: 13px; color: #64748b; margin-top: 5px; margin-bottom: 15px;">Thêm các
+                                lựa chọn như Trọng lượng (6kg, 45kg) hoặc Màu sắc (Xanh, Đỏ). Liên kết với sản phẩm khác
+                                để khách hàng dễ dàng chuyển đổi.</p>
+                            <div id="productVariantsContainer"
+                                style="display: flex; flex-direction: column; gap: 10px;">
                                 <!-- Variants will be added here -->
                             </div>
                         </div>
